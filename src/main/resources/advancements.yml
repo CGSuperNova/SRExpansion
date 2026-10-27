@@ -134,7 +134,7 @@ advancement_points:
   'minecraft:adventure/minecraft_trials_edition': 10   # 踏入试炼密室
   'minecraft:adventure/under_lock_and_key': 6          # 用试炼钥匙开出宝库
   'minecraft:adventure/revaulting': 20                 # 用不祥试炼钥匙开出不祥宝库
-  'minecraft:adventure/blowback': 25                   # 用反弹的风弹炸死旋风人
+  'minecraft:adventure/blowback': 40                   # 用反弹的风弹炸死旋风人
   'minecraft:adventure/overoverkill': 35               # 用重锤一次打出 50 颗心伤害
   'minecraft:adventure/crafters_crafting_crafters': 12 # 让合成器合成出合成器
   # 其它 1.21 内容

@@ -41,11 +41,11 @@ specific_mob_scores:
   ARMADILLO: 0.01      # 犰狳
   BOGGED: 0.04         # 沼骸
   BREEZE: 0.3          # 旋风人
-  HAPPY_GHAST: 0.02    # 快乐恶魂
-  COPPER_GOLEM: 0.05   # 铜傀儡
+  HAPPY_GHAST: 0.01    # 快乐恶魂
+  COPPER_GOLEM: 0.02   # 铜傀儡
 
   # ===== 1.21.11 新增（暂按强度估算，可按手感调整）=====
   PARCHED: 0.03
   CAMEL_HUSK: 0.15
-  NAUTILUS: 0.3
-  ZOMBIE_NAUTILUS: 0.2
+  NAUTILUS: 0.15
+  ZOMBIE_NAUTILUS: 0.15
