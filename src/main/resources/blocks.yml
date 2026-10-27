@@ -1,0 +1,20 @@
+# 特殊方块额外分
+#   log  : 按后缀生效，覆盖所有 _LOG / _STEM（含 1.21.4 的 PALE_OAK_LOG、STRIPPED_PALE_OAK_LOG）
+#   wood : 按后缀生效，覆盖所有 _WOOD / _HYPHAE（含 PALE_OAK_WOOD、STRIPPED_PALE_OAK_WOOD）
+#   其余键一律按“材料名小写”解析，可以只给某一种方块单独设值，也可以覆盖上面两组里的单个值；
+#   写成 0 表示这种方块不再有额外分。矿石键会自动兼容对应的深板岩变体。
+specific_block_scores:
+  log: 0.01
+  wood: 0.01
+  coal_ore: 0.018
+  copper_ore: 0.022
+  iron_ore: 0.035
+  gold_ore: 0.055
+  diamond_ore: 0.1
+  emerald_ore: 0.17
+  lapis_ore: 0.05
+  redstone_ore: 0.05
+  nether_quartz_ore: 0.055
+  ancient_debris: 0.4
+  nether_gold_ore: 0.04
+  obsidian: 0.018

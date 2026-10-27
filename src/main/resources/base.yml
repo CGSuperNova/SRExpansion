@@ -1,0 +1,15 @@
+# 统计项权重：生存段位分 = 统计数量 × 权重（再套用 config.yml 的分段递减）
+weights:
+  block_break: 0.01
+  block_place: 0.03
+  mob_kill: 0.07
+  player_kill: 3
+  damage_dealt: 0.0000
+  trade: 2
+  enchant: 3
+  jump: 0.001
+  move_cm: 0.00003
+  craft_item: 0.005
+  play_tick: 0.00008333333
+  fishing: 1
+  raid_win: 12

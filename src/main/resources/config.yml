@@ -1,0 +1,391 @@
+# 死亡惩罚配置
+death_penalty:
+  percent: 0.05    # 扣除当前分数的百分比（5%）
+  max: 3.0         # 单次扣除上限分数
+
+# 阈值命令：分数达到 score 时执行一次（触发记录持久化在 data.yml 的 triggered 里，不会被 recalc 清掉）
+thresholds:
+  - score: 5
+    command: luckperms user %player% permission set rank.dirt.achieved true llg
+    console: true
+  - score: 20
+    command: luckperms user %player% permission set rank.log.achieved true llg
+    console: true
+  - score: 45
+    command: luckperms user %player% permission set rank.stone.achieved true llg
+    console: true
+  - score: 80
+    command: luckperms user %player% permission set rank.coal.achieved true llg
+    console: true
+  - score: 125
+    command: luckperms user %player% permission set rank.coal_ore.achieved true llg
+    console: true
+  - score: 180
+    command: luckperms user %player% permission set rank.coal_block.achieved true llg
+    console: true
+  - score: 245
+    command: luckperms user %player% permission set rank.iron.achieved true llg
+    console: true
+  - score: 320
+    command: luckperms user %player% permission set rank.iron_ore.achieved true llg
+    console: true
+  - score: 405
+    command: luckperms user %player% permission set rank.iron_block.achieved true llg
+    console: true
+  - score: 500
+    command: luckperms user %player% permission set rank.gold.achieved true llg
+    console: true
+  - score: 605
+    command: luckperms user %player% permission set rank.gold_ore.achieved true llg
+    console: true
+  - score: 720
+    command: luckperms user %player% permission set rank.gold_block.achieved true llg
+    console: true
+  - score: 845
+    command: luckperms user %player% permission set rank.redstone.achieved true llg
+    console: true
+  - score: 980
+    command: luckperms user %player% permission set rank.redstone_ore.achieved true llg
+    console: true
+  - score: 1125
+    command: luckperms user %player% permission set rank.redstone_block.achieved true llg
+    console: true
+  - score: 1280
+    command: luckperms user %player% permission set rank.lapis.achieved true llg
+    console: true
+  - score: 1445
+    command: luckperms user %player% permission set rank.lapis_ore.achieved true llg
+    console: true
+  - score: 1620
+    command: luckperms user %player% permission set rank.lapis_block.achieved true llg
+    console: true
+  - score: 1805
+    command: luckperms user %player% permission set rank.diamond.achieved true llg
+    console: true
+  - score: 2000
+    command: luckperms user %player% permission set rank.diamond_ore.achieved true llg
+    console: true
+  - score: 2205
+    command: luckperms user %player% permission set rank.diamond_block.achieved true llg
+    console: true
+  - score: 2420
+    command: luckperms user %player% permission set rank.enchanter.achieved true llg
+    console: true
+  - score: 2645
+    command: luckperms user %player% permission set rank.emerald.achieved true llg
+    console: true
+  - score: 2880
+    command: luckperms user %player% permission set rank.emerald_ore.achieved true llg
+    console: true
+  - score: 3125
+    command: luckperms user %player% permission set rank.emerald_block.achieved true llg
+    console: true
+  - score: 3380
+    command: luckperms user %player% permission set rank.obsidian.achieved true llg
+    console: true
+  - score: 3645
+    command: luckperms user %player% permission set rank.nether.achieved true llg
+    console: true
+  - score: 3920
+    command: luckperms user %player% permission set rank.nether_quartz.achieved true llg
+    console: true
+  - score: 4205
+    command: luckperms user %player% permission set rank.nether_gold_ore.achieved true llg
+    console: true
+  - score: 4500
+    command: luckperms user %player% permission set rank.nether_fortress.achieved true llg
+    console: true
+  - score: 4805
+    command: luckperms user %player% permission set rank.netherite.achieved true llg
+    console: true
+  - score: 5120
+    command: luckperms user %player% permission set rank.wither.achieved true llg
+    console: true
+  - score: 5445
+    command: luckperms user %player% permission set rank.nether_star.achieved true llg
+    console: true
+  - score: 5780
+    command: luckperms user %player% permission set rank.beacon.achieved true llg
+    console: true
+  - score: 6125
+    command: luckperms user %player% permission set rank.ender.achieved true llg
+    console: true
+  - score: 6480
+    command: luckperms user %player% permission set rank.ender_dragon.achieved true llg
+    console: true
+  - score: 6845
+    command: luckperms user %player% permission set rank.end_city.achieved true llg
+    console: true
+  - score: 7220
+    command: luckperms user %player% permission set rank.elytra.achieved true llg
+    console: true
+  - score: 7605
+    command: luckperms user %player% permission set rank.end_again.achieved true llg
+    console: true
+  - score: 8000
+    command: luckperms user %player% permission set rank.bedrock.achieved true llg
+    console: true
+  - score: 8405
+    command: luckperms user %player% permission set rank.barrier.achieved true llg
+    console: true
+  - score: 8820
+    command: luckperms user %player% permission set rank.command_block.achieved true llg
+    console: true
+  - score: 9245
+    command: luckperms user %player% permission set rank.chain_command_block.achieved true llg
+    console: true
+  - score: 9680
+    command: luckperms user %player% permission set rank.repeating_command_block.achieved true llg
+    console: true
+  - score: 10125
+    command: luckperms user %player% permission set rank.debug_stick.achieved true llg
+    console: true
+  - score: 10580
+    command: luckperms user %player% permission set rank.structure_block.achieved true llg
+    console: true
+  - score: 11045
+    command: luckperms user %player% permission set rank.structure_void.achieved true llg
+    console: true
+  - score: 11520
+    command: luckperms user %player% permission set rank.minecraft.achieved true llg
+    console: true
+  - score: 12005
+    command: luckperms user %player% permission set rank.minecraft+.achieved true llg
+    console: true
+  - score: 12500
+    command: luckperms user %player% permission set rank.minecraft_max.achieved true llg
+    console: true
+  - score: 15606
+    command: luckperms user %player% permission set rank.extra_dirt.achieved true llg
+    console: true
+  - score: 16224
+    command: luckperms user %player% permission set rank.extra_log.achieved true llg
+    console: true
+  - score: 16854
+    command: luckperms user %player% permission set rank.extra_stone.achieved true llg
+    console: true
+  - score: 17496
+    command: luckperms user %player% permission set rank.extra_coal.achieved true llg
+    console: true
+  - score: 18150
+    command: luckperms user %player% permission set rank.extra_coal_ore.achieved true llg
+    console: true
+  - score: 18816
+    command: luckperms user %player% permission set rank.extra_coal_block.achieved true llg
+    console: true
+  - score: 19494
+    command: luckperms user %player% permission set rank.extra_iron.achieved true llg
+    console: true
+  - score: 20184
+    command: luckperms user %player% permission set rank.extra_iron_ore.achieved true llg
+    console: true
+  - score: 20886
+    command: luckperms user %player% permission set rank.extra_iron_block.achieved true llg
+    console: true
+  - score: 21600
+    command: luckperms user %player% permission set rank.extra_gold.achieved true llg
+    console: true
+  - score: 22326
+    command: luckperms user %player% permission set rank.extra_gold_ore.achieved true llg
+    console: true
+  - score: 23064
+    command: luckperms user %player% permission set rank.extra_gold_block.achieved true llg
+    console: true
+  - score: 23814
+    command: luckperms user %player% permission set rank.extra_redstone.achieved true llg
+    console: true
+  - score: 24576
+    command: luckperms user %player% permission set rank.extra_redstone_ore.achieved true llg
+    console: true
+  - score: 25350
+    command: luckperms user %player% permission set rank.extra_redstone_block.achieved true llg
+    console: true
+  - score: 26136
+    command: luckperms user %player% permission set rank.extra_lapis.achieved true llg
+    console: true
+  - score: 26934
+    command: luckperms user %player% permission set rank.extra_lapis_ore.achieved true llg
+    console: true
+  - score: 27744
+    command: luckperms user %player% permission set rank.extra_lapis_block.achieved true llg
+    console: true
+  - score: 28566
+    command: luckperms user %player% permission set rank.extra_diamond.achieved true llg
+    console: true
+  - score: 29400
+    command: luckperms user %player% permission set rank.extra_diamond_ore.achieved true llg
+    console: true
+  - score: 30246
+    command: luckperms user %player% permission set rank.extra_diamond_block.achieved true llg
+    console: true
+  - score: 31104
+    command: luckperms user %player% permission set rank.extra_enchanter.achieved true llg
+    console: true
+  - score: 31974
+    command: luckperms user %player% permission set rank.extra_emerald.achieved true llg
+    console: true
+  - score: 32856
+    command: luckperms user %player% permission set rank.extra_emerald_ore.achieved true llg
+    console: true
+  - score: 33750
+    command: luckperms user %player% permission set rank.extra_emerald_block.achieved true llg
+    console: true
+  - score: 34656
+    command: luckperms user %player% permission set rank.extra_obsidian.achieved true llg
+    console: true
+  - score: 35574
+    command: luckperms user %player% permission set rank.extra_nether.achieved true llg
+    console: true
+  - score: 36504
+    command: luckperms user %player% permission set rank.extra_nether_quartz.achieved true llg
+    console: true
+  - score: 37446
+    command: luckperms user %player% permission set rank.extra_nether_gold_ore.achieved true llg
+    console: true
+  - score: 38400
+    command: luckperms user %player% permission set rank.extra_nether_fortress.achieved true llg
+    console: true
+  - score: 39366
+    command: luckperms user %player% permission set rank.extra_netherite.achieved true llg
+    console: true
+  - score: 40344
+    command: luckperms user %player% permission set rank.extra_wither.achieved true llg
+    console: true
+  - score: 41334
+    command: luckperms user %player% permission set rank.extra_nether_star.achieved true llg
+    console: true
+  - score: 42336
+    command: luckperms user %player% permission set rank.extra_beacon.achieved true llg
+    console: true
+  - score: 43350
+    command: luckperms user %player% permission set rank.extra_ender.achieved true llg
+    console: true
+  - score: 44376
+    command: luckperms user %player% permission set rank.extra_ender_dragon.achieved true llg
+    console: true
+  - score: 45414
+    command: luckperms user %player% permission set rank.extra_end_city.achieved true llg
+    console: true
+  - score: 46464
+    command: luckperms user %player% permission set rank.extra_elytra.achieved true llg
+    console: true
+  - score: 47526
+    command: luckperms user %player% permission set rank.extra_end_again.achieved true llg
+    console: true
+  - score: 48600
+    command: luckperms user %player% permission set rank.extra_bedrock.achieved true llg
+    console: true
+  - score: 49686
+    command: luckperms user %player% permission set rank.extra_barrier.achieved true llg
+    console: true
+  - score: 50784
+    command: luckperms user %player% permission set rank.extra_cmd_block.achieved true llg
+    console: true
+  - score: 51894
+    command: luckperms user %player% permission set rank.extra_chain_cmd_block.achieved true llg
+    console: true
+  - score: 53016
+    command: luckperms user %player% permission set rank.extra_repeating_cmd_block.achieved true llg
+    console: true
+  - score: 54150
+    command: luckperms user %player% permission set rank.extra_debug_stick.achieved true llg
+    console: true
+  - score: 55296
+    command: luckperms user %player% permission set rank.extra_structure_block.achieved true llg
+    console: true
+  - score: 56454
+    command: luckperms user %player% permission set rank.extra_structure_void.achieved true llg
+    console: true
+  - score: 57624
+    command: luckperms user %player% permission set rank.extra_minecraft.achieved true llg
+    console: true
+  - score: 58806
+    command: luckperms user %player% permission set rank.extra_minecraft+.achieved true llg
+    console: true
+  - score: 60000
+    command: luckperms user %player% permission set rank.extra_minecraft_max.achieved true llg
+    console: true
+
+pvp:
+  kill_cooldown_seconds: 300   # 击杀同一玩家的冷却时间（秒），冷却期内不给分
+
+diminishing_returns:
+  block_break:
+    - limit: 1500
+      multiplier: 1
+    - limit: 3000
+      multiplier: 0.5
+    - limit: 6000
+      multiplier: 0.2
+  block_place:
+    - limit: 2000
+      multiplier: 1
+    - limit: 4000
+      multiplier: 0.5
+    - limit: 8000
+      multiplier: 0.2
+  craft_item:
+    - limit: 2000
+      multiplier: 1
+    - limit: 4000
+      multiplier: 0.5
+    - limit: 8000
+      multiplier: 0.2
+  mob_kill:
+    - limit: 1500
+      multiplier: 1
+    - limit: 3000
+      multiplier: 0.5
+    - limit: 6000
+      multiplier: 0.2
+  player_kill:
+    - limit: 1500
+      multiplier: 1
+    - limit: 3000
+      multiplier: 0.5
+    - limit: 6000
+      multiplier: 0.2
+  damage_dealt: []
+  trade:
+    - limit: 2000
+      multiplier: 1
+    - limit: 4000
+      multiplier: 0.5
+    - limit: 8000
+      multiplier: 0.2
+  enchant:
+    - limit: 2000
+      multiplier: 1
+    - limit: 4000
+      multiplier: 0.5
+    - limit: 8000
+      multiplier: 0.2
+  jump:
+    - limit: 1500
+      multiplier: 1
+    - limit: 3000
+      multiplier: 0.5
+    - limit: 6000
+      multiplier: 0.2
+  move_cm:
+    - limit: 1500
+      multiplier: 1
+    - limit: 3000
+      multiplier: 0.5
+    - limit: 6000
+      multiplier: 0.2
+  play_tick: []
+  fishing:
+    - limit: 2000
+      multiplier: 1
+    - limit: 4000
+      multiplier: 0.5
+    - limit: 8000
+      multiplier: 0.2
+  raid_win:
+    - limit: 2000
+      multiplier: 1
+    - limit: 4000
+      multiplier: 0.5
+    - limit: 8000
+      multiplier: 0.2

@@ -1,0 +1,51 @@
+# 特殊生物额外分（键名 = 实体类型，大小写不敏感；非生物实体会被自动忽略）
+specific_mob_scores:
+  # ===== 基础生物 =====
+  COW: 0.01
+  SHEEP: 0.01
+  CHICKEN: 0.01
+  PIG: 0.01
+  ZOMBIE: 0.02
+  SKELETON: 0.04
+  CREEPER: 0.045
+  SPIDER: 0.02
+  ENDERMAN: 0.05
+  PILLAGER: 0.05
+  VINDICATOR: 0.2
+  EVOKER: 0.7
+  VEX: 0.04
+  WITCH: 0.035
+  RAVAGER: 1
+  GUARDIAN: 0.4
+  ELDER_GUARDIAN: 2.5
+  DROWNED: 0.02
+  HUSK: 0.02
+  ZOMBIE_VILLAGER: 0.02
+  PHANTOM: 0.2
+  STRAY: 0.025
+  SLIME: 0.015
+  ZOMBIFIED_PIGLIN: 0.025
+  PIGLIN: 0.025
+  PIGLIN_BRUTE: 0.9
+  GHAST: 0.04
+  BLAZE: 0.05
+  MAGMA_CUBE: 0.015
+  WITHER_SKELETON: 0.045
+  HOGLIN: 0.4
+  WARDEN: 10
+  WITHER: 4
+  ENDER_DRAGON: 25.0
+
+  # ===== 1.21 起新增的生物 =====
+  # CREAKING（嘎枝）不设分值：它不能被正常击杀，只有打碎嘎枝之心才会消失，原版也不会涨 KILL_ENTITY 统计
+  ARMADILLO: 0.01      # 犰狳
+  BOGGED: 0.04         # 沼骸
+  BREEZE: 0.3          # 旋风人
+  HAPPY_GHAST: 0.02    # 快乐恶魂
+  COPPER_GOLEM: 0.05   # 铜傀儡
+
+  # ===== 1.21.11 新增（暂按强度估算，可按手感调整）=====
+  PARCHED: 0.03
+  CAMEL_HUSK: 0.15
+  NAUTILUS: 0.3
+  ZOMBIE_NAUTILUS: 0.2

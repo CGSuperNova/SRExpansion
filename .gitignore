@@ -1,0 +1,16 @@
+# 构建产物
+target/
+dist/
+out/
+.build/
+
+# IDE
+.idea/
+*.iml
+
+# 临时/日志
+*.log
+*.tmp
+
+# 玩家数据（体积大且含 UUID，不入库）
+SRExpansion_config/data.yml

@@ -1,0 +1,152 @@
+# 每个进度ID对应的分值
+# 采用命名空间:路径的格式，与原版进度系统完全一致
+advancement_points:
+  # ==================== Minecraft 主世界进度 ====================
+  'minecraft:story/root': 0.3
+  'minecraft:story/mine_stone': 0.5
+  'minecraft:story/upgrade_tools': 0.8
+  'minecraft:story/smelt_iron': 1
+  'minecraft:story/obtain_armor': 2
+  'minecraft:story/lava_bucket': 1
+  'minecraft:story/deflect_arrow': 0.5
+  'minecraft:story/form_obsidian': 1
+  'minecraft:story/iron_tools': 1
+  'minecraft:story/mine_diamond': 3
+  'minecraft:story/shiny_gear': 8
+  'minecraft:story/enchant_item': 5
+  'minecraft:story/cure_zombie_villager': 4
+  'minecraft:story/follow_ender_eye': 3
+  'minecraft:story/enter_the_nether': 5
+  'minecraft:story/enter_the_end': 8
+
+  # ==================== 下界进度 ====================
+  'minecraft:nether/root': 0.3
+  'minecraft:nether/find_fortress': 5
+  'minecraft:nether/return_to_sender': 10
+  'minecraft:nether/obtain_blaze_rod': 5
+  'minecraft:nether/get_wither_skull': 12
+  'minecraft:nether/summon_wither': 30
+  'minecraft:nether/create_beacon': 12
+  'minecraft:nether/create_full_beacon': 40
+  'minecraft:nether/brew_potion': 3
+  'minecraft:nether/all_potions': 250
+  'minecraft:nether/all_effects': 800
+  'minecraft:nether/uneasy_alliance': 80
+  'minecraft:nether/fast_travel': 10
+  'minecraft:nether/explore_nether': 15
+
+  # ==================== 末地进度 ====================
+  'minecraft:end/root': 0.3
+  'minecraft:end/kill_dragon': 60
+  'minecraft:end/dragon_egg': 300
+  'minecraft:end/enter_end_gateway': 12
+  'minecraft:end/find_end_city': 15
+  'minecraft:end/elytra': 40
+  'minecraft:end/levitate': 10
+  'minecraft:end/respawn_dragon': 15
+
+  # ==================== 冒险进度 ====================
+  'minecraft:adventure/root': 0.3
+  'minecraft:adventure/sleep_in_bed': 0.5
+  'minecraft:adventure/adventuring_time': 550
+  'minecraft:adventure/kill_a_mob': 0.5
+  'minecraft:adventure/kill_all_mobs': 480
+  'minecraft:adventure/shoot_arrow': 0.5
+  'minecraft:adventure/throw_trident': 3
+  'minecraft:adventure/trade': 3
+  'minecraft:adventure/totem_of_undying': 10
+  'minecraft:adventure/summon_iron_golem': 3
+  'minecraft:adventure/voluntary_exile': 5
+  'minecraft:adventure/hero_of_the_village': 30
+  'minecraft:adventure/very_very_frightening': 18
+  'minecraft:adventure/sniper_duel': 15
+  'minecraft:adventure/ol_betsy': 1
+  'minecraft:adventure/arbalistic': 22
+  'minecraft:adventure/who_needs_rockets': 4
+  'minecraft:adventure/two_birds_one_arrow': 18
+  'minecraft:adventure/whos_the_pillager_now': 15
+  'minecraft:adventure/lighten_up': 12
+  'minecraft:adventure/honey_block_slide': 3
+  'minecraft:adventure/fall_from_world_height': 8
+  'minecraft:adventure/spyglass_at_parrot': 1
+  'minecraft:adventure/spyglass_at_ghast': 2
+  'minecraft:adventure/spyglass_at_dragon': 3
+  'minecraft:adventure/walk_on_powder_snow_with_leather_boots': 5
+  'minecraft:adventure/avoid_vibration': 7
+
+  # ==================== 农牧业进度 ====================
+  'minecraft:husbandry/root': 0.3
+  'minecraft:husbandry/plant_seed': 1
+  'minecraft:husbandry/breed_an_animal': 1.5
+  'minecraft:husbandry/tame_an_animal': 3
+  'minecraft:husbandry/fishy_business': 2
+  'minecraft:husbandry/tactical_fishing': 5
+  'minecraft:husbandry/balanced_diet': 450
+  'minecraft:husbandry/bred_all_animals': 350
+  'minecraft:husbandry/complete_catalogue': 320
+  'minecraft:husbandry/wax_on': 2
+  'minecraft:husbandry/wax_off': 2
+  'minecraft:husbandry/silk_touch_nest': 8
+  'minecraft:husbandry/leash_all_frog_variants': 15
+  'minecraft:husbandry/froglights': 8
+  'minecraft:husbandry/allay_deliver_cake_to_note_block': 8
+  'minecraft:husbandry/make_a_sign_glow': 3
+  'minecraft:husbandry/safely_harvest_honey': 3
+  # 这两条在 1.21 里改了归属，原来的 husbandry/... 路径已不存在
+  'minecraft:nether/ride_strider': 5
+  'minecraft:adventure/play_jukebox_in_meadows': 7
+
+  # ==================== 1.20.4 之前漏配的成就（补全，原本一律按默认 1 分）====================
+  # 下界（1.16）
+  'minecraft:nether/obtain_ancient_debris': 15
+  'minecraft:nether/netherite_armor': 20
+  'minecraft:nether/charge_respawn_anchor': 8
+  'minecraft:nether/distract_piglin': 5
+  'minecraft:nether/find_bastion': 8
+  'minecraft:nether/loot_bastion': 10
+  'minecraft:nether/obtain_crying_obsidian': 5
+  'minecraft:nether/ride_strider_in_overworld_lava': 5
+  # 末地
+  'minecraft:end/dragon_breath': 10
+  # 冒险（1.20 考古 / 纹饰）
+  'minecraft:adventure/bullseye': 10
+  'minecraft:adventure/craft_decorated_pot_using_only_sherds': 8
+  'minecraft:adventure/kill_mob_near_sculk_catalyst': 6
+  'minecraft:adventure/lightning_rod_with_villager_no_fire': 8
+  'minecraft:adventure/read_power_of_chiseled_bookshelf': 3
+  'minecraft:adventure/salvage_sherd': 3
+  'minecraft:adventure/trade_at_world_height': 6
+  'minecraft:adventure/trim_with_any_armor_pattern': 10
+  'minecraft:adventure/trim_with_all_exclusive_armor_patterns': 60
+  # 农牧业（1.17 ~ 1.20）
+  'minecraft:husbandry/axolotl_in_a_bucket': 5
+  'minecraft:husbandry/kill_axolotl_target': 8
+  'minecraft:husbandry/tadpole_in_a_bucket': 3
+  'minecraft:husbandry/allay_deliver_item_to_player': 5
+  'minecraft:husbandry/feed_snifflet': 5
+  'minecraft:husbandry/obtain_sniffer_egg': 15
+  'minecraft:husbandry/plant_any_sniffer_seed': 10
+  'minecraft:husbandry/obtain_netherite_hoe': 20
+  'minecraft:husbandry/ride_a_boat_with_a_goat': 5
+
+  # ==================== 1.20.5 ~ 1.21.11 新增 ====================
+  # 试炼密室（1.21）
+  'minecraft:adventure/minecraft_trials_edition': 10   # 踏入试炼密室
+  'minecraft:adventure/under_lock_and_key': 6          # 用试炼钥匙开出宝库
+  'minecraft:adventure/revaulting': 20                 # 用不祥试炼钥匙开出不祥宝库
+  'minecraft:adventure/blowback': 25                   # 用反弹的风弹炸死旋风人
+  'minecraft:adventure/overoverkill': 35               # 用重锤一次打出 50 颗心伤害
+  'minecraft:adventure/crafters_crafting_crafters': 12 # 让合成器合成出合成器
+  # 其它 1.21 内容
+  'minecraft:adventure/brush_armadillo': 3             # 用刷子从犰狳身上刷下鳞甲
+  'minecraft:adventure/use_lodestone': 3               # 对磁石使用指南针
+  # 1.21.4 苍白之园
+  'minecraft:adventure/heart_transplanter': 15         # 在两块苍白橡木原木之间正确放置嘎枝之心
+  # 1.21.6 恶魂
+  'minecraft:husbandry/place_dried_ghast_in_water': 5  # 把干燥恶魂方块放进水里
+  # 1.21.9 狼盔甲
+  'minecraft:husbandry/remove_wolf_armor': 2           # 用剪刀给狼卸下盔甲
+  'minecraft:husbandry/repair_wolf_armor': 3           # 用犰狳鳞甲完全修复狼盔甲
+  'minecraft:husbandry/whole_pack': 200                # 驯服全部 9 种毛色的狼
+  # 1.21.11 长矛
+  'minecraft:adventure/spear_many_mobs': 25            # 一次冲刺攻击命中 5 只生物
