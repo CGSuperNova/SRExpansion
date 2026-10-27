@@ -1527,6 +1527,7 @@ public class ScoreDataManager {
             if (score < threshold.getScore()) continue;
             if (!data.getTriggeredScores().add(threshold.getScore())) continue;
             // 立刻落盘，避免崩服后重复执行同一条阈值命令
+            markDirty(uuid);
             savePlayerDataIfDirty(uuid);
             String command = threshold.getCommand() == null ? "" : threshold.getCommand().replace("%player%", player.getName());
             Bukkit.getScheduler().runTask(plugin, () -> {
