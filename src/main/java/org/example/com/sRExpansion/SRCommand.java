@@ -1,257 +1,531 @@
 package org.example.com.sRExpansion;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.command.*;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 public class SRCommand implements CommandExecutor, TabCompleter {
+
+    private static final int LIST_PAGE_SIZE = 10;
+    private static final int STATS_PAGE_SIZE = 10;
+
     private final SRExpansion plugin;
+
     public SRCommand(SRExpansion plugin) { this.plugin = plugin; }
+
+    // ==================== 入口 ====================
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (args.length == 0) {
-            sender.sendMessage(ChatColor.RED + "用法: /srank <reload|recalc|give|query|list|leaderboard>");
-            sender.sendMessage(ChatColor.YELLOW + "  give 子命令: /srank give <玩家> <分数> [原因]");
-            sender.sendMessage(ChatColor.YELLOW + "  give 管理: /srank give undo <玩家> <id>");
-            sender.sendMessage(ChatColor.YELLOW + "  give 管理: /srank give edit <玩家> <id> <新分数> [新原因]");
-            sender.sendMessage(ChatColor.YELLOW + "  give 管理: /srank give list <玩家>");
+            sendHelp(sender);
             return true;
         }
-        switch (args[0].toLowerCase()) {
-            case "reload":
-                if (!sender.hasPermission("srank.admin")) { sender.sendMessage(ChatColor.RED + "无权限"); return true; }
+        String sub = args[0].toLowerCase(Locale.ROOT);
+        String[] rest = Arrays.copyOfRange(args, 1, args.length);
+        switch (sub) {
+            case "score" -> handleScore(sender, rest);
+            case "list" -> {
+                if (!check(sender, "srank.user")) return true;
+                showRankList(sender, parseInt(rest.length > 0 ? rest[0] : "1", 1));
+            }
+            case "info" -> {
+                if (!check(sender, "srank.user")) return true;
+                handleInfo(sender, rest);
+            }
+            case "rankup" -> {
+                if (!checkPlayer(sender)) return true;
+                if (!check(sender, "srank.user")) return true;
+                handleRankup((Player) sender);
+            }
+            case "rankset" -> {
+                if (!check(sender, "srank.admin")) return true;
+                handleRankSet(sender, rest);
+            }
+            case "autorankup" -> {
+                if (!checkPlayer(sender)) return true;
+                if (!check(sender, "srank.user")) return true;
+                handleAutoRankup((Player) sender, rest);
+            }
+            case "reload" -> {
+                if (!check(sender, "srank.admin")) return true;
+                plugin.getRankManager().load();
                 plugin.getDataManager().reload();
-                sender.sendMessage(ChatColor.GREEN + "配置已重载（分数未变）。如需重算请使用 /srank recalc");
-                break;
-
-            case "recalc":
-                if (!sender.hasPermission("srank.admin")) { sender.sendMessage(ChatColor.RED + "无权限"); return true; }
-                plugin.getDataManager().recalcAllPlayers();
-                sender.sendMessage(ChatColor.GREEN + "已重新计算所有在线玩家分数（触发记录保留）");
-                break;
-
-            case "give":
-                if (!sender.hasPermission("srank.admin")) { sender.sendMessage(ChatColor.RED + "无权限"); return true; }
-                // 检查是否为子命令
-                if (args.length >= 2 && (args[1].equalsIgnoreCase("undo") || args[1].equalsIgnoreCase("edit") || args[1].equalsIgnoreCase("list"))) {
-                    // 子命令处理
-                    switch (args[1].toLowerCase()) {
-                        case "undo":
-                            if (args.length < 4) { sender.sendMessage(ChatColor.RED + "用法: /srank give undo <玩家> <id>"); return true; }
-                            Player pUndo = Bukkit.getPlayer(args[2]);
-                            if (pUndo == null) { sender.sendMessage(ChatColor.RED + "玩家不在线"); return true; }
-                            int idUndo;
-                            try { idUndo = Integer.parseInt(args[3]); } catch (NumberFormatException e) { sender.sendMessage(ChatColor.RED + "ID必须为数字"); return true; }
-                            if (plugin.getDataManager().undoGiveRecord(pUndo.getUniqueId(), idUndo)) {
-                                sender.sendMessage(ChatColor.GREEN + "已撤销记录 " + idUndo);
-                            } else {
-                                sender.sendMessage(ChatColor.RED + "记录不存在");
-                            }
-                            break;
-                        case "edit":
-                            if (args.length < 5) { sender.sendMessage(ChatColor.RED + "用法: /srank give edit <玩家> <id> <新分数> [新原因]"); return true; }
-                            Player pEdit = Bukkit.getPlayer(args[2]);
-                            if (pEdit == null) { sender.sendMessage(ChatColor.RED + "玩家不在线"); return true; }
-                            int idEdit;
-                            try { idEdit = Integer.parseInt(args[3]); } catch (NumberFormatException e) { sender.sendMessage(ChatColor.RED + "ID必须为数字"); return true; }
-                            double newAmount;
-                            try { newAmount = Double.parseDouble(args[4]); } catch (NumberFormatException e) { sender.sendMessage(ChatColor.RED + "分数必须为数字"); return true; }
-                            String newReason = args.length >= 6 ? args[5] : null;
-                            if (plugin.getDataManager().editGiveRecord(pEdit.getUniqueId(), idEdit, newAmount, newReason)) {
-                                sender.sendMessage(ChatColor.GREEN + "已修改记录 " + idEdit);
-                            } else {
-                                sender.sendMessage(ChatColor.RED + "记录不存在");
-                            }
-                            break;
-                        case "list":
-                            if (args.length < 3) { sender.sendMessage(ChatColor.RED + "用法: /srank give list <玩家>"); return true; }
-                            Player pList = Bukkit.getPlayer(args[2]);
-                            if (pList == null) { sender.sendMessage(ChatColor.RED + "玩家不在线"); return true; }
-                            List<ScoreDataManager.GiveRecord> records = plugin.getDataManager().getGiveRecords(pList.getUniqueId());
-                            if (records.isEmpty()) { sender.sendMessage(ChatColor.YELLOW + "该玩家无记录"); return true; }
-                            sender.sendMessage(ChatColor.GOLD + "---- " + pList.getName() + " 的 Give 记录 ----");
-                            for (ScoreDataManager.GiveRecord r : records) {
-                                sender.sendMessage(String.format(ChatColor.YELLOW + "#%d: %.2f 分, 原因: %s, 操作者: %s", r.id, r.amount, r.reason, r.operator));
-                            }
-                            break;
-                        default:
-                            sender.sendMessage(ChatColor.RED + "未知子命令");
-                    }
-                } else {
-                    // 基础 give 命令：给予分数
-                    if (args.length < 3) {
-                        sender.sendMessage(ChatColor.RED + "用法: /srank give <玩家> <分数> [原因]");
-                        return true;
-                    }
-                    Player target = Bukkit.getPlayer(args[1]);
-                    if (target == null) { sender.sendMessage(ChatColor.RED + "玩家不在线"); return true; }
-                    double amount;
-                    try { amount = Double.parseDouble(args[2]); } catch (NumberFormatException e) { sender.sendMessage(ChatColor.RED + "分数必须为数字"); return true; }
-                    String reason = args.length >= 4 ? args[3] : "管理员操作";
-                    if (plugin.getDataManager().getPlayerData(target.getUniqueId()) == null) {
-                        plugin.getDataManager().initPlayer(target, false);
-                    }
-                    // 加分与记录在 addGiveRecord 内部一起完成，避免重复加
-                    int recordId = plugin.getDataManager().addGiveRecord(target.getUniqueId(), amount, reason, sender.getName());
-                    if (recordId < 0) { sender.sendMessage(ChatColor.RED + "该玩家数据尚未初始化，请稍后再试"); return true; }
-                    plugin.getDataManager().savePlayerDataIfDirty(target.getUniqueId());
-                    sender.sendMessage(ChatColor.GREEN + "已给予 " + String.format("%.2f", amount) + " 分，记录ID=" + recordId);
-                }
-                break;
-
-            case "query":
-                if (!sender.hasPermission("srank.user")) { sender.sendMessage(ChatColor.RED + "无权限"); return true; }
-                Player qp;
-                if (args.length >= 2) { qp = Bukkit.getPlayer(args[1]); if (qp == null) { sender.sendMessage(ChatColor.RED + "玩家不在线"); return true; } }
-                else if (sender instanceof Player) qp = (Player) sender;
-                else { sender.sendMessage(ChatColor.RED + "请指定玩家名"); return true; }
-                ScoreDataManager.PlayerData qd = plugin.getDataManager().getPlayerData(qp.getUniqueId());
-                if (qd == null) { sender.sendMessage(ChatColor.RED + "该玩家尚无数据"); return true; }
-                sender.sendMessage(ChatColor.GOLD + qp.getName() + " 的段位分: " + ChatColor.GREEN + String.format("%.2f", qd.getScore()));
-                break;
-
-            case "list":
-                if (!sender.hasPermission("srank.user")) { sender.sendMessage(ChatColor.RED + "无权限"); return true; }
-                OfflinePlayer off = null; Player on = null; String cat = "all";
-                if (args.length >= 2) {
-                    Player p = Bukkit.getPlayer(args[1]);
-                    if (p != null) { on = p; if (args.length>=3) cat = args[2].toLowerCase(); }
-                    else { off = Bukkit.getOfflinePlayer(args[1]); if (off.hasPlayedBefore() || plugin.getDataManager().hasData(off.getUniqueId())) { if (args.length>=3) cat = args[2].toLowerCase(); } else { sender.sendMessage(ChatColor.RED + "玩家无数据"); return true; } }
-                } else if (sender instanceof Player) on = (Player) sender;
-                else { sender.sendMessage(ChatColor.RED + "请指定玩家名"); return true; }
-                if (on != null) showStats(sender, on, cat);
-                else if (off != null) showStatsOffline(sender, off, cat);
-                break;
-
-            case "leaderboard":
-                if (!sender.hasPermission("srank.user")) { sender.sendMessage(ChatColor.RED + "无权限"); return true; }
-                int page = 1;
-                if (args.length >= 2) try { page = Integer.parseInt(args[1]); } catch (NumberFormatException e) {}
-                showLeaderboard(sender, page);
-                break;
-
-            default:
-                sender.sendMessage(ChatColor.RED + "未知命令");
+                msg(sender, "&a配置已重载（段位与计分配置均已重新读取）");
+            }
+            // 兼容旧命令，提示新位置
+            case "query", "recalc", "give", "leaderboard", "top" ->
+                    msg(sender, "&e该命令已迁移到 &f/srank score " + sub + "&e，请使用新写法");
+            default -> sendHelp(sender);
         }
         return true;
     }
 
-    // ========== 显示方法 ==========
+    private void sendHelp(CommandSender sender) {
+        msg(sender, "&6===== 生存段位 =====");
+        msg(sender, "&e/srank score [query|list|top|recalc|give] &7- 生存段位分相关");
+        msg(sender, "&e/srank list [页码] &7- 查看所有段位");
+        msg(sender, "&e/srank info [玩家] &7- 查看段位与进度");
+        msg(sender, "&e/srank rankup &7- 手动升级段位");
+        msg(sender, "&e/srank autorankup [true|false] &7- 开关自动升级");
+        if (sender.hasPermission("srank.admin")) {
+            msg(sender, "&e/srank rankset <玩家> <段位> &7- 强制设置段位");
+            msg(sender, "&e/srank reload &7- 重载配置");
+        }
+    }
+
+    // ==================== /srank score ... ====================
+
+    private void handleScore(CommandSender sender, String[] args) {
+        if (!check(sender, "srank.user")) return;
+        if (args.length == 0) {
+            if (!(sender instanceof Player self)) { msg(sender, "&c请指定玩家"); return; }
+            showScore(sender, self.getName());
+            return;
+        }
+        String sub = args[0].toLowerCase(Locale.ROOT);
+        String[] rest = Arrays.copyOfRange(args, 1, args.length);
+        switch (sub) {
+            case "query" -> {
+                if (rest.length >= 1) showScore(sender, rest[0]);
+                else if (sender instanceof Player self) showScore(sender, self.getName());
+                else msg(sender, "&c请指定玩家名");
+            }
+            case "list" -> {
+                String name = rest.length >= 1 ? rest[0] : (sender instanceof Player self ? self.getName() : null);
+                if (name == null) { msg(sender, "&c请指定玩家名"); return; }
+                String category = rest.length >= 2 ? rest[1].toLowerCase(Locale.ROOT) : "all";
+                showStatsByName(sender, name, category);
+            }
+            case "top", "leaderboard" -> showLeaderboard(sender, parseInt(rest.length > 0 ? rest[0] : "1", 1));
+            case "recalc" -> {
+                if (!check(sender, "srank.admin")) return;
+                plugin.getDataManager().recalcAllPlayers();
+                msg(sender, "&a已重新计算所有在线玩家的生存段位分（触发记录与赠与分保留）");
+            }
+            case "give" -> {
+                if (!check(sender, "srank.admin")) return;
+                handleGive(sender, rest);
+            }
+            default -> msg(sender, "&c未知子命令，可用: &fquery / list / top / recalc / give");
+        }
+    }
+
+    private void showScore(CommandSender sender, String name) {
+        ScoreDataManager.PlayerData data = resolveData(name);
+        if (data == null) { msg(sender, "&c没有找到该玩家的数据"); return; }
+        Rank rank = resolveRank(data);
+        msg(sender, "&6" + name + " &7的生存段位分: &a" + fmt(data.getScore()));
+        if (rank != null) {
+            sender.sendMessage(Component.text("当前段位: ").color(NamedTextColor.GRAY).append(rank.getDisplayComponent()));
+        }
+    }
+
+    // ==================== /srank info ====================
+
+    private void handleInfo(CommandSender sender, String[] args) {
+        String name = args.length >= 1 ? args[0] : (sender instanceof Player self ? self.getName() : null);
+        if (name == null) { msg(sender, "&c请指定玩家名"); return; }
+        ScoreDataManager.PlayerData data = resolveData(name);
+        if (data == null) { msg(sender, "&c没有找到该玩家的数据"); return; }
+        RankManager rankManager = plugin.getRankManager();
+        Rank rank = resolveRank(data);
+        double score = data.getScore();
+
+        msg(sender, "&6===== " + name + " 的段位 =====");
+        if (rank == null) {
+            msg(sender, "&c尚未初始化段位");
+            return;
+        }
+        sender.sendMessage(Component.text("当前段位: ").color(NamedTextColor.GRAY)
+                .append(rank.getDisplayComponent())
+                .append(Component.text(" (#" + rank.getIndex() + "/" + rankManager.size() + ")").color(NamedTextColor.DARK_GRAY)));
+        msg(sender, "&7生存段位分: &a" + fmt(score) + " &7/ 本段位要求 &f" + fmt(rank.getScore()));
+        Rank next = rankManager.next(rank);
+        if (next == null) {
+            msg(sender, "&d已达到最高段位");
+        } else {
+            msg(sender, "&7下一段位: &f" + next.getDisplayPlain() + " &7需要 &a" + fmt(next.getScore())
+                    + " &7分（还差 &e" + fmt(Math.max(0, next.getScore() - score)) + "&7）");
+            double span = next.getScore() - rank.getScore();
+            double progress = span <= 0 ? 100 : Math.max(0, Math.min(100, (score - rank.getScore()) / span * 100));
+            msg(sender, "&7升级进度: &b" + String.format("%.1f", progress) + "%");
+        }
+        msg(sender, "&7自动升级: " + (data.isAutoRankup() ? "&a开启" : "&c关闭") + " &8(/srank autorankup 切换)");
+    }
+
+    // ==================== /srank list ====================
+
+    private void showRankList(CommandSender sender, int page) {
+        RankManager rankManager = plugin.getRankManager();
+        List<Rank> ranks = rankManager.getRanks();
+        if (ranks.isEmpty()) { msg(sender, "&c没有加载到任何段位"); return; }
+        int totalPages = (int) Math.ceil(ranks.size() / (double) LIST_PAGE_SIZE);
+        int current = Math.max(1, Math.min(page, totalPages));
+        Rank mine = null;
+        if (sender instanceof Player self) {
+            ScoreDataManager.PlayerData data = plugin.getDataManager().getPlayerData(self.getUniqueId());
+            mine = data == null ? null : resolveRank(data);
+        }
+        msg(sender, "&6===== 生存段位列表 &7(第 " + current + "/" + totalPages + " 页, 共 " + ranks.size() + " 个) &6=====");
+        int from = (current - 1) * LIST_PAGE_SIZE;
+        int to = Math.min(from + LIST_PAGE_SIZE, ranks.size());
+        for (int i = from; i < to; i++) {
+            Rank rank = ranks.get(i);
+            Component line = Component.text("#" + rank.getIndex() + " ", NamedTextColor.DARK_GRAY)
+                    .append(rank.getDisplayComponent())
+                    .append(Component.text("  " + fmt(rank.getScore()) + " 分", NamedTextColor.GRAY));
+            if (rank.getMoney() > 0) {
+                line = line.append(Component.text(" · " + fmt(rank.getMoney()) + " 金币", NamedTextColor.GOLD));
+            }
+            if (!rank.isAuto()) {
+                line = line.append(Component.text(" · 需手动升级", NamedTextColor.RED));
+            }
+            if (mine != null && mine.getId().equalsIgnoreCase(rank.getId())) {
+                line = line.append(Component.text("  ← 当前", NamedTextColor.GREEN));
+            }
+            sender.sendMessage(line);
+        }
+    }
+
+    // ==================== /srank rankup ====================
+
+    private void handleRankup(Player player) {
+        RankManager rankManager = plugin.getRankManager();
+        ScoreDataManager.PlayerData data = plugin.getDataManager().getPlayerData(player.getUniqueId());
+        if (data == null) { msg(player, "&c你的数据尚未初始化，请稍后再试"); return; }
+        Rank before = resolveRank(data);
+        int steps = rankManager.rankup(player, true);
+        if (steps == 0) {
+            Rank next = rankManager.next(before);
+            if (next == null) {
+                msg(player, "&d你已经是最高段位了");
+            } else {
+                msg(player, "&c升级失败：需要 &e" + fmt(next.getScore()) + " &c生存段位分（当前 &e"
+                        + fmt(data.getScore()) + "&c）");
+            }
+        }
+    }
+
+    // ==================== /srank rankset ====================
+
+    private void handleRankSet(CommandSender sender, String[] args) {
+        if (args.length < 2) { msg(sender, "&c用法: /srank rankset <玩家> <段位>"); return; }
+        Player target = Bukkit.getPlayerExact(args[0]);
+        if (target == null) { msg(sender, "&c玩家不在线"); return; }
+        Rank rank = plugin.getRankManager().resolve(args[1]);
+        if (rank == null) {
+            msg(sender, "&c找不到段位: &f" + args[1] + "&c（可用注册名，或 /srank list 里显示的段位名）");
+            return;
+        }
+        if (plugin.getDataManager().getPlayerData(target.getUniqueId()) == null) {
+            plugin.getDataManager().initPlayer(target, false);
+        }
+        plugin.getRankManager().setRank(target, rank);
+        sender.sendMessage(Component.text("已将 " + target.getName() + " 的段位设置为 ").color(NamedTextColor.GREEN)
+                .append(rank.getDisplayComponent()));
+        target.sendMessage(Component.text("你的生存段位已被设置为 ").color(NamedTextColor.YELLOW)
+                .append(rank.getDisplayComponent()));
+    }
+
+    // ==================== /srank autorankup ====================
+
+    private void handleAutoRankup(Player player, String[] args) {
+        ScoreDataManager.PlayerData data = plugin.getDataManager().getPlayerData(player.getUniqueId());
+        if (data == null) { msg(player, "&c你的数据尚未初始化"); return; }
+        boolean value;
+        if (args.length >= 1) {
+            if (!args[0].equalsIgnoreCase("true") && !args[0].equalsIgnoreCase("false")) {
+                msg(player, "&c用法: /srank autorankup [true|false]");
+                return;
+            }
+            value = Boolean.parseBoolean(args[0]);
+        } else {
+            value = !data.isAutoRankup();
+        }
+        plugin.getDataManager().setAutoRankup(player.getUniqueId(), value);
+        msg(player, value ? "&a已开启自动升级" : "&c已关闭自动升级（可以随时用 /srank rankup 手动升级）");
+    }
+
+    // ==================== 生存段位分详情 ====================
+
+    private void showStatsByName(CommandSender sender, String name, String category) {
+        Player online = Bukkit.getPlayerExact(name);
+        if (online != null) {
+            showStats(sender, online, category);
+        } else {
+            showStatsOffline(sender, Bukkit.getOfflinePlayer(name), category);
+        }
+    }
+
     private void showStats(CommandSender sender, Player player, String cat) {
-        ScoreDataManager dm = plugin.getDataManager();
-        ScoreDataManager.PlayerData data = dm.getPlayerData(player.getUniqueId());
-        if (data == null) { sender.sendMessage(ChatColor.RED + "无数据"); return; }
+        ScoreDataManager.PlayerData data = plugin.getDataManager().getPlayerData(player.getUniqueId());
+        if (data == null) { msg(sender, "&c无数据"); return; }
+        printStats(sender, plugin.getDataManager(), data, player.getName(), false, cat);
+    }
+
+    private void showStatsOffline(CommandSender sender, OfflinePlayer player, String cat) {
+        ScoreDataManager.PlayerData data = plugin.getDataManager().getPlayerDataOffline(player.getName());
+        if (data == null) { msg(sender, "&c无数据"); return; }
+        printStats(sender, plugin.getDataManager(), data, player.getName(), true, cat);
+    }
+
+    private void printStats(CommandSender sender, ScoreDataManager dm, ScoreDataManager.PlayerData data,
+                            String name, boolean offline, String cat) {
         ScoreDataManager.PlayerStatsSnapshot s = data.getStats();
-        sender.sendMessage(ChatColor.GOLD + "===== " + player.getName() + " 的段位分详情 =====");
+        msg(sender, "&6===== " + name + (offline ? " (离线)" : "") + " 的段位分详情 =====");
         if (cat.equals("base") || cat.equals("all")) showBase(sender, dm, s);
         if (cat.equals("blocks") || cat.equals("all")) showBlocks(sender, dm, s);
         if (cat.equals("mobs") || cat.equals("all")) showMobs(sender, dm, s);
         if (cat.equals("achievements") || cat.equals("ach") || cat.equals("all")) showAchievements(sender, s);
         if (cat.equals("deaths") || cat.equals("all")) showDeaths(sender, s, data);
-        sender.sendMessage(ChatColor.GREEN + "总分: " + String.format("%.2f", data.getScore()));
-        sender.sendMessage(ChatColor.GOLD + "=============================");
-    }
-
-    private void showStatsOffline(CommandSender sender, OfflinePlayer player, String cat) {
-        ScoreDataManager.PlayerData data = plugin.getDataManager().getPlayerDataOffline(player.getName());
-        if (data == null) { sender.sendMessage(ChatColor.RED + "无数据"); return; }
-        ScoreDataManager.PlayerStatsSnapshot s = data.getStats();
-        sender.sendMessage(ChatColor.GOLD + "===== " + player.getName() + " (离线) 的段位分详情 =====");
-        if (cat.equals("base") || cat.equals("all")) showBase(sender, plugin.getDataManager(), s);
-        if (cat.equals("blocks") || cat.equals("all")) showBlocks(sender, plugin.getDataManager(), s);
-        if (cat.equals("mobs") || cat.equals("all")) showMobs(sender, plugin.getDataManager(), s);
-        if (cat.equals("achievements") || cat.equals("ach") || cat.equals("all")) showAchievements(sender, s);
-        if (cat.equals("deaths") || cat.equals("all")) showDeaths(sender, s, data);
-        sender.sendMessage(ChatColor.GREEN + "总分: " + String.format("%.2f", data.getScore()));
-        sender.sendMessage(ChatColor.GOLD + "=============================");
+        msg(sender, "&a总分: " + fmt(data.getScore()));
+        msg(sender, "&6=============================");
     }
 
     private void showBase(CommandSender sender, ScoreDataManager dm, ScoreDataManager.PlayerStatsSnapshot s) {
-        sender.sendMessage(ChatColor.AQUA + "--- 基础统计 ---");
-        sender.sendMessage(ChatColor.YELLOW + "挖掘方块: " + s.blockBreak + " × " + dm.weightBlockBreak + " = " + String.format("%.2f", s.discountedBlockBreak));
-        sender.sendMessage(ChatColor.YELLOW + "放置方块: " + s.blockPlace + " × " + dm.weightBlockPlace + " = " + String.format("%.2f", s.discountedBlockPlace));
-        sender.sendMessage(ChatColor.YELLOW + "合成: " + s.craftItem + " × " + dm.weightCraft + " = " + String.format("%.2f", s.discountedCraft));
-        sender.sendMessage(ChatColor.YELLOW + "击杀(总): " + s.mobKills + " → " + String.format("%.2f", s.discountedMobKill));
-        sender.sendMessage(ChatColor.YELLOW + "击杀玩家: " + s.playerKills + " × " + dm.weightPlayerKill + " = " + String.format("%.2f", s.discountedPlayerKill));
-        sender.sendMessage(ChatColor.YELLOW + "伤害: " + s.damageDealt + " ❤ = " + String.format("%.2f", s.discountedDamage));
-        sender.sendMessage(ChatColor.YELLOW + "交易: " + s.trades + " = " + String.format("%.2f", s.discountedTrade));
-        sender.sendMessage(ChatColor.YELLOW + "附魔: " + s.enchants + " = " + String.format("%.2f", s.discountedEnchant));
-        sender.sendMessage(ChatColor.YELLOW + "跳跃: " + s.jumps + " = " + String.format("%.2f", s.discountedJump));
-        sender.sendMessage(ChatColor.YELLOW + "移动: " + s.totalMove + " cm = " + String.format("%.2f", s.discountedMove));
-        sender.sendMessage(ChatColor.YELLOW + "在线: " + s.playTicks + " tick = " + String.format("%.2f", s.discountedPlayTick));
-        sender.sendMessage(ChatColor.YELLOW + "钓鱼: " + s.fishingCaught + " = " + String.format("%.2f", s.discountedFishing));
-        sender.sendMessage(ChatColor.YELLOW + "袭击胜利: " + s.raidWins + " = " + String.format("%.2f", s.discountedRaidWin));
+        msg(sender, "&b--- 基础统计 ---");
+        msg(sender, "&e挖掘方块: " + s.blockBreak + " × " + dm.weightBlockBreak + " = " + fmt(s.discountedBlockBreak));
+        msg(sender, "&e放置方块: " + s.blockPlace + " × " + dm.weightBlockPlace + " = " + fmt(s.discountedBlockPlace));
+        msg(sender, "&e合成: " + s.craftItem + " × " + dm.weightCraft + " = " + fmt(s.discountedCraft));
+        msg(sender, "&e击杀(总): " + s.mobKills + " → " + fmt(s.discountedMobKill));
+        msg(sender, "&e击杀玩家: " + s.playerKills + " × " + dm.weightPlayerKill + " = " + fmt(s.discountedPlayerKill));
+        msg(sender, "&e伤害: " + s.damageDealt + " = " + fmt(s.discountedDamage));
+        msg(sender, "&e交易: " + s.trades + " = " + fmt(s.discountedTrade));
+        msg(sender, "&e附魔: " + s.enchants + " = " + fmt(s.discountedEnchant));
+        msg(sender, "&e跳跃: " + s.jumps + " = " + fmt(s.discountedJump));
+        msg(sender, "&e移动: " + s.totalMove + " cm = " + fmt(s.discountedMove));
+        msg(sender, "&e在线: " + s.playTicks + " tick = " + fmt(s.discountedPlayTick));
+        msg(sender, "&e钓鱼: " + s.fishingCaught + " = " + fmt(s.discountedFishing));
+        msg(sender, "&e袭击胜利: " + s.raidWins + " = " + fmt(s.discountedRaidWin));
     }
 
     private void showBlocks(CommandSender sender, ScoreDataManager dm, ScoreDataManager.PlayerStatsSnapshot s) {
-        if (s.specificBlockCounts.isEmpty()) { sender.sendMessage(ChatColor.AQUA + "--- 特殊方块 (无) ---"); return; }
-        sender.sendMessage(ChatColor.AQUA + "--- 特殊方块破坏额外分（合并到挖掘）---");
+        if (s.specificBlockCounts.isEmpty()) { msg(sender, "&b--- 特殊方块 (无) ---"); return; }
+        msg(sender, "&b--- 特殊方块破坏额外分（合并到挖掘）---");
         for (Map.Entry<Material, Long> e : s.specificBlockCounts.entrySet()) {
-            String name = ChineseNames.getBlockName(e.getKey());
             double extra = dm.getExtraBlockScore(e.getKey());
-            double contrib = e.getValue() * extra;
-            sender.sendMessage(ChatColor.YELLOW + name + ": " + e.getValue() + " × " + extra + " = " + String.format("%.2f", contrib));
+            msg(sender, "&e" + ChineseNames.getBlockName(e.getKey()) + ": " + e.getValue() + " × " + extra
+                    + " = " + fmt(e.getValue() * extra));
         }
     }
 
     private void showMobs(CommandSender sender, ScoreDataManager dm, ScoreDataManager.PlayerStatsSnapshot s) {
-        if (s.specificMobCounts.isEmpty()) { sender.sendMessage(ChatColor.AQUA + "--- 特殊生物 (无) ---"); return; }
-        sender.sendMessage(ChatColor.AQUA + "--- 特殊生物击杀额外分（合并到击杀）---");
+        if (s.specificMobCounts.isEmpty()) { msg(sender, "&b--- 特殊生物 (无) ---"); return; }
+        msg(sender, "&b--- 特殊生物击杀额外分（合并到击杀）---");
         for (Map.Entry<EntityType, Long> e : s.specificMobCounts.entrySet()) {
-            String name = ChineseNames.getMobName(e.getKey());
             double extra = dm.getExtraMobScore(e.getKey());
-            double contrib = e.getValue() * extra;
-            sender.sendMessage(ChatColor.YELLOW + name + ": " + e.getValue() + " × " + extra + " = " + String.format("%.2f", contrib));
+            msg(sender, "&e" + ChineseNames.getMobName(e.getKey()) + ": " + e.getValue() + " × " + extra
+                    + " = " + fmt(e.getValue() * extra));
         }
     }
 
     private void showAchievements(CommandSender sender, ScoreDataManager.PlayerStatsSnapshot s) {
-        sender.sendMessage(ChatColor.AQUA + "--- 进度 ---");
-        sender.sendMessage(ChatColor.YELLOW + "完成数量: " + s.advancements.size() + " 总分: " + String.format("%.2f", s.discountedAdvancements));
+        msg(sender, "&b--- 进度 ---");
+        msg(sender, "&e完成数量: " + s.advancements.size() + " 总分: " + fmt(s.discountedAdvancements));
     }
 
     private void showDeaths(CommandSender sender, ScoreDataManager.PlayerStatsSnapshot s, ScoreDataManager.PlayerData data) {
-        sender.sendMessage(ChatColor.AQUA + "--- 死亡 ---");
-        sender.sendMessage(ChatColor.YELLOW + "死亡次数: " + s.deaths);
-        sender.sendMessage(ChatColor.YELLOW + "累计扣除: " + String.format("%.2f", data.getTotalPenalty()));
+        msg(sender, "&b--- 死亡 ---");
+        msg(sender, "&e死亡次数: " + s.deaths);
+        msg(sender, "&e累计扣除: " + fmt(data.getTotalPenalty()));
     }
 
     private void showLeaderboard(CommandSender sender, int page) {
         List<Map.Entry<String, Double>> list = plugin.getDataManager().getTopPlayers();
-        if (list.isEmpty()) { sender.sendMessage(ChatColor.RED + "无数据"); return; }
-        int total = (int) Math.ceil(list.size() / 10.0);
-        if (page < 1) page = 1;
-        if (page > total) page = total;
-        int start = (page-1)*10, end = Math.min(start+10, list.size());
-        sender.sendMessage(ChatColor.GOLD + "===== 段位分排行榜 (第" + page + "/" + total + "页) =====");
+        if (list.isEmpty()) { msg(sender, "&c无数据"); return; }
+        int total = (int) Math.ceil(list.size() / (double) STATS_PAGE_SIZE);
+        int current = Math.max(1, Math.min(page, total));
+        int start = (current - 1) * STATS_PAGE_SIZE;
+        int end = Math.min(start + STATS_PAGE_SIZE, list.size());
+        msg(sender, "&6===== 段位分排行榜 (第" + current + "/" + total + "页) =====");
         for (int i = start; i < end; i++) {
             Map.Entry<String, Double> e = list.get(i);
-            String line = ChatColor.YELLOW + String.valueOf(i+1) + ". " + e.getKey() + ChatColor.WHITE + " → " + ChatColor.GREEN + String.format("%.2f", e.getValue());
-            sender.sendMessage(line);
+            msg(sender, "&e" + (i + 1) + ". " + e.getKey() + " &f→ &a" + fmt(e.getValue()));
         }
     }
+
+    // ==================== give ====================
+
+    private void handleGive(CommandSender sender, String[] args) {
+        if (args.length == 0) {
+            msg(sender, "&c用法: /srank score give <玩家> <分数> [原因]");
+            msg(sender, "&c      /srank score give undo|edit|list <玩家> ...");
+            return;
+        }
+        String first = args[0].toLowerCase(Locale.ROOT);
+        if (first.equals("undo") || first.equals("edit") || first.equals("list")) {
+            if (args.length < 2) { msg(sender, "&c缺少玩家名"); return; }
+            Player target = Bukkit.getPlayerExact(args[1]);
+            if (target == null) { msg(sender, "&c玩家不在线"); return; }
+            switch (first) {
+                case "undo" -> {
+                    if (args.length < 3) { msg(sender, "&c用法: /srank score give undo <玩家> <id>"); return; }
+                    int id = parseInt(args[2], -1);
+                    if (id < 0) { msg(sender, "&cID 必须是数字"); return; }
+                    msg(sender, plugin.getDataManager().undoGiveRecord(target.getUniqueId(), id)
+                            ? "&a已撤销记录 " + id : "&c记录不存在");
+                }
+                case "edit" -> {
+                    if (args.length < 4) { msg(sender, "&c用法: /srank score give edit <玩家> <id> <新分数> [新原因]"); return; }
+                    int id = parseInt(args[2], -1);
+                    if (id < 0) { msg(sender, "&cID 必须是数字"); return; }
+                    double amount;
+                    try {
+                        amount = Double.parseDouble(args[3]);
+                    } catch (NumberFormatException e) {
+                        msg(sender, "&c分数必须是数字");
+                        return;
+                    }
+                    String reason = args.length >= 5 ? args[4] : null;
+                    msg(sender, plugin.getDataManager().editGiveRecord(target.getUniqueId(), id, amount, reason)
+                            ? "&a已修改记录 " + id : "&c记录不存在");
+                }
+                default -> {
+                    List<ScoreDataManager.GiveRecord> records = plugin.getDataManager().getGiveRecords(target.getUniqueId());
+                    if (records.isEmpty()) { msg(sender, "&e该玩家没有赠与记录"); return; }
+                    msg(sender, "&6---- " + target.getName() + " 的赠与记录 ----");
+                    for (ScoreDataManager.GiveRecord r : records) {
+                        msg(sender, "&e#" + r.id + ": " + fmt(r.amount) + " 分, 原因: " + r.reason + ", 操作者: " + r.operator);
+                    }
+                }
+            }
+            return;
+        }
+        if (args.length < 2) { msg(sender, "&c用法: /srank score give <玩家> <分数> [原因]"); return; }
+        Player target = Bukkit.getPlayerExact(args[0]);
+        if (target == null) { msg(sender, "&c玩家不在线"); return; }
+        double amount;
+        try {
+            amount = Double.parseDouble(args[1]);
+        } catch (NumberFormatException e) {
+            msg(sender, "&c分数必须是数字");
+            return;
+        }
+        String reason = args.length >= 3 ? args[2] : "管理员操作";
+        if (plugin.getDataManager().getPlayerData(target.getUniqueId()) == null) {
+            plugin.getDataManager().initPlayer(target, false);
+        }
+        int recordId = plugin.getDataManager().addGiveRecord(target.getUniqueId(), amount, reason, sender.getName());
+        if (recordId < 0) { msg(sender, "&c该玩家数据尚未初始化，请稍后再试"); return; }
+        plugin.getDataManager().savePlayerDataIfDirty(target.getUniqueId());
+        msg(sender, "&a已给予 " + fmt(amount) + " 分，记录ID=" + recordId);
+        target.sendMessage(Component.text("你收到了 " + fmt(amount) + " 生存段位分（" + reason + "）").color(NamedTextColor.GREEN));
+    }
+
+    // ==================== 工具 ====================
+
+    private ScoreDataManager.PlayerData resolveData(String name) {
+        Player online = Bukkit.getPlayerExact(name);
+        if (online != null) return plugin.getDataManager().getPlayerData(online.getUniqueId());
+        return plugin.getDataManager().getPlayerDataOffline(name);
+    }
+
+    private Rank resolveRank(ScoreDataManager.PlayerData data) {
+        if (data == null) return null;
+        RankManager rankManager = plugin.getRankManager();
+        Rank rank = data.getRankId() == null ? null : rankManager.getById(data.getRankId());
+        return rank != null ? rank : rankManager.getByScore(data.getScore());
+    }
+
+    private boolean check(CommandSender sender, String permission) {
+        if (sender.hasPermission(permission)) return true;
+        msg(sender, "&c无权限");
+        return false;
+    }
+
+    private boolean checkPlayer(CommandSender sender) {
+        if (sender instanceof Player) return true;
+        msg(sender, "&c该命令只能由玩家执行");
+        return false;
+    }
+
+    private void msg(CommandSender sender, String text) {
+        sender.sendMessage(TextFormatter.parse(text));
+    }
+
+    private static String fmt(double value) {
+        if (Math.abs(value - Math.rint(value)) < 1e-6) return String.valueOf((long) Math.rint(value));
+        return String.format("%.2f", value);
+    }
+
+    private static int parseInt(String value, int fallback) {
+        try { return Integer.parseInt(value); } catch (NumberFormatException e) { return fallback; }
+    }
+
+    // ==================== Tab 补全 ====================
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command cmd, String alias, String[] args) {
-        if (args.length == 1) return Arrays.asList("reload","recalc","give","query","list","leaderboard");
-        if (args.length == 2) {
-            if (args[0].equalsIgnoreCase("give")) return Arrays.asList("undo","edit","list");
-            if (args[0].equalsIgnoreCase("query") || args[0].equalsIgnoreCase("list")) return null; // 在线玩家列表
+        if (args.length == 1) {
+            List<String> options = new ArrayList<>(Arrays.asList("score", "list", "info", "rankup", "autorankup"));
+            if (sender.hasPermission("srank.admin")) {
+                options.add("rankset");
+                options.add("reload");
+            }
+            return filter(options, args[0]);
         }
-        if (args.length == 3 && args[0].equalsIgnoreCase("list")) {
-            return Arrays.asList("all","base","blocks","mobs","deaths","achievements");
+        String sub = args[0].toLowerCase(Locale.ROOT);
+        if (sub.equals("score")) {
+            if (args.length == 2) {
+                List<String> options = new ArrayList<>(Arrays.asList("query", "list", "top"));
+                if (sender.hasPermission("srank.admin")) {
+                    options.add("recalc");
+                    options.add("give");
+                }
+                return filter(options, args[1]);
+            }
+            if (args.length == 3) {
+                String action = args[1].toLowerCase(Locale.ROOT);
+                if (action.equals("query") || action.equals("list")) return null;   // 玩家名
+                if (action.equals("give") && sender.hasPermission("srank.admin")) {
+                    return filter(Arrays.asList("undo", "edit", "list"), args[2]);
+                }
+            }
+            return new ArrayList<>();
         }
+        if (sub.equals("rankset")) {
+            if (args.length == 2) return null;                                       // 玩家名
+            if (args.length == 3) {
+                List<String> ids = new ArrayList<>();
+                for (Rank rank : plugin.getRankManager().getRanks()) ids.add(rank.getId());
+                return filter(ids, args[2]);
+            }
+            return new ArrayList<>();
+        }
+        if (sub.equals("autorankup") && args.length == 2) {
+            return filter(Arrays.asList("true", "false"), args[1]);
+        }
+        if (sub.equals("info") && args.length == 2) return null;
         return new ArrayList<>();
     }
 
-    // ========== 中文翻译 ==========
+    private static List<String> filter(List<String> options, String prefix) {
+        String lower = prefix.toLowerCase(Locale.ROOT);
+        List<String> result = new ArrayList<>();
+        for (String option : options) {
+            if (option.toLowerCase(Locale.ROOT).startsWith(lower)) result.add(option);
+        }
+        return result;
+    }
+
+    // ==================== 中文翻译 ====================
+
     private static class ChineseNames {
         private static final Map<String, String> BLOCK_NAMES = new HashMap<>();
         private static final Map<String, String> MOB_NAMES = new HashMap<>();
@@ -263,8 +537,8 @@ public class SRCommand implements CommandExecutor, TabCompleter {
             BLOCK_NAMES.put("JUNGLE_LOG", "丛林原木");
             BLOCK_NAMES.put("ACACIA_LOG", "金合欢原木");
             BLOCK_NAMES.put("DARK_OAK_LOG", "深色橡木原木");
-            BLOCK_NAMES.put("CRIMSON_STEM", "诡异菌柄");
-            BLOCK_NAMES.put("WARPED_STEM", "绯红菌柄");
+            BLOCK_NAMES.put("CRIMSON_STEM", "绯红菌柄");
+            BLOCK_NAMES.put("WARPED_STEM", "诡异菌柄");
             BLOCK_NAMES.put("COAL_ORE", "煤矿石");
             BLOCK_NAMES.put("DEEPSLATE_COAL_ORE", "深板岩煤矿石");
             BLOCK_NAMES.put("COPPER_ORE", "铜矿石");
@@ -320,14 +594,23 @@ public class SRCommand implements CommandExecutor, TabCompleter {
             MOB_NAMES.put("WARDEN", "坚守者");
             MOB_NAMES.put("WITHER", "凋灵");
             MOB_NAMES.put("ENDER_DRAGON", "末影龙");
+            MOB_NAMES.put("ARMADILLO", "犰狳");
+            MOB_NAMES.put("BOGGED", "沼骸");
+            MOB_NAMES.put("BREEZE", "旋风人");
+            MOB_NAMES.put("HAPPY_GHAST", "快乐恶魂");
+            MOB_NAMES.put("COPPER_GOLEM", "铜傀儡");
+            MOB_NAMES.put("PARCHED", "干尸");
+            MOB_NAMES.put("CAMEL_HUSK", "骆驼尸壳");
+            MOB_NAMES.put("NAUTILUS", "鹦鹉螺");
+            MOB_NAMES.put("ZOMBIE_NAUTILUS", "僵尸鹦鹉螺");
         }
 
-        public static String getBlockName(Material material) {
-            return BLOCK_NAMES.getOrDefault(material.name(), material.name().toLowerCase().replace("_", " "));
+        static String getBlockName(Material material) {
+            return BLOCK_NAMES.getOrDefault(material.name(), material.name().toLowerCase(Locale.ROOT).replace('_', ' '));
         }
 
-        public static String getMobName(EntityType type) {
-            return MOB_NAMES.getOrDefault(type.name(), type.name().toLowerCase().replace("_", " "));
+        static String getMobName(EntityType type) {
+            return MOB_NAMES.getOrDefault(type.name(), type.name().toLowerCase(Locale.ROOT).replace('_', ' '));
         }
     }
 }

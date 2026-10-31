@@ -33,9 +33,66 @@ public class SRPlaceholder extends PlaceholderExpansion {
         }
 
         // ---------- 排名 ----------
-        if (identifier.equals("rank")) {
+        if (identifier.equals("rank") || identifier.equals("rank_pos")) {
             int rank = dm.getPlayerRank(uuid);
             return rank == -1 ? "无排名" : String.valueOf(rank);
+        }
+
+        // ---------- 段位 ----------
+        RankManager rankManager = plugin.getRankManager();
+        if (identifier.equals("rank_name") || identifier.equals("rankname")) {
+            Rank rank = currentRank(uuid);
+            return rank == null ? "" : rank.getDisplayLegacy();
+        }
+        if (identifier.equals("rank_plain") || identifier.equals("rank_name_plain")) {
+            Rank rank = currentRank(uuid);
+            return rank == null ? "" : rank.getDisplayPlain();
+        }
+        if (identifier.equals("rank_id") || identifier.equals("rankid")) {
+            Rank rank = currentRank(uuid);
+            return rank == null ? "" : rank.getId();
+        }
+        if (identifier.equals("rank_index")) {
+            Rank rank = currentRank(uuid);
+            return rank == null ? "0" : String.valueOf(rank.getIndex());
+        }
+        if (identifier.equals("rank_count") || identifier.equals("ranks_total")) {
+            return String.valueOf(rankManager == null ? 0 : rankManager.size());
+        }
+        if (identifier.equals("rank_required")) {
+            Rank rank = currentRank(uuid);
+            return rank == null ? "0" : RankManager.formatMoney(rank.getScore());
+        }
+        if (identifier.equals("next_rank") || identifier.equals("next_rank_name")) {
+            Rank next = nextRank(uuid);
+            return next == null ? "" : next.getDisplayLegacy();
+        }
+        if (identifier.equals("next_rank_plain")) {
+            Rank next = nextRank(uuid);
+            return next == null ? "" : next.getDisplayPlain();
+        }
+        if (identifier.equals("next_rank_score") || identifier.equals("rank_next_score")) {
+            Rank next = nextRank(uuid);
+            return next == null ? "-1" : RankManager.formatMoney(next.getScore());
+        }
+        if (identifier.equals("rank_remaining")) {
+            ScoreDataManager.PlayerData data = dm.getPlayerData(uuid);
+            Rank next = nextRank(uuid);
+            if (data == null || next == null) return "0";
+            return RankManager.formatMoney(Math.max(0, next.getScore() - data.getScore()));
+        }
+        if (identifier.equals("rank_progress")) {
+            ScoreDataManager.PlayerData data = dm.getPlayerData(uuid);
+            Rank rank = currentRank(uuid);
+            Rank next = nextRank(uuid);
+            if (data == null || rank == null || next == null) return "100.0";
+            double span = next.getScore() - rank.getScore();
+            double progress = span <= 0 ? 100 : Math.max(0, Math.min(100, (data.getScore() - rank.getScore()) / span * 100));
+            return String.format("%.1f", progress);
+        }
+        if (identifier.equals("autorankup")) {
+            ScoreDataManager.PlayerData data = dm.getPlayerData(uuid);
+            return data != null && data.isAutoRankup() ? "true" : "false";
         }
 
         // ---------- Give 记录统计 ----------
@@ -193,5 +250,21 @@ public class SRPlaceholder extends PlaceholderExpansion {
         }
 
         return null;
+    }
+
+    /** 玩家当前段位：优先用存档里的段位，没有就按分数推导。 */
+    private Rank currentRank(UUID uuid) {
+        RankManager rankManager = plugin.getRankManager();
+        ScoreDataManager.PlayerData data = plugin.getDataManager().getPlayerData(uuid);
+        if (rankManager == null || data == null) return null;
+        Rank rank = data.getRankId() == null ? null : rankManager.getById(data.getRankId());
+        return rank != null ? rank : rankManager.getByScore(data.getScore());
+    }
+
+    /** 玩家的下一段位；已满级返回 null。 */
+    private Rank nextRank(UUID uuid) {
+        RankManager rankManager = plugin.getRankManager();
+        if (rankManager == null) return null;
+        return rankManager.next(currentRank(uuid));
     }
 }

@@ -20,7 +20,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
 public class ScoreDataManager {
-    private final JavaPlugin plugin;
+    private final SRExpansion plugin;
     private File dataFile;
     private YamlConfiguration dataConfig;
 
@@ -165,6 +165,10 @@ public class ScoreDataManager {
         private double totalPenalty;
         private final List<GiveRecord> giveRecords;
         private int nextGiveId;
+        /** 当前段位注册名（ranks.yml 里的键），null 表示还没初始化。 */
+        private String rankId;
+        /** 是否开启自动升级。 */
+        private boolean autoRankup = true;
 
         public PlayerData(double score, PlayerStatsSnapshot stats, Set<Double> triggeredScores, double totalPenalty) {
             this(score, stats, triggeredScores, totalPenalty, new ArrayList<>(), 1);
@@ -194,10 +198,14 @@ public class ScoreDataManager {
             for (GiveRecord record : giveRecords) total += record.amount;
             return total;
         }
+        public String getRankId() { return rankId; }
+        public void setRankId(String rankId) { this.rankId = rankId; }
+        public boolean isAutoRankup() { return autoRankup; }
+        public void setAutoRankup(boolean autoRankup) { this.autoRankup = autoRankup; }
     }
 
     // 构造函数与初始化
-    public ScoreDataManager(JavaPlugin plugin) {
+    public ScoreDataManager(SRExpansion plugin) {
         this.plugin = plugin;
         initDataFile();
         startPeriodicSync();
@@ -273,60 +281,13 @@ public class ScoreDataManager {
         loadAdvancementsConfig();    // advancements.yml
     }
 
-    /**
-     * 取服务器数据目录下的配置文件：不存在就从 jar 里释放一份；
-     * 已存在则只把 jar 默认配置里“缺失的键”补进去。
-     * 这样升级插件后新增的方块/生物会自动补进服务器已有的配置，不会因为文件已存在而失效。
-     */
+    /** 取配置文件：不存在就释放，已存在则补全新增键。 */
     private File ensureConfig(String fileName) {
-        File file = new File(plugin.getDataFolder(), fileName);
-        if (!file.exists()) {
-            plugin.saveResource(fileName, false);
-            return file;
-        }
-        mergeMissingDefaults(fileName, file);
-        return file;
+        return ConfigFiles.ensure(plugin, fileName);
     }
 
     private void mergeMissingDefaults(String fileName, File file) {
-        if (!file.exists()) return;
-        InputStream in = plugin.getResource(fileName);
-        if (in == null) return;
-        YamlConfiguration defaults;
-        try (InputStreamReader reader = new InputStreamReader(in, StandardCharsets.UTF_8)) {
-            defaults = YamlConfiguration.loadConfiguration(reader);
-        } catch (IOException e) {
-            plugin.getLogger().warning("读取内置 " + fileName + " 失败: " + e.getMessage());
-            return;
-        }
-        YamlConfiguration live = YamlConfiguration.loadConfiguration(file);
-        if (!copyMissingKeys(live, defaults)) return;
-        try {
-            live.save(file);
-            plugin.getLogger().info("已为 " + fileName + " 自动补齐新增配置项");
-        } catch (IOException e) {
-            plugin.getLogger().warning("写回 " + fileName + " 失败: " + e.getMessage());
-        }
-    }
-
-    /** 递归把 defaults 里 live 缺失的键补进 live；已存在的键（包括列表）一律不覆盖。 */
-    private boolean copyMissingKeys(ConfigurationSection live, ConfigurationSection defaults) {
-        boolean changed = false;
-        for (String key : defaults.getKeys(false)) {
-            ConfigurationSection defaultSection = defaults.getConfigurationSection(key);
-            if (defaultSection != null) {
-                ConfigurationSection liveSection = live.getConfigurationSection(key);
-                if (liveSection == null) {
-                    if (live.contains(key)) continue; // 用户写成了别的类型，保持原样
-                    liveSection = live.createSection(key);
-                }
-                changed |= copyMissingKeys(liveSection, defaultSection);
-            } else if (!live.contains(key)) {
-                live.set(key, defaults.get(key));
-                changed = true;
-            }
-        }
-        return changed;
+        ConfigFiles.mergeMissing(plugin, fileName, file);
     }
 
     private void loadBaseConfig() {
@@ -741,6 +702,24 @@ public class ScoreDataManager {
                 discFishing, discRaidWin, discAdvancementScore
         );
         PlayerData data = new PlayerData(finalScore, snapshot, triggered, accumulatedPenalty, giveRecords, nextGiveId);
+        // 段位：优先读存档；没有就按当前分数推导，老玩家迁移时不会一次性刷出上百条升级公告
+        String savedRank;
+        boolean autoRankup;
+        synchronized (dataConfig) {
+            String base = "players." + uuid;
+            savedRank = dataConfig.getString(base + ".rank");
+            autoRankup = dataConfig.getBoolean(base + ".auto_rankup",
+                    plugin.getRankManager() != null && plugin.getRankManager().isAutoDefault());
+        }
+        RankManager rankManager = plugin.getRankManager();
+        if (rankManager != null) {
+            Rank rank = savedRank == null ? null : rankManager.getById(savedRank);
+            if (rank == null) rank = rankManager.getByScore(data.getScore());
+            data.setRankId(rank == null ? null : rank.getId());
+        } else {
+            data.setRankId(savedRank);
+        }
+        data.setAutoRankup(autoRankup);
         playerDataCache.put(uuid, data);
         savePlayerData(uuid, data);
     }
@@ -993,6 +972,8 @@ public class ScoreDataManager {
             dataConfig.set(path + ".total_penalty", data.getTotalPenalty());
             dataConfig.set(path + ".triggered", new ArrayList<>(data.getTriggeredScores()));
             dataConfig.set(path + ".give_next_id", data.getNextGiveId());
+            dataConfig.set(path + ".rank", data.getRankId());
+            dataConfig.set(path + ".auto_rankup", data.isAutoRankup());
 
             List<Map<String, Object>> records = new ArrayList<>();
             for (GiveRecord record : data.getGiveRecords()) {
@@ -1178,13 +1159,22 @@ public class ScoreDataManager {
             List<GiveRecord> records = readGiveRecords(uuid);
             int nextGiveId = dataConfig.getInt(path + ".give_next_id", 1);
             for (GiveRecord record : records) nextGiveId = Math.max(nextGiveId, record.id + 1);
-            return new PlayerData(
+            PlayerData data = new PlayerData(
                     dataConfig.getDouble(path + ".score"),
                     snapshot,
                     new HashSet<>(dataConfig.getDoubleList(path + ".triggered")),
                     dataConfig.getDouble(path + ".total_penalty"),
                     records,
                     nextGiveId);
+            String rankId = dataConfig.getString(path + ".rank");
+            if (rankId == null && plugin.getRankManager() != null) {
+                Rank derived = plugin.getRankManager().getByScore(data.getScore());
+                rankId = derived == null ? null : derived.getId();
+            }
+            data.setRankId(rankId);
+            data.setAutoRankup(dataConfig.getBoolean(path + ".auto_rankup",
+                    plugin.getRankManager() != null && plugin.getRankManager().isAutoDefault()));
+            return data;
         }
     }
 
@@ -1500,6 +1490,24 @@ public class ScoreDataManager {
         playerDataCache.remove(uuid);
     }
 
+    /** 设置玩家段位（段位系统调用）。 */
+    public void setRank(UUID uuid, String rankId) {
+        PlayerData data = playerDataCache.get(uuid);
+        if (data == null) return;
+        data.setRankId(rankId);
+        markDirty(uuid);
+        savePlayerDataIfDirty(uuid);
+    }
+
+    /** 开关自动升级。 */
+    public void setAutoRankup(UUID uuid, boolean value) {
+        PlayerData data = playerDataCache.get(uuid);
+        if (data == null) return;
+        data.setAutoRankup(value);
+        markDirty(uuid);
+        savePlayerDataIfDirty(uuid);
+    }
+
     /** 重载配置并重算所有在线玩家（触发记录与赠与分会保留）。 */
     public void reload() {
         mergeMissingDefaults("config.yml", new File(plugin.getDataFolder(), "config.yml"));
@@ -1535,6 +1543,8 @@ public class ScoreDataManager {
                 else player.performCommand(command);
             });
         }
+        // 分数变化后顺便检查段位
+        if (plugin.getRankManager() != null) plugin.getRankManager().tryAutoRankup(player);
     }
 
     private List<Threshold> thresholds = new ArrayList<>();

@@ -1,18 +1,18 @@
 name: SRExpansion
-version: 1.8.1
+version: 1.9.0
 main: org.example.com.sRExpansion.SRExpansion
 api-version: '1.21'
 author: buzizi
-description: 生存段位分附属插件（Paper 1.21.11）
-softdepend: [PlaceholderAPI]
+description: 生存段位系统（Paper 1.21.11）
+softdepend: [PlaceholderAPI, Vault]
 commands:
   srank:
-    description: 生存段位分管理命令
-    usage: /srank <reload|recalc|give|query|list|leaderboard>
+    description: 生存段位主命令
+    usage: /srank <score|list|info|rankup|rankset|autorankup|reload>
 permissions:
   srank.user:
-    description: 允许使用 /srank query、list、leaderboard
+    description: 允许使用 /srank score、list、info、rankup、autorankup
     default: true
   srank.admin:
-    description: 允许使用 /srank reload、recalc、give
+    description: 允许使用 /srank rankset、reload 以及 score 下的 recalc、give
     default: op
