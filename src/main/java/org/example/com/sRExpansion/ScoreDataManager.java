@@ -169,6 +169,8 @@ public class ScoreDataManager {
         private String rankId;
         /** 是否开启自动升级。 */
         private boolean autoRankup = true;
+        /** 已经授予过的段位权限节点，避免重复执行 luckperms 命令。 */
+        private final Set<String> grantedPermissions = new HashSet<>();
 
         public PlayerData(double score, PlayerStatsSnapshot stats, Set<Double> triggeredScores, double totalPenalty) {
             this(score, stats, triggeredScores, totalPenalty, new ArrayList<>(), 1);
@@ -202,6 +204,11 @@ public class ScoreDataManager {
         public void setRankId(String rankId) { this.rankId = rankId; }
         public boolean isAutoRankup() { return autoRankup; }
         public void setAutoRankup(boolean autoRankup) { this.autoRankup = autoRankup; }
+        public Set<String> getGrantedPermissions() { return grantedPermissions; }
+        public void setGrantedPermissions(List<String> nodes) {
+            grantedPermissions.clear();
+            if (nodes != null) grantedPermissions.addAll(nodes);
+        }
     }
 
     // 构造函数与初始化
@@ -283,7 +290,13 @@ public class ScoreDataManager {
 
     /** 取配置文件：不存在就释放，已存在则补全新增键。 */
     private File ensureConfig(String fileName) {
-        return ConfigFiles.ensure(plugin, fileName);
+        // 这些段里管理员可能整条删除某个方块/生物/成就，合并时只补新条目，不改已有条目
+        return switch (fileName) {
+            case "blocks.yml" -> ConfigFiles.ensure(plugin, fileName, "specific_block_scores");
+            case "mobs.yml" -> ConfigFiles.ensure(plugin, fileName, "specific_mob_scores");
+            case "advancements.yml" -> ConfigFiles.ensure(plugin, fileName, "advancement_points");
+            default -> ConfigFiles.ensure(plugin, fileName);
+        };
     }
 
     private void mergeMissingDefaults(String fileName, File file) {
@@ -705,21 +718,31 @@ public class ScoreDataManager {
         // 段位：优先读存档；没有就按当前分数推导，老玩家迁移时不会一次性刷出上百条升级公告
         String savedRank;
         boolean autoRankup;
+        List<String> savedPermissions;
+        boolean hasPermissionsKey;
         synchronized (dataConfig) {
             String base = "players." + uuid;
             savedRank = dataConfig.getString(base + ".rank");
             autoRankup = dataConfig.getBoolean(base + ".auto_rankup",
                     plugin.getRankManager() != null && plugin.getRankManager().isAutoDefault());
+            hasPermissionsKey = dataConfig.contains(base + ".granted_permissions");
+            savedPermissions = dataConfig.getStringList(base + ".granted_permissions");
         }
         RankManager rankManager = plugin.getRankManager();
+        Rank currentRank = null;
         if (rankManager != null) {
-            Rank rank = savedRank == null ? null : rankManager.getById(savedRank);
-            if (rank == null) rank = rankManager.getByScore(data.getScore());
-            data.setRankId(rank == null ? null : rank.getId());
+            currentRank = savedRank == null ? null : rankManager.getById(savedRank);
+            if (currentRank == null) currentRank = rankManager.getByScore(data.getScore());
+            data.setRankId(currentRank == null ? null : currentRank.getId());
         } else {
             data.setRankId(savedRank);
         }
         data.setAutoRankup(autoRankup);
+        data.setGrantedPermissions(savedPermissions);
+        if (!hasPermissionsKey && rankManager != null) {
+            // 老玩家迁移：旧系统已经用 luckperms 命令授予过这些节点，这里只记账、不重复执行命令
+            rankManager.prefillPermissions(data, currentRank);
+        }
         playerDataCache.put(uuid, data);
         savePlayerData(uuid, data);
     }
@@ -974,6 +997,7 @@ public class ScoreDataManager {
             dataConfig.set(path + ".give_next_id", data.getNextGiveId());
             dataConfig.set(path + ".rank", data.getRankId());
             dataConfig.set(path + ".auto_rankup", data.isAutoRankup());
+            dataConfig.set(path + ".granted_permissions", new ArrayList<>(data.getGrantedPermissions()));
 
             List<Map<String, Object>> records = new ArrayList<>();
             for (GiveRecord record : data.getGiveRecords()) {
@@ -1174,6 +1198,7 @@ public class ScoreDataManager {
             data.setRankId(rankId);
             data.setAutoRankup(dataConfig.getBoolean(path + ".auto_rankup",
                     plugin.getRankManager() != null && plugin.getRankManager().isAutoDefault()));
+            data.setGrantedPermissions(dataConfig.getStringList(path + ".granted_permissions"));
             return data;
         }
     }
@@ -1495,6 +1520,12 @@ public class ScoreDataManager {
         PlayerData data = playerDataCache.get(uuid);
         if (data == null) return;
         data.setRankId(rankId);
+        markDirty(uuid);
+        savePlayerDataIfDirty(uuid);
+    }
+
+    /** 段位系统改动了玩家数据后调用：标记并立即落盘。 */
+    public void touch(UUID uuid) {
         markDirty(uuid);
         savePlayerDataIfDirty(uuid);
     }

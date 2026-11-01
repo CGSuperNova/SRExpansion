@@ -48,6 +48,8 @@ public class StatisticsListener implements Listener {
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
+        // 退服时把没播完的升级悬浮字收掉，避免残留实体
+        if (plugin.getRankupDisplay() != null) plugin.getRankupDisplay().cancel(event.getPlayer().getUniqueId());
         plugin.getDataManager().unloadPlayer(event.getPlayer().getUniqueId());
     }
 }

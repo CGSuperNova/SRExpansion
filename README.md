@@ -41,7 +41,13 @@ jar --create --file dist\SRExpansion.jar -C out .
 - 晋升时按 `settings.messages` 广播 / 标题 / 聊天提示，并按 `money` 发放金币（Vault 优先，其次执行
   `settings.money.command`）。
 - 玩家可用 `/srank autorankup` 自行关闭自动升级，之后靠 `/srank rankup` 手动升。
-- `display` 支持 `&a` 传统颜色码、`{#RRGGBB}` 单色、`{#RRGGBB>}文字{#RRGGBB<}` 渐变，
+- **段位权限**：晋升时按 `settings.permission` 里的节点模板（默认 `rank.%rank%.achieved`）通过
+  LuckPerms 命令授予玩家「已达到的所有段位」的权限，其他插件可以直接拿这些节点做判断。
+  已授予的节点记录在 `data.yml` 的 `granted_permissions`，不会重复执行。
+- **升级悬浮字**：`settings.display` 控制一段三幕演出 —— 在玩家左侧 90°、3 格处生成悬浮字，
+  快速转到左前方 30° 停留约 1.5 秒再转回去，依次展示「段位提升」「获得奖励」「下一段位」，
+  全程跟随玩家视角（每 tick 按玩家朝向重算位置），且只对本人可见。
+- 段位名支持 `&a` 传统颜色码、`{#RRGGBB}` 单色、`{#RRGGBB>}文字{#RRGGBB<}` 渐变，
   以及多色标 `{#RRGGBB<>}`（解析器见 `TextFormatter`）。
 
 ## 命令

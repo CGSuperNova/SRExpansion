@@ -10,6 +10,7 @@ public final class SRExpansion extends JavaPlugin {
     private static SRExpansion instance;
     private ScoreDataManager dataManager;
     private RankManager rankManager;
+    private RankupDisplay rankupDisplay;
 
     @Override
     public void onEnable() {
@@ -23,6 +24,8 @@ public final class SRExpansion extends JavaPlugin {
 
         dataManager = new ScoreDataManager(this);
         dataManager.loadConfig();
+
+        rankupDisplay = new RankupDisplay(this);
 
         Bukkit.getPluginManager().registerEvents(new StatisticsListener(this), this);
         Bukkit.getPluginManager().registerEvents(new BlockEventListener(this), this);
@@ -48,10 +51,12 @@ public final class SRExpansion extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        if (rankupDisplay != null) rankupDisplay.shutdown();
         if (dataManager != null) dataManager.saveAllData();
     }
 
     public static SRExpansion getInstance() { return instance; }
     public ScoreDataManager getDataManager() { return dataManager; }
     public RankManager getRankManager() { return rankManager; }
+    public RankupDisplay getRankupDisplay() { return rankupDisplay; }
 }

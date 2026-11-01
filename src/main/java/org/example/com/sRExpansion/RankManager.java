@@ -39,6 +39,25 @@ public class RankManager {
     private float volume = 1.0f;
     private float pitch = 1.0f;
 
+    // 权限授予（其他插件用 rank.<id>.achieved 判断玩家是否达到某段位）
+    private boolean permissionEnabled = true;
+    private List<String> permissionNodes = new ArrayList<>(List.of("rank.%rank%.achieved"));
+    private String permissionCommand = "";
+
+    // 升级悬浮字
+    private boolean displayEnabled = true;
+    private double displayDistance = 3.0;
+    private double displayHeight = 0.4;
+    private double displayStartAngle = 90;
+    private double displayReadAngle = 30;
+    private int displayRotateTicks = 6;
+    private int displayHoldTicks = 30;
+    private int displayGapTicks = 4;
+    private boolean displaySeeThrough = false;
+    private List<String> displayStage1 = new ArrayList<>();
+    private List<String> displayStage2 = new ArrayList<>();
+    private List<String> displayStage3 = new ArrayList<>();
+
     private Object economy;
     private boolean economyChecked;
 
@@ -49,7 +68,7 @@ public class RankManager {
     // ==================== 配置 ====================
 
     public void load() {
-        File file = ConfigFiles.ensure(plugin, "ranks.yml");
+        File file = ConfigFiles.ensure(plugin, "ranks.yml", "ranks");
         YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
 
         autoDefault = config.getBoolean("settings.auto-rankup-default", true);
@@ -62,6 +81,27 @@ public class RankManager {
         soundName = config.getString("settings.messages.sound", "");
         volume = (float) config.getDouble("settings.messages.volume", 1.0);
         pitch = (float) config.getDouble("settings.messages.pitch", 1.0);
+
+        permissionEnabled = config.getBoolean("settings.permission.enabled", true);
+        List<String> nodes = config.getStringList("settings.permission.nodes");
+        permissionNodes = nodes.isEmpty() ? new ArrayList<>(List.of("rank.%rank%.achieved")) : new ArrayList<>(nodes);
+        permissionCommand = config.getString("settings.permission.command", "");
+
+        displayEnabled = config.getBoolean("settings.display.enabled", true);
+        displayDistance = config.getDouble("settings.display.distance", 3.0);
+        displayHeight = config.getDouble("settings.display.height", 0.4);
+        displayStartAngle = config.getDouble("settings.display.start-angle", 90);
+        displayReadAngle = config.getDouble("settings.display.read-angle", 30);
+        displayRotateTicks = Math.max(1, config.getInt("settings.display.rotate-ticks", 6));
+        displayHoldTicks = Math.max(1, config.getInt("settings.display.hold-ticks", 30));
+        displayGapTicks = Math.max(0, config.getInt("settings.display.gap-ticks", 4));
+        displaySeeThrough = config.getBoolean("settings.display.see-through", false);
+        displayStage1 = config.getStringList("settings.display.stages.stage1");
+        displayStage2 = config.getStringList("settings.display.stages.stage2");
+        displayStage3 = config.getStringList("settings.display.stages.stage3");
+        if (displayStage1.isEmpty()) displayStage1 = List.of("&a&l生存段位提升！", "&f你升级到了 %rank%");
+        if (displayStage2.isEmpty()) displayStage2 = List.of("&e&l获得奖励", "&6+%money% 金币");
+        if (displayStage3.isEmpty()) displayStage3 = List.of("&b&l下一段位", "&f%next_rank% &7需要 %next_score% 分");
 
         List<Rank> loaded = new ArrayList<>();
         ConfigurationSection section = config.getConfigurationSection("ranks");
@@ -173,8 +213,58 @@ public class RankManager {
         if (steps == 0) return 0;
 
         dataManager.setRank(player.getUniqueId(), target.getId());
+        grantPermissions(player, target);
         announce(player, target, money, steps);
+        if (displayEnabled && plugin.getRankupDisplay() != null) {
+            plugin.getRankupDisplay().play(player, target, money);
+        }
         return steps;
+    }
+
+    /**
+     * 给玩家补上“已达到的所有段位”的权限节点（其他插件用它判断段位）。
+     * 已经记录在 data.yml 的节点不会重复执行命令。
+     */
+    public void grantPermissions(Player player, Rank target) {
+        if (!permissionEnabled || target == null) return;
+        if (permissionCommand == null || permissionCommand.isBlank()) return;
+        ScoreDataManager dataManager = plugin.getDataManager();
+        if (dataManager == null) return;
+        ScoreDataManager.PlayerData data = dataManager.getPlayerData(player.getUniqueId());
+        if (data == null) return;
+
+        java.util.Set<String> granted = data.getGrantedPermissions();
+        List<String> toGrant = new ArrayList<>();
+        for (Rank rank : ranks) {
+            if (rank.getIndex() > target.getIndex()) break;
+            if (rank.getScore() <= 0) continue; // 初始段位（Newbie）不授予权限节点
+            for (String template : permissionNodes) {
+                String node = template.replace("%rank%", rank.getId().toLowerCase(Locale.ROOT));
+                if (granted.add(node)) toGrant.add(node);
+            }
+        }
+        if (toGrant.isEmpty()) return;
+        dataManager.touch(player.getUniqueId());
+        for (String node : toGrant) {
+            String command = permissionCommand
+                    .replace("%player%", player.getName())
+                    .replace("%node%", node);
+            Bukkit.getScheduler().runTask(plugin,
+                    () -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command));
+        }
+    }
+
+    /** 登录/初始化时用：不发命令，直接把“已达到的段位节点”记为已授予，避免老玩家迁移时刷一堆命令。 */
+    public void prefillPermissions(ScoreDataManager.PlayerData data, Rank rank) {
+        if (!permissionEnabled || data == null || rank == null) return;
+        java.util.Set<String> granted = data.getGrantedPermissions();
+        for (Rank item : ranks) {
+            if (item.getIndex() > rank.getIndex()) break;
+            if (item.getScore() <= 0) continue; // 初始段位不授予权限节点
+            for (String template : permissionNodes) {
+                granted.add(template.replace("%rank%", item.getId().toLowerCase(Locale.ROOT)));
+            }
+        }
     }
 
     /** 自动升级检查：只在玩家开启自动升级时生效。 */
@@ -187,10 +277,35 @@ public class RankManager {
         rankup(player, false);
     }
 
-    /** 管理员强制设置段位（不发奖励、不广播）。 */
+    /** 管理员强制设置段位（不发奖励、不广播，但会补上对应段位的权限）。 */
     public void setRank(Player player, Rank rank) {
         plugin.getDataManager().setRank(player.getUniqueId(), rank.getId());
+        grantPermissions(player, rank);
     }
+
+    // ==================== 悬浮字设置（给 RankupDisplay 用） ====================
+
+    public boolean isDisplayEnabled() { return displayEnabled; }
+    public double getDisplayDistance() { return displayDistance; }
+    public double getDisplayHeight() { return displayHeight; }
+    public double getDisplayStartAngle() { return displayStartAngle; }
+    public double getDisplayReadAngle() { return displayReadAngle; }
+    public int getDisplayRotateTicks() { return displayRotateTicks; }
+    public int getDisplayHoldTicks() { return displayHoldTicks; }
+    public int getDisplayGapTicks() { return displayGapTicks; }
+    public boolean isDisplaySeeThrough() { return displaySeeThrough; }
+
+    /** 第 stage 阶段（0 起）要显示的原始文本行。 */
+    public List<String> getDisplayStage(int stage) {
+        return switch (stage) {
+            case 0 -> displayStage1;
+            case 1 -> displayStage2;
+            case 2 -> displayStage3;
+            default -> List.of();
+        };
+    }
+
+    public int getDisplayStageCount() { return 3; }
 
     public void startTask() {
         long ticks = Math.max(5, checkInterval) * 20L;

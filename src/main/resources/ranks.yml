@@ -30,6 +30,41 @@ settings:
     volume: 1.0
     pitch: 1.1
 
+  # 段位权限：达到某段位后自动授予的权限节点（其他插件常拿它判断“玩家是否达到某段位”）
+  permission:
+    enabled: true
+    # %rank% 会被替换成段位注册名的小写形式：dirt / coal_ore / extra_iron …
+    # 如果需要 srank.<段位>.achieved 那种写法，在这里再加一行即可（可以写多条）
+    nodes:
+      - 'rank.%rank%.achieved'
+    # 授予用的控制台命令：%player% 玩家名，%node% 权限节点
+    # 旧配置用的是 "luckperms user %player% permission set rank.xxx.achieved true llg"，如需附加参数自行补在这里
+    command: 'luckperms user %player% permission set %node% true'
+
+  # 升级时在玩家左侧生成的悬浮字演出
+  display:
+    enabled: true
+    distance: 3.0            # 距离玩家的格数
+    height: 0.4              # 相对视平线的高度偏移
+    start-angle: 90          # 起始位置：视角左侧 90°
+    read-angle: 30           # 阅读位置：视角左侧 30°
+    rotate-ticks: 6          # 旋转耗时（20 tick = 1 秒）
+    hold-ticks: 30           # 停留时长（1.5 秒）
+    gap-ticks: 4             # 两个阶段之间的间隔
+    see-through: false       # true = 隔墙也能看见
+    # 三个阶段依次显示的文本（每段两行），占位符：
+    #   %rank% %rank_plain% %money% %next_rank% %next_score% %next_rank_plain% %remaining% %player%
+    stages:
+      stage1:
+        - '&a&l生存段位提升！'
+        - '&f你升级到了 %rank%'
+      stage2:
+        - '&e&l获得奖励'
+        - '&6+%money% 金币'
+      stage3:
+        - '&b&l下一段位'
+        - '&f%next_rank% &7需要 &e%next_score% &7分'
+
 ranks:
   Newbie: {display: '&f&l[&b&lA&f&li&b&lr&f&l]', score: 0}
   Dirt: {display: '{#A0522D>}[Dirt]{#F5DEB3<}', score: 5, money: 355}
