@@ -27,6 +27,8 @@ public class RankManager {
     private final SRExpansion plugin;
     private final List<Rank> ranks = new ArrayList<>();
     private final Map<String, Rank> byId = new LinkedHashMap<>();
+    /** 所有段位里出现过的属性 id，用于把没加成的属性也同步成 0。 */
+    private final java.util.Set<String> attributeIds = new java.util.LinkedHashSet<>();
 
     private boolean autoDefault = true;
     private int checkInterval = 60;
@@ -115,21 +117,59 @@ public class RankManager {
                 double score = rank.getDouble("score", 0);
                 double money = rank.getDouble("money", 0);
                 boolean auto = rank.getBoolean("auto", true);
-                loaded.add(new Rank(0, id, display, score, money, auto));
+                Map<String, Double> attributes = new LinkedHashMap<>();
+                ConfigurationSection attributeSection = rank.getConfigurationSection("attributes");
+                if (attributeSection != null) {
+                    for (String key : attributeSection.getKeys(false)) {
+                        double value = attributeSection.getDouble(key);
+                        if (value != 0) attributes.put(key.toLowerCase(Locale.ROOT), value);
+                    }
+                }
+                loaded.add(new Rank(0, id, display, score, money, auto, attributes));
             }
         }
         loaded.sort(Comparator.comparingDouble(Rank::getScore));
 
         ranks.clear();
         byId.clear();
+        attributeIds.clear();
         int index = 0;
         for (Rank rank : loaded) {
             index++;
-            Rank numbered = new Rank(index, rank.getId(), rank.getDisplay(), rank.getScore(), rank.getMoney(), rank.isAuto());
+            Rank numbered = new Rank(index, rank.getId(), rank.getDisplay(), rank.getScore(), rank.getMoney(),
+                    rank.isAuto(), rank.getAttributes());
             ranks.add(numbered);
             byId.put(numbered.getId().toLowerCase(Locale.ROOT), numbered);
+            attributeIds.addAll(numbered.getAttributes().keySet());
         }
         plugin.getLogger().info("已加载 " + ranks.size() + " 个段位");
+    }
+
+    /**
+     * 把「当前段位之前所有段位的属性加成之和」同步给 AdvancedPlayerAttribute。
+     * 是幂等的：重复调用不会叠加，只会把该来源的加成设为最新值。
+     */
+    public void syncAttributes(Player player) {
+        if (player == null) return;
+        AttributeBridge bridge = plugin.getAttributeBridge();
+        if (bridge == null || !bridge.isAvailable() || attributeIds.isEmpty()) return;
+        ScoreDataManager dataManager = plugin.getDataManager();
+        if (dataManager == null) return;
+        ScoreDataManager.PlayerData data = dataManager.getPlayerData(player.getUniqueId());
+        if (data == null) return;
+
+        Rank current = data.getRankId() == null ? null : getById(data.getRankId());
+        if (current == null) current = getByScore(data.getScore());
+        if (current == null) return;
+
+        Map<String, Double> totals = new LinkedHashMap<>();
+        for (Rank rank : ranks) {
+            if (rank.getIndex() > current.getIndex()) break;
+            rank.getAttributes().forEach((key, value) -> totals.merge(key, value, Double::sum));
+        }
+        for (String attributeId : attributeIds) {
+            bridge.set(player, attributeId, totals.getOrDefault(attributeId, 0.0));
+        }
     }
 
     public int getCheckInterval() { return checkInterval; }
@@ -214,6 +254,7 @@ public class RankManager {
 
         dataManager.setRank(player.getUniqueId(), target.getId());
         grantPermissions(player, target);
+        syncAttributes(player);
         announce(player, target, money, steps);
         if (displayEnabled && plugin.getRankupDisplay() != null) {
             plugin.getRankupDisplay().play(player, target, money);
@@ -277,10 +318,11 @@ public class RankManager {
         rankup(player, false);
     }
 
-    /** 管理员强制设置段位（不发奖励、不广播，但会补上对应段位的权限）。 */
+    /** 管理员强制设置段位（不发奖励、不广播，但会补上对应段位的权限与属性）。 */
     public void setRank(Player player, Rank rank) {
         plugin.getDataManager().setRank(player.getUniqueId(), rank.getId());
         grantPermissions(player, rank);
+        syncAttributes(player);
     }
 
     // ==================== 悬浮字设置（给 RankupDisplay 用） ====================

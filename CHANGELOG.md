@@ -7,6 +7,24 @@
 
 ## [Unreleased]
 
+## [1.10.0] - 2026-11-03
+
+### Added
+
+- 段位属性奖励：`ranks.yml` 里每个段位可以配置 `attributes:`（`max_health`、`attack`、`defense`、
+  `shield`、`dodge` 等），升级后会把「该段位及之前所有段位」的加成之和同步给
+  **AdvancedPlayerAttribute** 插件；登录、升级、`rankset`、重载时都会重算（幂等，不会叠加）。
+- 与 AdvancedPlayerAttribute 的连接层 `AttributeBridge`：通过反射调用对方 API，两个插件没有编译依赖；
+  对方未安装时全部空操作，并在启动日志里提示是否连接成功。
+- `plugin.yml` 增加 `softdepend: AdvancedPlayerAttribute`，保证加载顺序。
+- 默认段位属性阶梯：Dirt / Coal / Iron / Gold / Diamond / Netherite / Wither / Beacon / Ender_Dragon /
+  Minecraft / Minecraft_Max 以及 5 个 Extra 段位共 16 个里程碑提供属性，满段位累计
+  血量上限 +32、防御 +13、攻击 +18、护盾 +15、闪避 +7%。
+
+### Changed
+
+- 版本号升到 1.10.0；构建改为 Maven 打包（bStats 通过 shade 插件重定位进 jar）。
+
 ## [1.9.1] - 2026-11-02
 
 ### Added

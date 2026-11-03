@@ -1,5 +1,6 @@
 package org.example.com.sRExpansion;
 
+import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -11,6 +12,7 @@ public final class SRExpansion extends JavaPlugin {
     private ScoreDataManager dataManager;
     private RankManager rankManager;
     private RankupDisplay rankupDisplay;
+    private AttributeBridge attributeBridge;
 
     @Override
     public void onEnable() {
@@ -18,6 +20,13 @@ public final class SRExpansion extends JavaPlugin {
         saveDefaultConfig();
         // base.yml / blocks.yml / mobs.yml / advancements.yml / ranks.yml 按需释放：
         // 不存在就写一份默认的，已存在则只补齐新增键，不覆盖管理员配置。
+
+        // 属性插件是可选依赖：装了就把段位属性奖励同步过去，没装则全部空操作
+        attributeBridge = new AttributeBridge();
+        attributeBridge.init();
+        if (attributeBridge.isAvailable()) {
+            getLogger().info("已连接 AdvancedPlayerAttribute，段位属性奖励生效");
+        }
 
         rankManager = new RankManager(this);
         rankManager.load();
@@ -47,6 +56,11 @@ public final class SRExpansion extends JavaPlugin {
         Bukkit.getScheduler().runTask(this, () -> {
             for (Player player : Bukkit.getOnlinePlayers()) dataManager.initPlayer(player, false);
         });
+
+        // 初始化bStats服务
+        int pluginId = 35105;
+        Metrics metrics = new Metrics(this, pluginId);
+
     }
 
     @Override
@@ -59,4 +73,5 @@ public final class SRExpansion extends JavaPlugin {
     public ScoreDataManager getDataManager() { return dataManager; }
     public RankManager getRankManager() { return rankManager; }
     public RankupDisplay getRankupDisplay() { return rankupDisplay; }
+    public AttributeBridge getAttributeBridge() { return attributeBridge; }
 }

@@ -6,6 +6,10 @@
 #   {#RRGGBB<>}                 渐变中间的色标（可多个）
 # auto: false 表示该段位不能自动升级，必须手动 /srank rankup（默认 true）
 # money: 晋升奖励金币（可省略）
+# attributes: 段位提供的属性加成（需要安装 AdvancedPlayerAttribute，可省略）
+#   可用属性：attack 攻击 / armor_pierce 破甲攻击 / absolute 绝对攻击 / defense 防御 /
+#             max_health 血量上限 / dodge 闪避率(%) / shield 护盾 / shield_regen 护盾恢复秒数
+#   加成是「累加」的：玩家达到 Iron 时，会同时拿到 Dirt、Coal、Iron 三个段位的加成
 
 settings:
   # 新玩家默认是否开启自动升级（玩家可用 /srank autorankup 自己切换）
@@ -67,16 +71,16 @@ settings:
 
 ranks:
   Newbie: {display: '&f&l[&b&lA&f&li&b&lr&f&l]', score: 0}
-  Dirt: {display: '{#A0522D>}[Dirt]{#F5DEB3<}', score: 5, money: 355}
+  Dirt: {display: '{#A0522D>}[Dirt]{#F5DEB3<}', score: 5, money: 355, attributes: {max_health: 1}}
   Log: {display: '{#CD853F>}[Log]{#DEB887<}', score: 20, money: 440}
   Stone: {display: '{#708090>}[Stone]{#B0C4DE<}', score: 45, money: 555}
-  Coal: {display: '{#696969>}[Coal]{#404040<}', score: 80, money: 700}
+  Coal: {display: '{#696969>}[Coal]{#404040<}', score: 80, money: 700, attributes: {max_health: 1}}
   Coal_ore: {display: '{#696969>}[Coal_ore]{#404040<}', score: 125, money: 875}
   Coal_block: {display: '{#696969>}[Coal_block]{#404040<}', score: 180, money: 1080}
-  Iron: {display: '{#A9A9A9>}[Iron]{#FFFFFF<}', score: 245, money: 1315}
+  Iron: {display: '{#A9A9A9>}[Iron]{#FFFFFF<}', score: 245, money: 1315, attributes: {max_health: 2, defense: 1}}
   Iron_ore: {display: '{#A9A9A9>}[Iron_Ore]{#FFFFFF<}', score: 320, money: 1580}
   Iron_block: {display: '{#A9A9A9>}[Iron_Block]{#FFFFFF<}', score: 405, money: 1875}
-  Gold: {display: '{#FFD700>}[Gold]{#DAA520<}', score: 500, money: 2200}
+  Gold: {display: '{#FFD700>}[Gold]{#DAA520<}', score: 500, money: 2200, attributes: {max_health: 1, attack: 1}}
   Gold_ore: {display: '{#FFD700>}[Gold_Ore]{#DAA520<}', score: 605, money: 2555}
   Gold_block: {display: '{#FFD700>}[Gold_Block]{#DAA520<}', score: 720, money: 2940}
   Redstone: {display: '{#FF0000>}[Redstone]{#FA8072<}', score: 845, money: 3355}
@@ -85,7 +89,7 @@ ranks:
   Lapis: {display: '{#00008B>}[Lapis]{#4169E1<}', score: 1280, money: 4780}
   Lapis_ore: {display: '{#00008B>}[Lapis_Ore]{#4169E1<}', score: 1445, money: 5315}
   Lapis_block: {display: '{#00008B>}[Lapis_Block]{#4169E1<}', score: 1620, money: 5880}
-  Diamond: {display: '{#1E90FF>}[Diamond]{#00BFFF<}', score: 1805, money: 6475}
+  Diamond: {display: '{#1E90FF>}[Diamond]{#00BFFF<}', score: 1805, money: 6475, attributes: {max_health: 2, defense: 1, attack: 1}}
   Diamond_ore: {display: '{#1E90FF>}[Diamond_Ore]{#00BFFF<}', score: 2000, money: 7110}
   Diamond_block: {display: '{#1E90FF>}[Diamond_Block]{#00BFFF<}', score: 2205, money: 7755}
   Enchanter: {display: '{#8A2BE2>}[Enchanter]{#BA55D3<}', score: 2420, money: 8440}
@@ -97,12 +101,12 @@ ranks:
   Nether_quartz: {display: '{#DC143C>}[Nether{#FA8072<>}_Quartz]{#FFFFFF<}', score: 3920, money: 13180}
   Nether_gold_ore: {display: '{#DC143C>}[Nether{#FA8072<>}_Gold_Ore]{#FFD700<}', score: 4205, money: 14075}
   Nether_fortress: {display: '{#DC143C>}[Nether{#FA8072<>}_Fortress]{#800000<}', score: 4500, money: 15000}
-  Netherite: {display: '{#696969>}[Netherite]{#483D8B<}', score: 4805, money: 15955}
-  Wither: {display: '{#8B4513>}[Wither]{#808080<}', score: 5120, money: 16940}
+  Netherite: {display: '{#696969>}[Netherite]{#483D8B<}', score: 4805, money: 15955, attributes: {max_health: 2, defense: 1, attack: 1, shield: 2}}
+  Wither: {display: '{#8B4513>}[Wither]{#808080<}', score: 5120, money: 16940, attributes: {attack: 2}}
   Nether_Star: {display: '{#DC143C>}[Nether{#FFD700<>}_Star]{#FFFFFF<}', score: 5445, money: 17955}
-  Beacon: {display: '{#00BFFF>}[Beacon]{#FF4500<}', score: 5780, money: 19000}
+  Beacon: {display: '{#00BFFF>}[Beacon]{#FF4500<}', score: 5780, money: 19000, attributes: {max_health: 2, defense: 1}}
   Ender: {display: '{#9932CC>}[Ender]{#FFFF00<}', score: 6125, money: 20075}
-  Ender_Dragon: {display: '{#9932CC>}[Ender_{#FFFF00<>}Dragon]{#9932CC<}', score: 6480, money: 21180}
+  Ender_Dragon: {display: '{#9932CC>}[Ender_{#FFFF00<>}Dragon]{#9932CC<}', score: 6480, money: 21180, attributes: {attack: 2, shield: 2}}
   End_City: {display: '{#8A2BE2>}[End_City]{#4169E1<}', score: 6845, money: 22315}
   Elytra: {display: '{#8B008B>}[Elytra]{#483D8B<}', score: 7220, money: 23480}
   End_again: {display: '{#8A2BE2>}[End_{#FFD700<>}Again]{#FF4500<}', score: 7605, money: 24675}
@@ -114,16 +118,16 @@ ranks:
   Debug_Stick: {display: '&d[{#FF4500>}Debug_{#FFD700<>}Stick{#8A2BE2<}&d]', score: 10125, money: 32475}
   Structure_block: {display: '&c&l[&d&l¤{#8A2BE2>}Structure_Block{#DDA0DD<}&d&l¤&c&l]&r', score: 10580, money: 33880}
   Structure_void: {display: '&c&l[&d&l¤{#8A2BE2>}Structure_Void{#20B2AA<}&d&l¤&c&l]&r', score: 11045, money: 35315}
-  Minecraft: {display: '&4&l[&e&l&k[&b■&e&l&k]{#FF0000>}Mi{#FFA500<>}ne{#FFFF00<>}cr{#00FF00<>}af{#00FFFF<>}t{#0000FF<}&e&l&k[&b■&e&l&k]&4&l]&r', score: 11520, money: 36780}
+  Minecraft: {display: '&4&l[&e&l&k[&b■&e&l&k]{#FF0000>}Mi{#FFA500<>}ne{#FFFF00<>}cr{#00FF00<>}af{#00FFFF<>}t{#0000FF<}&e&l&k[&b■&e&l&k]&4&l]&r', score: 11520, money: 36780, attributes: {max_health: 3, defense: 2, dodge: 2}}
   Minecraft+: {display: '&4&l[&e&l&k[&b■&e&l&k]{#FF0000>}Mi{#FFA500<>}ne{#FFFF00<>}cr{#00FF00<>}af{#00FFFF<>}t{#0000FF<>}+{#FF00FF<}&e&l&k[&b■&e&l&k]&4&l]&r', score: 12005, money: 38275}
-  Minecraft_Max: {display: '&4&l[&e&l&k[&b■&e&l&k]{#FF0000>}Mi{#FFA500<>}ne{#FFFF00<>}cr{#00FF00<>}af{#00FFFF<>}t{#0000FF<}-&f{#FFD700>}&lM&la&lx{#F5F5F5<}&e&l&k[&b■&e&l&k]&4&l]&r', score: 12500, money: 39800}
+  Minecraft_Max: {display: '&4&l[&e&l&k[&b■&e&l&k]{#FF0000>}Mi{#FFA500<>}ne{#FFFF00<>}cr{#00FF00<>}af{#00FFFF<>}t{#0000FF<}-&f{#FFD700>}&lM&la&lx{#F5F5F5<}&e&l&k[&b■&e&l&k]&4&l]&r', score: 12500, money: 39800, attributes: {max_health: 3, attack: 3, shield: 3}}
   Extra_Dirt: {display: '&e[{#FFD700>}Extra_{#FF4500<}&r{#A0522D>}Dirt{#F5DEB3<}&e]', score: 15606, money: 41355}
   Extra_Log: {display: '&e[{#FFD700>}Extra_{#FF4500<}&r{#CD853F>}Log{#DEB887<}&e]', score: 16224, money: 42920}
   Extra_Stone: {display: '&e[{#FFD700>}Extra_{#FF4500<}&r{#708090>}Stone{#B0C4DE<}&e]', score: 16854, money: 44555}
   Extra_Coal: {display: '&e[{#FFD700>}Extra_{#FF4500<}&r{#696969>}Coal{#404040<}&e]', score: 17496, money: 46200}
   Extra_Coal_ore: {display: '&e[{#FFD700>}Extra_{#FF4500<}&r{#696969>}Coal_Ore{#404040<}&e]', score: 18150, money: 47875}
   Extra_Coal_block: {display: '&e[{#FFD700>}Extra_{#FF4500<}&r{#696969>}Coal_Block{#404040<}&e]', score: 18816, money: 49580}
-  Extra_Iron: {display: '&e[{#FFD700>}Extra_{#FF4500<}&r{#A9A9A9>}Iron{#FFFFFF<}&e]', score: 19494, money: 51315}
+  Extra_Iron: {display: '&e[{#FFD700>}Extra_{#FF4500<}&r{#A9A9A9>}Iron{#FFFFFF<}&e]', score: 19494, money: 51315, attributes: {max_health: 2, defense: 2}}
   Extra_Iron_ore: {display: '&e[{#FFD700>}Extra_{#FF4500<}&r{#A9A9A9>}Iron_Ore{#FFFFFF<}&e]', score: 20184, money: 53080}
   Extra_Iron_block: {display: '&e[{#FFD700>}Extra_{#FF4500<}&r{#A9A9A9>}Iron_Block{#FFFFFF<}&e]', score: 20886, money: 54875}
   Extra_Gold: {display: '&e[{#FFD700>}Extra_{#FF4500<}&r{#FFD700>}Gold{#DAA520<}&e]', score: 21600, money: 56700}
@@ -135,7 +139,7 @@ ranks:
   Extra_Lapis: {display: '&e[{#FFD700>}Extra_{#FF4500<}&r{#00008B>}Lapis{#4169E1<}&e]', score: 26136, money: 68200}
   Extra_Lapis_ore: {display: '&e[{#FFD700>}Extra_{#FF4500<}&r{#00008B>}Lapis_ore{#4169E1<}&e]', score: 26934, money: 70315}
   Extra_Lapis_block: {display: '&e[{#FFD700>}Extra_{#FF4500<}&r{#00008B>}Lapis_block{#4169E1<}&e]', score: 27744, money: 72380}
-  Extra_Diamond: {display: '&e[{#FFD700>}Extra_{#FF4500<}&r{#1E90FF>}Diamond{#00BFFF<}&e]', score: 28566, money: 74475}
+  Extra_Diamond: {display: '&e[{#FFD700>}Extra_{#FF4500<}&r{#1E90FF>}Diamond{#00BFFF<}&e]', score: 28566, money: 74475, attributes: {max_health: 2, attack: 2, dodge: 2}}
   Extra_Diamond_ore: {display: '&e[{#FFD700>}Extra_{#FF4500<}&r{#1E90FF>}Diamond_ore{#00BFFF<}&e]', score: 29400, money: 76600}
   Extra_Diamond_block: {display: '&e[{#FFD700>}Extra_{#FF4500<}&r{#1E90FF>}Diamond_block{#00BFFF<}&e]', score: 30246, money: 78755}
   Extra_Enchanter: {display: '&e[{#FFD700>}Extra_{#FF4500<}&r{#8A2BE2>}Enchanter{#BA55D3<}&e]', score: 31104, money: 80940}
@@ -147,7 +151,7 @@ ranks:
   Extra_Nether_quartz: {display: '&e[{#FFD700>}Extra_{#FF4500<}&r{#DC143C>}Nether{#FA8072<>}_Quartz{#FFFFFF<}&e]', score: 36504, money: 94680}
   Extra_Nether_gold_ore: {display: '&e[{#FFD700>}Extra_{#FF4500<}&r{#DC143C>}Nether{#FA8072<>}_Gold_Ore{#FFD700<}&e]', score: 37446, money: 97075}
   Extra_Nether_Fortress: {display: '&e[{#FFD700>}Extra_{#FF4500<}&r{#DC143C>}Nether{#FA8072<>}_Fortress{#800000<}&e]', score: 38400, money: 99500}
-  Extra_Netherite: {display: '&e[{#FFD700>}Extra_{#FF4500<}&r{#696969>}Netherite{#483D8B<}&e]', score: 39366, money: 101955}
+  Extra_Netherite: {display: '&e[{#FFD700>}Extra_{#FF4500<}&r{#696969>}Netherite{#483D8B<}&e]', score: 39366, money: 101955, attributes: {max_health: 3, defense: 2, shield: 3}}
   Extra_Wither: {display: '&e[{#FFD700>}Extra_{#FF4500<}&r{#8B4513>}Wither{#808080<}&e]', score: 40344, money: 104440}
   Extra_Nether_star: {display: '&e[{#FFD700>}Extra_{#FF4500<}&r{#DC143C>}Nether{#FFD700<>}_Star{#FFFFFF<}&e]', score: 41334, money: 106955}
   Extra_Beacon: {display: '&e[{#FFD700>}Extra_{#FF4500<}&r{#00BFFF>}Beacon{#FF4500<}&e]', score: 42336, money: 109500}
@@ -164,6 +168,6 @@ ranks:
   Extra_Debug_Stick: {display: '&e[{#FFD700>}Extra_{#FF4500<}&rDebug_{#FFD700>}Stick{#8A2BE2<}&e]', score: 54150, money: 110884}
   Extra_Structure_block: {display: '&e[{#FFD700>}Extra_{#FF4500<}&r{#8A2BE2>}Structure_Block{#DDA0DD<}&e]', score: 55296, money: 112259}
   Extra_Structure_void: {display: '&e[{#FFD700>}Extra_{#FF4500<}&r{#8A2BE2>}Structure_Void{#20B2AA<}&e]', score: 56454, money: 113634}
-  Extra_Minecraft: {display: '&e[{#FFD700>}Extra_{#FF4500<}&r{#FF0000>}Mi{#FFA500<>}ne{#FFFF00<>}cr{#00FF00<>}af{#00FFFF<>}t{#0000FF<}&e]', score: 57624, money: 115009}
+  Extra_Minecraft: {display: '&e[{#FFD700>}Extra_{#FF4500<}&r{#FF0000>}Mi{#FFA500<>}ne{#FFFF00<>}cr{#00FF00<>}af{#00FFFF<>}t{#0000FF<}&e]', score: 57624, money: 115009, attributes: {max_health: 3, attack: 3, dodge: 3}}
   Extra_Minecraft_plus: {display: '&e[{#FFD700>}Extra_{#FF4500<}&r{#FF0000>}Mi{#FFA500<>}ne{#FFFF00<>}cr{#00FF00<>}af{#00FFFF<>}t{#0000FF<>}+{#FF00FF<}&e]', score: 58806, money: 116384}
-  Extra_Minecraft_max: {display: '&e[{#FFD700>}Extra_{#FF4500<}&r{#FF0000>}Mi{#FFA500<>}ne{#FFFF00<>}cr{#00FF00<>}af{#00FFFF<>}t{#0000FF<}-&f{#FFD700>}&lM&la&lx{#F5F5F5<}&e]', score: 60000, money: 117759}
+  Extra_Minecraft_max: {display: '&e[{#FFD700>}Extra_{#FF4500<}&r{#FF0000>}Mi{#FFA500<>}ne{#FFFF00<>}cr{#00FF00<>}af{#00FFFF<>}t{#0000FF<}-&f{#FFD700>}&lM&la&lx{#F5F5F5<}&e]', score: 60000, money: 117759, attributes: {max_health: 5, defense: 3, attack: 3, shield: 5}}

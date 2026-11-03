@@ -35,3 +35,7 @@ Ranks.yml
 dirt.txt
 docs/
 SRExpansion_config/
+
+# ---- 独立插件（自己是一个仓库）----
+AdvancedPlayerAttribute/
+

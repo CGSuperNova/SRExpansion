@@ -1,10 +1,10 @@
 name: SRExpansion
-version: 1.9.1
+version: 1.10.0
 main: org.example.com.sRExpansion.SRExpansion
 api-version: '1.21'
 author: buzizi
 description: 生存段位系统（Paper 1.21.11）
-softdepend: [PlaceholderAPI, Vault]
+softdepend: [PlaceholderAPI, Vault, AdvancedPlayerAttribute]
 commands:
   srank:
     description: 生存段位主命令

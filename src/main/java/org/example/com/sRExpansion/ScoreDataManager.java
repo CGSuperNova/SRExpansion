@@ -745,6 +745,7 @@ public class ScoreDataManager {
         }
         playerDataCache.put(uuid, data);
         savePlayerData(uuid, data);
+        if (rankManager != null) rankManager.syncAttributes(player);
     }
 
     public void updateStatistic(UUID uuid, Statistic stat, int increment, Material material, EntityType entityType) {
