@@ -72,6 +72,7 @@ public class RankManager {
     public void load() {
         File file = ConfigFiles.ensure(plugin, "ranks.yml", "ranks");
         YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
+        migrateAttributes(config, file);
 
         autoDefault = config.getBoolean("settings.auto-rankup-default", true);
         checkInterval = Math.max(5, config.getInt("settings.check-interval-seconds", 60));
@@ -146,6 +147,53 @@ public class RankManager {
     }
 
     /**
+     * 一次性迁移：把 jar 内置的 attributes 补进服务器上已存在的段位条目。
+     *
+     * <p>配置合并对 {@code ranks} 是「只补整条新增、不改已有条目」，所以老服务器的
+     * ranks.yml 不会自动获得 v1.10.0 新增的 attributes。这里用一个开关做一次性迁移：
+     * 只给「还没有 attributes 字段」的段位补上默认值，之后管理员删改都不会被还原。</p>
+     */
+    private void migrateAttributes(YamlConfiguration config, File file) {
+        if (config.getBoolean("settings.attributes-migrated", false)) return;
+        java.io.InputStream in = plugin.getResource("ranks.yml");
+        if (in == null) return;
+        YamlConfiguration defaults;
+        try (java.io.InputStreamReader reader = new java.io.InputStreamReader(in, java.nio.charset.StandardCharsets.UTF_8)) {
+            defaults = YamlConfiguration.loadConfiguration(reader);
+        } catch (java.io.IOException e) {
+            return;
+        }
+
+        ConfigurationSection ranks = config.getConfigurationSection("ranks");
+        ConfigurationSection defaultRanks = defaults.getConfigurationSection("ranks");
+        int migrated = 0;
+        if (ranks != null && defaultRanks != null) {
+            for (String id : ranks.getKeys(false)) {
+                ConfigurationSection entry = ranks.getConfigurationSection(id);
+                ConfigurationSection defaultEntry = defaultRanks.getConfigurationSection(id);
+                if (entry == null || defaultEntry == null) continue;
+                if (entry.contains("attributes")) continue;
+                ConfigurationSection defaultAttributes = defaultEntry.getConfigurationSection("attributes");
+                if (defaultAttributes == null) continue;
+                ConfigurationSection created = entry.createSection("attributes");
+                for (String key : defaultAttributes.getKeys(false)) {
+                    created.set(key, defaultAttributes.get(key));
+                }
+                migrated++;
+            }
+        }
+        config.set("settings.attributes-migrated", true);
+        try {
+            config.save(file);
+            if (migrated > 0) {
+                plugin.getLogger().info("已为 " + migrated + " 个段位补上默认的属性奖励（attributes）");
+            }
+        } catch (java.io.IOException e) {
+            plugin.getLogger().warning("写回 ranks.yml 失败: " + e.getMessage());
+        }
+    }
+
+    /**
      * 把「当前段位之前所有段位的属性加成之和」同步给 AdvancedPlayerAttribute。
      * 是幂等的：重复调用不会叠加，只会把该来源的加成设为最新值。
      */
@@ -172,8 +220,7 @@ public class RankManager {
         }
     }
 
-    public int getCheckInterval() { return checkInterval; }
-    public boolean isAutoDefault() { return autoDefault; }
+    public int getCheckInterval() { return checkInterval; }    public boolean isAutoDefault() { return autoDefault; }
     public List<Rank> getRanks() { return ranks; }
     public int size() { return ranks.size(); }
 

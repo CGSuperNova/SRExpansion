@@ -20,6 +20,8 @@
 - 默认段位属性阶梯：Dirt / Coal / Iron / Gold / Diamond / Netherite / Wither / Beacon / Ender_Dragon /
   Minecraft / Minecraft_Max 以及 5 个 Extra 段位共 16 个里程碑提供属性，满段位累计
   血量上限 +32、防御 +13、攻击 +18、护盾 +15、闪避 +7%。
+- 老服务器升级时的一次性迁移：`settings.attributes-migrated` 为 false 时，会把内置的默认属性
+  补进还没有 `attributes` 字段的段位条目，之后管理员的删改不会被还原。
 
 ### Changed
 
