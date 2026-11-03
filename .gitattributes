@@ -1,0 +1,16 @@
+# 统一换行符，避免 Windows 下出现整文件 diff
+* text=auto eol=lf
+
+*.java    text eol=lf
+*.yml     text eol=lf
+*.yaml    text eol=lf
+*.md      text eol=lf
+*.xml     text eol=lf
+*.json    text eol=lf
+
+*.ps1     text eol=crlf
+*.bat     text eol=crlf
+
+*.jar     binary
+*.png     binary
+*.jpg     binary

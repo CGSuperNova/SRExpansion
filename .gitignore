@@ -1,16 +1,37 @@
-# 构建产物
+# ============================================
+# 只提交插件本体（pom.xml + src/ + README + CHANGELOG）
+# 下面这些是本地构建产物、IDE 配置、以及内部资料，不进仓库
+# ============================================
+
+# ---- 构建产物 ----
 target/
 dist/
 out/
 .build/
+*.jar
 
-# IDE
+# ---- IDE ----
 .idea/
 *.iml
+*.ipr
+*.iws
+.vscode/
+.settings/
+.classpath
+.project
 
-# 临时/日志
+# ---- 临时 / 日志 / 系统文件 ----
 *.log
 *.tmp
+*.bak
+Thumbs.db
+.DS_Store
 
-# 玩家数据（体积大且含 UUID，不入库）
-SRExpansion_config/data.yml
+# ---- 本地资料（不属于插件代码）----
+# 服务器实际配置与玩家数据、Wiki 源码、交接文档、计分项文档
+wiki.txt
+HANDOVER.md
+Ranks.yml
+dirt.txt
+docs/
+SRExpansion_config/
