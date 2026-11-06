@@ -56,6 +56,7 @@ public class RankManager {
     private int displayHoldTicks = 30;
     private int displayGapTicks = 4;
     private boolean displaySeeThrough = false;
+    private int displayMoveIntervalTicks = 1;
     private List<String> displayStage1 = new ArrayList<>();
     private List<String> displayStage2 = new ArrayList<>();
     private List<String> displayStage3 = new ArrayList<>();
@@ -99,6 +100,7 @@ public class RankManager {
         displayHoldTicks = Math.max(1, config.getInt("settings.display.hold-ticks", 30));
         displayGapTicks = Math.max(0, config.getInt("settings.display.gap-ticks", 4));
         displaySeeThrough = config.getBoolean("settings.display.see-through", false);
+        displayMoveIntervalTicks = Math.max(1, config.getInt("settings.display.move-interval-ticks", 1));
         displayStage1 = config.getStringList("settings.display.stages.stage1");
         displayStage2 = config.getStringList("settings.display.stages.stage2");
         displayStage3 = config.getStringList("settings.display.stages.stage3");
@@ -126,7 +128,8 @@ public class RankManager {
                         if (value != 0) attributes.put(key.toLowerCase(Locale.ROOT), value);
                     }
                 }
-                loaded.add(new Rank(0, id, display, score, money, auto, attributes));
+                loaded.add(new Rank(0, id, display, score, money, auto, attributes,
+                        rank.getStringList("extra")));
             }
         }
         loaded.sort(Comparator.comparingDouble(Rank::getScore));
@@ -138,7 +141,7 @@ public class RankManager {
         for (Rank rank : loaded) {
             index++;
             Rank numbered = new Rank(index, rank.getId(), rank.getDisplay(), rank.getScore(), rank.getMoney(),
-                    rank.isAuto(), rank.getAttributes());
+                    rank.isAuto(), rank.getAttributes(), rank.getExtraDisplay());
             ranks.add(numbered);
             byId.put(numbered.getId().toLowerCase(Locale.ROOT), numbered);
             attributeIds.addAll(numbered.getAttributes().keySet());
@@ -287,6 +290,7 @@ public class RankManager {
 
         Rank target = current;
         double money = 0;
+        Map<String, Double> gainedAttributes = new LinkedHashMap<>();
         int steps = 0;
         while (true) {
             Rank next = next(target);
@@ -295,6 +299,7 @@ public class RankManager {
             if (!manual && !next.isAuto()) break;
             target = next;
             money += next.getMoney();
+            next.getAttributes().forEach((key, value) -> gainedAttributes.merge(key, value, Double::sum));
             steps++;
         }
         if (steps == 0) return 0;
@@ -304,7 +309,7 @@ public class RankManager {
         syncAttributes(player);
         announce(player, target, money, steps);
         if (displayEnabled && plugin.getRankupDisplay() != null) {
-            plugin.getRankupDisplay().play(player, target, money);
+            plugin.getRankupDisplay().play(player, target, money, gainedAttributes);
         }
         return steps;
     }
@@ -383,18 +388,61 @@ public class RankManager {
     public int getDisplayHoldTicks() { return displayHoldTicks; }
     public int getDisplayGapTicks() { return displayGapTicks; }
     public boolean isDisplaySeeThrough() { return displaySeeThrough; }
+    /** 悬浮字跟随玩家的位置更新间隔（tick），1 = 每 tick 都跟随。 */
+    public int getDisplayMoveIntervalTicks() { return displayMoveIntervalTicks; }
 
-    /** 第 stage 阶段（0 起）要显示的原始文本行。 */
-    public List<String> getDisplayStage(int stage) {
+    /**
+     * 第 stage 阶段（0 起）要显示的原始文本行。
+     * 前三幕固定，第 4 幕是段位自己的 {@code extra} 内容（只有配置了才存在）。
+     */
+    public List<String> getDisplayStage(Rank rank, int stage) {
         return switch (stage) {
             case 0 -> displayStage1;
             case 1 -> displayStage2;
             case 2 -> displayStage3;
+            case 3 -> rank == null ? List.of() : rank.getExtraDisplay();
             default -> List.of();
         };
     }
 
-    public int getDisplayStageCount() { return 3; }
+    /** 某个段位总共要播几幕：基础 3 幕 + 有额外内容时再 +1。 */
+    public int getDisplayStageCount(Rank rank) {
+        return rank != null && !rank.getExtraDisplay().isEmpty() ? 4 : 3;
+    }
+
+    /** 属性 id → 中文名，用于悬浮字展示。 */
+    public static String attributeDisplayName(String id) {
+        return switch (id == null ? "" : id.toLowerCase(Locale.ROOT)) {
+            case "attack" -> "攻击";
+            case "armor_pierce" -> "破甲攻击";
+            case "absolute" -> "绝对攻击";
+            case "defense" -> "防御";
+            case "max_health" -> "血量上限";
+            case "dodge" -> "闪避率";
+            case "shield" -> "护盾";
+            case "shield_regen" -> "护盾恢复";
+            default -> id;
+        };
+    }
+
+    /**
+     * 把属性加成描述成多行文本（每行一个属性），用于悬浮字的 {@code %attributes%} 占位符。
+     * 没有加成时返回空字符串。
+     */
+    public static String describeAttributes(Map<String, Double> attributes) {
+        if (attributes == null || attributes.isEmpty()) return "";
+        StringBuilder builder = new StringBuilder();
+        for (Map.Entry<String, Double> entry : attributes.entrySet()) {
+            double value = entry.getValue();
+            if (value == 0) continue;
+            if (builder.length() > 0) builder.append('\n');
+            String name = attributeDisplayName(entry.getKey());
+            String suffix = "dodge".equalsIgnoreCase(entry.getKey()) ? "%" : "";
+            builder.append("&a").append(name).append(" &f+")
+                    .append(RankManager.formatMoney(value)).append(suffix);
+        }
+        return builder.toString();
+    }
 
     public void startTask() {
         long ticks = Math.max(5, checkInterval) * 20L;

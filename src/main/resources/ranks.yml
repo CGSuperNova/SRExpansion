@@ -56,8 +56,13 @@ settings:
     hold-ticks: 30           # 停留时长（1.5 秒）
     gap-ticks: 4             # 两个阶段之间的间隔
     see-through: false       # true = 隔墙也能看见
+    # 悬浮字跟随玩家位置/视角的刷新间隔（tick，1 = 每 tick 都跟随，最顺滑；调大可以降低发包量）
+    move-interval-ticks: 1
     # 三个阶段依次显示的文本（每段两行），占位符：
     #   %rank% %rank_plain% %money% %next_rank% %next_score% %next_rank_plain% %remaining% %player%
+    #   %attributes%      本次升级获得的属性（自动展开成多行，没有则为空）
+    #   %rank_attributes% 该段位自身提供的属性
+    # 段位自己还可以用 extra: 追加第 4 幕内容（见文件末尾 Extra_Minecraft_max）
     stages:
       stage1:
         - '&a&l生存段位提升！'
@@ -65,6 +70,7 @@ settings:
       stage2:
         - '&e&l获得奖励'
         - '&6+%money% 金币'
+        - '%attributes%'
       stage3:
         - '&b&l下一段位'
         - '&f%next_rank% &7需要 &e%next_score% &7分'
@@ -170,4 +176,4 @@ ranks:
   Extra_Structure_void: {display: '&e[{#FFD700>}Extra_{#FF4500<}&r{#8A2BE2>}Structure_Void{#20B2AA<}&e]', score: 56454, money: 113634}
   Extra_Minecraft: {display: '&e[{#FFD700>}Extra_{#FF4500<}&r{#FF0000>}Mi{#FFA500<>}ne{#FFFF00<>}cr{#00FF00<>}af{#00FFFF<>}t{#0000FF<}&e]', score: 57624, money: 115009, attributes: {max_health: 3, attack: 3, dodge: 3}}
   Extra_Minecraft_plus: {display: '&e[{#FFD700>}Extra_{#FF4500<}&r{#FF0000>}Mi{#FFA500<>}ne{#FFFF00<>}cr{#00FF00<>}af{#00FFFF<>}t{#0000FF<>}+{#FF00FF<}&e]', score: 58806, money: 116384}
-  Extra_Minecraft_max: {display: '&e[{#FFD700>}Extra_{#FF4500<}&r{#FF0000>}Mi{#FFA500<>}ne{#FFFF00<>}cr{#00FF00<>}af{#00FFFF<>}t{#0000FF<}-&f{#FFD700>}&lM&la&lx{#F5F5F5<}&e]', score: 60000, money: 117759, attributes: {max_health: 5, defense: 3, attack: 3, shield: 5}}
+  Extra_Minecraft_max: {display: '&e[{#FFD700>}Extra_{#FF4500<}&r{#FF0000>}Mi{#FFA500<>}ne{#FFFF00<>}cr{#00FF00<>}af{#00FFFF<>}t{#0000FF<}-&f{#FFD700>}&lM&la&lx{#F5F5F5<}&e]', score: 60000, money: 117759, attributes: {max_health: 5, defense: 3, attack: 3, shield: 5}, extra: ['&6&l恭喜达到最高段位！', '&e你已站上生存段位的顶点']}

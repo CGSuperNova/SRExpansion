@@ -7,6 +7,23 @@
 
 ## [Unreleased]
 
+## [1.11.0] - 2026-11-06
+
+### Added
+
+- 悬浮字「获得奖励」一幕新增属性展示：`settings.display.stages.stage2` 支持 `%attributes%` 占位符
+  （展开为本次升级获得的全部属性，每个属性一行）与 `%rank_attributes%`（该段位自身的属性）。
+- 段位额外悬浮字内容：段位配置新增 `extra:`，基础三幕播完后会再播第 4 幕。
+  默认给最高段位 `Extra_Minecraft_max` 配了「恭喜达到最高段位！」。
+- `/srank display [true|false]`：玩家自行开关升级时的悬浮字演出，状态保存在 `data.yml` 的 `display`。
+- 变量 `%srank_rank_name_<玩家名>%`、`%srank_rank_name_plain_<玩家名>%`、`%srank_score_<玩家名>%`，
+  可以查询指定玩家（含离线）的段位与段位分；另有 `%srank_display%` 表示开关状态。
+
+### Changed
+
+- 悬浮字跟随间隔改为可配置：`settings.display.move-interval-ticks`（默认 1，即每 tick 跟随一次），
+  调大可以降低实体传送的发包量。
+
 ## [1.10.0] - 2026-11-03
 
 ### Added

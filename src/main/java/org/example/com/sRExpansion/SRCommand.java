@@ -62,6 +62,11 @@ public class SRCommand implements CommandExecutor, TabCompleter {
                 if (!check(sender, "srank.user")) return true;
                 handleAutoRankup((Player) sender, rest);
             }
+            case "display" -> {
+                if (!checkPlayer(sender)) return true;
+                if (!check(sender, "srank.user")) return true;
+                handleDisplayToggle((Player) sender, rest);
+            }
             case "reload" -> {
                 if (!check(sender, "srank.admin")) return true;
                 plugin.getRankManager().load();
@@ -83,6 +88,7 @@ public class SRCommand implements CommandExecutor, TabCompleter {
         msg(sender, "&e/srank info [玩家] &7- 查看段位与进度");
         msg(sender, "&e/srank rankup &7- 手动升级段位");
         msg(sender, "&e/srank autorankup [true|false] &7- 开关自动升级");
+        msg(sender, "&e/srank display [true|false] &7- 开关升级悬浮字");
         if (sender.hasPermission("srank.admin")) {
             msg(sender, "&e/srank rankset <玩家> <段位> &7- 强制设置段位");
             msg(sender, "&e/srank reload &7- 重载配置");
@@ -260,6 +266,26 @@ public class SRCommand implements CommandExecutor, TabCompleter {
         }
         plugin.getDataManager().setAutoRankup(player.getUniqueId(), value);
         msg(player, value ? "&a已开启自动升级" : "&c已关闭自动升级（可以随时用 /srank rankup 手动升级）");
+    }
+
+    // ==================== /srank display ====================
+
+    private void handleDisplayToggle(Player player, String[] args) {
+        ScoreDataManager.PlayerData data = plugin.getDataManager().getPlayerData(player.getUniqueId());
+        if (data == null) { msg(player, "&c你的数据尚未初始化"); return; }
+        boolean value;
+        if (args.length >= 1) {
+            if (!args[0].equalsIgnoreCase("true") && !args[0].equalsIgnoreCase("false")) {
+                msg(player, "&c用法: /srank display [true|false]");
+                return;
+            }
+            value = Boolean.parseBoolean(args[0]);
+        } else {
+            value = !data.isDisplayEnabled();
+        }
+        plugin.getDataManager().setDisplayEnabled(player.getUniqueId(), value);
+        if (!value) plugin.getRankupDisplay().cancel(player.getUniqueId());
+        msg(player, value ? "&a已开启升级悬浮字演出" : "&c已关闭升级悬浮字演出（升级时的提示消息与金币奖励不受影响）");
     }
 
     // ==================== 生存段位分详情 ====================
@@ -473,7 +499,7 @@ public class SRCommand implements CommandExecutor, TabCompleter {
     @Override
     public List<String> onTabComplete(CommandSender sender, Command cmd, String alias, String[] args) {
         if (args.length == 1) {
-            List<String> options = new ArrayList<>(Arrays.asList("score", "list", "info", "rankup", "autorankup"));
+            List<String> options = new ArrayList<>(Arrays.asList("score", "list", "info", "rankup", "autorankup", "display"));
             if (sender.hasPermission("srank.admin")) {
                 options.add("rankset");
                 options.add("reload");
@@ -509,6 +535,9 @@ public class SRCommand implements CommandExecutor, TabCompleter {
             return new ArrayList<>();
         }
         if (sub.equals("autorankup") && args.length == 2) {
+            return filter(Arrays.asList("true", "false"), args[1]);
+        }
+        if (sub.equals("display") && args.length == 2) {
             return filter(Arrays.asList("true", "false"), args[1]);
         }
         if (sub.equals("info") && args.length == 2) return null;

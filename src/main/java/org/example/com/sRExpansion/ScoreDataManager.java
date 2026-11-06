@@ -169,6 +169,8 @@ public class ScoreDataManager {
         private String rankId;
         /** 是否开启自动升级。 */
         private boolean autoRankup = true;
+        /** 升级时是否播放悬浮字演出。 */
+        private boolean displayEnabled = true;
         /** 已经授予过的段位权限节点，避免重复执行 luckperms 命令。 */
         private final Set<String> grantedPermissions = new HashSet<>();
 
@@ -204,6 +206,8 @@ public class ScoreDataManager {
         public void setRankId(String rankId) { this.rankId = rankId; }
         public boolean isAutoRankup() { return autoRankup; }
         public void setAutoRankup(boolean autoRankup) { this.autoRankup = autoRankup; }
+        public boolean isDisplayEnabled() { return displayEnabled; }
+        public void setDisplayEnabled(boolean displayEnabled) { this.displayEnabled = displayEnabled; }
         public Set<String> getGrantedPermissions() { return grantedPermissions; }
         public void setGrantedPermissions(List<String> nodes) {
             grantedPermissions.clear();
@@ -718,6 +722,7 @@ public class ScoreDataManager {
         // 段位：优先读存档；没有就按当前分数推导，老玩家迁移时不会一次性刷出上百条升级公告
         String savedRank;
         boolean autoRankup;
+        boolean displayEnabled;
         List<String> savedPermissions;
         boolean hasPermissionsKey;
         synchronized (dataConfig) {
@@ -725,6 +730,7 @@ public class ScoreDataManager {
             savedRank = dataConfig.getString(base + ".rank");
             autoRankup = dataConfig.getBoolean(base + ".auto_rankup",
                     plugin.getRankManager() != null && plugin.getRankManager().isAutoDefault());
+            displayEnabled = dataConfig.getBoolean(base + ".display", true);
             hasPermissionsKey = dataConfig.contains(base + ".granted_permissions");
             savedPermissions = dataConfig.getStringList(base + ".granted_permissions");
         }
@@ -738,6 +744,7 @@ public class ScoreDataManager {
             data.setRankId(savedRank);
         }
         data.setAutoRankup(autoRankup);
+        data.setDisplayEnabled(displayEnabled);
         data.setGrantedPermissions(savedPermissions);
         if (!hasPermissionsKey && rankManager != null) {
             // 老玩家迁移：旧系统已经用 luckperms 命令授予过这些节点，这里只记账、不重复执行命令
@@ -998,6 +1005,7 @@ public class ScoreDataManager {
             dataConfig.set(path + ".give_next_id", data.getNextGiveId());
             dataConfig.set(path + ".rank", data.getRankId());
             dataConfig.set(path + ".auto_rankup", data.isAutoRankup());
+            dataConfig.set(path + ".display", data.isDisplayEnabled());
             dataConfig.set(path + ".granted_permissions", new ArrayList<>(data.getGrantedPermissions()));
 
             List<Map<String, Object>> records = new ArrayList<>();
@@ -1199,6 +1207,7 @@ public class ScoreDataManager {
             data.setRankId(rankId);
             data.setAutoRankup(dataConfig.getBoolean(path + ".auto_rankup",
                     plugin.getRankManager() != null && plugin.getRankManager().isAutoDefault()));
+            data.setDisplayEnabled(dataConfig.getBoolean(path + ".display", true));
             data.setGrantedPermissions(dataConfig.getStringList(path + ".granted_permissions"));
             return data;
         }
@@ -1536,6 +1545,15 @@ public class ScoreDataManager {
         PlayerData data = playerDataCache.get(uuid);
         if (data == null) return;
         data.setAutoRankup(value);
+        markDirty(uuid);
+        savePlayerDataIfDirty(uuid);
+    }
+
+    /** 开关升级时的悬浮字演出。 */
+    public void setDisplayEnabled(UUID uuid, boolean value) {
+        PlayerData data = playerDataCache.get(uuid);
+        if (data == null) return;
+        data.setDisplayEnabled(value);
         markDirty(uuid);
         savePlayerDataIfDirty(uuid);
     }

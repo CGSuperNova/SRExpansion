@@ -45,9 +45,13 @@ public class RankupDisplay {
     }
 
     /** 播放一段升级演出；重复调用会先取消上一次。 */
-    public void play(Player player, Rank rank, double money) {
+    public void play(Player player, Rank rank, double money, Map<String, Double> gainedAttributes) {
         RankManager rankManager = plugin.getRankManager();
         if (rankManager == null || !rankManager.isDisplayEnabled() || rank == null) return;
+        ScoreDataManager.PlayerData data = plugin.getDataManager() == null ? null
+                : plugin.getDataManager().getPlayerData(player.getUniqueId());
+        // 玩家自己关掉了悬浮字演出
+        if (data != null && !data.isDisplayEnabled()) return;
         cancel(player.getUniqueId());
 
         Location spawn = location(player, rankManager.getDisplayStartAngle());
@@ -60,7 +64,7 @@ public class RankupDisplay {
         }
         player.showEntity(plugin, display);
 
-        Animation animation = new Animation(player.getUniqueId(), display, rank, money);
+        Animation animation = new Animation(player.getUniqueId(), display, rank, money, gainedAttributes);
         active.put(player.getUniqueId(), animation);
         animation.start();
     }
@@ -124,18 +128,21 @@ public class RankupDisplay {
         private final TextDisplay display;
         private final Rank rank;
         private final double money;
+        private final Map<String, Double> gainedAttributes;
 
         private BukkitTask task;
         private int stage = 0;
         private int phase = PHASE_IN;
         private int tick = 0;
+        private int moveTick = 0;
         private boolean done = false;
 
-        Animation(UUID uuid, TextDisplay display, Rank rank, double money) {
+        Animation(UUID uuid, TextDisplay display, Rank rank, double money, Map<String, Double> gainedAttributes) {
             this.uuid = uuid;
             this.display = display;
             this.rank = rank;
             this.money = money;
+            this.gainedAttributes = gainedAttributes == null ? Map.of() : gainedAttributes;
         }
 
         void start() {
@@ -180,7 +187,7 @@ public class RankupDisplay {
                         tick = 0;
                         phase = PHASE_IN;
                         stage++;
-                        if (stage >= rankManager.getDisplayStageCount()) {
+                        if (stage >= rankManager.getDisplayStageCount(rank)) {
                             finish();
                             return;
                         }
@@ -188,12 +195,16 @@ public class RankupDisplay {
                     }
                 }
             }
-            display.teleport(location(player, angle));
+            // 位置跟随的刷新频率可配；默认每 tick 都跟随，玩家跑动/转视角时不会掉队
+            if (++moveTick >= Math.max(1, rankManager.getDisplayMoveIntervalTicks())) {
+                moveTick = 0;
+                display.teleport(location(player, angle));
+            }
         }
 
         private void applyText() {
             RankManager rankManager = plugin.getRankManager();
-            List<String> lines = rankManager.getDisplayStage(stage);
+            List<String> lines = rankManager.getDisplayStage(rank, stage);
             if (lines.isEmpty()) return;
 
             Player player = Bukkit.getPlayer(uuid);
@@ -211,17 +222,25 @@ public class RankupDisplay {
             vars.put("%next_rank_plain%", next == null ? "已满级" : next.getDisplayPlain());
             vars.put("%remaining%", next == null || data == null
                     ? "0" : RankManager.formatMoney(Math.max(0, next.getScore() - data.getScore())));
+            // 本次升级获得的属性（连升多段时是各段之和）
+            vars.put("%attributes%", RankManager.describeAttributes(gainedAttributes));
+            // 当前段位自身提供的属性
+            vars.put("%rank_attributes%", RankManager.describeAttributes(rank.getAttributes()));
 
             Component text = Component.empty();
             boolean first = true;
             for (String line : lines) {
-                if (!first) text = text.append(Component.newline());
-                first = false;
                 String replaced = line;
                 for (Map.Entry<String, String> entry : vars.entrySet()) {
                     replaced = replaced.replace(entry.getKey(), entry.getValue());
                 }
-                text = text.append(TextFormatter.parse(replaced));
+                // 占位符展开后可能是多行（例如 %attributes%），逐行拼接
+                for (String part : replaced.split("\n", -1)) {
+                    if (part.isEmpty()) continue;
+                    if (!first) text = text.append(Component.newline());
+                    first = false;
+                    text = text.append(TextFormatter.parse(part));
+                }
             }
             display.text(text);
         }

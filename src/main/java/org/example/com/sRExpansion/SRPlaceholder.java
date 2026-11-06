@@ -94,6 +94,31 @@ public class SRPlaceholder extends PlaceholderExpansion {
             ScoreDataManager.PlayerData data = dm.getPlayerData(uuid);
             return data != null && data.isAutoRankup() ? "true" : "false";
         }
+        if (identifier.equals("display")) {
+            ScoreDataManager.PlayerData data = dm.getPlayerData(uuid);
+            return data != null && data.isDisplayEnabled() ? "true" : "false";
+        }
+
+        // ---------- 指定玩家的段位 / 分数：%srank_rank_name_<玩家名>% / %srank_score_<玩家名>% ----------
+        // 注意 rank_name_plain_ 要放在 rank_name_ 之前判断，否则会被当成名字以 plain_ 开头的玩家
+        if (identifier.startsWith("rank_name_plain_")) {
+            String name = identifier.substring("rank_name_plain_".length());
+            if (name.isEmpty()) return "";
+            Rank rank = rankOfPlayer(name);
+            return rank == null ? "" : rank.getDisplayPlain();
+        }
+        if (identifier.startsWith("rank_name_")) {
+            String name = identifier.substring("rank_name_".length());
+            if (name.isEmpty()) return "";
+            Rank rank = rankOfPlayer(name);
+            return rank == null ? "" : rank.getDisplayLegacy();
+        }
+        if (identifier.startsWith("score_")) {
+            String name = identifier.substring("score_".length());
+            if (name.isEmpty()) return "0.00";
+            ScoreDataManager.PlayerData data = dataOfPlayer(name);
+            return data == null ? "0.00" : String.format("%.2f", data.getScore());
+        }
 
         // ---------- Give 记录统计 ----------
         if (identifier.equals("give_total")) {
@@ -256,6 +281,26 @@ public class SRPlaceholder extends PlaceholderExpansion {
     private Rank currentRank(UUID uuid) {
         RankManager rankManager = plugin.getRankManager();
         ScoreDataManager.PlayerData data = plugin.getDataManager().getPlayerData(uuid);
+        if (rankManager == null || data == null) return null;
+        Rank rank = data.getRankId() == null ? null : rankManager.getById(data.getRankId());
+        return rank != null ? rank : rankManager.getByScore(data.getScore());
+    }
+
+    // ---------- 按玩家名查询（支持离线玩家） ----------
+
+    private ScoreDataManager.PlayerData dataOfPlayer(String name) {
+        ScoreDataManager dm = plugin.getDataManager();
+        Player online = org.bukkit.Bukkit.getPlayerExact(name);
+        if (online != null) {
+            ScoreDataManager.PlayerData data = dm.getPlayerData(online.getUniqueId());
+            if (data != null) return data;
+        }
+        return dm.getPlayerDataOffline(name);
+    }
+
+    private Rank rankOfPlayer(String name) {
+        RankManager rankManager = plugin.getRankManager();
+        ScoreDataManager.PlayerData data = dataOfPlayer(name);
         if (rankManager == null || data == null) return null;
         Rank rank = data.getRankId() == null ? null : rankManager.getById(data.getRankId());
         return rank != null ? rank : rankManager.getByScore(data.getScore());

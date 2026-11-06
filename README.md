@@ -45,8 +45,10 @@ jar --create --file dist\SRExpansion.jar -C out .
   LuckPerms 命令授予玩家「已达到的所有段位」的权限，其他插件可以直接拿这些节点做判断。
   已授予的节点记录在 `data.yml` 的 `granted_permissions`，不会重复执行。
 - **升级悬浮字**：`settings.display` 控制一段三幕演出 —— 在玩家左侧 90°、3 格处生成悬浮字，
-  快速转到左前方 30° 停留约 1.5 秒再转回去，依次展示「段位提升」「获得奖励」「下一段位」，
-  全程跟随玩家视角（每 tick 按玩家朝向重算位置），且只对本人可见。
+  快速转到左前方 30° 停留约 1.5 秒再转回去，依次展示「段位提升」「获得奖励（含本次获得的属性）」
+  「下一段位」，全程跟随玩家视角（`move-interval-ticks` 控制刷新间隔，默认每 tick 跟随），且只对本人可见。
+  段位还可以用 `extra:` 追加第 4 幕内容（例如最高段位的「恭喜达到最高段位！」），玩家可用
+  `/srank display` 自行关闭这段演出。
 - **段位属性奖励**：装了一同附带的 [AdvancedPlayerAttribute](../AdvancedPlayerAttribute) 插件后，
   可以在 `ranks.yml` 里给段位配 `attributes:`
   （`max_health` / `attack` / `defense` / `shield` / `dodge` / `armor_pierce` / `absolute`）。
@@ -64,6 +66,7 @@ jar --create --file dist\SRExpansion.jar -C out .
 | `/srank list [页]` | `srank.user` | 全部段位列表 |
 | `/srank rankup` | `srank.user` | 手动升级 |
 | `/srank autorankup [true\|false]` | `srank.user` | 开关自动升级（不带参数则取反） |
+| `/srank display [true\|false]` | `srank.user` | 开关升级时的悬浮字演出（不带参数则取反） |
 | `/srank score` | `srank.user` | 查看自己的段位分 |
 | `/srank score query [玩家]` | `srank.user` | 查段位分 |
 | `/srank score list [玩家] [base\|blocks\|mobs\|deaths\|achievements]` | `srank.user` | 分项明细（支持离线） |
@@ -90,8 +93,11 @@ jar --create --file dist\SRExpansion.jar -C out .
 ## 常用变量
 
 `%srank_rank_name%`（段位名，带颜色）、`%srank_rank_plain%`、`%srank_next_rank_name%`、
-`%srank_rank_remaining%`、`%srank_rank_progress%`、`%srank_score%`、`%srank_rank%`（段位分排名）等，
-完整列表见 [wiki.txt](wiki.txt)。
+`%srank_rank_remaining%`、`%srank_rank_progress%`、`%srank_score%`、`%srank_rank%`（段位分排名）、
+`%srank_autorankup%`、`%srank_display%` 等。
+
+查**指定玩家**（支持离线）：`%srank_rank_name_<玩家名>%`、`%srank_rank_name_plain_<玩家名>%`、
+`%srank_score_<玩家名>%`，例如 `%srank_rank_name_Steve%`。完整列表见 [wiki.txt](wiki.txt)。
 
 ## 目录
 
