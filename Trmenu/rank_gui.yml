@@ -1,0 +1,5220 @@
+# ============================================================
+# 生存段位系统 GUI —— 由 Trmenu/tools/generate_gui.ps1 自动生成，请勿手改
+# 菜单 ID：rank_gui     打开方式：/trmenu open rank_gui 或 /rankgui
+# 依赖：TrMenu, PlaceholderAPI, SRExpansion（可选 AdvancedPlayerAttribute）
+# 页面：0 主页面 / 1 设置操作 / 2 段位选择 / 3 常规段位 / 4 额外段位
+#       5 算法总览 / 6 一般类 / 7 方块 / 8 生物 / 9 成就分类
+#       10+ 成就明细（故事 / 冒险 / 农牧 / 下界 / 末地，超过 45 个自动分页）
+# ============================================================
+
+Title:
+  - '&a&l生存&6&l段位&e&l系统 &7| &d%srank_rank_name% &7| &e%srank_score% 分'
+Title-Update: 60
+
+# ---------------- 布局 ----------------
+Layout:
+  # 0 主页面
+  - - '#########'
+    - '#I     R#'
+    - '#   T   #'
+    - '#F     C#'
+    - '#S     A#'
+    - '#########'
+  # 1 个人设置 / 操作
+  - - '#########'
+    - '#       #'
+    - '# X   Y #'
+    - '#       #'
+    - '#   Z   #'
+    - 'K########'
+  # 2 全段位展示 - 选择
+  - - '#########'
+    - '#       #'
+    - '# `regular`   `extra` #'
+    - '#       #'
+    - '         '
+    - 'K########'
+  # 3 常规段位（1-50）
+  - - '`Dirt``Log``Stone``Coal``Coal_ore``Coal_block``Iron``Iron_ore``Iron_block`'
+    - '`Gold``Gold_ore``Gold_block``Redstone``Redstone_ore``Redstone_block``Lapis``Lapis_ore``Lapis_block`'
+    - '`Diamond``Diamond_ore``Diamond_block``Enchanter``Emerald``Emerald_ore``Emerald_block``Obsidian``Nether`'
+    - '`Nether_quartz``Nether_gold_ore``Nether_fortress``Netherite``Wither``Nether_Star``Beacon``Ender``Ender_Dragon`'
+    - '`End_City``Elytra``End_again``Bedrock``Barrier``Command_block``Chain_command_block``Repeating_command_block``Debug_Stick`'
+    - '`Structure_block``Structure_void``Minecraft``Minecraft+``Minecraft_Max`   `back2`'
+  # 4 额外段位（51-100）
+  - - '`Extra_Dirt``Extra_Log``Extra_Stone``Extra_Coal``Extra_Coal_ore``Extra_Coal_block``Extra_Iron``Extra_Iron_ore``Extra_Iron_block`'
+    - '`Extra_Gold``Extra_Gold_ore``Extra_Gold_block``Extra_Redstone``Extra_Redstone_ore``Extra_Redstone_block``Extra_Lapis``Extra_Lapis_ore``Extra_Lapis_block`'
+    - '`Extra_Diamond``Extra_Diamond_ore``Extra_Diamond_block``Extra_Enchanter``Extra_Emerald``Extra_Emerald_ore``Extra_Emerald_block``Extra_Obsidian``Extra_Nether`'
+    - '`Extra_Nether_quartz``Extra_Nether_gold_ore``Extra_Nether_Fortress``Extra_Netherite``Extra_Wither``Extra_Nether_star``Extra_Beacon``Extra_Ender``Extra_Ender_dragon`'
+    - '`Extra_End_city``Extra_Elytra``Extra_End_again``Extra_Bedrock``Extra_Barrier``Extra_Command_block``Extra_Chain_command_block``Extra_Repeating_command_block``Extra_Debug_Stick`'
+    - '`Extra_Structure_block``Extra_Structure_void``Extra_Minecraft``Extra_Minecraft_plus``Extra_Minecraft_max`   `back2`'
+  # 5 全段位分计算算法 - 总览
+  - - '#########'
+    - '#       #'
+    - '# `calc_base` `calc_block` `calc_mob` #'
+    - '#       #'
+    - '#   `calc_adv`   #'
+    - 'K########'
+  # 6 一般类加分
+  - - '`base_block_break``base_block_place``base_mob_kill``base_player_kill``base_damage_dealt``base_trade``base_enchant``base_jump``base_move_cm`'
+    - '`base_craft_item``base_play_tick``base_fishing``base_raid_win`     '
+    - '#########'
+    - '         '
+    - '         '
+    - '`back_calc`########'
+  # 7 特殊方块加分
+  - - '`blk_log``blk_wood``blk_coal_ore``blk_copper_ore``blk_iron_ore``blk_gold_ore``blk_diamond_ore``blk_emerald_ore``blk_lapis_ore`'
+    - '`blk_redstone_ore``blk_nether_quartz_ore``blk_ancient_debris``blk_nether_gold_ore``blk_obsidian`    '
+    - '#########'
+    - '         '
+    - '         '
+    - '`back_calc`########'
+  # 8 特殊生物加分
+  - - '`mob_COW``mob_SHEEP``mob_CHICKEN``mob_PIG``mob_ZOMBIE``mob_SKELETON``mob_CREEPER``mob_SPIDER``mob_ENDERMAN`'
+    - '`mob_PILLAGER``mob_VINDICATOR``mob_EVOKER``mob_VEX``mob_WITCH``mob_RAVAGER``mob_GUARDIAN``mob_ELDER_GUARDIAN``mob_DROWNED`'
+    - '`mob_HUSK``mob_ZOMBIE_VILLAGER``mob_PHANTOM``mob_STRAY``mob_SLIME``mob_ZOMBIFIED_PIGLIN``mob_PIGLIN``mob_PIGLIN_BRUTE``mob_GHAST`'
+    - '`mob_BLAZE``mob_MAGMA_CUBE``mob_WITHER_SKELETON``mob_HOGLIN``mob_WARDEN``mob_WITHER``mob_ENDER_DRAGON``mob_ARMADILLO``mob_BOGGED`'
+    - '`mob_BREEZE``mob_HAPPY_GHAST``mob_COPPER_GOLEM``mob_PARCHED``mob_CAMEL_HUSK``mob_NAUTILUS``mob_ZOMBIE_NAUTILUS`  '
+    - '`back_calc`########'
+  # 9 成就分类
+  - - '#########'
+    - '#       #'
+    - '#`adv_story``adv_adventure``adv_husbandry``adv_nether``adv_end`  #'
+    - '#       #'
+    - '#########'
+    - '`back_calc`########'
+  # 10 成就-主世界·故事
+  - - '`adv_story_root``adv_story_mine_stone``adv_story_upgrade_tools``adv_story_smelt_iron``adv_story_obtain_armor``adv_story_lava_bucket``adv_story_deflect_arrow``adv_story_form_obsidian``adv_story_iron_tools`'
+    - '`adv_story_mine_diamond``adv_story_shiny_gear``adv_story_enchant_item``adv_story_cure_zombie_villager``adv_story_follow_ender_eye``adv_story_enter_the_nether``adv_story_enter_the_end`  '
+    - '         '
+    - '         '
+    - '         '
+    - '`back_adv`########'
+  # 11 成就-主世界·冒险
+  - - '`adv_adventure_root``adv_adventure_sleep_in_bed``adv_adventure_adventuring_time``adv_adventure_kill_a_mob``adv_adventure_kill_all_mobs``adv_adventure_shoot_arrow``adv_adventure_throw_trident``adv_adventure_trade``adv_adventure_totem_of_undying`'
+    - '`adv_adventure_summon_iron_golem``adv_adventure_voluntary_exile``adv_adventure_hero_of_the_village``adv_adventure_very_very_frightening``adv_adventure_sniper_duel``adv_adventure_ol_betsy``adv_adventure_arbalistic``adv_adventure_who_needs_rockets``adv_adventure_two_birds_one_arrow`'
+    - '`adv_adventure_whos_the_pillager_now``adv_adventure_lighten_up``adv_adventure_honey_block_slide``adv_adventure_fall_from_world_height``adv_adventure_spyglass_at_parrot``adv_adventure_spyglass_at_ghast`   '
+    - '         '
+    - '         '
+    - '`back_adv`########'
+  # 12 成就-主世界·冒险
+  - - '`adv_adventure_spyglass_at_dragon``adv_adventure_walk_on_powder_snow_with_leather_boots``adv_adventure_avoid_vibration``adv_adventure_play_jukebox_in_meadows``adv_adventure_bullseye``adv_adventure_craft_decorated_pot_using_only_sherds``adv_adventure_kill_mob_near_sculk_catalyst``adv_adventure_lightning_rod_with_villager_no_fire``adv_adventure_read_power_of_chiseled_bookshelf`'
+    - '`adv_adventure_salvage_sherd``adv_adventure_trade_at_world_height``adv_adventure_trim_with_any_armor_pattern``adv_adventure_trim_with_all_exclusive_armor_patterns``adv_adventure_minecraft_trials_edition``adv_adventure_under_lock_and_key``adv_adventure_revaulting``adv_adventure_blowback``adv_adventure_overoverkill`'
+    - '`adv_adventure_crafters_crafting_crafters``adv_adventure_brush_armadillo``adv_adventure_use_lodestone``adv_adventure_heart_transplanter``adv_adventure_spear_many_mobs`    '
+    - '         '
+    - '         '
+    - '`back_adv`########'
+  # 13 成就-主世界·农牧
+  - - '`adv_husbandry_root``adv_husbandry_plant_seed``adv_husbandry_breed_an_animal``adv_husbandry_tame_an_animal``adv_husbandry_fishy_business``adv_husbandry_tactical_fishing``adv_husbandry_balanced_diet``adv_husbandry_bred_all_animals``adv_husbandry_complete_catalogue`'
+    - '`adv_husbandry_wax_on``adv_husbandry_wax_off``adv_husbandry_silk_touch_nest``adv_husbandry_leash_all_frog_variants``adv_husbandry_froglights``adv_husbandry_allay_deliver_cake_to_note_block``adv_husbandry_make_a_sign_glow``adv_husbandry_safely_harvest_honey``adv_husbandry_axolotl_in_a_bucket`'
+    - '`adv_husbandry_kill_axolotl_target``adv_husbandry_tadpole_in_a_bucket``adv_husbandry_allay_deliver_item_to_player``adv_husbandry_feed_snifflet``adv_husbandry_obtain_sniffer_egg``adv_husbandry_plant_any_sniffer_seed``adv_husbandry_obtain_netherite_hoe``adv_husbandry_ride_a_boat_with_a_goat``adv_husbandry_place_dried_ghast_in_water`'
+    - '`adv_husbandry_remove_wolf_armor``adv_husbandry_repair_wolf_armor``adv_husbandry_whole_pack`      '
+    - '         '
+    - '`back_adv`########'
+  # 14 成就-下界
+  - - '`adv_nether_root``adv_nether_find_fortress``adv_nether_return_to_sender``adv_nether_obtain_blaze_rod``adv_nether_get_wither_skull``adv_nether_summon_wither``adv_nether_create_beacon``adv_nether_create_full_beacon``adv_nether_brew_potion`'
+    - '`adv_nether_all_potions``adv_nether_all_effects``adv_nether_uneasy_alliance``adv_nether_fast_travel``adv_nether_explore_nether``adv_nether_ride_strider``adv_nether_obtain_ancient_debris``adv_nether_netherite_armor``adv_nether_charge_respawn_anchor`'
+    - '`adv_nether_distract_piglin``adv_nether_find_bastion``adv_nether_loot_bastion``adv_nether_obtain_crying_obsidian``adv_nether_ride_strider_in_overworld_lava`    '
+    - '         '
+    - '         '
+    - '`back_adv`########'
+  # 15 成就-末地
+  - - '`adv_end_root``adv_end_kill_dragon``adv_end_dragon_egg``adv_end_enter_end_gateway``adv_end_find_end_city``adv_end_elytra``adv_end_levitate``adv_end_respawn_dragon``adv_end_dragon_breath`'
+    - '         '
+    - '         '
+    - '         '
+    - '         '
+    - '`back_adv`########'
+
+PlayerInventory:
+  - '         '
+  - '         '
+  - '         '
+  - '         '
+
+Options:
+  Arguments: false
+  Default-Arguments: [ ]
+  Default-Layout: 0
+  Hide-Player-Inventory: true
+  Min-Click-Delay: 200
+  Depend-Expansions: [ 'server', 'player', 'progress', 'animations' ]
+
+Bindings:
+  Commands:
+    - '(?i)(rank|srank)?gui'
+  Items:
+    - 'material:clock,lore:生存段位'
+
+Events:
+  Open:
+    - actions:
+        - 'sound: BLOCK_CHEST_OPEN-1-0'
+  Close:
+    - 'sound: BLOCK_CHEST_CLOSE-1-0'
+
+# ============================================================
+# 图标
+# ============================================================
+Icons:
+  '#':
+    update: [ -1, 10, 15, -1 ]
+    display:
+      material: White Stained Glass Pane
+      name: [ '&e---&b琉璃之塔&e---', '&b---&e琉璃之塔&b---' ]
+      lore:
+        - '&7生存段位系统'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-2'
+
+  # ---------- 导航按钮 ----------
+  back2:
+    update: 20
+    display:
+      material: Light Blue Stained Glass Pane
+      name: '&b返回段位选择'
+      lore:
+        - '&7点击返回'
+    actions:
+      all: 'page: 2 &&& sound: BLOCK_NOTE_BLOCK_PLING-1-2'
+
+  back_calc:
+    update: 20
+    display:
+      material: Light Blue Stained Glass Pane
+      name: '&b返回算法总览'
+      lore:
+        - '&7点击返回'
+    actions:
+      all: 'page: 5 &&& sound: BLOCK_NOTE_BLOCK_PLING-1-2'
+
+  back_adv:
+    update: 20
+    display:
+      material: Light Blue Stained Glass Pane
+      name: '&b返回成就分类'
+      lore:
+        - '&7点击返回'
+    actions:
+      all: 'page: 9 &&& sound: BLOCK_NOTE_BLOCK_PLING-1-2'
+
+  K:
+    update: 20
+    display:
+      material: ARROW
+      name: '&b返回主页面'
+      lore:
+        - '&7点击返回'
+    actions:
+      all: 'page: 0 &&& sound: BLOCK_NOTE_BLOCK_PLING-1-2'
+
+  # ---------- 主页面 ----------
+  I:
+    update: 20
+    display:
+      material: 'head:%player_name%'
+      name: '&6&l%player_name% &7的个人档案'
+      lore:
+        - '&8&m------------------------'
+        - '&f当前段位: %srank_rank_name%'
+        - '&f下一段位: %srank_next_rank_name%'
+        - '&f生存段位分: &6&l%srank_score% &7(#%srank_rank%)'
+        - '&f升级进度: &e%srank_rank_progress%% &7(还差 %srank_rank_remaining% 分)'
+        - '&8&m------------------------'
+        - '&6&l属性加成'
+        - '&f· 攻击 &7%apa_attack% &f· 防御 &7%apa_defense%'
+        - '&f· 血量上限 &7%apa_max_health% &8(总计 %apa_max_health_total%)'
+        - '&f· 闪避率 &7%apa_dodge%% &f· 护盾 &7%apa_shield%/%apa_shield_max%'
+        - '&8&m------------------------'
+        - '&7自动升级: &f%srank_autorankup% &7| 悬浮字: &f%srank_display%'
+        - '&e点击刷新'
+    actions:
+      all: 'refresh: * &&& sound: BLOCK_NOTE_BLOCK_PLING-1-2'
+
+  R:
+    update: 60
+    display:
+      material: NETHER_STAR
+      name: '&d&l生存段位分排行榜'
+      lore:
+        - '&7我的排名: &e#%srank_rank%'
+        - '&8&m------------------------'
+        - '&e1. &f%srank_top1_name% &7- &6%srank_top1_score%'
+        - '&e2. &f%srank_top2_name% &7- &6%srank_top2_score%'
+        - '&e3. &f%srank_top3_name% &7- &6%srank_top3_score%'
+        - '&e4. &f%srank_top4_name% &7- &6%srank_top4_score%'
+        - '&e5. &f%srank_top5_name% &7- &6%srank_top5_score%'
+        - '&e6. &f%srank_top6_name% &7- &6%srank_top6_score%'
+        - '&e7. &f%srank_top7_name% &7- &6%srank_top7_score%'
+        - '&e8. &f%srank_top8_name% &7- &6%srank_top8_score%'
+        - '&e9. &f%srank_top9_name% &7- &6%srank_top9_score%'
+        - '&e10. &f%srank_top10_name% &7- &6%srank_top10_score%'
+        - '&8&m------------------------'
+        - '&7分数来自原版统计，越高代表越肝'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  T:
+    update: 20
+    display:
+      material: BOOK
+      name: '&e&l生存段位 · 指导'
+      lore:
+        - '&f生存段位是服务器特色玩法之一，'
+        - '&f通过积累「生存段位分」来晋升。'
+        - '&7分数来源: 挖掘 / 击杀 / 合成 / 交易 /'
+        - '&7钓鱼 / 成就 / 在线时长等原版统计。'
+        - '&7达到分数要求后会自动升级，'
+        - '&7也可以在「设置」里关闭自动升级或手动升级。'
+        - '&8&m------------------------'
+        - '&7左上: &f个人档案 &7| 右上: &f排行榜'
+        - '&7左下: &f段位列表 &7| 右下: &f计分规则'
+        - '&7左侧: &f属性图鉴 &7| 右侧: &f设置'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  F:
+    update: 20
+    display:
+      material: EXPERIENCE_BOTTLE
+      name: '&a&l段位属性 · 图鉴'
+      lore:
+        - '&7段位会累计提供以下属性'
+        - '&7（需要安装 AdvancedPlayerAttribute）'
+        - '&8&m------------------------'
+        - '&f· 攻击 &7- 命中时额外造成的伤害'
+        - '&f· 破甲攻击 &7- 无视护甲的额外伤害'
+        - '&f· 绝对攻击 &7- 无视一切防御与 Buff 的伤害'
+        - '&f· 防御 &7- 受到的伤害固定减少'
+        - '&f· 血量上限 &7- 最大生命值提升'
+        - '&f· 闪避率 &7- 按百分比完全躲开一次攻击'
+        - '&f· 护盾 &7- 黄心，优先于生命值被消耗，'
+        - '&7  被击破后需满血才会自然回复'
+        - '&f· 护盾恢复 &7- 每 N 秒回复 1 点护盾'
+        - '&8&m------------------------'
+        - '&7我当前的属性:'
+        - '&f攻击 &e%apa_attack% &f防御 &e%apa_defense% &f闪避 &e%apa_dodge%%'
+        - '&f护盾 &e%apa_shield%&7/&e%apa_shield_max% &f恢复 &e%apa_shield_regen% 秒/点'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  S:
+    update: 20
+    display:
+      material: COMPARATOR
+      name: '&b&l设置 / 操作'
+      lore:
+        - '&7自动升级、悬浮字开关、手动升级'
+        - '&7点击进入'
+    actions:
+      all: 'page: 1 &&& sound: BLOCK_NOTE_BLOCK_BIT-1-1'
+
+  A:
+    update: 20
+    display:
+      material: GRASS_BLOCK
+      name: '&e&l生存段位列表'
+      lore:
+        - '&7查看全部 100 个段位'
+        - '&7含所需分数、金币与属性奖励'
+        - '&7点击进入'
+    actions:
+      all: 'page: 2 &&& sound: BLOCK_NOTE_BLOCK_BIT-1-1'
+
+  C:
+    update: 20
+    display:
+      material: WRITABLE_BOOK
+      name: '&6&l生存段位分计算算法'
+      lore:
+        - '&7一般统计 / 特殊方块 / 特殊生物 / 成就'
+        - '&7每一项加分的来源'
+        - '&7点击查看'
+    actions:
+      all: 'page: 5 &&& sound: BLOCK_NOTE_BLOCK_BIT-1-1'
+
+  # ---------- 设置 / 操作 ----------
+  X:
+    update: 20
+    display:
+      material: CLOCK
+      name: '&e&l自动升级 &7: &f%srank_autorankup%'
+      lore:
+        - '&7开启后，分数达到要求会自动升段'
+        - '&7关闭后需要手动点击升级'
+        - '&8&m------------------------'
+        - '&f当前状态: &a%srank_autorankup%'
+        - '&7点击切换'
+    actions:
+      all: 'command: srank autorankup &&& delay: 2 &&& update: X &&& sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+
+  Y:
+    update: 20
+    display:
+      material: ENDER_EYE
+      name: '&d&l升级悬浮字 &7: &f%srank_display%'
+      lore:
+        - '&7升级时在视野左侧播放的悬浮字演出'
+        - '&8&m------------------------'
+        - '&f当前状态: &a%srank_display%'
+        - '&7点击切换'
+    actions:
+      all: 'command: srank display &&& delay: 2 &&& update: Y &&& sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+
+  Z:
+    update: 20
+    display:
+      material: NETHER_STAR
+      name: '&6&l手动升级段位'
+      lore:
+        - '&7分数已达到下一段位要求时点击升级'
+        - '&8&m------------------------'
+        - '&f当前段位: %srank_rank_name%'
+        - '&f下一段位: %srank_next_rank_name% &7(需 %srank_next_rank_score% 分)'
+        - '&f还差: &e%srank_rank_remaining% &7分'
+        - '&7点击升级'
+    actions:
+      all: 'command: srank rankup &&& sound: BLOCK_NOTE_BLOCK_PLING-1-2'
+
+  # ---------- 段位选择 ----------
+  regular:
+    update: 20
+    display:
+      material: IRON_BLOCK
+      name: '&a生存段位列表 &f- &a常规段位'
+      lore:
+        - '&7第 1 ~ 50 个段位'
+        - '&7共 50 个'
+        - '&7点击查看'
+    actions:
+      all: 'page: 3 &&& sound: BLOCK_NOTE_BLOCK_BIT-1-1'
+
+  extra:
+    update: 20
+    display:
+      material: DIAMOND_BLOCK
+      name: '&a生存段位列表 &f- &d额外段位'
+      lore:
+        - '&7第 51 ~ 100 个段位（Extra 前缀）'
+        - '&7共 50 个'
+        - '&7点击查看'
+    actions:
+      all: 'page: 4 &&& sound: BLOCK_NOTE_BLOCK_BIT-1-1'
+
+  # ============================================================
+  # 段位图标（常规 + 额外）
+  # ============================================================
+  Dirt:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: DIRT
+      name: '<gradient:#A0522D:#F5DEB3>[Dirt]</gradient>'
+      lore:
+        - '&7需要段位分: &e5'
+        - '&7升级奖励: &a355 金币'
+        - '&7属性奖励: &b血量上限 +1'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.dirt.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<gradient:#A0522D:#F5DEB3>[Dirt]</gradient>'
+          lore:
+            - '&7需要段位分: &e5'
+            - '&7升级奖励: &a355 金币'
+            - '&7属性奖励: &b血量上限 +1'
+            - '&a✔ 已达到'
+
+  Log:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: OAK_LOG
+      name: '<gradient:#CD853F:#DEB887>[Log]</gradient>'
+      lore:
+        - '&7需要段位分: &e20'
+        - '&7升级奖励: &a440 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.log.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<gradient:#CD853F:#DEB887>[Log]</gradient>'
+          lore:
+            - '&7需要段位分: &e20'
+            - '&7升级奖励: &a440 金币'
+            - '&a✔ 已达到'
+
+  Stone:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: STONE
+      name: '<gradient:#708090:#B0C4DE>[Stone]</gradient>'
+      lore:
+        - '&7需要段位分: &e45'
+        - '&7升级奖励: &a555 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.stone.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<gradient:#708090:#B0C4DE>[Stone]</gradient>'
+          lore:
+            - '&7需要段位分: &e45'
+            - '&7升级奖励: &a555 金币'
+            - '&a✔ 已达到'
+
+  Coal:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: COAL
+      name: '<gradient:#696969:#404040>[Coal]</gradient>'
+      lore:
+        - '&7需要段位分: &e80'
+        - '&7升级奖励: &a700 金币'
+        - '&7属性奖励: &b血量上限 +1'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.coal.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<gradient:#696969:#404040>[Coal]</gradient>'
+          lore:
+            - '&7需要段位分: &e80'
+            - '&7升级奖励: &a700 金币'
+            - '&7属性奖励: &b血量上限 +1'
+            - '&a✔ 已达到'
+
+  Coal_ore:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: COAL_ORE
+      name: '<gradient:#696969:#404040>[Coal_ore]</gradient>'
+      lore:
+        - '&7需要段位分: &e125'
+        - '&7升级奖励: &a875 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.coal_ore.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<gradient:#696969:#404040>[Coal_ore]</gradient>'
+          lore:
+            - '&7需要段位分: &e125'
+            - '&7升级奖励: &a875 金币'
+            - '&a✔ 已达到'
+
+  Coal_block:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: COAL_BLOCK
+      name: '<gradient:#696969:#404040>[Coal_block]</gradient>'
+      lore:
+        - '&7需要段位分: &e180'
+        - '&7升级奖励: &a1080 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.coal_block.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<gradient:#696969:#404040>[Coal_block]</gradient>'
+          lore:
+            - '&7需要段位分: &e180'
+            - '&7升级奖励: &a1080 金币'
+            - '&a✔ 已达到'
+
+  Iron:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: IRON_INGOT
+      name: '<gradient:#A9A9A9:#FFFFFF>[Iron]</gradient>'
+      lore:
+        - '&7需要段位分: &e245'
+        - '&7升级奖励: &a1315 金币'
+        - '&7属性奖励: &b血量上限 +2 &7/ &b防御 +1'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.iron.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<gradient:#A9A9A9:#FFFFFF>[Iron]</gradient>'
+          lore:
+            - '&7需要段位分: &e245'
+            - '&7升级奖励: &a1315 金币'
+            - '&7属性奖励: &b血量上限 +2 &7/ &b防御 +1'
+            - '&a✔ 已达到'
+
+  Iron_ore:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: IRON_ORE
+      name: '<gradient:#A9A9A9:#FFFFFF>[Iron_Ore]</gradient>'
+      lore:
+        - '&7需要段位分: &e320'
+        - '&7升级奖励: &a1580 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.iron_ore.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<gradient:#A9A9A9:#FFFFFF>[Iron_Ore]</gradient>'
+          lore:
+            - '&7需要段位分: &e320'
+            - '&7升级奖励: &a1580 金币'
+            - '&a✔ 已达到'
+
+  Iron_block:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: IRON_BLOCK
+      name: '<gradient:#A9A9A9:#FFFFFF>[Iron_Block]</gradient>'
+      lore:
+        - '&7需要段位分: &e405'
+        - '&7升级奖励: &a1875 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.iron_block.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<gradient:#A9A9A9:#FFFFFF>[Iron_Block]</gradient>'
+          lore:
+            - '&7需要段位分: &e405'
+            - '&7升级奖励: &a1875 金币'
+            - '&a✔ 已达到'
+
+  Gold:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: GOLD_INGOT
+      name: '<gradient:#FFD700:#DAA520>[Gold]</gradient>'
+      lore:
+        - '&7需要段位分: &e500'
+        - '&7升级奖励: &a2200 金币'
+        - '&7属性奖励: &b血量上限 +1 &7/ &b攻击 +1'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.gold.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<gradient:#FFD700:#DAA520>[Gold]</gradient>'
+          lore:
+            - '&7需要段位分: &e500'
+            - '&7升级奖励: &a2200 金币'
+            - '&7属性奖励: &b血量上限 +1 &7/ &b攻击 +1'
+            - '&a✔ 已达到'
+
+  Gold_ore:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: GOLD_ORE
+      name: '<gradient:#FFD700:#DAA520>[Gold_Ore]</gradient>'
+      lore:
+        - '&7需要段位分: &e605'
+        - '&7升级奖励: &a2555 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.gold_ore.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<gradient:#FFD700:#DAA520>[Gold_Ore]</gradient>'
+          lore:
+            - '&7需要段位分: &e605'
+            - '&7升级奖励: &a2555 金币'
+            - '&a✔ 已达到'
+
+  Gold_block:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: GOLD_BLOCK
+      name: '<gradient:#FFD700:#DAA520>[Gold_Block]</gradient>'
+      lore:
+        - '&7需要段位分: &e720'
+        - '&7升级奖励: &a2940 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.gold_block.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<gradient:#FFD700:#DAA520>[Gold_Block]</gradient>'
+          lore:
+            - '&7需要段位分: &e720'
+            - '&7升级奖励: &a2940 金币'
+            - '&a✔ 已达到'
+
+  Redstone:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: REDSTONE
+      name: '<gradient:#FF0000:#FA8072>[Redstone]</gradient>'
+      lore:
+        - '&7需要段位分: &e845'
+        - '&7升级奖励: &a3355 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.redstone.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<gradient:#FF0000:#FA8072>[Redstone]</gradient>'
+          lore:
+            - '&7需要段位分: &e845'
+            - '&7升级奖励: &a3355 金币'
+            - '&a✔ 已达到'
+
+  Redstone_ore:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: REDSTONE_ORE
+      name: '<gradient:#FF0000:#FA8072>[Redstone_Ore]</gradient>'
+      lore:
+        - '&7需要段位分: &e980'
+        - '&7升级奖励: &a3800 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.redstone_ore.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<gradient:#FF0000:#FA8072>[Redstone_Ore]</gradient>'
+          lore:
+            - '&7需要段位分: &e980'
+            - '&7升级奖励: &a3800 金币'
+            - '&a✔ 已达到'
+
+  Redstone_block:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: REDSTONE_BLOCK
+      name: '<gradient:#FF0000:#FA8072>[Redstone_Block]</gradient>'
+      lore:
+        - '&7需要段位分: &e1125'
+        - '&7升级奖励: &a4275 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.redstone_block.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<gradient:#FF0000:#FA8072>[Redstone_Block]</gradient>'
+          lore:
+            - '&7需要段位分: &e1125'
+            - '&7升级奖励: &a4275 金币'
+            - '&a✔ 已达到'
+
+  Lapis:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: LAPIS_LAZULI
+      name: '<gradient:#00008B:#4169E1>[Lapis]</gradient>'
+      lore:
+        - '&7需要段位分: &e1280'
+        - '&7升级奖励: &a4780 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.lapis.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<gradient:#00008B:#4169E1>[Lapis]</gradient>'
+          lore:
+            - '&7需要段位分: &e1280'
+            - '&7升级奖励: &a4780 金币'
+            - '&a✔ 已达到'
+
+  Lapis_ore:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: LAPIS_ORE
+      name: '<gradient:#00008B:#4169E1>[Lapis_Ore]</gradient>'
+      lore:
+        - '&7需要段位分: &e1445'
+        - '&7升级奖励: &a5315 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.lapis_ore.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<gradient:#00008B:#4169E1>[Lapis_Ore]</gradient>'
+          lore:
+            - '&7需要段位分: &e1445'
+            - '&7升级奖励: &a5315 金币'
+            - '&a✔ 已达到'
+
+  Lapis_block:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: LAPIS_BLOCK
+      name: '<gradient:#00008B:#4169E1>[Lapis_Block]</gradient>'
+      lore:
+        - '&7需要段位分: &e1620'
+        - '&7升级奖励: &a5880 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.lapis_block.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<gradient:#00008B:#4169E1>[Lapis_Block]</gradient>'
+          lore:
+            - '&7需要段位分: &e1620'
+            - '&7升级奖励: &a5880 金币'
+            - '&a✔ 已达到'
+
+  Diamond:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: DIAMOND
+      name: '<gradient:#1E90FF:#00BFFF>[Diamond]</gradient>'
+      lore:
+        - '&7需要段位分: &e1805'
+        - '&7升级奖励: &a6475 金币'
+        - '&7属性奖励: &b血量上限 +2 &7/ &b防御 +1 &7/ &b攻击 +1'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.diamond.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<gradient:#1E90FF:#00BFFF>[Diamond]</gradient>'
+          lore:
+            - '&7需要段位分: &e1805'
+            - '&7升级奖励: &a6475 金币'
+            - '&7属性奖励: &b血量上限 +2 &7/ &b防御 +1 &7/ &b攻击 +1'
+            - '&a✔ 已达到'
+
+  Diamond_ore:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: DIAMOND_ORE
+      name: '<gradient:#1E90FF:#00BFFF>[Diamond_Ore]</gradient>'
+      lore:
+        - '&7需要段位分: &e2000'
+        - '&7升级奖励: &a7110 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.diamond_ore.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<gradient:#1E90FF:#00BFFF>[Diamond_Ore]</gradient>'
+          lore:
+            - '&7需要段位分: &e2000'
+            - '&7升级奖励: &a7110 金币'
+            - '&a✔ 已达到'
+
+  Diamond_block:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: DIAMOND_BLOCK
+      name: '<gradient:#1E90FF:#00BFFF>[Diamond_Block]</gradient>'
+      lore:
+        - '&7需要段位分: &e2205'
+        - '&7升级奖励: &a7755 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.diamond_block.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<gradient:#1E90FF:#00BFFF>[Diamond_Block]</gradient>'
+          lore:
+            - '&7需要段位分: &e2205'
+            - '&7升级奖励: &a7755 金币'
+            - '&a✔ 已达到'
+
+  Enchanter:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: ENCHANTING_TABLE
+      name: '<gradient:#8A2BE2:#BA55D3>[Enchanter]</gradient>'
+      lore:
+        - '&7需要段位分: &e2420'
+        - '&7升级奖励: &a8440 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.enchanter.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<gradient:#8A2BE2:#BA55D3>[Enchanter]</gradient>'
+          lore:
+            - '&7需要段位分: &e2420'
+            - '&7升级奖励: &a8440 金币'
+            - '&a✔ 已达到'
+
+  Emerald:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: EMERALD
+      name: '<gradient:#228B22:#7CFC00>[Emerald]</gradient>'
+      lore:
+        - '&7需要段位分: &e2645'
+        - '&7升级奖励: &a9155 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.emerald.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<gradient:#228B22:#7CFC00>[Emerald]</gradient>'
+          lore:
+            - '&7需要段位分: &e2645'
+            - '&7升级奖励: &a9155 金币'
+            - '&a✔ 已达到'
+
+  Emerald_ore:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: EMERALD_ORE
+      name: '<gradient:#228B22:#7CFC00>[Emerald_Ore]</gradient>'
+      lore:
+        - '&7需要段位分: &e2880'
+        - '&7升级奖励: &a9900 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.emerald_ore.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<gradient:#228B22:#7CFC00>[Emerald_Ore]</gradient>'
+          lore:
+            - '&7需要段位分: &e2880'
+            - '&7升级奖励: &a9900 金币'
+            - '&a✔ 已达到'
+
+  Emerald_block:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: EMERALD_BLOCK
+      name: '<gradient:#228B22:#7CFC00>[Emerald_Block]</gradient>'
+      lore:
+        - '&7需要段位分: &e3125'
+        - '&7升级奖励: &a10675 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.emerald_block.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<gradient:#228B22:#7CFC00>[Emerald_Block]</gradient>'
+          lore:
+            - '&7需要段位分: &e3125'
+            - '&7升级奖励: &a10675 金币'
+            - '&a✔ 已达到'
+
+  Obsidian:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: OBSIDIAN
+      name: '<gradient:#8B008B:#696969>[Obsidian]</gradient>'
+      lore:
+        - '&7需要段位分: &e3380'
+        - '&7升级奖励: &a11480 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.obsidian.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<gradient:#8B008B:#696969>[Obsidian]</gradient>'
+          lore:
+            - '&7需要段位分: &e3380'
+            - '&7升级奖励: &a11480 金币'
+            - '&a✔ 已达到'
+
+  Nether:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: NETHER_BRICK
+      name: '<gradient:#DC143C:#FA8072>[Nether]</gradient>'
+      lore:
+        - '&7需要段位分: &e3645'
+        - '&7升级奖励: &a12315 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.nether.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<gradient:#DC143C:#FA8072>[Nether]</gradient>'
+          lore:
+            - '&7需要段位分: &e3645'
+            - '&7升级奖励: &a12315 金币'
+            - '&a✔ 已达到'
+
+  Nether_quartz:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: NETHER_QUARTZ_ORE
+      name: '<gradient:#DC143C:#FA8072:#FFFFFF>[Nether_Quartz]</gradient>'
+      lore:
+        - '&7需要段位分: &e3920'
+        - '&7升级奖励: &a13180 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.nether_quartz.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<gradient:#DC143C:#FA8072:#FFFFFF>[Nether_Quartz]</gradient>'
+          lore:
+            - '&7需要段位分: &e3920'
+            - '&7升级奖励: &a13180 金币'
+            - '&a✔ 已达到'
+
+  Nether_gold_ore:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: NETHER_GOLD_ORE
+      name: '<gradient:#DC143C:#FA8072:#FFD700>[Nether_Gold_Ore]</gradient>'
+      lore:
+        - '&7需要段位分: &e4205'
+        - '&7升级奖励: &a14075 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.nether_gold_ore.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<gradient:#DC143C:#FA8072:#FFD700>[Nether_Gold_Ore]</gradient>'
+          lore:
+            - '&7需要段位分: &e4205'
+            - '&7升级奖励: &a14075 金币'
+            - '&a✔ 已达到'
+
+  Nether_fortress:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: NETHER_BRICK
+      name: '<gradient:#DC143C:#FA8072:#800000>[Nether_Fortress]</gradient>'
+      lore:
+        - '&7需要段位分: &e4500'
+        - '&7升级奖励: &a15000 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.nether_fortress.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<gradient:#DC143C:#FA8072:#800000>[Nether_Fortress]</gradient>'
+          lore:
+            - '&7需要段位分: &e4500'
+            - '&7升级奖励: &a15000 金币'
+            - '&a✔ 已达到'
+
+  Netherite:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: NETHERITE_INGOT
+      name: '<gradient:#696969:#483D8B>[Netherite]</gradient>'
+      lore:
+        - '&7需要段位分: &e4805'
+        - '&7升级奖励: &a15955 金币'
+        - '&7属性奖励: &b血量上限 +2 &7/ &b防御 +1 &7/ &b攻击 +1 &7/ &b护盾 +2'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.netherite.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<gradient:#696969:#483D8B>[Netherite]</gradient>'
+          lore:
+            - '&7需要段位分: &e4805'
+            - '&7升级奖励: &a15955 金币'
+            - '&7属性奖励: &b血量上限 +2 &7/ &b防御 +1 &7/ &b攻击 +1 &7/ &b护盾 +2'
+            - '&a✔ 已达到'
+
+  Wither:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: WITHER_SKELETON_SKULL
+      name: '<gradient:#8B4513:#808080>[Wither]</gradient>'
+      lore:
+        - '&7需要段位分: &e5120'
+        - '&7升级奖励: &a16940 金币'
+        - '&7属性奖励: &b攻击 +2'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.wither.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<gradient:#8B4513:#808080>[Wither]</gradient>'
+          lore:
+            - '&7需要段位分: &e5120'
+            - '&7升级奖励: &a16940 金币'
+            - '&7属性奖励: &b攻击 +2'
+            - '&a✔ 已达到'
+
+  Nether_Star:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: NETHER_STAR
+      name: '<gradient:#DC143C:#FFD700:#FFFFFF>[Nether_Star]</gradient>'
+      lore:
+        - '&7需要段位分: &e5445'
+        - '&7升级奖励: &a17955 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.nether_star.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<gradient:#DC143C:#FFD700:#FFFFFF>[Nether_Star]</gradient>'
+          lore:
+            - '&7需要段位分: &e5445'
+            - '&7升级奖励: &a17955 金币'
+            - '&a✔ 已达到'
+
+  Beacon:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: BEACON
+      name: '<gradient:#00BFFF:#FF4500>[Beacon]</gradient>'
+      lore:
+        - '&7需要段位分: &e5780'
+        - '&7升级奖励: &a19000 金币'
+        - '&7属性奖励: &b血量上限 +2 &7/ &b防御 +1'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.beacon.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<gradient:#00BFFF:#FF4500>[Beacon]</gradient>'
+          lore:
+            - '&7需要段位分: &e5780'
+            - '&7升级奖励: &a19000 金币'
+            - '&7属性奖励: &b血量上限 +2 &7/ &b防御 +1'
+            - '&a✔ 已达到'
+
+  Ender:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: ENDER_PEARL
+      name: '<gradient:#9932CC:#FFFF00>[Ender]</gradient>'
+      lore:
+        - '&7需要段位分: &e6125'
+        - '&7升级奖励: &a20075 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.ender.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<gradient:#9932CC:#FFFF00>[Ender]</gradient>'
+          lore:
+            - '&7需要段位分: &e6125'
+            - '&7升级奖励: &a20075 金币'
+            - '&a✔ 已达到'
+
+  Ender_Dragon:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: DRAGON_HEAD
+      name: '<gradient:#9932CC:#FFFF00:#9932CC>[Ender_Dragon]</gradient>'
+      lore:
+        - '&7需要段位分: &e6480'
+        - '&7升级奖励: &a21180 金币'
+        - '&7属性奖励: &b攻击 +2 &7/ &b护盾 +2'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.ender_dragon.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<gradient:#9932CC:#FFFF00:#9932CC>[Ender_Dragon]</gradient>'
+          lore:
+            - '&7需要段位分: &e6480'
+            - '&7升级奖励: &a21180 金币'
+            - '&7属性奖励: &b攻击 +2 &7/ &b护盾 +2'
+            - '&a✔ 已达到'
+
+  End_City:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: END_STONE
+      name: '<gradient:#8A2BE2:#4169E1>[End_City]</gradient>'
+      lore:
+        - '&7需要段位分: &e6845'
+        - '&7升级奖励: &a22315 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.end_city.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<gradient:#8A2BE2:#4169E1>[End_City]</gradient>'
+          lore:
+            - '&7需要段位分: &e6845'
+            - '&7升级奖励: &a22315 金币'
+            - '&a✔ 已达到'
+
+  Elytra:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: ELYTRA
+      name: '<gradient:#8B008B:#483D8B>[Elytra]</gradient>'
+      lore:
+        - '&7需要段位分: &e7220'
+        - '&7升级奖励: &a23480 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.elytra.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<gradient:#8B008B:#483D8B>[Elytra]</gradient>'
+          lore:
+            - '&7需要段位分: &e7220'
+            - '&7升级奖励: &a23480 金币'
+            - '&a✔ 已达到'
+
+  End_again:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: END_CRYSTAL
+      name: '<gradient:#8A2BE2:#FFD700:#FF4500>[End_Again]</gradient>'
+      lore:
+        - '&7需要段位分: &e7605'
+        - '&7升级奖励: &a24675 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.end_again.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<gradient:#8A2BE2:#FFD700:#FF4500>[End_Again]</gradient>'
+          lore:
+            - '&7需要段位分: &e7605'
+            - '&7升级奖励: &a24675 金币'
+            - '&a✔ 已达到'
+
+  Bedrock:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: BEDROCK
+      name: '<gradient:#000000:#696969>[Bedrock]</gradient>'
+      lore:
+        - '&7需要段位分: &e8000'
+        - '&7升级奖励: &a25900 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.bedrock.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<gradient:#000000:#696969>[Bedrock]</gradient>'
+          lore:
+            - '&7需要段位分: &e8000'
+            - '&7升级奖励: &a25900 金币'
+            - '&a✔ 已达到'
+
+  Barrier:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: BARRIER
+      name: '<gradient:#ff0000:#F08080>[Barrier]</gradient>'
+      lore:
+        - '&7需要段位分: &e8405'
+        - '&7升级奖励: &a27155 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.barrier.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<gradient:#ff0000:#F08080>[Barrier]</gradient>'
+          lore:
+            - '&7需要段位分: &e8405'
+            - '&7升级奖励: &a27155 金币'
+            - '&a✔ 已达到'
+
+  Command_block:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: COMMAND_BLOCK
+      name: '<red><bold>[<gold><bold>★<gradient:#FFA500:#FFFFFF:#DAA520>Command_Block</gradient><gold><bold>★<red><bold>]<reset>'
+      lore:
+        - '&7需要段位分: &e8820'
+        - '&7升级奖励: &a28440 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.command_block.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<red><bold>[<gold><bold>★<gradient:#FFA500:#FFFFFF:#DAA520>Command_Block</gradient><gold><bold>★<red><bold>]<reset>'
+          lore:
+            - '&7需要段位分: &e8820'
+            - '&7升级奖励: &a28440 金币'
+            - '&a✔ 已达到'
+
+  Chain_command_block:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: CHAIN_COMMAND_BLOCK
+      name: '<red><bold>[<gold><bold>★<gradient:#20B2AA:#FFA500:#FFFFFF>Chain_Command_Block</gradient><gold><bold>★<red><bold>]<reset>'
+      lore:
+        - '&7需要段位分: &e9245'
+        - '&7升级奖励: &a28440 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.chain_command_block.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<red><bold>[<gold><bold>★<gradient:#20B2AA:#FFA500:#FFFFFF>Chain_Command_Block</gradient><gold><bold>★<red><bold>]<reset>'
+          lore:
+            - '&7需要段位分: &e9245'
+            - '&7升级奖励: &a28440 金币'
+            - '&a✔ 已达到'
+
+  Repeating_command_block:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: REPEATING_COMMAND_BLOCK
+      name: '<red><bold>[<gold><bold>★<gradient:#9400D3:#FFA500:#FDF5E6>Repeating_Command_Block</gradient><gold><bold>★<red><bold>]<reset>'
+      lore:
+        - '&7需要段位分: &e9680'
+        - '&7升级奖励: &a31100 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.repeating_command_block.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<red><bold>[<gold><bold>★<gradient:#9400D3:#FFA500:#FDF5E6>Repeating_Command_Block</gradient><gold><bold>★<red><bold>]<reset>'
+          lore:
+            - '&7需要段位分: &e9680'
+            - '&7升级奖励: &a31100 金币'
+            - '&a✔ 已达到'
+
+  Debug_Stick:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: DEBUG_STICK
+      name: '<light_purple>[<gradient:#FF4500:#FFD700:#8A2BE2>Debug_Stick</gradient><light_purple>]'
+      lore:
+        - '&7需要段位分: &e10125'
+        - '&7升级奖励: &a32475 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.debug_stick.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<light_purple>[<gradient:#FF4500:#FFD700:#8A2BE2>Debug_Stick</gradient><light_purple>]'
+          lore:
+            - '&7需要段位分: &e10125'
+            - '&7升级奖励: &a32475 金币'
+            - '&a✔ 已达到'
+
+  Structure_block:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: STRUCTURE_BLOCK
+      name: '<red><bold>[<light_purple><bold>¤<gradient:#8A2BE2:#DDA0DD>Structure_Block</gradient><light_purple><bold>¤<red><bold>]<reset>'
+      lore:
+        - '&7需要段位分: &e10580'
+        - '&7升级奖励: &a33880 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.structure_block.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<red><bold>[<light_purple><bold>¤<gradient:#8A2BE2:#DDA0DD>Structure_Block</gradient><light_purple><bold>¤<red><bold>]<reset>'
+          lore:
+            - '&7需要段位分: &e10580'
+            - '&7升级奖励: &a33880 金币'
+            - '&a✔ 已达到'
+
+  Structure_void:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: STRUCTURE_BLOCK
+      name: '<red><bold>[<light_purple><bold>¤<gradient:#8A2BE2:#20B2AA>Structure_Void</gradient><light_purple><bold>¤<red><bold>]<reset>'
+      lore:
+        - '&7需要段位分: &e11045'
+        - '&7升级奖励: &a35315 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.structure_void.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<red><bold>[<light_purple><bold>¤<gradient:#8A2BE2:#20B2AA>Structure_Void</gradient><light_purple><bold>¤<red><bold>]<reset>'
+          lore:
+            - '&7需要段位分: &e11045'
+            - '&7升级奖励: &a35315 金币'
+            - '&a✔ 已达到'
+
+  Minecraft:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: GRASS_BLOCK
+      name: '<dark_red><bold>[<yellow><bold><obfuscated>[<aqua>■<yellow><bold><obfuscated>]<gradient:#FF0000:#FFA500:#FFFF00:#00FF00:#00FFFF:#0000FF>Minecraft</gradient><yellow><bold><obfuscated>[<aqua>■<yellow><bold><obfuscated>]<dark_red><bold>]<reset>'
+      lore:
+        - '&7需要段位分: &e11520'
+        - '&7升级奖励: &a36780 金币'
+        - '&7属性奖励: &b血量上限 +3 &7/ &b防御 +2 &7/ &b闪避率 +2%'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.minecraft.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<dark_red><bold>[<yellow><bold><obfuscated>[<aqua>■<yellow><bold><obfuscated>]<gradient:#FF0000:#FFA500:#FFFF00:#00FF00:#00FFFF:#0000FF>Minecraft</gradient><yellow><bold><obfuscated>[<aqua>■<yellow><bold><obfuscated>]<dark_red><bold>]<reset>'
+          lore:
+            - '&7需要段位分: &e11520'
+            - '&7升级奖励: &a36780 金币'
+            - '&7属性奖励: &b血量上限 +3 &7/ &b防御 +2 &7/ &b闪避率 +2%'
+            - '&a✔ 已达到'
+
+  Minecraft+:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: GRASS_BLOCK
+      name: '<dark_red><bold>[<yellow><bold><obfuscated>[<aqua>■<yellow><bold><obfuscated>]<gradient:#FF0000:#FFA500:#FFFF00:#00FF00:#00FFFF:#0000FF:#FF00FF>Minecraft+</gradient><yellow><bold><obfuscated>[<aqua>■<yellow><bold><obfuscated>]<dark_red><bold>]<reset>'
+      lore:
+        - '&7需要段位分: &e12005'
+        - '&7升级奖励: &a38275 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.minecraft+.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<dark_red><bold>[<yellow><bold><obfuscated>[<aqua>■<yellow><bold><obfuscated>]<gradient:#FF0000:#FFA500:#FFFF00:#00FF00:#00FFFF:#0000FF:#FF00FF>Minecraft+</gradient><yellow><bold><obfuscated>[<aqua>■<yellow><bold><obfuscated>]<dark_red><bold>]<reset>'
+          lore:
+            - '&7需要段位分: &e12005'
+            - '&7升级奖励: &a38275 金币'
+            - '&a✔ 已达到'
+
+  Minecraft_Max:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: GRASS_BLOCK
+      name: '<dark_red><bold>[<yellow><bold><obfuscated>[<aqua>■<yellow><bold><obfuscated>]<gradient:#FF0000:#FFA500:#FFFF00:#00FF00:#00FFFF:#0000FF>Minecraft</gradient>-<white><gradient:#FFD700:#F5F5F5><bold>M<bold>a<bold>x</gradient><yellow><bold><obfuscated>[<aqua>■<yellow><bold><obfuscated>]<dark_red><bold>]<reset>'
+      lore:
+        - '&7需要段位分: &e12500'
+        - '&7升级奖励: &a39800 金币'
+        - '&7属性奖励: &b血量上限 +3 &7/ &b攻击 +3 &7/ &b护盾 +3'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.minecraft_max.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<dark_red><bold>[<yellow><bold><obfuscated>[<aqua>■<yellow><bold><obfuscated>]<gradient:#FF0000:#FFA500:#FFFF00:#00FF00:#00FFFF:#0000FF>Minecraft</gradient>-<white><gradient:#FFD700:#F5F5F5><bold>M<bold>a<bold>x</gradient><yellow><bold><obfuscated>[<aqua>■<yellow><bold><obfuscated>]<dark_red><bold>]<reset>'
+          lore:
+            - '&7需要段位分: &e12500'
+            - '&7升级奖励: &a39800 金币'
+            - '&7属性奖励: &b血量上限 +3 &7/ &b攻击 +3 &7/ &b护盾 +3'
+            - '&a✔ 已达到'
+
+  Extra_Dirt:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: DIRT
+      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#A0522D:#F5DEB3>Dirt</gradient><yellow>]'
+      lore:
+        - '&7需要段位分: &e15606'
+        - '&7升级奖励: &a41355 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.extra_dirt.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#A0522D:#F5DEB3>Dirt</gradient><yellow>]'
+          lore:
+            - '&7需要段位分: &e15606'
+            - '&7升级奖励: &a41355 金币'
+            - '&a✔ 已达到'
+
+  Extra_Log:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: OAK_LOG
+      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#CD853F:#DEB887>Log</gradient><yellow>]'
+      lore:
+        - '&7需要段位分: &e16224'
+        - '&7升级奖励: &a42920 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.extra_log.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#CD853F:#DEB887>Log</gradient><yellow>]'
+          lore:
+            - '&7需要段位分: &e16224'
+            - '&7升级奖励: &a42920 金币'
+            - '&a✔ 已达到'
+
+  Extra_Stone:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: STONE
+      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#708090:#B0C4DE>Stone</gradient><yellow>]'
+      lore:
+        - '&7需要段位分: &e16854'
+        - '&7升级奖励: &a44555 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.extra_stone.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#708090:#B0C4DE>Stone</gradient><yellow>]'
+          lore:
+            - '&7需要段位分: &e16854'
+            - '&7升级奖励: &a44555 金币'
+            - '&a✔ 已达到'
+
+  Extra_Coal:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: COAL
+      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#696969:#404040>Coal</gradient><yellow>]'
+      lore:
+        - '&7需要段位分: &e17496'
+        - '&7升级奖励: &a46200 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.extra_coal.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#696969:#404040>Coal</gradient><yellow>]'
+          lore:
+            - '&7需要段位分: &e17496'
+            - '&7升级奖励: &a46200 金币'
+            - '&a✔ 已达到'
+
+  Extra_Coal_ore:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: COAL_ORE
+      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#696969:#404040>Coal_Ore</gradient><yellow>]'
+      lore:
+        - '&7需要段位分: &e18150'
+        - '&7升级奖励: &a47875 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.extra_coal_ore.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#696969:#404040>Coal_Ore</gradient><yellow>]'
+          lore:
+            - '&7需要段位分: &e18150'
+            - '&7升级奖励: &a47875 金币'
+            - '&a✔ 已达到'
+
+  Extra_Coal_block:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: COAL_BLOCK
+      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#696969:#404040>Coal_Block</gradient><yellow>]'
+      lore:
+        - '&7需要段位分: &e18816'
+        - '&7升级奖励: &a49580 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.extra_coal_block.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#696969:#404040>Coal_Block</gradient><yellow>]'
+          lore:
+            - '&7需要段位分: &e18816'
+            - '&7升级奖励: &a49580 金币'
+            - '&a✔ 已达到'
+
+  Extra_Iron:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: IRON_INGOT
+      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#A9A9A9:#FFFFFF>Iron</gradient><yellow>]'
+      lore:
+        - '&7需要段位分: &e19494'
+        - '&7升级奖励: &a51315 金币'
+        - '&7属性奖励: &b血量上限 +2 &7/ &b防御 +2'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.extra_iron.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#A9A9A9:#FFFFFF>Iron</gradient><yellow>]'
+          lore:
+            - '&7需要段位分: &e19494'
+            - '&7升级奖励: &a51315 金币'
+            - '&7属性奖励: &b血量上限 +2 &7/ &b防御 +2'
+            - '&a✔ 已达到'
+
+  Extra_Iron_ore:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: IRON_ORE
+      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#A9A9A9:#FFFFFF>Iron_Ore</gradient><yellow>]'
+      lore:
+        - '&7需要段位分: &e20184'
+        - '&7升级奖励: &a53080 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.extra_iron_ore.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#A9A9A9:#FFFFFF>Iron_Ore</gradient><yellow>]'
+          lore:
+            - '&7需要段位分: &e20184'
+            - '&7升级奖励: &a53080 金币'
+            - '&a✔ 已达到'
+
+  Extra_Iron_block:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: IRON_BLOCK
+      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#A9A9A9:#FFFFFF>Iron_Block</gradient><yellow>]'
+      lore:
+        - '&7需要段位分: &e20886'
+        - '&7升级奖励: &a54875 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.extra_iron_block.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#A9A9A9:#FFFFFF>Iron_Block</gradient><yellow>]'
+          lore:
+            - '&7需要段位分: &e20886'
+            - '&7升级奖励: &a54875 金币'
+            - '&a✔ 已达到'
+
+  Extra_Gold:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: GOLD_INGOT
+      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#FFD700:#DAA520>Gold</gradient><yellow>]'
+      lore:
+        - '&7需要段位分: &e21600'
+        - '&7升级奖励: &a56700 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.extra_gold.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#FFD700:#DAA520>Gold</gradient><yellow>]'
+          lore:
+            - '&7需要段位分: &e21600'
+            - '&7升级奖励: &a56700 金币'
+            - '&a✔ 已达到'
+
+  Extra_Gold_ore:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: GOLD_ORE
+      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#FFD700:#DAA520>Gold_Ore</gradient><yellow>]'
+      lore:
+        - '&7需要段位分: &e22326'
+        - '&7升级奖励: &a58555 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.extra_gold_ore.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#FFD700:#DAA520>Gold_Ore</gradient><yellow>]'
+          lore:
+            - '&7需要段位分: &e22326'
+            - '&7升级奖励: &a58555 金币'
+            - '&a✔ 已达到'
+
+  Extra_Gold_block:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: GOLD_BLOCK
+      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#FFD700:#DAA520>Gold_Block</gradient><yellow>]'
+      lore:
+        - '&7需要段位分: &e23064'
+        - '&7升级奖励: &a60440 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.extra_gold_block.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#FFD700:#DAA520>Gold_Block</gradient><yellow>]'
+          lore:
+            - '&7需要段位分: &e23064'
+            - '&7升级奖励: &a60440 金币'
+            - '&a✔ 已达到'
+
+  Extra_Redstone:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: REDSTONE
+      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#FF0000:#FA8072>Redstone</gradient><yellow>]'
+      lore:
+        - '&7需要段位分: &e23814'
+        - '&7升级奖励: &a62355 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.extra_redstone.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#FF0000:#FA8072>Redstone</gradient><yellow>]'
+          lore:
+            - '&7需要段位分: &e23814'
+            - '&7升级奖励: &a62355 金币'
+            - '&a✔ 已达到'
+
+  Extra_Redstone_ore:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: REDSTONE_ORE
+      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#FF0000:#FA8072>Redstone_Ore</gradient><yellow>]'
+      lore:
+        - '&7需要段位分: &e24576'
+        - '&7升级奖励: &a64300 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.extra_redstone_ore.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#FF0000:#FA8072>Redstone_Ore</gradient><yellow>]'
+          lore:
+            - '&7需要段位分: &e24576'
+            - '&7升级奖励: &a64300 金币'
+            - '&a✔ 已达到'
+
+  Extra_Redstone_block:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: REDSTONE_BLOCK
+      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#FF0000:#FA8072>Redstone_Block</gradient><yellow>]'
+      lore:
+        - '&7需要段位分: &e25350'
+        - '&7升级奖励: &a66275 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.extra_redstone_block.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#FF0000:#FA8072>Redstone_Block</gradient><yellow>]'
+          lore:
+            - '&7需要段位分: &e25350'
+            - '&7升级奖励: &a66275 金币'
+            - '&a✔ 已达到'
+
+  Extra_Lapis:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: LAPIS_LAZULI
+      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#00008B:#4169E1>Lapis</gradient><yellow>]'
+      lore:
+        - '&7需要段位分: &e26136'
+        - '&7升级奖励: &a68200 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.extra_lapis.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#00008B:#4169E1>Lapis</gradient><yellow>]'
+          lore:
+            - '&7需要段位分: &e26136'
+            - '&7升级奖励: &a68200 金币'
+            - '&a✔ 已达到'
+
+  Extra_Lapis_ore:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: LAPIS_ORE
+      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#00008B:#4169E1>Lapis_ore</gradient><yellow>]'
+      lore:
+        - '&7需要段位分: &e26934'
+        - '&7升级奖励: &a70315 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.extra_lapis_ore.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#00008B:#4169E1>Lapis_ore</gradient><yellow>]'
+          lore:
+            - '&7需要段位分: &e26934'
+            - '&7升级奖励: &a70315 金币'
+            - '&a✔ 已达到'
+
+  Extra_Lapis_block:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: LAPIS_BLOCK
+      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#00008B:#4169E1>Lapis_block</gradient><yellow>]'
+      lore:
+        - '&7需要段位分: &e27744'
+        - '&7升级奖励: &a72380 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.extra_lapis_block.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#00008B:#4169E1>Lapis_block</gradient><yellow>]'
+          lore:
+            - '&7需要段位分: &e27744'
+            - '&7升级奖励: &a72380 金币'
+            - '&a✔ 已达到'
+
+  Extra_Diamond:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: DIAMOND
+      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#1E90FF:#00BFFF>Diamond</gradient><yellow>]'
+      lore:
+        - '&7需要段位分: &e28566'
+        - '&7升级奖励: &a74475 金币'
+        - '&7属性奖励: &b血量上限 +2 &7/ &b攻击 +2 &7/ &b闪避率 +2%'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.extra_diamond.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#1E90FF:#00BFFF>Diamond</gradient><yellow>]'
+          lore:
+            - '&7需要段位分: &e28566'
+            - '&7升级奖励: &a74475 金币'
+            - '&7属性奖励: &b血量上限 +2 &7/ &b攻击 +2 &7/ &b闪避率 +2%'
+            - '&a✔ 已达到'
+
+  Extra_Diamond_ore:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: DIAMOND_ORE
+      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#1E90FF:#00BFFF>Diamond_ore</gradient><yellow>]'
+      lore:
+        - '&7需要段位分: &e29400'
+        - '&7升级奖励: &a76600 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.extra_diamond_ore.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#1E90FF:#00BFFF>Diamond_ore</gradient><yellow>]'
+          lore:
+            - '&7需要段位分: &e29400'
+            - '&7升级奖励: &a76600 金币'
+            - '&a✔ 已达到'
+
+  Extra_Diamond_block:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: DIAMOND_BLOCK
+      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#1E90FF:#00BFFF>Diamond_block</gradient><yellow>]'
+      lore:
+        - '&7需要段位分: &e30246'
+        - '&7升级奖励: &a78755 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.extra_diamond_block.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#1E90FF:#00BFFF>Diamond_block</gradient><yellow>]'
+          lore:
+            - '&7需要段位分: &e30246'
+            - '&7升级奖励: &a78755 金币'
+            - '&a✔ 已达到'
+
+  Extra_Enchanter:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: ENCHANTING_TABLE
+      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#8A2BE2:#BA55D3>Enchanter</gradient><yellow>]'
+      lore:
+        - '&7需要段位分: &e31104'
+        - '&7升级奖励: &a80940 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.extra_enchanter.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#8A2BE2:#BA55D3>Enchanter</gradient><yellow>]'
+          lore:
+            - '&7需要段位分: &e31104'
+            - '&7升级奖励: &a80940 金币'
+            - '&a✔ 已达到'
+
+  Extra_Emerald:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: EMERALD
+      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#228B22:#7CFC00>Emerald</gradient><yellow>]'
+      lore:
+        - '&7需要段位分: &e31974'
+        - '&7升级奖励: &a83155 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.extra_emerald.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#228B22:#7CFC00>Emerald</gradient><yellow>]'
+          lore:
+            - '&7需要段位分: &e31974'
+            - '&7升级奖励: &a83155 金币'
+            - '&a✔ 已达到'
+
+  Extra_Emerald_ore:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: EMERALD_ORE
+      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#228B22:#7CFC00>Emerald_ore</gradient><yellow>]'
+      lore:
+        - '&7需要段位分: &e32856'
+        - '&7升级奖励: &a85400 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.extra_emerald_ore.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#228B22:#7CFC00>Emerald_ore</gradient><yellow>]'
+          lore:
+            - '&7需要段位分: &e32856'
+            - '&7升级奖励: &a85400 金币'
+            - '&a✔ 已达到'
+
+  Extra_Emerald_block:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: EMERALD_BLOCK
+      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#228B22:#7CFC00>Emerald_block</gradient><yellow>]'
+      lore:
+        - '&7需要段位分: &e33750'
+        - '&7升级奖励: &a87675 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.extra_emerald_block.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#228B22:#7CFC00>Emerald_block</gradient><yellow>]'
+          lore:
+            - '&7需要段位分: &e33750'
+            - '&7升级奖励: &a87675 金币'
+            - '&a✔ 已达到'
+
+  Extra_Obsidian:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: OBSIDIAN
+      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#8B008B:#696969>Obsidian</gradient><yellow>]'
+      lore:
+        - '&7需要段位分: &e34656'
+        - '&7升级奖励: &a89980 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.extra_obsidian.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#8B008B:#696969>Obsidian</gradient><yellow>]'
+          lore:
+            - '&7需要段位分: &e34656'
+            - '&7升级奖励: &a89980 金币'
+            - '&a✔ 已达到'
+
+  Extra_Nether:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: NETHER_BRICK
+      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#DC143C:#FA8072>Nether</gradient><yellow>]'
+      lore:
+        - '&7需要段位分: &e35574'
+        - '&7升级奖励: &a92315 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.extra_nether.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#DC143C:#FA8072>Nether</gradient><yellow>]'
+          lore:
+            - '&7需要段位分: &e35574'
+            - '&7升级奖励: &a92315 金币'
+            - '&a✔ 已达到'
+
+  Extra_Nether_quartz:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: NETHER_QUARTZ_ORE
+      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#DC143C:#FA8072:#FFFFFF>Nether_Quartz</gradient><yellow>]'
+      lore:
+        - '&7需要段位分: &e36504'
+        - '&7升级奖励: &a94680 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.extra_nether_quartz.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#DC143C:#FA8072:#FFFFFF>Nether_Quartz</gradient><yellow>]'
+          lore:
+            - '&7需要段位分: &e36504'
+            - '&7升级奖励: &a94680 金币'
+            - '&a✔ 已达到'
+
+  Extra_Nether_gold_ore:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: NETHER_GOLD_ORE
+      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#DC143C:#FA8072:#FFD700>Nether_Gold_Ore</gradient><yellow>]'
+      lore:
+        - '&7需要段位分: &e37446'
+        - '&7升级奖励: &a97075 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.extra_nether_gold_ore.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#DC143C:#FA8072:#FFD700>Nether_Gold_Ore</gradient><yellow>]'
+          lore:
+            - '&7需要段位分: &e37446'
+            - '&7升级奖励: &a97075 金币'
+            - '&a✔ 已达到'
+
+  Extra_Nether_Fortress:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: NETHER_BRICK
+      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#DC143C:#FA8072:#800000>Nether_Fortress</gradient><yellow>]'
+      lore:
+        - '&7需要段位分: &e38400'
+        - '&7升级奖励: &a99500 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.extra_nether_fortress.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#DC143C:#FA8072:#800000>Nether_Fortress</gradient><yellow>]'
+          lore:
+            - '&7需要段位分: &e38400'
+            - '&7升级奖励: &a99500 金币'
+            - '&a✔ 已达到'
+
+  Extra_Netherite:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: NETHERITE_INGOT
+      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#696969:#483D8B>Netherite</gradient><yellow>]'
+      lore:
+        - '&7需要段位分: &e39366'
+        - '&7升级奖励: &a101955 金币'
+        - '&7属性奖励: &b血量上限 +3 &7/ &b防御 +2 &7/ &b护盾 +3'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.extra_netherite.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#696969:#483D8B>Netherite</gradient><yellow>]'
+          lore:
+            - '&7需要段位分: &e39366'
+            - '&7升级奖励: &a101955 金币'
+            - '&7属性奖励: &b血量上限 +3 &7/ &b防御 +2 &7/ &b护盾 +3'
+            - '&a✔ 已达到'
+
+  Extra_Wither:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: WITHER_SKELETON_SKULL
+      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#8B4513:#808080>Wither</gradient><yellow>]'
+      lore:
+        - '&7需要段位分: &e40344'
+        - '&7升级奖励: &a104440 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.extra_wither.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#8B4513:#808080>Wither</gradient><yellow>]'
+          lore:
+            - '&7需要段位分: &e40344'
+            - '&7升级奖励: &a104440 金币'
+            - '&a✔ 已达到'
+
+  Extra_Nether_star:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: NETHER_STAR
+      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#DC143C:#FFD700:#FFFFFF>Nether_Star</gradient><yellow>]'
+      lore:
+        - '&7需要段位分: &e41334'
+        - '&7升级奖励: &a106955 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.extra_nether_star.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#DC143C:#FFD700:#FFFFFF>Nether_Star</gradient><yellow>]'
+          lore:
+            - '&7需要段位分: &e41334'
+            - '&7升级奖励: &a106955 金币'
+            - '&a✔ 已达到'
+
+  Extra_Beacon:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: BEACON
+      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#00BFFF:#FF4500>Beacon</gradient><yellow>]'
+      lore:
+        - '&7需要段位分: &e42336'
+        - '&7升级奖励: &a109500 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.extra_beacon.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#00BFFF:#FF4500>Beacon</gradient><yellow>]'
+          lore:
+            - '&7需要段位分: &e42336'
+            - '&7升级奖励: &a109500 金币'
+            - '&a✔ 已达到'
+
+  Extra_Ender:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: ENDER_PEARL
+      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#9932CC:#FFFF00>Ender</gradient><yellow>]'
+      lore:
+        - '&7需要段位分: &e43350'
+        - '&7升级奖励: &a112075 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.extra_ender.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#9932CC:#FFFF00>Ender</gradient><yellow>]'
+          lore:
+            - '&7需要段位分: &e43350'
+            - '&7升级奖励: &a112075 金币'
+            - '&a✔ 已达到'
+
+  Extra_Ender_dragon:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: DRAGON_HEAD
+      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#9932CC:#FFFF00:#9932CC>Ender_Dragon</gradient><yellow>]'
+      lore:
+        - '&7需要段位分: &e44376'
+        - '&7升级奖励: &a114680 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.extra_ender_dragon.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#9932CC:#FFFF00:#9932CC>Ender_Dragon</gradient><yellow>]'
+          lore:
+            - '&7需要段位分: &e44376'
+            - '&7升级奖励: &a114680 金币'
+            - '&a✔ 已达到'
+
+  Extra_End_city:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: END_STONE
+      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#8A2BE2:#4169E1>End_City</gradient><yellow>]'
+      lore:
+        - '&7需要段位分: &e45414'
+        - '&7升级奖励: &a117315 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.extra_end_city.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#8A2BE2:#4169E1>End_City</gradient><yellow>]'
+          lore:
+            - '&7需要段位分: &e45414'
+            - '&7升级奖励: &a117315 金币'
+            - '&a✔ 已达到'
+
+  Extra_Elytra:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: ELYTRA
+      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#8B008B:#483D8B>Elytra</gradient><yellow>]'
+      lore:
+        - '&7需要段位分: &e46464'
+        - '&7升级奖励: &a119980 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.extra_elytra.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#8B008B:#483D8B>Elytra</gradient><yellow>]'
+          lore:
+            - '&7需要段位分: &e46464'
+            - '&7升级奖励: &a119980 金币'
+            - '&a✔ 已达到'
+
+  Extra_End_again:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: END_CRYSTAL
+      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#8A2BE2:#FFD700:#FF4500>End_Again</gradient><yellow>]'
+      lore:
+        - '&7需要段位分: &e47526'
+        - '&7升级奖励: &a102634 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.extra_end_again.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#8A2BE2:#FFD700:#FF4500>End_Again</gradient><yellow>]'
+          lore:
+            - '&7需要段位分: &e47526'
+            - '&7升级奖励: &a102634 金币'
+            - '&a✔ 已达到'
+
+  Extra_Bedrock:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: BEDROCK
+      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#000000:#696969>Bedrock</gradient><yellow>]'
+      lore:
+        - '&7需要段位分: &e48600'
+        - '&7升级奖励: &a104009 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.extra_bedrock.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#000000:#696969>Bedrock</gradient><yellow>]'
+          lore:
+            - '&7需要段位分: &e48600'
+            - '&7升级奖励: &a104009 金币'
+            - '&a✔ 已达到'
+
+  Extra_Barrier:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: BARRIER
+      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#ff0000:#F08080>Barrier</gradient><yellow>]'
+      lore:
+        - '&7需要段位分: &e49686'
+        - '&7升级奖励: &a105384 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.extra_barrier.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#ff0000:#F08080>Barrier</gradient><yellow>]'
+          lore:
+            - '&7需要段位分: &e49686'
+            - '&7升级奖励: &a105384 金币'
+            - '&a✔ 已达到'
+
+  Extra_Command_block:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: COMMAND_BLOCK
+      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#FFA500:#FFFFFF:#DAA520>Command_Block</gradient><yellow>]'
+      lore:
+        - '&7需要段位分: &e50784'
+        - '&7升级奖励: &a106759 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.extra_command_block.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#FFA500:#FFFFFF:#DAA520>Command_Block</gradient><yellow>]'
+          lore:
+            - '&7需要段位分: &e50784'
+            - '&7升级奖励: &a106759 金币'
+            - '&a✔ 已达到'
+
+  Extra_Chain_command_block:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: CHAIN_COMMAND_BLOCK
+      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#20B2AA:#FFA500:#FFFFFF>Chain_Command_Block</gradient><yellow>]'
+      lore:
+        - '&7需要段位分: &e51894'
+        - '&7升级奖励: &a108134 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.extra_chain_command_block.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#20B2AA:#FFA500:#FFFFFF>Chain_Command_Block</gradient><yellow>]'
+          lore:
+            - '&7需要段位分: &e51894'
+            - '&7升级奖励: &a108134 金币'
+            - '&a✔ 已达到'
+
+  Extra_Repeating_command_block:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: REPEATING_COMMAND_BLOCK
+      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#9400D3:#FFA500:#FDF5E6>Repeating_Command_Block</gradient><yellow>]'
+      lore:
+        - '&7需要段位分: &e53016'
+        - '&7升级奖励: &a109509 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.extra_repeating_command_block.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#9400D3:#FFA500:#FDF5E6>Repeating_Command_Block</gradient><yellow>]'
+          lore:
+            - '&7需要段位分: &e53016'
+            - '&7升级奖励: &a109509 金币'
+            - '&a✔ 已达到'
+
+  Extra_Debug_Stick:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: DEBUG_STICK
+      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset>Debug_<gradient:#FFD700:#8A2BE2>Stick</gradient><yellow>]'
+      lore:
+        - '&7需要段位分: &e54150'
+        - '&7升级奖励: &a110884 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.extra_debug_stick.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset>Debug_<gradient:#FFD700:#8A2BE2>Stick</gradient><yellow>]'
+          lore:
+            - '&7需要段位分: &e54150'
+            - '&7升级奖励: &a110884 金币'
+            - '&a✔ 已达到'
+
+  Extra_Structure_block:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: STRUCTURE_BLOCK
+      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#8A2BE2:#DDA0DD>Structure_Block</gradient><yellow>]'
+      lore:
+        - '&7需要段位分: &e55296'
+        - '&7升级奖励: &a112259 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.extra_structure_block.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#8A2BE2:#DDA0DD>Structure_Block</gradient><yellow>]'
+          lore:
+            - '&7需要段位分: &e55296'
+            - '&7升级奖励: &a112259 金币'
+            - '&a✔ 已达到'
+
+  Extra_Structure_void:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: STRUCTURE_BLOCK
+      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#8A2BE2:#20B2AA>Structure_Void</gradient><yellow>]'
+      lore:
+        - '&7需要段位分: &e56454'
+        - '&7升级奖励: &a113634 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.extra_structure_void.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#8A2BE2:#20B2AA>Structure_Void</gradient><yellow>]'
+          lore:
+            - '&7需要段位分: &e56454'
+            - '&7升级奖励: &a113634 金币'
+            - '&a✔ 已达到'
+
+  Extra_Minecraft:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: GRASS_BLOCK
+      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#FF0000:#FFA500:#FFFF00:#00FF00:#00FFFF:#0000FF>Minecraft</gradient><yellow>]'
+      lore:
+        - '&7需要段位分: &e57624'
+        - '&7升级奖励: &a115009 金币'
+        - '&7属性奖励: &b血量上限 +3 &7/ &b攻击 +3 &7/ &b闪避率 +3%'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.extra_minecraft.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#FF0000:#FFA500:#FFFF00:#00FF00:#00FFFF:#0000FF>Minecraft</gradient><yellow>]'
+          lore:
+            - '&7需要段位分: &e57624'
+            - '&7升级奖励: &a115009 金币'
+            - '&7属性奖励: &b血量上限 +3 &7/ &b攻击 +3 &7/ &b闪避率 +3%'
+            - '&a✔ 已达到'
+
+  Extra_Minecraft_plus:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: GRASS_BLOCK
+      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#FF0000:#FFA500:#FFFF00:#00FF00:#00FFFF:#0000FF:#FF00FF>Minecraft+</gradient><yellow>]'
+      lore:
+        - '&7需要段位分: &e58806'
+        - '&7升级奖励: &a116384 金币'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.extra_minecraft_plus.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#FF0000:#FFA500:#FFFF00:#00FF00:#00FFFF:#0000FF:#FF00FF>Minecraft+</gradient><yellow>]'
+          lore:
+            - '&7需要段位分: &e58806'
+            - '&7升级奖励: &a116384 金币'
+            - '&a✔ 已达到'
+
+  Extra_Minecraft_max:
+    update: [ -1, 20, 30, -1 ]
+    display:
+      material: GRASS_BLOCK
+      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#FF0000:#FFA500:#FFFF00:#00FF00:#00FFFF:#0000FF>Minecraft</gradient>-<white><gradient:#FFD700:#F5F5F5><bold>M<bold>a<bold>x</gradient><yellow>]'
+      lore:
+        - '&7需要段位分: &e60000'
+        - '&7升级奖励: &a117759 金币'
+        - '&7属性奖励: &b血量上限 +5 &7/ &b防御 +3 &7/ &b攻击 +3 &7/ &b护盾 +5'
+        - '<gray>专属内容: <light_purple><gold><bold>恭喜达到最高段位！'
+        - ''
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+    icons:
+      - condition: 'perm *rank.extra_minecraft_max.achieved'
+        priority: 10
+        display:
+          shiny: true
+          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#FF0000:#FFA500:#FFFF00:#00FF00:#00FFFF:#0000FF>Minecraft</gradient>-<white><gradient:#FFD700:#F5F5F5><bold>M<bold>a<bold>x</gradient><yellow>]'
+          lore:
+            - '&7需要段位分: &e60000'
+            - '&7升级奖励: &a117759 金币'
+            - '&7属性奖励: &b血量上限 +5 &7/ &b防御 +3 &7/ &b攻击 +3 &7/ &b护盾 +5'
+            - '<gray>专属内容: <light_purple><gold><bold>恭喜达到最高段位！'
+            - '&a✔ 已达到'
+
+  # ---------- 算法总览 ----------
+  calc_base:
+    update: 20
+    display:
+      material: IRON_PICKAXE
+      name: '&e&l一般类加分'
+      lore:
+        - '&7方块破坏 / 放置、击杀、合成等基础统计'
+        - '&7共 13 项'
+        - '&7点击查看'
+    actions:
+      all: 'page: 6 &&& sound: BLOCK_NOTE_BLOCK_BIT-1-1'
+
+  calc_block:
+    update: 20
+    display:
+      material: DIAMOND_ORE
+      name: '&e&l特殊方块加分'
+      lore:
+        - '&7挖掘特定方块时的额外分'
+        - '&7共 14 类'
+        - '&7点击查看'
+    actions:
+      all: 'page: 7 &&& sound: BLOCK_NOTE_BLOCK_BIT-1-1'
+
+  calc_mob:
+    update: 20
+    display:
+      material: IRON_SWORD
+      name: '&e&l特殊生物加分'
+      lore:
+        - '&7击杀特定生物的额外分'
+        - '&7共 43 种'
+        - '&7点击查看'
+    actions:
+      all: 'page: 8 &&& sound: BLOCK_NOTE_BLOCK_BIT-1-1'
+
+  calc_adv:
+    update: 20
+    display:
+      material: ENCHANTED_BOOK
+      name: '&e&l成就（进度）加分'
+      lore:
+        - '&7完成原版成就获得一次性分数'
+        - '&7共 125 个成就'
+        - '&7点击按分类查看'
+    actions:
+      all: 'page: 9 &&& sound: BLOCK_NOTE_BLOCK_BIT-1-1'
+
+  # ---------- 一般类加分项 ----------
+  base_block_break:
+    display:
+      material: IRON_PICKAXE
+      name: '&eblock_break'
+      lore:
+        - '&7权重: &a+0.01 分'
+        - '&7统计项: &8block_break'
+        - '&8&m------------------------'
+        - '&7按原版统计次数累加，参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  base_block_place:
+    display:
+      material: BRICKS
+      name: '&eblock_place'
+      lore:
+        - '&7权重: &a+0.03 分'
+        - '&7统计项: &8block_place'
+        - '&8&m------------------------'
+        - '&7按原版统计次数累加，参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  base_mob_kill:
+    display:
+      material: IRON_SWORD
+      name: '&emob_kill'
+      lore:
+        - '&7权重: &a+0.07 分'
+        - '&7统计项: &8mob_kill'
+        - '&8&m------------------------'
+        - '&7按原版统计次数累加，参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  base_player_kill:
+    display:
+      material: DIAMOND_SWORD
+      name: '&eplayer_kill'
+      lore:
+        - '&7权重: &a+3 分'
+        - '&7统计项: &8player_kill'
+        - '&8&m------------------------'
+        - '&7按原版统计次数累加，参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  base_damage_dealt:
+    display:
+      material: BOW
+      name: '&e全部'
+      lore:
+        - '&7权重: &a+0 分'
+        - '&7统计项: &8damage_dealt'
+        - '&8&m------------------------'
+        - '&7按原版统计次数累加，参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  base_trade:
+    display:
+      material: EMERALD
+      name: '&etrade'
+      lore:
+        - '&7权重: &a+2 分'
+        - '&7统计项: &8trade'
+        - '&8&m------------------------'
+        - '&7按原版统计次数累加，参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  base_enchant:
+    display:
+      material: ENCHANTING_TABLE
+      name: '&eenchant'
+      lore:
+        - '&7权重: &a+3 分'
+        - '&7统计项: &8enchant'
+        - '&8&m------------------------'
+        - '&7按原版统计次数累加，参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  base_jump:
+    display:
+      material: SLIME_BALL
+      name: '&ejump'
+      lore:
+        - '&7权重: &a+0.001 分'
+        - '&7统计项: &8jump'
+        - '&8&m------------------------'
+        - '&7按原版统计次数累加，参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  base_move_cm:
+    display:
+      material: LEATHER_BOOTS
+      name: '&emove_cm'
+      lore:
+        - '&7权重: &a+0 分'
+        - '&7统计项: &8move_cm'
+        - '&8&m------------------------'
+        - '&7按原版统计次数累加，参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  base_craft_item:
+    display:
+      material: CRAFTING_TABLE
+      name: '&ecraft_item'
+      lore:
+        - '&7权重: &a+0.005 分'
+        - '&7统计项: &8craft_item'
+        - '&8&m------------------------'
+        - '&7按原版统计次数累加，参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  base_play_tick:
+    display:
+      material: CLOCK
+      name: '&e全部'
+      lore:
+        - '&7权重: &a+0 分'
+        - '&7统计项: &8play_tick'
+        - '&8&m------------------------'
+        - '&7按原版统计次数累加，参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  base_fishing:
+    display:
+      material: FISHING_ROD
+      name: '&efishing'
+      lore:
+        - '&7权重: &a+1 分'
+        - '&7统计项: &8fishing'
+        - '&8&m------------------------'
+        - '&7按原版统计次数累加，参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  base_raid_win:
+    display:
+      material: BELL
+      name: '&eraid_win'
+      lore:
+        - '&7权重: &a+12 分'
+        - '&7统计项: &8raid_win'
+        - '&8&m------------------------'
+        - '&7按原版统计次数累加，参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  # ---------- 特殊方块加分项 ----------
+  blk_log:
+    display:
+      material: OAK_LOG
+      name: '&elog'
+      lore:
+        - '&7额外分: &a+0.01 /个'
+        - '&7配置键: &8log'
+        - '&8&m------------------------'
+        - '&7与基础「方块破坏」权重叠加计算'
+        - '&7按后缀生效，包含所有原木/菌柄变种'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  blk_wood:
+    display:
+      material: OAK_WOOD
+      name: '&ewood'
+      lore:
+        - '&7额外分: &a+0.01 /个'
+        - '&7配置键: &8wood'
+        - '&8&m------------------------'
+        - '&7与基础「方块破坏」权重叠加计算'
+        - '&7按后缀生效，包含所有原木/菌柄变种'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  blk_coal_ore:
+    display:
+      material: COAL_ORE
+      name: '&ecoal_ore'
+      lore:
+        - '&7额外分: &a+0.018 /个'
+        - '&7配置键: &8coal_ore'
+        - '&8&m------------------------'
+        - '&7与基础「方块破坏」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  blk_copper_ore:
+    display:
+      material: COPPER_ORE
+      name: '&ecopper_ore'
+      lore:
+        - '&7额外分: &a+0.022 /个'
+        - '&7配置键: &8copper_ore'
+        - '&8&m------------------------'
+        - '&7与基础「方块破坏」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  blk_iron_ore:
+    display:
+      material: IRON_ORE
+      name: '&eiron_ore'
+      lore:
+        - '&7额外分: &a+0.035 /个'
+        - '&7配置键: &8iron_ore'
+        - '&8&m------------------------'
+        - '&7与基础「方块破坏」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  blk_gold_ore:
+    display:
+      material: GOLD_ORE
+      name: '&egold_ore'
+      lore:
+        - '&7额外分: &a+0.055 /个'
+        - '&7配置键: &8gold_ore'
+        - '&8&m------------------------'
+        - '&7与基础「方块破坏」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  blk_diamond_ore:
+    display:
+      material: DIAMOND_ORE
+      name: '&ediamond_ore'
+      lore:
+        - '&7额外分: &a+0.1 /个'
+        - '&7配置键: &8diamond_ore'
+        - '&8&m------------------------'
+        - '&7与基础「方块破坏」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  blk_emerald_ore:
+    display:
+      material: EMERALD_ORE
+      name: '&eemerald_ore'
+      lore:
+        - '&7额外分: &a+0.17 /个'
+        - '&7配置键: &8emerald_ore'
+        - '&8&m------------------------'
+        - '&7与基础「方块破坏」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  blk_lapis_ore:
+    display:
+      material: LAPIS_ORE
+      name: '&elapis_ore'
+      lore:
+        - '&7额外分: &a+0.05 /个'
+        - '&7配置键: &8lapis_ore'
+        - '&8&m------------------------'
+        - '&7与基础「方块破坏」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  blk_redstone_ore:
+    display:
+      material: REDSTONE_ORE
+      name: '&eredstone_ore'
+      lore:
+        - '&7额外分: &a+0.05 /个'
+        - '&7配置键: &8redstone_ore'
+        - '&8&m------------------------'
+        - '&7与基础「方块破坏」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  blk_nether_quartz_ore:
+    display:
+      material: NETHER_QUARTZ_ORE
+      name: '&enether_quartz_ore'
+      lore:
+        - '&7额外分: &a+0.055 /个'
+        - '&7配置键: &8nether_quartz_ore'
+        - '&8&m------------------------'
+        - '&7与基础「方块破坏」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  blk_ancient_debris:
+    display:
+      material: ANCIENT_DEBRIS
+      name: '&eancient_debris'
+      lore:
+        - '&7额外分: &a+0.4 /个'
+        - '&7配置键: &8ancient_debris'
+        - '&8&m------------------------'
+        - '&7与基础「方块破坏」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  blk_nether_gold_ore:
+    display:
+      material: NETHER_GOLD_ORE
+      name: '&enether_gold_ore'
+      lore:
+        - '&7额外分: &a+0.04 /个'
+        - '&7配置键: &8nether_gold_ore'
+        - '&8&m------------------------'
+        - '&7与基础「方块破坏」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  blk_obsidian:
+    display:
+      material: OBSIDIAN
+      name: '&eobsidian'
+      lore:
+        - '&7额外分: &a+0.018 /个'
+        - '&7配置键: &8obsidian'
+        - '&8&m------------------------'
+        - '&7与基础「方块破坏」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  # ---------- 特殊生物加分项 ----------
+  mob_COW:
+    display:
+      material: COW_SPAWN_EGG
+      name: '&e牛'
+      lore:
+        - '&7额外分: &a+0.01 /只'
+        - '&7实体 ID: &8COW'
+        - '&8&m------------------------'
+        - '&7与基础「击杀生物」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  mob_SHEEP:
+    display:
+      material: SHEEP_SPAWN_EGG
+      name: '&e羊'
+      lore:
+        - '&7额外分: &a+0.01 /只'
+        - '&7实体 ID: &8SHEEP'
+        - '&8&m------------------------'
+        - '&7与基础「击杀生物」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  mob_CHICKEN:
+    display:
+      material: CHICKEN_SPAWN_EGG
+      name: '&e鸡'
+      lore:
+        - '&7额外分: &a+0.01 /只'
+        - '&7实体 ID: &8CHICKEN'
+        - '&8&m------------------------'
+        - '&7与基础「击杀生物」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  mob_PIG:
+    display:
+      material: PIG_SPAWN_EGG
+      name: '&e猪'
+      lore:
+        - '&7额外分: &a+0.01 /只'
+        - '&7实体 ID: &8PIG'
+        - '&8&m------------------------'
+        - '&7与基础「击杀生物」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  mob_ZOMBIE:
+    display:
+      material: ZOMBIE_SPAWN_EGG
+      name: '&e僵尸'
+      lore:
+        - '&7额外分: &a+0.02 /只'
+        - '&7实体 ID: &8ZOMBIE'
+        - '&8&m------------------------'
+        - '&7与基础「击杀生物」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  mob_SKELETON:
+    display:
+      material: SKELETON_SPAWN_EGG
+      name: '&e骷髅'
+      lore:
+        - '&7额外分: &a+0.04 /只'
+        - '&7实体 ID: &8SKELETON'
+        - '&8&m------------------------'
+        - '&7与基础「击杀生物」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  mob_CREEPER:
+    display:
+      material: CREEPER_SPAWN_EGG
+      name: '&e苦力怕'
+      lore:
+        - '&7额外分: &a+0.045 /只'
+        - '&7实体 ID: &8CREEPER'
+        - '&8&m------------------------'
+        - '&7与基础「击杀生物」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  mob_SPIDER:
+    display:
+      material: SPIDER_SPAWN_EGG
+      name: '&e蜘蛛'
+      lore:
+        - '&7额外分: &a+0.02 /只'
+        - '&7实体 ID: &8SPIDER'
+        - '&8&m------------------------'
+        - '&7与基础「击杀生物」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  mob_ENDERMAN:
+    display:
+      material: ENDERMAN_SPAWN_EGG
+      name: '&e末影人'
+      lore:
+        - '&7额外分: &a+0.05 /只'
+        - '&7实体 ID: &8ENDERMAN'
+        - '&8&m------------------------'
+        - '&7与基础「击杀生物」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  mob_PILLAGER:
+    display:
+      material: PILLAGER_SPAWN_EGG
+      name: '&e掠夺者'
+      lore:
+        - '&7额外分: &a+0.05 /只'
+        - '&7实体 ID: &8PILLAGER'
+        - '&8&m------------------------'
+        - '&7与基础「击杀生物」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  mob_VINDICATOR:
+    display:
+      material: VINDICATOR_SPAWN_EGG
+      name: '&e卫道士'
+      lore:
+        - '&7额外分: &a+0.2 /只'
+        - '&7实体 ID: &8VINDICATOR'
+        - '&8&m------------------------'
+        - '&7与基础「击杀生物」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  mob_EVOKER:
+    display:
+      material: TOTEM_OF_UNDYING
+      name: '&e唤魔者'
+      lore:
+        - '&7额外分: &a+0.7 /只'
+        - '&7实体 ID: &8EVOKER'
+        - '&8&m------------------------'
+        - '&7与基础「击杀生物」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  mob_VEX:
+    display:
+      material: VEX_SPAWN_EGG
+      name: '&e恼鬼'
+      lore:
+        - '&7额外分: &a+0.04 /只'
+        - '&7实体 ID: &8VEX'
+        - '&8&m------------------------'
+        - '&7与基础「击杀生物」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  mob_WITCH:
+    display:
+      material: WITCH_SPAWN_EGG
+      name: '&e女巫'
+      lore:
+        - '&7额外分: &a+0.035 /只'
+        - '&7实体 ID: &8WITCH'
+        - '&8&m------------------------'
+        - '&7与基础「击杀生物」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  mob_RAVAGER:
+    display:
+      material: SADDLE
+      name: '&e劫掠兽'
+      lore:
+        - '&7额外分: &a+1 /只'
+        - '&7实体 ID: &8RAVAGER'
+        - '&8&m------------------------'
+        - '&7与基础「击杀生物」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  mob_GUARDIAN:
+    display:
+      material: GUARDIAN_SPAWN_EGG
+      name: '&e守卫者'
+      lore:
+        - '&7额外分: &a+0.4 /只'
+        - '&7实体 ID: &8GUARDIAN'
+        - '&8&m------------------------'
+        - '&7与基础「击杀生物」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  mob_ELDER_GUARDIAN:
+    display:
+      material: PRISMARINE_CRYSTALS
+      name: '&e远古守卫者'
+      lore:
+        - '&7额外分: &a+2.5 /只'
+        - '&7实体 ID: &8ELDER_GUARDIAN'
+        - '&8&m------------------------'
+        - '&7与基础「击杀生物」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  mob_DROWNED:
+    display:
+      material: DROWNED_SPAWN_EGG
+      name: '&e溺尸'
+      lore:
+        - '&7额外分: &a+0.02 /只'
+        - '&7实体 ID: &8DROWNED'
+        - '&8&m------------------------'
+        - '&7与基础「击杀生物」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  mob_HUSK:
+    display:
+      material: HUSK_SPAWN_EGG
+      name: '&e尸壳'
+      lore:
+        - '&7额外分: &a+0.02 /只'
+        - '&7实体 ID: &8HUSK'
+        - '&8&m------------------------'
+        - '&7与基础「击杀生物」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  mob_ZOMBIE_VILLAGER:
+    display:
+      material: ZOMBIE_VILLAGER_SPAWN_EGG
+      name: '&e僵尸村民'
+      lore:
+        - '&7额外分: &a+0.02 /只'
+        - '&7实体 ID: &8ZOMBIE_VILLAGER'
+        - '&8&m------------------------'
+        - '&7与基础「击杀生物」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  mob_PHANTOM:
+    display:
+      material: PHANTOM_SPAWN_EGG
+      name: '&e幻翼'
+      lore:
+        - '&7额外分: &a+0.2 /只'
+        - '&7实体 ID: &8PHANTOM'
+        - '&8&m------------------------'
+        - '&7与基础「击杀生物」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  mob_STRAY:
+    display:
+      material: STRAY_SPAWN_EGG
+      name: '&e流浪者'
+      lore:
+        - '&7额外分: &a+0.025 /只'
+        - '&7实体 ID: &8STRAY'
+        - '&8&m------------------------'
+        - '&7与基础「击杀生物」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  mob_SLIME:
+    display:
+      material: SLIME_BALL
+      name: '&e史莱姆'
+      lore:
+        - '&7额外分: &a+0.015 /只'
+        - '&7实体 ID: &8SLIME'
+        - '&8&m------------------------'
+        - '&7与基础「击杀生物」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  mob_ZOMBIFIED_PIGLIN:
+    display:
+      material: ZOMBIFIED_PIGLIN_SPAWN_EGG
+      name: '&e僵尸猪灵'
+      lore:
+        - '&7额外分: &a+0.025 /只'
+        - '&7实体 ID: &8ZOMBIFIED_PIGLIN'
+        - '&8&m------------------------'
+        - '&7与基础「击杀生物」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  mob_PIGLIN:
+    display:
+      material: PIGLIN_SPAWN_EGG
+      name: '&e猪灵'
+      lore:
+        - '&7额外分: &a+0.025 /只'
+        - '&7实体 ID: &8PIGLIN'
+        - '&8&m------------------------'
+        - '&7与基础「击杀生物」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  mob_PIGLIN_BRUTE:
+    display:
+      material: GOLDEN_AXE
+      name: '&e猪灵蛮兵'
+      lore:
+        - '&7额外分: &a+0.9 /只'
+        - '&7实体 ID: &8PIGLIN_BRUTE'
+        - '&8&m------------------------'
+        - '&7与基础「击杀生物」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  mob_GHAST:
+    display:
+      material: GHAST_TEAR
+      name: '&e恶魂'
+      lore:
+        - '&7额外分: &a+0.04 /只'
+        - '&7实体 ID: &8GHAST'
+        - '&8&m------------------------'
+        - '&7与基础「击杀生物」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  mob_BLAZE:
+    display:
+      material: BLAZE_ROD
+      name: '&e烈焰人'
+      lore:
+        - '&7额外分: &a+0.05 /只'
+        - '&7实体 ID: &8BLAZE'
+        - '&8&m------------------------'
+        - '&7与基础「击杀生物」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  mob_MAGMA_CUBE:
+    display:
+      material: MAGMA_CREAM
+      name: '&e岩浆怪'
+      lore:
+        - '&7额外分: &a+0.015 /只'
+        - '&7实体 ID: &8MAGMA_CUBE'
+        - '&8&m------------------------'
+        - '&7与基础「击杀生物」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  mob_WITHER_SKELETON:
+    display:
+      material: WITHER_SKELETON_SPAWN_EGG
+      name: '&e凋零骷髅'
+      lore:
+        - '&7额外分: &a+0.045 /只'
+        - '&7实体 ID: &8WITHER_SKELETON'
+        - '&8&m------------------------'
+        - '&7与基础「击杀生物」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  mob_HOGLIN:
+    display:
+      material: COOKED_PORKCHOP
+      name: '&e疣猪兽'
+      lore:
+        - '&7额外分: &a+0.4 /只'
+        - '&7实体 ID: &8HOGLIN'
+        - '&8&m------------------------'
+        - '&7与基础「击杀生物」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  mob_WARDEN:
+    display:
+      material: SCULK_CATALYST
+      name: '&e坚守者'
+      lore:
+        - '&7额外分: &a+10 /只'
+        - '&7实体 ID: &8WARDEN'
+        - '&8&m------------------------'
+        - '&7与基础「击杀生物」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  mob_WITHER:
+    display:
+      material: WITHER_SKELETON_SKULL
+      name: '&e凋灵'
+      lore:
+        - '&7额外分: &a+4 /只'
+        - '&7实体 ID: &8WITHER'
+        - '&8&m------------------------'
+        - '&7与基础「击杀生物」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  mob_ENDER_DRAGON:
+    display:
+      material: DRAGON_HEAD
+      name: '&e末影龙'
+      lore:
+        - '&7额外分: &a+25 /只'
+        - '&7实体 ID: &8ENDER_DRAGON'
+        - '&8&m------------------------'
+        - '&7与基础「击杀生物」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  mob_ARMADILLO:
+    display:
+      material: ARMADILLO_SCUTE
+      name: '&e犰狳'
+      lore:
+        - '&7额外分: &a+0.01 /只'
+        - '&7实体 ID: &8ARMADILLO'
+        - '&8&m------------------------'
+        - '&7与基础「击杀生物」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  mob_BOGGED:
+    display:
+      material: MOSS_BLOCK
+      name: '&e沼骸'
+      lore:
+        - '&7额外分: &a+0.04 /只'
+        - '&7实体 ID: &8BOGGED'
+        - '&8&m------------------------'
+        - '&7与基础「击杀生物」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  mob_BREEZE:
+    display:
+      material: WIND_CHARGE
+      name: '&e旋风人'
+      lore:
+        - '&7额外分: &a+0.3 /只'
+        - '&7实体 ID: &8BREEZE'
+        - '&8&m------------------------'
+        - '&7与基础「击杀生物」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  mob_HAPPY_GHAST:
+    display:
+      material: WHITE_HARNESS
+      name: '&e快乐恶魂'
+      lore:
+        - '&7额外分: &a+0.01 /只'
+        - '&7实体 ID: &8HAPPY_GHAST'
+        - '&8&m------------------------'
+        - '&7与基础「击杀生物」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  mob_COPPER_GOLEM:
+    display:
+      material: COPPER_BLOCK
+      name: '&e铜傀儡'
+      lore:
+        - '&7额外分: &a+0.02 /只'
+        - '&7实体 ID: &8COPPER_GOLEM'
+        - '&8&m------------------------'
+        - '&7与基础「击杀生物」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  mob_PARCHED:
+    display:
+      material: SAND
+      name: '&e干尸'
+      lore:
+        - '&7额外分: &a+0.03 /只'
+        - '&7实体 ID: &8PARCHED'
+        - '&8&m------------------------'
+        - '&7与基础「击杀生物」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  mob_CAMEL_HUSK:
+    display:
+      material: CAMEL_SPAWN_EGG
+      name: '&e骆驼尸壳'
+      lore:
+        - '&7额外分: &a+0.15 /只'
+        - '&7实体 ID: &8CAMEL_HUSK'
+        - '&8&m------------------------'
+        - '&7与基础「击杀生物」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  mob_NAUTILUS:
+    display:
+      material: NAUTILUS_SHELL
+      name: '&e鹦鹉螺'
+      lore:
+        - '&7额外分: &a+0.15 /只'
+        - '&7实体 ID: &8NAUTILUS'
+        - '&8&m------------------------'
+        - '&7与基础「击杀生物」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  mob_ZOMBIE_NAUTILUS:
+    display:
+      material: NAUTILUS_SHELL
+      name: '&e僵尸鹦鹉螺'
+      lore:
+        - '&7额外分: &a+0.15 /只'
+        - '&7实体 ID: &8ZOMBIE_NAUTILUS'
+        - '&8&m------------------------'
+        - '&7与基础「击杀生物」权重叠加计算'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  # ---------- 成就分类 ----------
+  adv_story:
+    update: 20
+    display:
+      material: BOOK
+      name: '&e&l主世界 · 故事'
+      lore:
+        - '&7主线剧情类成就'
+        - '&7共 16 个成就'
+        - '&7点击查看'
+    actions:
+      all: 'page: 10 &&& sound: BLOCK_NOTE_BLOCK_BIT-1-1'
+
+  adv_adventure:
+    update: 20
+    display:
+      material: COMPASS
+      name: '&e&l主世界 · 冒险'
+      lore:
+        - '&7探索与战斗类成就'
+        - '&7共 47 个成就'
+        - '&7点击查看'
+    actions:
+      all: 'page: 11 &&& sound: BLOCK_NOTE_BLOCK_BIT-1-1'
+
+  adv_husbandry:
+    update: 20
+    display:
+      material: WHEAT
+      name: '&e&l主世界 · 农牧'
+      lore:
+        - '&7种植与养殖类成就'
+        - '&7共 30 个成就'
+        - '&7点击查看'
+    actions:
+      all: 'page: 13 &&& sound: BLOCK_NOTE_BLOCK_BIT-1-1'
+
+  adv_nether:
+    update: 20
+    display:
+      material: NETHERRACK
+      name: '&e&l下界'
+      lore:
+        - '&7下界维度成就'
+        - '&7共 23 个成就'
+        - '&7点击查看'
+    actions:
+      all: 'page: 14 &&& sound: BLOCK_NOTE_BLOCK_BIT-1-1'
+
+  adv_end:
+    update: 20
+    display:
+      material: END_STONE
+      name: '&e&l末地'
+      lore:
+        - '&7末地维度成就'
+        - '&7共 9 个成就'
+        - '&7点击查看'
+    actions:
+      all: 'page: 15 &&& sound: BLOCK_NOTE_BLOCK_BIT-1-1'
+
+  # ---------- 成就明细 ----------
+  adv_story_root:
+    display:
+      material: BOOK
+      name: '&e故事/根源'
+      lore:
+        - '&7分类: &f主世界 · 故事'
+        - '&7完成奖励: &a+0.3 分'
+        - '&7进度 ID: &8minecraft:story/root'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_story_mine_stone:
+    display:
+      material: STONE
+      name: '&e采掘石头'
+      lore:
+        - '&7分类: &f主世界 · 故事'
+        - '&7完成奖励: &a+0.5 分'
+        - '&7进度 ID: &8minecraft:story/mine_stone'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_story_upgrade_tools:
+    display:
+      material: BOOK
+      name: '&e升级工具'
+      lore:
+        - '&7分类: &f主世界 · 故事'
+        - '&7完成奖励: &a+0.8 分'
+        - '&7进度 ID: &8minecraft:story/upgrade_tools'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_story_smelt_iron:
+    display:
+      material: IRON_INGOT
+      name: '&e冶炼铁锭'
+      lore:
+        - '&7分类: &f主世界 · 故事'
+        - '&7完成奖励: &a+1 分'
+        - '&7进度 ID: &8minecraft:story/smelt_iron'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_story_obtain_armor:
+    display:
+      material: BOOK
+      name: '&e获得盔甲'
+      lore:
+        - '&7分类: &f主世界 · 故事'
+        - '&7完成奖励: &a+2 分'
+        - '&7进度 ID: &8minecraft:story/obtain_armor'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_story_lava_bucket:
+    display:
+      material: LAVA_BUCKET
+      name: '&e岩浆桶'
+      lore:
+        - '&7分类: &f主世界 · 故事'
+        - '&7完成奖励: &a+1 分'
+        - '&7进度 ID: &8minecraft:story/lava_bucket'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_story_deflect_arrow:
+    display:
+      material: ARROW
+      name: '&e弹射物反弹'
+      lore:
+        - '&7分类: &f主世界 · 故事'
+        - '&7完成奖励: &a+0.5 分'
+        - '&7进度 ID: &8minecraft:story/deflect_arrow'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_story_form_obsidian:
+    display:
+      material: OBSIDIAN
+      name: '&e制作黑曜石'
+      lore:
+        - '&7分类: &f主世界 · 故事'
+        - '&7完成奖励: &a+1 分'
+        - '&7进度 ID: &8minecraft:story/form_obsidian'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_story_iron_tools:
+    display:
+      material: IRON_INGOT
+      name: '&e铁制工具'
+      lore:
+        - '&7分类: &f主世界 · 故事'
+        - '&7完成奖励: &a+1 分'
+        - '&7进度 ID: &8minecraft:story/iron_tools'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_story_mine_diamond:
+    display:
+      material: DIAMOND
+      name: '&e挖掘钻石'
+      lore:
+        - '&7分类: &f主世界 · 故事'
+        - '&7完成奖励: &a+3 分'
+        - '&7进度 ID: &8minecraft:story/mine_diamond'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_story_shiny_gear:
+    display:
+      material: BOOK
+      name: '&e闪亮装备'
+      lore:
+        - '&7分类: &f主世界 · 故事'
+        - '&7完成奖励: &a+8 分'
+        - '&7进度 ID: &8minecraft:story/shiny_gear'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_story_enchant_item:
+    display:
+      material: ENCHANTED_BOOK
+      name: '&e附魔物品'
+      lore:
+        - '&7分类: &f主世界 · 故事'
+        - '&7完成奖励: &a+5 分'
+        - '&7进度 ID: &8minecraft:story/enchant_item'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_story_cure_zombie_villager:
+    display:
+      material: ROTTEN_FLESH
+      name: '&e治愈僵尸村民'
+      lore:
+        - '&7分类: &f主世界 · 故事'
+        - '&7完成奖励: &a+4 分'
+        - '&7进度 ID: &8minecraft:story/cure_zombie_villager'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_story_follow_ender_eye:
+    display:
+      material: END_STONE
+      name: '&e跟随末影之眼'
+      lore:
+        - '&7分类: &f主世界 · 故事'
+        - '&7完成奖励: &a+3 分'
+        - '&7进度 ID: &8minecraft:story/follow_ender_eye'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_story_enter_the_nether:
+    display:
+      material: NETHERRACK
+      name: '&e进入下界'
+      lore:
+        - '&7分类: &f主世界 · 故事'
+        - '&7完成奖励: &a+5 分'
+        - '&7进度 ID: &8minecraft:story/enter_the_nether'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_story_enter_the_end:
+    display:
+      material: END_STONE
+      name: '&e进入末地'
+      lore:
+        - '&7分类: &f主世界 · 故事'
+        - '&7完成奖励: &a+8 分'
+        - '&7进度 ID: &8minecraft:story/enter_the_end'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_adventure_root:
+    display:
+      material: BOOK
+      name: '&e冒险/根源'
+      lore:
+        - '&7分类: &f主世界 · 冒险'
+        - '&7完成奖励: &a+0.3 分'
+        - '&7进度 ID: &8minecraft:adventure/root'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_adventure_sleep_in_bed:
+    display:
+      material: RED_BED
+      name: '&e在床上睡觉'
+      lore:
+        - '&7分类: &f主世界 · 冒险'
+        - '&7完成奖励: &a+0.5 分'
+        - '&7进度 ID: &8minecraft:adventure/sleep_in_bed'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_adventure_adventuring_time:
+    display:
+      material: COMPASS
+      name: '&e探索时光'
+      lore:
+        - '&7分类: &f主世界 · 冒险'
+        - '&7完成奖励: &a+550 分'
+        - '&7进度 ID: &8minecraft:adventure/adventuring_time'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_adventure_kill_a_mob:
+    display:
+      material: COMPASS
+      name: '&e击杀怪物'
+      lore:
+        - '&7分类: &f主世界 · 冒险'
+        - '&7完成奖励: &a+0.5 分'
+        - '&7进度 ID: &8minecraft:adventure/kill_a_mob'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_adventure_kill_all_mobs:
+    display:
+      material: COMPASS
+      name: '&e怪物猎人'
+      lore:
+        - '&7分类: &f主世界 · 冒险'
+        - '&7完成奖励: &a+480 分'
+        - '&7进度 ID: &8minecraft:adventure/kill_all_mobs'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_adventure_shoot_arrow:
+    display:
+      material: ARROW
+      name: '&e射箭'
+      lore:
+        - '&7分类: &f主世界 · 冒险'
+        - '&7完成奖励: &a+0.5 分'
+        - '&7进度 ID: &8minecraft:adventure/shoot_arrow'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_adventure_throw_trident:
+    display:
+      material: TRIDENT
+      name: '&e投掷三叉戟'
+      lore:
+        - '&7分类: &f主世界 · 冒险'
+        - '&7完成奖励: &a+3 分'
+        - '&7进度 ID: &8minecraft:adventure/throw_trident'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_adventure_trade:
+    display:
+      material: EMERALD
+      name: '&e交易'
+      lore:
+        - '&7分类: &f主世界 · 冒险'
+        - '&7完成奖励: &a+3 分'
+        - '&7进度 ID: &8minecraft:adventure/trade'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_adventure_totem_of_undying:
+    display:
+      material: TOTEM_OF_UNDYING
+      name: '&e不死图腾'
+      lore:
+        - '&7分类: &f主世界 · 冒险'
+        - '&7完成奖励: &a+10 分'
+        - '&7进度 ID: &8minecraft:adventure/totem_of_undying'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_adventure_summon_iron_golem:
+    display:
+      material: IRON_INGOT
+      name: '&e召唤铁傀儡'
+      lore:
+        - '&7分类: &f主世界 · 冒险'
+        - '&7完成奖励: &a+3 分'
+        - '&7进度 ID: &8minecraft:adventure/summon_iron_golem'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_adventure_voluntary_exile:
+    display:
+      material: COMPASS
+      name: '&e自愿流放'
+      lore:
+        - '&7分类: &f主世界 · 冒险'
+        - '&7完成奖励: &a+5 分'
+        - '&7进度 ID: &8minecraft:adventure/voluntary_exile'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_adventure_hero_of_the_village:
+    display:
+      material: COMPASS
+      name: '&e村庄英雄'
+      lore:
+        - '&7分类: &f主世界 · 冒险'
+        - '&7完成奖励: &a+30 分'
+        - '&7进度 ID: &8minecraft:adventure/hero_of_the_village'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_adventure_very_very_frightening:
+    display:
+      material: COMPASS
+      name: '&e非常非常吓人'
+      lore:
+        - '&7分类: &f主世界 · 冒险'
+        - '&7完成奖励: &a+18 分'
+        - '&7进度 ID: &8minecraft:adventure/very_very_frightening'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_adventure_sniper_duel:
+    display:
+      material: COMPASS
+      name: '&e狙击决斗'
+      lore:
+        - '&7分类: &f主世界 · 冒险'
+        - '&7完成奖励: &a+15 分'
+        - '&7进度 ID: &8minecraft:adventure/sniper_duel'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_adventure_ol_betsy:
+    display:
+      material: COMPASS
+      name: '&e老贝蒂'
+      lore:
+        - '&7分类: &f主世界 · 冒险'
+        - '&7完成奖励: &a+1 分'
+        - '&7进度 ID: &8minecraft:adventure/ol_betsy'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_adventure_arbalistic:
+    display:
+      material: COMPASS
+      name: '&e弩箭手'
+      lore:
+        - '&7分类: &f主世界 · 冒险'
+        - '&7完成奖励: &a+22 分'
+        - '&7进度 ID: &8minecraft:adventure/arbalistic'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_adventure_who_needs_rockets:
+    display:
+      material: COMPASS
+      name: '&e谁需要火箭'
+      lore:
+        - '&7分类: &f主世界 · 冒险'
+        - '&7完成奖励: &a+4 分'
+        - '&7进度 ID: &8minecraft:adventure/who_needs_rockets'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_adventure_two_birds_one_arrow:
+    display:
+      material: ARROW
+      name: '&e一箭双雕'
+      lore:
+        - '&7分类: &f主世界 · 冒险'
+        - '&7完成奖励: &a+18 分'
+        - '&7进度 ID: &8minecraft:adventure/two_birds_one_arrow'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_adventure_whos_the_pillager_now:
+    display:
+      material: COMPASS
+      name: '&e现在谁是掠夺者'
+      lore:
+        - '&7分类: &f主世界 · 冒险'
+        - '&7完成奖励: &a+15 分'
+        - '&7进度 ID: &8minecraft:adventure/whos_the_pillager_now'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_adventure_lighten_up:
+    display:
+      material: COMPASS
+      name: '&e点亮它'
+      lore:
+        - '&7分类: &f主世界 · 冒险'
+        - '&7完成奖励: &a+12 分'
+        - '&7进度 ID: &8minecraft:adventure/lighten_up'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_adventure_honey_block_slide:
+    display:
+      material: HONEYCOMB
+      name: '&e蜂蜜块滑行'
+      lore:
+        - '&7分类: &f主世界 · 冒险'
+        - '&7完成奖励: &a+3 分'
+        - '&7进度 ID: &8minecraft:adventure/honey_block_slide'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_adventure_fall_from_world_height:
+    display:
+      material: COMPASS
+      name: '&e从世界高度坠落'
+      lore:
+        - '&7分类: &f主世界 · 冒险'
+        - '&7完成奖励: &a+8 分'
+        - '&7进度 ID: &8minecraft:adventure/fall_from_world_height'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_adventure_spyglass_at_parrot:
+    display:
+      material: COMPASS
+      name: '&e用望远镜看鹦鹉'
+      lore:
+        - '&7分类: &f主世界 · 冒险'
+        - '&7完成奖励: &a+1 分'
+        - '&7进度 ID: &8minecraft:adventure/spyglass_at_parrot'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_adventure_spyglass_at_ghast:
+    display:
+      material: GHAST_TEAR
+      name: '&e用望远镜看恶魂'
+      lore:
+        - '&7分类: &f主世界 · 冒险'
+        - '&7完成奖励: &a+2 分'
+        - '&7进度 ID: &8minecraft:adventure/spyglass_at_ghast'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_adventure_spyglass_at_dragon:
+    display:
+      material: DRAGON_HEAD
+      name: '&e用望远镜看末影龙'
+      lore:
+        - '&7分类: &f主世界 · 冒险'
+        - '&7完成奖励: &a+3 分'
+        - '&7进度 ID: &8minecraft:adventure/spyglass_at_dragon'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_adventure_walk_on_powder_snow_with_leather_boots:
+    display:
+      material: COMPASS
+      name: '&e穿皮革靴在细雪上行走'
+      lore:
+        - '&7分类: &f主世界 · 冒险'
+        - '&7完成奖励: &a+5 分'
+        - '&7进度 ID: &8minecraft:adventure/walk_on_powder_snow_with_leather_boots'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_adventure_avoid_vibration:
+    display:
+      material: COMPASS
+      name: '&e避开振动'
+      lore:
+        - '&7分类: &f主世界 · 冒险'
+        - '&7完成奖励: &a+7 分'
+        - '&7进度 ID: &8minecraft:adventure/avoid_vibration'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_adventure_play_jukebox_in_meadows:
+    display:
+      material: COMPASS
+      name: '&e在草地上播放唱片'
+      lore:
+        - '&7分类: &f主世界 · 冒险'
+        - '&7完成奖励: &a+7 分'
+        - '&7进度 ID: &8minecraft:adventure/play_jukebox_in_meadows'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_adventure_bullseye:
+    display:
+      material: COMPASS
+      name: '&e正中靶心'
+      lore:
+        - '&7分类: &f主世界 · 冒险'
+        - '&7完成奖励: &a+10 分'
+        - '&7进度 ID: &8minecraft:adventure/bullseye'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_adventure_craft_decorated_pot_using_only_sherds:
+    display:
+      material: COMPASS
+      name: '&e只用陶片合成饰纹陶罐'
+      lore:
+        - '&7分类: &f主世界 · 冒险'
+        - '&7完成奖励: &a+8 分'
+        - '&7进度 ID: &8minecraft:adventure/craft_decorated_pot_using_only_sherds'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_adventure_kill_mob_near_sculk_catalyst:
+    display:
+      material: COMPASS
+      name: '&e在幽匿催发体旁击杀生物'
+      lore:
+        - '&7分类: &f主世界 · 冒险'
+        - '&7完成奖励: &a+6 分'
+        - '&7进度 ID: &8minecraft:adventure/kill_mob_near_sculk_catalyst'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_adventure_lightning_rod_with_villager_no_fire:
+    display:
+      material: EMERALD
+      name: '&e用避雷针保护村民'
+      lore:
+        - '&7分类: &f主世界 · 冒险'
+        - '&7完成奖励: &a+8 分'
+        - '&7进度 ID: &8minecraft:adventure/lightning_rod_with_villager_no_fire'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_adventure_read_power_of_chiseled_bookshelf:
+    display:
+      material: CHISELED_BOOKSHELF
+      name: '&e读取雕纹书架'
+      lore:
+        - '&7分类: &f主世界 · 冒险'
+        - '&7完成奖励: &a+3 分'
+        - '&7进度 ID: &8minecraft:adventure/read_power_of_chiseled_bookshelf'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_adventure_salvage_sherd:
+    display:
+      material: COMPASS
+      name: '&e打捞陶片'
+      lore:
+        - '&7分类: &f主世界 · 冒险'
+        - '&7完成奖励: &a+3 分'
+        - '&7进度 ID: &8minecraft:adventure/salvage_sherd'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_adventure_trade_at_world_height:
+    display:
+      material: EMERALD
+      name: '&e在世界最高处交易'
+      lore:
+        - '&7分类: &f主世界 · 冒险'
+        - '&7完成奖励: &a+6 分'
+        - '&7进度 ID: &8minecraft:adventure/trade_at_world_height'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_adventure_trim_with_any_armor_pattern:
+    display:
+      material: COMPASS
+      name: '&e任意盔甲纹饰'
+      lore:
+        - '&7分类: &f主世界 · 冒险'
+        - '&7完成奖励: &a+10 分'
+        - '&7进度 ID: &8minecraft:adventure/trim_with_any_armor_pattern'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_adventure_trim_with_all_exclusive_armor_patterns:
+    display:
+      material: COMPASS
+      name: '&e集齐所有盔甲纹饰'
+      lore:
+        - '&7分类: &f主世界 · 冒险'
+        - '&7完成奖励: &a+60 分'
+        - '&7进度 ID: &8minecraft:adventure/trim_with_all_exclusive_armor_patterns'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_adventure_minecraft_trials_edition:
+    display:
+      material: COMPASS
+      name: '&e试炼之室'
+      lore:
+        - '&7分类: &f主世界 · 冒险'
+        - '&7完成奖励: &a+10 分'
+        - '&7进度 ID: &8minecraft:adventure/minecraft_trials_edition'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_adventure_under_lock_and_key:
+    display:
+      material: COMPASS
+      name: '&e上锁与钥匙'
+      lore:
+        - '&7分类: &f主世界 · 冒险'
+        - '&7完成奖励: &a+6 分'
+        - '&7进度 ID: &8minecraft:adventure/under_lock_and_key'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_adventure_revaulting:
+    display:
+      material: COMPASS
+      name: '&e再开宝库'
+      lore:
+        - '&7分类: &f主世界 · 冒险'
+        - '&7完成奖励: &a+20 分'
+        - '&7进度 ID: &8minecraft:adventure/revaulting'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_adventure_blowback:
+    display:
+      material: COMPASS
+      name: '&e以其人之道'
+      lore:
+        - '&7分类: &f主世界 · 冒险'
+        - '&7完成奖励: &a+40 分'
+        - '&7进度 ID: &8minecraft:adventure/blowback'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_adventure_overoverkill:
+    display:
+      material: COMPASS
+      name: '&e过量击杀'
+      lore:
+        - '&7分类: &f主世界 · 冒险'
+        - '&7完成奖励: &a+35 分'
+        - '&7进度 ID: &8minecraft:adventure/overoverkill'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_adventure_crafters_crafting_crafters:
+    display:
+      material: COMPASS
+      name: '&e合成器合成合成器'
+      lore:
+        - '&7分类: &f主世界 · 冒险'
+        - '&7完成奖励: &a+12 分'
+        - '&7进度 ID: &8minecraft:adventure/crafters_crafting_crafters'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_adventure_brush_armadillo:
+    display:
+      material: COMPASS
+      name: '&e刷犰狳'
+      lore:
+        - '&7分类: &f主世界 · 冒险'
+        - '&7完成奖励: &a+3 分'
+        - '&7进度 ID: &8minecraft:adventure/brush_armadillo'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_adventure_use_lodestone:
+    display:
+      material: STONE
+      name: '&e磁石指路'
+      lore:
+        - '&7分类: &f主世界 · 冒险'
+        - '&7完成奖励: &a+3 分'
+        - '&7进度 ID: &8minecraft:adventure/use_lodestone'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_adventure_heart_transplanter:
+    display:
+      material: COMPASS
+      name: '&e心脏移植'
+      lore:
+        - '&7分类: &f主世界 · 冒险'
+        - '&7完成奖励: &a+15 分'
+        - '&7进度 ID: &8minecraft:adventure/heart_transplanter'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_adventure_spear_many_mobs:
+    display:
+      material: COMPASS
+      name: '&e长矛串烧'
+      lore:
+        - '&7分类: &f主世界 · 冒险'
+        - '&7完成奖励: &a+25 分'
+        - '&7进度 ID: &8minecraft:adventure/spear_many_mobs'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_husbandry_root:
+    display:
+      material: BOOK
+      name: '&e农牧业/根源'
+      lore:
+        - '&7分类: &f主世界 · 农牧'
+        - '&7完成奖励: &a+0.3 分'
+        - '&7进度 ID: &8minecraft:husbandry/root'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_husbandry_plant_seed:
+    display:
+      material: WHEAT
+      name: '&e种植种子'
+      lore:
+        - '&7分类: &f主世界 · 农牧'
+        - '&7完成奖励: &a+1 分'
+        - '&7进度 ID: &8minecraft:husbandry/plant_seed'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_husbandry_breed_an_animal:
+    display:
+      material: WHEAT
+      name: '&e繁殖动物'
+      lore:
+        - '&7分类: &f主世界 · 农牧'
+        - '&7完成奖励: &a+1.5 分'
+        - '&7进度 ID: &8minecraft:husbandry/breed_an_animal'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_husbandry_tame_an_animal:
+    display:
+      material: WHEAT
+      name: '&e驯服动物'
+      lore:
+        - '&7分类: &f主世界 · 农牧'
+        - '&7完成奖励: &a+3 分'
+        - '&7进度 ID: &8minecraft:husbandry/tame_an_animal'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_husbandry_fishy_business:
+    display:
+      material: COD
+      name: '&e钓鱼生意'
+      lore:
+        - '&7分类: &f主世界 · 农牧'
+        - '&7完成奖励: &a+2 分'
+        - '&7进度 ID: &8minecraft:husbandry/fishy_business'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_husbandry_tactical_fishing:
+    display:
+      material: FISHING_ROD
+      name: '&e战术钓鱼'
+      lore:
+        - '&7分类: &f主世界 · 农牧'
+        - '&7完成奖励: &a+5 分'
+        - '&7进度 ID: &8minecraft:husbandry/tactical_fishing'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_husbandry_balanced_diet:
+    display:
+      material: WHEAT
+      name: '&e均衡饮食'
+      lore:
+        - '&7分类: &f主世界 · 农牧'
+        - '&7完成奖励: &a+450 分'
+        - '&7进度 ID: &8minecraft:husbandry/balanced_diet'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_husbandry_bred_all_animals:
+    display:
+      material: WHEAT
+      name: '&e繁育所有动物'
+      lore:
+        - '&7分类: &f主世界 · 农牧'
+        - '&7完成奖励: &a+350 分'
+        - '&7进度 ID: &8minecraft:husbandry/bred_all_animals'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_husbandry_complete_catalogue:
+    display:
+      material: WHEAT
+      name: '&e全部猫种'
+      lore:
+        - '&7分类: &f主世界 · 农牧'
+        - '&7完成奖励: &a+320 分'
+        - '&7进度 ID: &8minecraft:husbandry/complete_catalogue'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_husbandry_wax_on:
+    display:
+      material: WHEAT
+      name: '&e涂蜡'
+      lore:
+        - '&7分类: &f主世界 · 农牧'
+        - '&7完成奖励: &a+2 分'
+        - '&7进度 ID: &8minecraft:husbandry/wax_on'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_husbandry_wax_off:
+    display:
+      material: WHEAT
+      name: '&e除蜡'
+      lore:
+        - '&7分类: &f主世界 · 农牧'
+        - '&7完成奖励: &a+2 分'
+        - '&7进度 ID: &8minecraft:husbandry/wax_off'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_husbandry_silk_touch_nest:
+    display:
+      material: WHEAT
+      name: '&e精准采集蜂巢'
+      lore:
+        - '&7分类: &f主世界 · 农牧'
+        - '&7完成奖励: &a+8 分'
+        - '&7进度 ID: &8minecraft:husbandry/silk_touch_nest'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_husbandry_leash_all_frog_variants:
+    display:
+      material: FROGSPAWN
+      name: '&e拴住所有青蛙变种'
+      lore:
+        - '&7分类: &f主世界 · 农牧'
+        - '&7完成奖励: &a+15 分'
+        - '&7进度 ID: &8minecraft:husbandry/leash_all_frog_variants'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_husbandry_froglights:
+    display:
+      material: FROGSPAWN
+      name: '&e蛙灯'
+      lore:
+        - '&7分类: &f主世界 · 农牧'
+        - '&7完成奖励: &a+8 分'
+        - '&7进度 ID: &8minecraft:husbandry/froglights'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_husbandry_allay_deliver_cake_to_note_block:
+    display:
+      material: CAKE
+      name: '&e悦灵送蛋糕到音符盒'
+      lore:
+        - '&7分类: &f主世界 · 农牧'
+        - '&7完成奖励: &a+8 分'
+        - '&7进度 ID: &8minecraft:husbandry/allay_deliver_cake_to_note_block'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_husbandry_make_a_sign_glow:
+    display:
+      material: WHEAT
+      name: '&e让告示牌发光'
+      lore:
+        - '&7分类: &f主世界 · 农牧'
+        - '&7完成奖励: &a+3 分'
+        - '&7进度 ID: &8minecraft:husbandry/make_a_sign_glow'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_husbandry_safely_harvest_honey:
+    display:
+      material: HONEYCOMB
+      name: '&e安全收获蜂蜜'
+      lore:
+        - '&7分类: &f主世界 · 农牧'
+        - '&7完成奖励: &a+3 分'
+        - '&7进度 ID: &8minecraft:husbandry/safely_harvest_honey'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_husbandry_axolotl_in_a_bucket:
+    display:
+      material: BUCKET
+      name: '&e把美西螈装进桶'
+      lore:
+        - '&7分类: &f主世界 · 农牧'
+        - '&7完成奖励: &a+5 分'
+        - '&7进度 ID: &8minecraft:husbandry/axolotl_in_a_bucket'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_husbandry_kill_axolotl_target:
+    display:
+      material: AXOLOTL_BUCKET
+      name: '&e和美西螈并肩作战'
+      lore:
+        - '&7分类: &f主世界 · 农牧'
+        - '&7完成奖励: &a+8 分'
+        - '&7进度 ID: &8minecraft:husbandry/kill_axolotl_target'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_husbandry_tadpole_in_a_bucket:
+    display:
+      material: BUCKET
+      name: '&e桶装蝌蚪'
+      lore:
+        - '&7分类: &f主世界 · 农牧'
+        - '&7完成奖励: &a+3 分'
+        - '&7进度 ID: &8minecraft:husbandry/tadpole_in_a_bucket'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_husbandry_allay_deliver_item_to_player:
+    display:
+      material: WHEAT
+      name: '&e悦灵交付物品'
+      lore:
+        - '&7分类: &f主世界 · 农牧'
+        - '&7完成奖励: &a+5 分'
+        - '&7进度 ID: &8minecraft:husbandry/allay_deliver_item_to_player'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_husbandry_feed_snifflet:
+    display:
+      material: WHEAT
+      name: '&e喂食小嗅探兽'
+      lore:
+        - '&7分类: &f主世界 · 农牧'
+        - '&7完成奖励: &a+5 分'
+        - '&7进度 ID: &8minecraft:husbandry/feed_snifflet'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_husbandry_obtain_sniffer_egg:
+    display:
+      material: EGG
+      name: '&e获得嗅探兽蛋'
+      lore:
+        - '&7分类: &f主世界 · 农牧'
+        - '&7完成奖励: &a+15 分'
+        - '&7进度 ID: &8minecraft:husbandry/obtain_sniffer_egg'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_husbandry_plant_any_sniffer_seed:
+    display:
+      material: WHEAT
+      name: '&e种植远古种子'
+      lore:
+        - '&7分类: &f主世界 · 农牧'
+        - '&7完成奖励: &a+10 分'
+        - '&7进度 ID: &8minecraft:husbandry/plant_any_sniffer_seed'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_husbandry_obtain_netherite_hoe:
+    display:
+      material: NETHERITE_INGOT
+      name: '&e下界合金锄'
+      lore:
+        - '&7分类: &f主世界 · 农牧'
+        - '&7完成奖励: &a+20 分'
+        - '&7进度 ID: &8minecraft:husbandry/obtain_netherite_hoe'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_husbandry_ride_a_boat_with_a_goat:
+    display:
+      material: GOAT_HORN
+      name: '&e带山羊坐船'
+      lore:
+        - '&7分类: &f主世界 · 农牧'
+        - '&7完成奖励: &a+5 分'
+        - '&7进度 ID: &8minecraft:husbandry/ride_a_boat_with_a_goat'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_husbandry_place_dried_ghast_in_water:
+    display:
+      material: WATER_BUCKET
+      name: '&e把干燥恶魂放进水里'
+      lore:
+        - '&7分类: &f主世界 · 农牧'
+        - '&7完成奖励: &a+5 分'
+        - '&7进度 ID: &8minecraft:husbandry/place_dried_ghast_in_water'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_husbandry_remove_wolf_armor:
+    display:
+      material: WHEAT
+      name: '&e给狼卸下盔甲'
+      lore:
+        - '&7分类: &f主世界 · 农牧'
+        - '&7完成奖励: &a+2 分'
+        - '&7进度 ID: &8minecraft:husbandry/remove_wolf_armor'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_husbandry_repair_wolf_armor:
+    display:
+      material: WHEAT
+      name: '&e修复狼盔甲'
+      lore:
+        - '&7分类: &f主世界 · 农牧'
+        - '&7完成奖励: &a+3 分'
+        - '&7进度 ID: &8minecraft:husbandry/repair_wolf_armor'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_husbandry_whole_pack:
+    display:
+      material: WHEAT
+      name: '&e完整狼群'
+      lore:
+        - '&7分类: &f主世界 · 农牧'
+        - '&7完成奖励: &a+200 分'
+        - '&7进度 ID: &8minecraft:husbandry/whole_pack'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_nether_root:
+    display:
+      material: BOOK
+      name: '&e下界/根源'
+      lore:
+        - '&7分类: &f下界'
+        - '&7完成奖励: &a+0.3 分'
+        - '&7进度 ID: &8minecraft:nether/root'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_nether_find_fortress:
+    display:
+      material: NETHERRACK
+      name: '&e发现堡垒'
+      lore:
+        - '&7分类: &f下界'
+        - '&7完成奖励: &a+5 分'
+        - '&7进度 ID: &8minecraft:nether/find_fortress'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_nether_return_to_sender:
+    display:
+      material: END_STONE
+      name: '&e归还火焰'
+      lore:
+        - '&7分类: &f下界'
+        - '&7完成奖励: &a+10 分'
+        - '&7进度 ID: &8minecraft:nether/return_to_sender'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_nether_obtain_blaze_rod:
+    display:
+      material: BLAZE_ROD
+      name: '&e获得烈焰棒'
+      lore:
+        - '&7分类: &f下界'
+        - '&7完成奖励: &a+5 分'
+        - '&7进度 ID: &8minecraft:nether/obtain_blaze_rod'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_nether_get_wither_skull:
+    display:
+      material: WITHER_SKELETON_SKULL
+      name: '&e获得凋零骷髅头'
+      lore:
+        - '&7分类: &f下界'
+        - '&7完成奖励: &a+12 分'
+        - '&7进度 ID: &8minecraft:nether/get_wither_skull'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_nether_summon_wither:
+    display:
+      material: WITHER_SKELETON_SKULL
+      name: '&e召唤凋灵'
+      lore:
+        - '&7分类: &f下界'
+        - '&7完成奖励: &a+30 分'
+        - '&7进度 ID: &8minecraft:nether/summon_wither'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_nether_create_beacon:
+    display:
+      material: BEACON
+      name: '&e制造信标'
+      lore:
+        - '&7分类: &f下界'
+        - '&7完成奖励: &a+12 分'
+        - '&7进度 ID: &8minecraft:nether/create_beacon'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_nether_create_full_beacon:
+    display:
+      material: BEACON
+      name: '&e完整信标'
+      lore:
+        - '&7分类: &f下界'
+        - '&7完成奖励: &a+40 分'
+        - '&7进度 ID: &8minecraft:nether/create_full_beacon'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_nether_brew_potion:
+    display:
+      material: POTION
+      name: '&e酿造药水'
+      lore:
+        - '&7分类: &f下界'
+        - '&7完成奖励: &a+3 分'
+        - '&7进度 ID: &8minecraft:nether/brew_potion'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_nether_all_potions:
+    display:
+      material: POTION
+      name: '&e所有药水效果'
+      lore:
+        - '&7分类: &f下界'
+        - '&7完成奖励: &a+250 分'
+        - '&7进度 ID: &8minecraft:nether/all_potions'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_nether_all_effects:
+    display:
+      material: NETHERRACK
+      name: '&e所有状态效果'
+      lore:
+        - '&7分类: &f下界'
+        - '&7完成奖励: &a+800 分'
+        - '&7进度 ID: &8minecraft:nether/all_effects'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_nether_uneasy_alliance:
+    display:
+      material: NETHERRACK
+      name: '&e不安的同盟'
+      lore:
+        - '&7分类: &f下界'
+        - '&7完成奖励: &a+80 分'
+        - '&7进度 ID: &8minecraft:nether/uneasy_alliance'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_nether_fast_travel:
+    display:
+      material: NETHERRACK
+      name: '&e快速旅行'
+      lore:
+        - '&7分类: &f下界'
+        - '&7完成奖励: &a+10 分'
+        - '&7进度 ID: &8minecraft:nether/fast_travel'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_nether_explore_nether:
+    display:
+      material: NETHERRACK
+      name: '&e探索下界'
+      lore:
+        - '&7分类: &f下界'
+        - '&7完成奖励: &a+15 分'
+        - '&7进度 ID: &8minecraft:nether/explore_nether'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_nether_ride_strider:
+    display:
+      material: WARPED_FUNGUS_ON_A_STICK
+      name: '&e骑炽足兽'
+      lore:
+        - '&7分类: &f下界'
+        - '&7完成奖励: &a+5 分'
+        - '&7进度 ID: &8minecraft:nether/ride_strider'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_nether_obtain_ancient_debris:
+    display:
+      material: ANCIENT_DEBRIS
+      name: '&e远古残骸'
+      lore:
+        - '&7分类: &f下界'
+        - '&7完成奖励: &a+15 分'
+        - '&7进度 ID: &8minecraft:nether/obtain_ancient_debris'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_nether_netherite_armor:
+    display:
+      material: NETHERITE_INGOT
+      name: '&e下界合金盔甲'
+      lore:
+        - '&7分类: &f下界'
+        - '&7完成奖励: &a+20 分'
+        - '&7进度 ID: &8minecraft:nether/netherite_armor'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_nether_charge_respawn_anchor:
+    display:
+      material: NETHERRACK
+      name: '&e为重生锚充能'
+      lore:
+        - '&7分类: &f下界'
+        - '&7完成奖励: &a+8 分'
+        - '&7进度 ID: &8minecraft:nether/charge_respawn_anchor'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_nether_distract_piglin:
+    display:
+      material: GOLD_INGOT
+      name: '&e分散猪灵注意'
+      lore:
+        - '&7分类: &f下界'
+        - '&7完成奖励: &a+5 分'
+        - '&7进度 ID: &8minecraft:nether/distract_piglin'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_nether_find_bastion:
+    display:
+      material: NETHERRACK
+      name: '&e发现堡垒遗迹'
+      lore:
+        - '&7分类: &f下界'
+        - '&7完成奖励: &a+8 分'
+        - '&7进度 ID: &8minecraft:nether/find_bastion'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_nether_loot_bastion:
+    display:
+      material: NETHERRACK
+      name: '&e搜刮堡垒遗迹'
+      lore:
+        - '&7分类: &f下界'
+        - '&7完成奖励: &a+10 分'
+        - '&7进度 ID: &8minecraft:nether/loot_bastion'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_nether_obtain_crying_obsidian:
+    display:
+      material: OBSIDIAN
+      name: '&e获得哭泣的黑曜石'
+      lore:
+        - '&7分类: &f下界'
+        - '&7完成奖励: &a+5 分'
+        - '&7进度 ID: &8minecraft:nether/obtain_crying_obsidian'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_nether_ride_strider_in_overworld_lava:
+    display:
+      material: LAVA_BUCKET
+      name: '&e在主世界的岩浆上骑炽足兽'
+      lore:
+        - '&7分类: &f下界'
+        - '&7完成奖励: &a+5 分'
+        - '&7进度 ID: &8minecraft:nether/ride_strider_in_overworld_lava'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_end_root:
+    display:
+      material: BOOK
+      name: '&e末地/根源'
+      lore:
+        - '&7分类: &f末地'
+        - '&7完成奖励: &a+0.3 分'
+        - '&7进度 ID: &8minecraft:end/root'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_end_kill_dragon:
+    display:
+      material: DRAGON_HEAD
+      name: '&e击杀末影龙'
+      lore:
+        - '&7分类: &f末地'
+        - '&7完成奖励: &a+60 分'
+        - '&7进度 ID: &8minecraft:end/kill_dragon'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_end_dragon_egg:
+    display:
+      material: DRAGON_HEAD
+      name: '&e龙蛋'
+      lore:
+        - '&7分类: &f末地'
+        - '&7完成奖励: &a+300 分'
+        - '&7进度 ID: &8minecraft:end/dragon_egg'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_end_enter_end_gateway:
+    display:
+      material: END_STONE
+      name: '&e进入末地折跃门'
+      lore:
+        - '&7分类: &f末地'
+        - '&7完成奖励: &a+12 分'
+        - '&7进度 ID: &8minecraft:end/enter_end_gateway'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_end_find_end_city:
+    display:
+      material: END_STONE
+      name: '&e寻找末地城'
+      lore:
+        - '&7分类: &f末地'
+        - '&7完成奖励: &a+15 分'
+        - '&7进度 ID: &8minecraft:end/find_end_city'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_end_elytra:
+    display:
+      material: ELYTRA
+      name: '&e鞘翅'
+      lore:
+        - '&7分类: &f末地'
+        - '&7完成奖励: &a+40 分'
+        - '&7进度 ID: &8minecraft:end/elytra'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_end_levitate:
+    display:
+      material: END_STONE
+      name: '&e悬浮'
+      lore:
+        - '&7分类: &f末地'
+        - '&7完成奖励: &a+10 分'
+        - '&7进度 ID: &8minecraft:end/levitate'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_end_respawn_dragon:
+    display:
+      material: DRAGON_HEAD
+      name: '&e复活末影龙'
+      lore:
+        - '&7分类: &f末地'
+        - '&7完成奖励: &a+15 分'
+        - '&7进度 ID: &8minecraft:end/respawn_dragon'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  adv_end_dragon_breath:
+    display:
+      material: DRAGON_BREATH
+      name: '&e龙息'
+      lore:
+        - '&7分类: &f末地'
+        - '&7完成奖励: &a+10 分'
+        - '&7进度 ID: &8minecraft:end/dragon_breath'
+        - '&8&m------------------------'
+        - '&7一次性加分，不参与分段折扣'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'

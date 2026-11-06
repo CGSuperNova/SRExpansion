@@ -39,3 +39,10 @@ SRExpansion_config/
 # ---- 独立插件（自己是一个仓库）----
 AdvancedPlayerAttribute/
 
+# ---- TrMenu 前端 ----
+# 只保留生成好的菜单、生成器和说明；插件源码 / wiki 爬取结果 / 旧菜单 / 服务器配置不入库
+Trmenu/Trmenu/
+Trmenu/trmenu-wiki-markdown/
+Trmenu/ai_rank.yml
+Trmenu/SRExpansion_config_in_server/
+
