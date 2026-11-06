@@ -408,7 +408,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: DIRT
-      name: '<gradient:#A0522D:#F5DEB3>[Dirt]</gradient>'
+      name: '<gradient:#A0522D:#F5DEB3>[Dirt]'
       lore:
         - '&7需要段位分: &e5'
         - '&7升级奖励: &a355 金币'
@@ -421,7 +421,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<gradient:#A0522D:#F5DEB3>[Dirt]</gradient>'
+          name: '<gradient:#A0522D:#F5DEB3>[Dirt]'
           lore:
             - '&7需要段位分: &e5'
             - '&7升级奖励: &a355 金币'
@@ -432,7 +432,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: OAK_LOG
-      name: '<gradient:#CD853F:#DEB887>[Log]</gradient>'
+      name: '<gradient:#CD853F:#DEB887>[Log]'
       lore:
         - '&7需要段位分: &e20'
         - '&7升级奖励: &a440 金币'
@@ -444,7 +444,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<gradient:#CD853F:#DEB887>[Log]</gradient>'
+          name: '<gradient:#CD853F:#DEB887>[Log]'
           lore:
             - '&7需要段位分: &e20'
             - '&7升级奖励: &a440 金币'
@@ -454,7 +454,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: STONE
-      name: '<gradient:#708090:#B0C4DE>[Stone]</gradient>'
+      name: '<gradient:#708090:#B0C4DE>[Stone]'
       lore:
         - '&7需要段位分: &e45'
         - '&7升级奖励: &a555 金币'
@@ -466,7 +466,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<gradient:#708090:#B0C4DE>[Stone]</gradient>'
+          name: '<gradient:#708090:#B0C4DE>[Stone]'
           lore:
             - '&7需要段位分: &e45'
             - '&7升级奖励: &a555 金币'
@@ -476,7 +476,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: COAL
-      name: '<gradient:#696969:#404040>[Coal]</gradient>'
+      name: '<gradient:#696969:#404040>[Coal]'
       lore:
         - '&7需要段位分: &e80'
         - '&7升级奖励: &a700 金币'
@@ -489,7 +489,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<gradient:#696969:#404040>[Coal]</gradient>'
+          name: '<gradient:#696969:#404040>[Coal]'
           lore:
             - '&7需要段位分: &e80'
             - '&7升级奖励: &a700 金币'
@@ -500,7 +500,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: COAL_ORE
-      name: '<gradient:#696969:#404040>[Coal_ore]</gradient>'
+      name: '<gradient:#696969:#404040>[Coal_ore]'
       lore:
         - '&7需要段位分: &e125'
         - '&7升级奖励: &a875 金币'
@@ -512,7 +512,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<gradient:#696969:#404040>[Coal_ore]</gradient>'
+          name: '<gradient:#696969:#404040>[Coal_ore]'
           lore:
             - '&7需要段位分: &e125'
             - '&7升级奖励: &a875 金币'
@@ -522,7 +522,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: COAL_BLOCK
-      name: '<gradient:#696969:#404040>[Coal_block]</gradient>'
+      name: '<gradient:#696969:#404040>[Coal_block]'
       lore:
         - '&7需要段位分: &e180'
         - '&7升级奖励: &a1080 金币'
@@ -534,7 +534,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<gradient:#696969:#404040>[Coal_block]</gradient>'
+          name: '<gradient:#696969:#404040>[Coal_block]'
           lore:
             - '&7需要段位分: &e180'
             - '&7升级奖励: &a1080 金币'
@@ -544,7 +544,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: IRON_INGOT
-      name: '<gradient:#A9A9A9:#FFFFFF>[Iron]</gradient>'
+      name: '<gradient:#A9A9A9:#FFFFFF>[Iron]'
       lore:
         - '&7需要段位分: &e245'
         - '&7升级奖励: &a1315 金币'
@@ -557,7 +557,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<gradient:#A9A9A9:#FFFFFF>[Iron]</gradient>'
+          name: '<gradient:#A9A9A9:#FFFFFF>[Iron]'
           lore:
             - '&7需要段位分: &e245'
             - '&7升级奖励: &a1315 金币'
@@ -568,7 +568,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: IRON_ORE
-      name: '<gradient:#A9A9A9:#FFFFFF>[Iron_Ore]</gradient>'
+      name: '<gradient:#A9A9A9:#FFFFFF>[Iron_Ore]'
       lore:
         - '&7需要段位分: &e320'
         - '&7升级奖励: &a1580 金币'
@@ -580,7 +580,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<gradient:#A9A9A9:#FFFFFF>[Iron_Ore]</gradient>'
+          name: '<gradient:#A9A9A9:#FFFFFF>[Iron_Ore]'
           lore:
             - '&7需要段位分: &e320'
             - '&7升级奖励: &a1580 金币'
@@ -590,7 +590,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: IRON_BLOCK
-      name: '<gradient:#A9A9A9:#FFFFFF>[Iron_Block]</gradient>'
+      name: '<gradient:#A9A9A9:#FFFFFF>[Iron_Block]'
       lore:
         - '&7需要段位分: &e405'
         - '&7升级奖励: &a1875 金币'
@@ -602,7 +602,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<gradient:#A9A9A9:#FFFFFF>[Iron_Block]</gradient>'
+          name: '<gradient:#A9A9A9:#FFFFFF>[Iron_Block]'
           lore:
             - '&7需要段位分: &e405'
             - '&7升级奖励: &a1875 金币'
@@ -612,7 +612,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: GOLD_INGOT
-      name: '<gradient:#FFD700:#DAA520>[Gold]</gradient>'
+      name: '<gradient:#FFD700:#DAA520>[Gold]'
       lore:
         - '&7需要段位分: &e500'
         - '&7升级奖励: &a2200 金币'
@@ -625,7 +625,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<gradient:#FFD700:#DAA520>[Gold]</gradient>'
+          name: '<gradient:#FFD700:#DAA520>[Gold]'
           lore:
             - '&7需要段位分: &e500'
             - '&7升级奖励: &a2200 金币'
@@ -636,7 +636,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: GOLD_ORE
-      name: '<gradient:#FFD700:#DAA520>[Gold_Ore]</gradient>'
+      name: '<gradient:#FFD700:#DAA520>[Gold_Ore]'
       lore:
         - '&7需要段位分: &e605'
         - '&7升级奖励: &a2555 金币'
@@ -648,7 +648,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<gradient:#FFD700:#DAA520>[Gold_Ore]</gradient>'
+          name: '<gradient:#FFD700:#DAA520>[Gold_Ore]'
           lore:
             - '&7需要段位分: &e605'
             - '&7升级奖励: &a2555 金币'
@@ -658,7 +658,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: GOLD_BLOCK
-      name: '<gradient:#FFD700:#DAA520>[Gold_Block]</gradient>'
+      name: '<gradient:#FFD700:#DAA520>[Gold_Block]'
       lore:
         - '&7需要段位分: &e720'
         - '&7升级奖励: &a2940 金币'
@@ -670,7 +670,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<gradient:#FFD700:#DAA520>[Gold_Block]</gradient>'
+          name: '<gradient:#FFD700:#DAA520>[Gold_Block]'
           lore:
             - '&7需要段位分: &e720'
             - '&7升级奖励: &a2940 金币'
@@ -680,7 +680,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: REDSTONE
-      name: '<gradient:#FF0000:#FA8072>[Redstone]</gradient>'
+      name: '<gradient:#FF0000:#FA8072>[Redstone]'
       lore:
         - '&7需要段位分: &e845'
         - '&7升级奖励: &a3355 金币'
@@ -692,7 +692,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<gradient:#FF0000:#FA8072>[Redstone]</gradient>'
+          name: '<gradient:#FF0000:#FA8072>[Redstone]'
           lore:
             - '&7需要段位分: &e845'
             - '&7升级奖励: &a3355 金币'
@@ -702,7 +702,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: REDSTONE_ORE
-      name: '<gradient:#FF0000:#FA8072>[Redstone_Ore]</gradient>'
+      name: '<gradient:#FF0000:#FA8072>[Redstone_Ore]'
       lore:
         - '&7需要段位分: &e980'
         - '&7升级奖励: &a3800 金币'
@@ -714,7 +714,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<gradient:#FF0000:#FA8072>[Redstone_Ore]</gradient>'
+          name: '<gradient:#FF0000:#FA8072>[Redstone_Ore]'
           lore:
             - '&7需要段位分: &e980'
             - '&7升级奖励: &a3800 金币'
@@ -724,7 +724,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: REDSTONE_BLOCK
-      name: '<gradient:#FF0000:#FA8072>[Redstone_Block]</gradient>'
+      name: '<gradient:#FF0000:#FA8072>[Redstone_Block]'
       lore:
         - '&7需要段位分: &e1125'
         - '&7升级奖励: &a4275 金币'
@@ -736,7 +736,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<gradient:#FF0000:#FA8072>[Redstone_Block]</gradient>'
+          name: '<gradient:#FF0000:#FA8072>[Redstone_Block]'
           lore:
             - '&7需要段位分: &e1125'
             - '&7升级奖励: &a4275 金币'
@@ -746,7 +746,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: LAPIS_LAZULI
-      name: '<gradient:#00008B:#4169E1>[Lapis]</gradient>'
+      name: '<gradient:#00008B:#4169E1>[Lapis]'
       lore:
         - '&7需要段位分: &e1280'
         - '&7升级奖励: &a4780 金币'
@@ -758,7 +758,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<gradient:#00008B:#4169E1>[Lapis]</gradient>'
+          name: '<gradient:#00008B:#4169E1>[Lapis]'
           lore:
             - '&7需要段位分: &e1280'
             - '&7升级奖励: &a4780 金币'
@@ -768,7 +768,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: LAPIS_ORE
-      name: '<gradient:#00008B:#4169E1>[Lapis_Ore]</gradient>'
+      name: '<gradient:#00008B:#4169E1>[Lapis_Ore]'
       lore:
         - '&7需要段位分: &e1445'
         - '&7升级奖励: &a5315 金币'
@@ -780,7 +780,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<gradient:#00008B:#4169E1>[Lapis_Ore]</gradient>'
+          name: '<gradient:#00008B:#4169E1>[Lapis_Ore]'
           lore:
             - '&7需要段位分: &e1445'
             - '&7升级奖励: &a5315 金币'
@@ -790,7 +790,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: LAPIS_BLOCK
-      name: '<gradient:#00008B:#4169E1>[Lapis_Block]</gradient>'
+      name: '<gradient:#00008B:#4169E1>[Lapis_Block]'
       lore:
         - '&7需要段位分: &e1620'
         - '&7升级奖励: &a5880 金币'
@@ -802,7 +802,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<gradient:#00008B:#4169E1>[Lapis_Block]</gradient>'
+          name: '<gradient:#00008B:#4169E1>[Lapis_Block]'
           lore:
             - '&7需要段位分: &e1620'
             - '&7升级奖励: &a5880 金币'
@@ -812,7 +812,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: DIAMOND
-      name: '<gradient:#1E90FF:#00BFFF>[Diamond]</gradient>'
+      name: '<gradient:#1E90FF:#00BFFF>[Diamond]'
       lore:
         - '&7需要段位分: &e1805'
         - '&7升级奖励: &a6475 金币'
@@ -825,7 +825,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<gradient:#1E90FF:#00BFFF>[Diamond]</gradient>'
+          name: '<gradient:#1E90FF:#00BFFF>[Diamond]'
           lore:
             - '&7需要段位分: &e1805'
             - '&7升级奖励: &a6475 金币'
@@ -836,7 +836,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: DIAMOND_ORE
-      name: '<gradient:#1E90FF:#00BFFF>[Diamond_Ore]</gradient>'
+      name: '<gradient:#1E90FF:#00BFFF>[Diamond_Ore]'
       lore:
         - '&7需要段位分: &e2000'
         - '&7升级奖励: &a7110 金币'
@@ -848,7 +848,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<gradient:#1E90FF:#00BFFF>[Diamond_Ore]</gradient>'
+          name: '<gradient:#1E90FF:#00BFFF>[Diamond_Ore]'
           lore:
             - '&7需要段位分: &e2000'
             - '&7升级奖励: &a7110 金币'
@@ -858,7 +858,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: DIAMOND_BLOCK
-      name: '<gradient:#1E90FF:#00BFFF>[Diamond_Block]</gradient>'
+      name: '<gradient:#1E90FF:#00BFFF>[Diamond_Block]'
       lore:
         - '&7需要段位分: &e2205'
         - '&7升级奖励: &a7755 金币'
@@ -870,7 +870,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<gradient:#1E90FF:#00BFFF>[Diamond_Block]</gradient>'
+          name: '<gradient:#1E90FF:#00BFFF>[Diamond_Block]'
           lore:
             - '&7需要段位分: &e2205'
             - '&7升级奖励: &a7755 金币'
@@ -880,7 +880,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: ENCHANTING_TABLE
-      name: '<gradient:#8A2BE2:#BA55D3>[Enchanter]</gradient>'
+      name: '<gradient:#8A2BE2:#BA55D3>[Enchanter]'
       lore:
         - '&7需要段位分: &e2420'
         - '&7升级奖励: &a8440 金币'
@@ -892,7 +892,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<gradient:#8A2BE2:#BA55D3>[Enchanter]</gradient>'
+          name: '<gradient:#8A2BE2:#BA55D3>[Enchanter]'
           lore:
             - '&7需要段位分: &e2420'
             - '&7升级奖励: &a8440 金币'
@@ -902,7 +902,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: EMERALD
-      name: '<gradient:#228B22:#7CFC00>[Emerald]</gradient>'
+      name: '<gradient:#228B22:#7CFC00>[Emerald]'
       lore:
         - '&7需要段位分: &e2645'
         - '&7升级奖励: &a9155 金币'
@@ -914,7 +914,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<gradient:#228B22:#7CFC00>[Emerald]</gradient>'
+          name: '<gradient:#228B22:#7CFC00>[Emerald]'
           lore:
             - '&7需要段位分: &e2645'
             - '&7升级奖励: &a9155 金币'
@@ -924,7 +924,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: EMERALD_ORE
-      name: '<gradient:#228B22:#7CFC00>[Emerald_Ore]</gradient>'
+      name: '<gradient:#228B22:#7CFC00>[Emerald_Ore]'
       lore:
         - '&7需要段位分: &e2880'
         - '&7升级奖励: &a9900 金币'
@@ -936,7 +936,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<gradient:#228B22:#7CFC00>[Emerald_Ore]</gradient>'
+          name: '<gradient:#228B22:#7CFC00>[Emerald_Ore]'
           lore:
             - '&7需要段位分: &e2880'
             - '&7升级奖励: &a9900 金币'
@@ -946,7 +946,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: EMERALD_BLOCK
-      name: '<gradient:#228B22:#7CFC00>[Emerald_Block]</gradient>'
+      name: '<gradient:#228B22:#7CFC00>[Emerald_Block]'
       lore:
         - '&7需要段位分: &e3125'
         - '&7升级奖励: &a10675 金币'
@@ -958,7 +958,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<gradient:#228B22:#7CFC00>[Emerald_Block]</gradient>'
+          name: '<gradient:#228B22:#7CFC00>[Emerald_Block]'
           lore:
             - '&7需要段位分: &e3125'
             - '&7升级奖励: &a10675 金币'
@@ -968,7 +968,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: OBSIDIAN
-      name: '<gradient:#8B008B:#696969>[Obsidian]</gradient>'
+      name: '<gradient:#8B008B:#696969>[Obsidian]'
       lore:
         - '&7需要段位分: &e3380'
         - '&7升级奖励: &a11480 金币'
@@ -980,7 +980,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<gradient:#8B008B:#696969>[Obsidian]</gradient>'
+          name: '<gradient:#8B008B:#696969>[Obsidian]'
           lore:
             - '&7需要段位分: &e3380'
             - '&7升级奖励: &a11480 金币'
@@ -990,7 +990,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: NETHER_BRICK
-      name: '<gradient:#DC143C:#FA8072>[Nether]</gradient>'
+      name: '<gradient:#DC143C:#FA8072>[Nether]'
       lore:
         - '&7需要段位分: &e3645'
         - '&7升级奖励: &a12315 金币'
@@ -1002,7 +1002,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<gradient:#DC143C:#FA8072>[Nether]</gradient>'
+          name: '<gradient:#DC143C:#FA8072>[Nether]'
           lore:
             - '&7需要段位分: &e3645'
             - '&7升级奖励: &a12315 金币'
@@ -1012,7 +1012,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: NETHER_QUARTZ_ORE
-      name: '<gradient:#DC143C:#FA8072:#FFFFFF>[Nether_Quartz]</gradient>'
+      name: '<gradient:#DC143C:#FA8072>[Nether<gradient:#FA8072:#FFFFFF>_Quartz]'
       lore:
         - '&7需要段位分: &e3920'
         - '&7升级奖励: &a13180 金币'
@@ -1024,7 +1024,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<gradient:#DC143C:#FA8072:#FFFFFF>[Nether_Quartz]</gradient>'
+          name: '<gradient:#DC143C:#FA8072>[Nether<gradient:#FA8072:#FFFFFF>_Quartz]'
           lore:
             - '&7需要段位分: &e3920'
             - '&7升级奖励: &a13180 金币'
@@ -1034,7 +1034,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: NETHER_GOLD_ORE
-      name: '<gradient:#DC143C:#FA8072:#FFD700>[Nether_Gold_Ore]</gradient>'
+      name: '<gradient:#DC143C:#FA8072>[Nether<gradient:#FA8072:#FFD700>_Gold_Ore]'
       lore:
         - '&7需要段位分: &e4205'
         - '&7升级奖励: &a14075 金币'
@@ -1046,7 +1046,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<gradient:#DC143C:#FA8072:#FFD700>[Nether_Gold_Ore]</gradient>'
+          name: '<gradient:#DC143C:#FA8072>[Nether<gradient:#FA8072:#FFD700>_Gold_Ore]'
           lore:
             - '&7需要段位分: &e4205'
             - '&7升级奖励: &a14075 金币'
@@ -1056,7 +1056,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: NETHER_BRICK
-      name: '<gradient:#DC143C:#FA8072:#800000>[Nether_Fortress]</gradient>'
+      name: '<gradient:#DC143C:#FA8072>[Nether<gradient:#FA8072:#800000>_Fortress]'
       lore:
         - '&7需要段位分: &e4500'
         - '&7升级奖励: &a15000 金币'
@@ -1068,7 +1068,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<gradient:#DC143C:#FA8072:#800000>[Nether_Fortress]</gradient>'
+          name: '<gradient:#DC143C:#FA8072>[Nether<gradient:#FA8072:#800000>_Fortress]'
           lore:
             - '&7需要段位分: &e4500'
             - '&7升级奖励: &a15000 金币'
@@ -1078,7 +1078,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: NETHERITE_INGOT
-      name: '<gradient:#696969:#483D8B>[Netherite]</gradient>'
+      name: '<gradient:#696969:#483D8B>[Netherite]'
       lore:
         - '&7需要段位分: &e4805'
         - '&7升级奖励: &a15955 金币'
@@ -1091,7 +1091,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<gradient:#696969:#483D8B>[Netherite]</gradient>'
+          name: '<gradient:#696969:#483D8B>[Netherite]'
           lore:
             - '&7需要段位分: &e4805'
             - '&7升级奖励: &a15955 金币'
@@ -1102,7 +1102,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: WITHER_SKELETON_SKULL
-      name: '<gradient:#8B4513:#808080>[Wither]</gradient>'
+      name: '<gradient:#8B4513:#808080>[Wither]'
       lore:
         - '&7需要段位分: &e5120'
         - '&7升级奖励: &a16940 金币'
@@ -1115,7 +1115,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<gradient:#8B4513:#808080>[Wither]</gradient>'
+          name: '<gradient:#8B4513:#808080>[Wither]'
           lore:
             - '&7需要段位分: &e5120'
             - '&7升级奖励: &a16940 金币'
@@ -1126,7 +1126,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: NETHER_STAR
-      name: '<gradient:#DC143C:#FFD700:#FFFFFF>[Nether_Star]</gradient>'
+      name: '<gradient:#DC143C:#FFD700>[Nether<gradient:#FFD700:#FFFFFF>_Star]'
       lore:
         - '&7需要段位分: &e5445'
         - '&7升级奖励: &a17955 金币'
@@ -1138,7 +1138,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<gradient:#DC143C:#FFD700:#FFFFFF>[Nether_Star]</gradient>'
+          name: '<gradient:#DC143C:#FFD700>[Nether<gradient:#FFD700:#FFFFFF>_Star]'
           lore:
             - '&7需要段位分: &e5445'
             - '&7升级奖励: &a17955 金币'
@@ -1148,7 +1148,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: BEACON
-      name: '<gradient:#00BFFF:#FF4500>[Beacon]</gradient>'
+      name: '<gradient:#00BFFF:#FF4500>[Beacon]'
       lore:
         - '&7需要段位分: &e5780'
         - '&7升级奖励: &a19000 金币'
@@ -1161,7 +1161,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<gradient:#00BFFF:#FF4500>[Beacon]</gradient>'
+          name: '<gradient:#00BFFF:#FF4500>[Beacon]'
           lore:
             - '&7需要段位分: &e5780'
             - '&7升级奖励: &a19000 金币'
@@ -1172,7 +1172,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: ENDER_PEARL
-      name: '<gradient:#9932CC:#FFFF00>[Ender]</gradient>'
+      name: '<gradient:#9932CC:#FFFF00>[Ender]'
       lore:
         - '&7需要段位分: &e6125'
         - '&7升级奖励: &a20075 金币'
@@ -1184,7 +1184,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<gradient:#9932CC:#FFFF00>[Ender]</gradient>'
+          name: '<gradient:#9932CC:#FFFF00>[Ender]'
           lore:
             - '&7需要段位分: &e6125'
             - '&7升级奖励: &a20075 金币'
@@ -1194,7 +1194,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: DRAGON_HEAD
-      name: '<gradient:#9932CC:#FFFF00:#9932CC>[Ender_Dragon]</gradient>'
+      name: '<gradient:#9932CC:#FFFF00>[Ender_<gradient:#FFFF00:#9932CC>Dragon]'
       lore:
         - '&7需要段位分: &e6480'
         - '&7升级奖励: &a21180 金币'
@@ -1207,7 +1207,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<gradient:#9932CC:#FFFF00:#9932CC>[Ender_Dragon]</gradient>'
+          name: '<gradient:#9932CC:#FFFF00>[Ender_<gradient:#FFFF00:#9932CC>Dragon]'
           lore:
             - '&7需要段位分: &e6480'
             - '&7升级奖励: &a21180 金币'
@@ -1218,7 +1218,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: END_STONE
-      name: '<gradient:#8A2BE2:#4169E1>[End_City]</gradient>'
+      name: '<gradient:#8A2BE2:#4169E1>[End_City]'
       lore:
         - '&7需要段位分: &e6845'
         - '&7升级奖励: &a22315 金币'
@@ -1230,7 +1230,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<gradient:#8A2BE2:#4169E1>[End_City]</gradient>'
+          name: '<gradient:#8A2BE2:#4169E1>[End_City]'
           lore:
             - '&7需要段位分: &e6845'
             - '&7升级奖励: &a22315 金币'
@@ -1240,7 +1240,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: ELYTRA
-      name: '<gradient:#8B008B:#483D8B>[Elytra]</gradient>'
+      name: '<gradient:#8B008B:#483D8B>[Elytra]'
       lore:
         - '&7需要段位分: &e7220'
         - '&7升级奖励: &a23480 金币'
@@ -1252,7 +1252,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<gradient:#8B008B:#483D8B>[Elytra]</gradient>'
+          name: '<gradient:#8B008B:#483D8B>[Elytra]'
           lore:
             - '&7需要段位分: &e7220'
             - '&7升级奖励: &a23480 金币'
@@ -1262,7 +1262,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: END_CRYSTAL
-      name: '<gradient:#8A2BE2:#FFD700:#FF4500>[End_Again]</gradient>'
+      name: '<gradient:#8A2BE2:#FFD700>[End_<gradient:#FFD700:#FF4500>Again]'
       lore:
         - '&7需要段位分: &e7605'
         - '&7升级奖励: &a24675 金币'
@@ -1274,7 +1274,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<gradient:#8A2BE2:#FFD700:#FF4500>[End_Again]</gradient>'
+          name: '<gradient:#8A2BE2:#FFD700>[End_<gradient:#FFD700:#FF4500>Again]'
           lore:
             - '&7需要段位分: &e7605'
             - '&7升级奖励: &a24675 金币'
@@ -1284,7 +1284,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: BEDROCK
-      name: '<gradient:#000000:#696969>[Bedrock]</gradient>'
+      name: '<gradient:#000000:#696969>[Bedrock]'
       lore:
         - '&7需要段位分: &e8000'
         - '&7升级奖励: &a25900 金币'
@@ -1296,7 +1296,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<gradient:#000000:#696969>[Bedrock]</gradient>'
+          name: '<gradient:#000000:#696969>[Bedrock]'
           lore:
             - '&7需要段位分: &e8000'
             - '&7升级奖励: &a25900 金币'
@@ -1306,7 +1306,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: BARRIER
-      name: '<gradient:#ff0000:#F08080>[Barrier]</gradient>'
+      name: '<gradient:#ff0000:#F08080>[Barrier]'
       lore:
         - '&7需要段位分: &e8405'
         - '&7升级奖励: &a27155 金币'
@@ -1318,7 +1318,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<gradient:#ff0000:#F08080>[Barrier]</gradient>'
+          name: '<gradient:#ff0000:#F08080>[Barrier]'
           lore:
             - '&7需要段位分: &e8405'
             - '&7升级奖励: &a27155 金币'
@@ -1328,7 +1328,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: COMMAND_BLOCK
-      name: '<red><bold>[<gold><bold>★<gradient:#FFA500:#FFFFFF:#DAA520>Command_Block</gradient><gold><bold>★<red><bold>]<reset>'
+      name: '&c&l[&6&l★<gradient:#FFA500:#FFFFFF>Command<gradient:#FFFFFF:#DAA520>_Block&6&l★&c&l]&r'
       lore:
         - '&7需要段位分: &e8820'
         - '&7升级奖励: &a28440 金币'
@@ -1340,7 +1340,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<red><bold>[<gold><bold>★<gradient:#FFA500:#FFFFFF:#DAA520>Command_Block</gradient><gold><bold>★<red><bold>]<reset>'
+          name: '&c&l[&6&l★<gradient:#FFA500:#FFFFFF>Command<gradient:#FFFFFF:#DAA520>_Block&6&l★&c&l]&r'
           lore:
             - '&7需要段位分: &e8820'
             - '&7升级奖励: &a28440 金币'
@@ -1350,7 +1350,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: CHAIN_COMMAND_BLOCK
-      name: '<red><bold>[<gold><bold>★<gradient:#20B2AA:#FFA500:#FFFFFF>Chain_Command_Block</gradient><gold><bold>★<red><bold>]<reset>'
+      name: '&c&l[&6&l★<gradient:#20B2AA:#FFA500>Chain_Comm<gradient:#FFA500:#FFFFFF>and_Block&6&l★&c&l]&r'
       lore:
         - '&7需要段位分: &e9245'
         - '&7升级奖励: &a28440 金币'
@@ -1362,7 +1362,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<red><bold>[<gold><bold>★<gradient:#20B2AA:#FFA500:#FFFFFF>Chain_Command_Block</gradient><gold><bold>★<red><bold>]<reset>'
+          name: '&c&l[&6&l★<gradient:#20B2AA:#FFA500>Chain_Comm<gradient:#FFA500:#FFFFFF>and_Block&6&l★&c&l]&r'
           lore:
             - '&7需要段位分: &e9245'
             - '&7升级奖励: &a28440 金币'
@@ -1372,7 +1372,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: REPEATING_COMMAND_BLOCK
-      name: '<red><bold>[<gold><bold>★<gradient:#9400D3:#FFA500:#FDF5E6>Repeating_Command_Block</gradient><gold><bold>★<red><bold>]<reset>'
+      name: '&c&l[&6&l★<gradient:#9400D3:#FFA500>Repeating_Co<gradient:#FFA500:#FDF5E6>mmand_Block&6&l★&c&l]&r'
       lore:
         - '&7需要段位分: &e9680'
         - '&7升级奖励: &a31100 金币'
@@ -1384,7 +1384,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<red><bold>[<gold><bold>★<gradient:#9400D3:#FFA500:#FDF5E6>Repeating_Command_Block</gradient><gold><bold>★<red><bold>]<reset>'
+          name: '&c&l[&6&l★<gradient:#9400D3:#FFA500>Repeating_Co<gradient:#FFA500:#FDF5E6>mmand_Block&6&l★&c&l]&r'
           lore:
             - '&7需要段位分: &e9680'
             - '&7升级奖励: &a31100 金币'
@@ -1394,7 +1394,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: DEBUG_STICK
-      name: '<light_purple>[<gradient:#FF4500:#FFD700:#8A2BE2>Debug_Stick</gradient><light_purple>]'
+      name: '&d[<gradient:#FF4500:#FFD700>Debug_<gradient:#FFD700:#8A2BE2>Stick&d]'
       lore:
         - '&7需要段位分: &e10125'
         - '&7升级奖励: &a32475 金币'
@@ -1406,7 +1406,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<light_purple>[<gradient:#FF4500:#FFD700:#8A2BE2>Debug_Stick</gradient><light_purple>]'
+          name: '&d[<gradient:#FF4500:#FFD700>Debug_<gradient:#FFD700:#8A2BE2>Stick&d]'
           lore:
             - '&7需要段位分: &e10125'
             - '&7升级奖励: &a32475 金币'
@@ -1416,7 +1416,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: STRUCTURE_BLOCK
-      name: '<red><bold>[<light_purple><bold>¤<gradient:#8A2BE2:#DDA0DD>Structure_Block</gradient><light_purple><bold>¤<red><bold>]<reset>'
+      name: '&c&l[&d&l¤<gradient:#8A2BE2:#DDA0DD>Structure_Block&d&l¤&c&l]&r'
       lore:
         - '&7需要段位分: &e10580'
         - '&7升级奖励: &a33880 金币'
@@ -1428,7 +1428,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<red><bold>[<light_purple><bold>¤<gradient:#8A2BE2:#DDA0DD>Structure_Block</gradient><light_purple><bold>¤<red><bold>]<reset>'
+          name: '&c&l[&d&l¤<gradient:#8A2BE2:#DDA0DD>Structure_Block&d&l¤&c&l]&r'
           lore:
             - '&7需要段位分: &e10580'
             - '&7升级奖励: &a33880 金币'
@@ -1438,7 +1438,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: STRUCTURE_BLOCK
-      name: '<red><bold>[<light_purple><bold>¤<gradient:#8A2BE2:#20B2AA>Structure_Void</gradient><light_purple><bold>¤<red><bold>]<reset>'
+      name: '&c&l[&d&l¤<gradient:#8A2BE2:#20B2AA>Structure_Void&d&l¤&c&l]&r'
       lore:
         - '&7需要段位分: &e11045'
         - '&7升级奖励: &a35315 金币'
@@ -1450,7 +1450,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<red><bold>[<light_purple><bold>¤<gradient:#8A2BE2:#20B2AA>Structure_Void</gradient><light_purple><bold>¤<red><bold>]<reset>'
+          name: '&c&l[&d&l¤<gradient:#8A2BE2:#20B2AA>Structure_Void&d&l¤&c&l]&r'
           lore:
             - '&7需要段位分: &e11045'
             - '&7升级奖励: &a35315 金币'
@@ -1460,7 +1460,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: GRASS_BLOCK
-      name: '<dark_red><bold>[<yellow><bold><obfuscated>[<aqua>■<yellow><bold><obfuscated>]<gradient:#FF0000:#FFA500:#FFFF00:#00FF00:#00FFFF:#0000FF>Minecraft</gradient><yellow><bold><obfuscated>[<aqua>■<yellow><bold><obfuscated>]<dark_red><bold>]<reset>'
+      name: '&4&l[&e&l&k[&b■&e&l&k]<gradient:#FF0000:#FFA500>Mi<gradient:#FFA500:#FFFF00>ne<gradient:#FFFF00:#00FF00>cr<gradient:#00FF00:#00FFFF>af<gradient:#00FFFF:#0000FF>t&e&l&k[&b■&e&l&k]&4&l]&r'
       lore:
         - '&7需要段位分: &e11520'
         - '&7升级奖励: &a36780 金币'
@@ -1473,7 +1473,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<dark_red><bold>[<yellow><bold><obfuscated>[<aqua>■<yellow><bold><obfuscated>]<gradient:#FF0000:#FFA500:#FFFF00:#00FF00:#00FFFF:#0000FF>Minecraft</gradient><yellow><bold><obfuscated>[<aqua>■<yellow><bold><obfuscated>]<dark_red><bold>]<reset>'
+          name: '&4&l[&e&l&k[&b■&e&l&k]<gradient:#FF0000:#FFA500>Mi<gradient:#FFA500:#FFFF00>ne<gradient:#FFFF00:#00FF00>cr<gradient:#00FF00:#00FFFF>af<gradient:#00FFFF:#0000FF>t&e&l&k[&b■&e&l&k]&4&l]&r'
           lore:
             - '&7需要段位分: &e11520'
             - '&7升级奖励: &a36780 金币'
@@ -1484,7 +1484,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: GRASS_BLOCK
-      name: '<dark_red><bold>[<yellow><bold><obfuscated>[<aqua>■<yellow><bold><obfuscated>]<gradient:#FF0000:#FFA500:#FFFF00:#00FF00:#00FFFF:#0000FF:#FF00FF>Minecraft+</gradient><yellow><bold><obfuscated>[<aqua>■<yellow><bold><obfuscated>]<dark_red><bold>]<reset>'
+      name: '&4&l[&e&l&k[&b■&e&l&k]<gradient:#FF0000:#FFA500>Mi<gradient:#FFA500:#FFFF00>ne<gradient:#FFFF00:#00FF00>cr<gradient:#00FF00:#00FFFF>af<gradient:#00FFFF:#0000FF>t<gradient:#0000FF:#FF00FF>+&e&l&k[&b■&e&l&k]&4&l]&r'
       lore:
         - '&7需要段位分: &e12005'
         - '&7升级奖励: &a38275 金币'
@@ -1496,7 +1496,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<dark_red><bold>[<yellow><bold><obfuscated>[<aqua>■<yellow><bold><obfuscated>]<gradient:#FF0000:#FFA500:#FFFF00:#00FF00:#00FFFF:#0000FF:#FF00FF>Minecraft+</gradient><yellow><bold><obfuscated>[<aqua>■<yellow><bold><obfuscated>]<dark_red><bold>]<reset>'
+          name: '&4&l[&e&l&k[&b■&e&l&k]<gradient:#FF0000:#FFA500>Mi<gradient:#FFA500:#FFFF00>ne<gradient:#FFFF00:#00FF00>cr<gradient:#00FF00:#00FFFF>af<gradient:#00FFFF:#0000FF>t<gradient:#0000FF:#FF00FF>+&e&l&k[&b■&e&l&k]&4&l]&r'
           lore:
             - '&7需要段位分: &e12005'
             - '&7升级奖励: &a38275 金币'
@@ -1506,7 +1506,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: GRASS_BLOCK
-      name: '<dark_red><bold>[<yellow><bold><obfuscated>[<aqua>■<yellow><bold><obfuscated>]<gradient:#FF0000:#FFA500:#FFFF00:#00FF00:#00FFFF:#0000FF>Minecraft</gradient>-<white><gradient:#FFD700:#F5F5F5><bold>M<bold>a<bold>x</gradient><yellow><bold><obfuscated>[<aqua>■<yellow><bold><obfuscated>]<dark_red><bold>]<reset>'
+      name: '&4&l[&e&l&k[&b■&e&l&k]<gradient:#FF0000:#FFA500>Mi<gradient:#FFA500:#FFFF00>ne<gradient:#FFFF00:#00FF00>cr<gradient:#00FF00:#00FFFF>af<gradient:#00FFFF:#0000FF>t-&f<gradient:#FFD700:#F5F5F5>&lM&la&lx&e&l&k[&b■&e&l&k]&4&l]&r'
       lore:
         - '&7需要段位分: &e12500'
         - '&7升级奖励: &a39800 金币'
@@ -1519,7 +1519,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<dark_red><bold>[<yellow><bold><obfuscated>[<aqua>■<yellow><bold><obfuscated>]<gradient:#FF0000:#FFA500:#FFFF00:#00FF00:#00FFFF:#0000FF>Minecraft</gradient>-<white><gradient:#FFD700:#F5F5F5><bold>M<bold>a<bold>x</gradient><yellow><bold><obfuscated>[<aqua>■<yellow><bold><obfuscated>]<dark_red><bold>]<reset>'
+          name: '&4&l[&e&l&k[&b■&e&l&k]<gradient:#FF0000:#FFA500>Mi<gradient:#FFA500:#FFFF00>ne<gradient:#FFFF00:#00FF00>cr<gradient:#00FF00:#00FFFF>af<gradient:#00FFFF:#0000FF>t-&f<gradient:#FFD700:#F5F5F5>&lM&la&lx&e&l&k[&b■&e&l&k]&4&l]&r'
           lore:
             - '&7需要段位分: &e12500'
             - '&7升级奖励: &a39800 金币'
@@ -1530,7 +1530,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: DIRT
-      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#A0522D:#F5DEB3>Dirt</gradient><yellow>]'
+      name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#A0522D:#F5DEB3>Dirt&e]'
       lore:
         - '&7需要段位分: &e15606'
         - '&7升级奖励: &a41355 金币'
@@ -1542,7 +1542,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#A0522D:#F5DEB3>Dirt</gradient><yellow>]'
+          name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#A0522D:#F5DEB3>Dirt&e]'
           lore:
             - '&7需要段位分: &e15606'
             - '&7升级奖励: &a41355 金币'
@@ -1552,7 +1552,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: OAK_LOG
-      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#CD853F:#DEB887>Log</gradient><yellow>]'
+      name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#CD853F:#DEB887>Log&e]'
       lore:
         - '&7需要段位分: &e16224'
         - '&7升级奖励: &a42920 金币'
@@ -1564,7 +1564,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#CD853F:#DEB887>Log</gradient><yellow>]'
+          name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#CD853F:#DEB887>Log&e]'
           lore:
             - '&7需要段位分: &e16224'
             - '&7升级奖励: &a42920 金币'
@@ -1574,7 +1574,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: STONE
-      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#708090:#B0C4DE>Stone</gradient><yellow>]'
+      name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#708090:#B0C4DE>Stone&e]'
       lore:
         - '&7需要段位分: &e16854'
         - '&7升级奖励: &a44555 金币'
@@ -1586,7 +1586,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#708090:#B0C4DE>Stone</gradient><yellow>]'
+          name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#708090:#B0C4DE>Stone&e]'
           lore:
             - '&7需要段位分: &e16854'
             - '&7升级奖励: &a44555 金币'
@@ -1596,7 +1596,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: COAL
-      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#696969:#404040>Coal</gradient><yellow>]'
+      name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#696969:#404040>Coal&e]'
       lore:
         - '&7需要段位分: &e17496'
         - '&7升级奖励: &a46200 金币'
@@ -1608,7 +1608,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#696969:#404040>Coal</gradient><yellow>]'
+          name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#696969:#404040>Coal&e]'
           lore:
             - '&7需要段位分: &e17496'
             - '&7升级奖励: &a46200 金币'
@@ -1618,7 +1618,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: COAL_ORE
-      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#696969:#404040>Coal_Ore</gradient><yellow>]'
+      name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#696969:#404040>Coal_Ore&e]'
       lore:
         - '&7需要段位分: &e18150'
         - '&7升级奖励: &a47875 金币'
@@ -1630,7 +1630,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#696969:#404040>Coal_Ore</gradient><yellow>]'
+          name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#696969:#404040>Coal_Ore&e]'
           lore:
             - '&7需要段位分: &e18150'
             - '&7升级奖励: &a47875 金币'
@@ -1640,7 +1640,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: COAL_BLOCK
-      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#696969:#404040>Coal_Block</gradient><yellow>]'
+      name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#696969:#404040>Coal_Block&e]'
       lore:
         - '&7需要段位分: &e18816'
         - '&7升级奖励: &a49580 金币'
@@ -1652,7 +1652,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#696969:#404040>Coal_Block</gradient><yellow>]'
+          name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#696969:#404040>Coal_Block&e]'
           lore:
             - '&7需要段位分: &e18816'
             - '&7升级奖励: &a49580 金币'
@@ -1662,7 +1662,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: IRON_INGOT
-      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#A9A9A9:#FFFFFF>Iron</gradient><yellow>]'
+      name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#A9A9A9:#FFFFFF>Iron&e]'
       lore:
         - '&7需要段位分: &e19494'
         - '&7升级奖励: &a51315 金币'
@@ -1675,7 +1675,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#A9A9A9:#FFFFFF>Iron</gradient><yellow>]'
+          name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#A9A9A9:#FFFFFF>Iron&e]'
           lore:
             - '&7需要段位分: &e19494'
             - '&7升级奖励: &a51315 金币'
@@ -1686,7 +1686,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: IRON_ORE
-      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#A9A9A9:#FFFFFF>Iron_Ore</gradient><yellow>]'
+      name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#A9A9A9:#FFFFFF>Iron_Ore&e]'
       lore:
         - '&7需要段位分: &e20184'
         - '&7升级奖励: &a53080 金币'
@@ -1698,7 +1698,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#A9A9A9:#FFFFFF>Iron_Ore</gradient><yellow>]'
+          name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#A9A9A9:#FFFFFF>Iron_Ore&e]'
           lore:
             - '&7需要段位分: &e20184'
             - '&7升级奖励: &a53080 金币'
@@ -1708,7 +1708,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: IRON_BLOCK
-      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#A9A9A9:#FFFFFF>Iron_Block</gradient><yellow>]'
+      name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#A9A9A9:#FFFFFF>Iron_Block&e]'
       lore:
         - '&7需要段位分: &e20886'
         - '&7升级奖励: &a54875 金币'
@@ -1720,7 +1720,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#A9A9A9:#FFFFFF>Iron_Block</gradient><yellow>]'
+          name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#A9A9A9:#FFFFFF>Iron_Block&e]'
           lore:
             - '&7需要段位分: &e20886'
             - '&7升级奖励: &a54875 金币'
@@ -1730,7 +1730,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: GOLD_INGOT
-      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#FFD700:#DAA520>Gold</gradient><yellow>]'
+      name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#FFD700:#DAA520>Gold&e]'
       lore:
         - '&7需要段位分: &e21600'
         - '&7升级奖励: &a56700 金币'
@@ -1742,7 +1742,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#FFD700:#DAA520>Gold</gradient><yellow>]'
+          name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#FFD700:#DAA520>Gold&e]'
           lore:
             - '&7需要段位分: &e21600'
             - '&7升级奖励: &a56700 金币'
@@ -1752,7 +1752,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: GOLD_ORE
-      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#FFD700:#DAA520>Gold_Ore</gradient><yellow>]'
+      name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#FFD700:#DAA520>Gold_Ore&e]'
       lore:
         - '&7需要段位分: &e22326'
         - '&7升级奖励: &a58555 金币'
@@ -1764,7 +1764,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#FFD700:#DAA520>Gold_Ore</gradient><yellow>]'
+          name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#FFD700:#DAA520>Gold_Ore&e]'
           lore:
             - '&7需要段位分: &e22326'
             - '&7升级奖励: &a58555 金币'
@@ -1774,7 +1774,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: GOLD_BLOCK
-      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#FFD700:#DAA520>Gold_Block</gradient><yellow>]'
+      name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#FFD700:#DAA520>Gold_Block&e]'
       lore:
         - '&7需要段位分: &e23064'
         - '&7升级奖励: &a60440 金币'
@@ -1786,7 +1786,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#FFD700:#DAA520>Gold_Block</gradient><yellow>]'
+          name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#FFD700:#DAA520>Gold_Block&e]'
           lore:
             - '&7需要段位分: &e23064'
             - '&7升级奖励: &a60440 金币'
@@ -1796,7 +1796,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: REDSTONE
-      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#FF0000:#FA8072>Redstone</gradient><yellow>]'
+      name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#FF0000:#FA8072>Redstone&e]'
       lore:
         - '&7需要段位分: &e23814'
         - '&7升级奖励: &a62355 金币'
@@ -1808,7 +1808,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#FF0000:#FA8072>Redstone</gradient><yellow>]'
+          name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#FF0000:#FA8072>Redstone&e]'
           lore:
             - '&7需要段位分: &e23814'
             - '&7升级奖励: &a62355 金币'
@@ -1818,7 +1818,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: REDSTONE_ORE
-      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#FF0000:#FA8072>Redstone_Ore</gradient><yellow>]'
+      name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#FF0000:#FA8072>Redstone_Ore&e]'
       lore:
         - '&7需要段位分: &e24576'
         - '&7升级奖励: &a64300 金币'
@@ -1830,7 +1830,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#FF0000:#FA8072>Redstone_Ore</gradient><yellow>]'
+          name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#FF0000:#FA8072>Redstone_Ore&e]'
           lore:
             - '&7需要段位分: &e24576'
             - '&7升级奖励: &a64300 金币'
@@ -1840,7 +1840,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: REDSTONE_BLOCK
-      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#FF0000:#FA8072>Redstone_Block</gradient><yellow>]'
+      name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#FF0000:#FA8072>Redstone_Block&e]'
       lore:
         - '&7需要段位分: &e25350'
         - '&7升级奖励: &a66275 金币'
@@ -1852,7 +1852,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#FF0000:#FA8072>Redstone_Block</gradient><yellow>]'
+          name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#FF0000:#FA8072>Redstone_Block&e]'
           lore:
             - '&7需要段位分: &e25350'
             - '&7升级奖励: &a66275 金币'
@@ -1862,7 +1862,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: LAPIS_LAZULI
-      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#00008B:#4169E1>Lapis</gradient><yellow>]'
+      name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#00008B:#4169E1>Lapis&e]'
       lore:
         - '&7需要段位分: &e26136'
         - '&7升级奖励: &a68200 金币'
@@ -1874,7 +1874,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#00008B:#4169E1>Lapis</gradient><yellow>]'
+          name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#00008B:#4169E1>Lapis&e]'
           lore:
             - '&7需要段位分: &e26136'
             - '&7升级奖励: &a68200 金币'
@@ -1884,7 +1884,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: LAPIS_ORE
-      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#00008B:#4169E1>Lapis_ore</gradient><yellow>]'
+      name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#00008B:#4169E1>Lapis_ore&e]'
       lore:
         - '&7需要段位分: &e26934'
         - '&7升级奖励: &a70315 金币'
@@ -1896,7 +1896,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#00008B:#4169E1>Lapis_ore</gradient><yellow>]'
+          name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#00008B:#4169E1>Lapis_ore&e]'
           lore:
             - '&7需要段位分: &e26934'
             - '&7升级奖励: &a70315 金币'
@@ -1906,7 +1906,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: LAPIS_BLOCK
-      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#00008B:#4169E1>Lapis_block</gradient><yellow>]'
+      name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#00008B:#4169E1>Lapis_block&e]'
       lore:
         - '&7需要段位分: &e27744'
         - '&7升级奖励: &a72380 金币'
@@ -1918,7 +1918,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#00008B:#4169E1>Lapis_block</gradient><yellow>]'
+          name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#00008B:#4169E1>Lapis_block&e]'
           lore:
             - '&7需要段位分: &e27744'
             - '&7升级奖励: &a72380 金币'
@@ -1928,7 +1928,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: DIAMOND
-      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#1E90FF:#00BFFF>Diamond</gradient><yellow>]'
+      name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#1E90FF:#00BFFF>Diamond&e]'
       lore:
         - '&7需要段位分: &e28566'
         - '&7升级奖励: &a74475 金币'
@@ -1941,7 +1941,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#1E90FF:#00BFFF>Diamond</gradient><yellow>]'
+          name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#1E90FF:#00BFFF>Diamond&e]'
           lore:
             - '&7需要段位分: &e28566'
             - '&7升级奖励: &a74475 金币'
@@ -1952,7 +1952,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: DIAMOND_ORE
-      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#1E90FF:#00BFFF>Diamond_ore</gradient><yellow>]'
+      name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#1E90FF:#00BFFF>Diamond_ore&e]'
       lore:
         - '&7需要段位分: &e29400'
         - '&7升级奖励: &a76600 金币'
@@ -1964,7 +1964,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#1E90FF:#00BFFF>Diamond_ore</gradient><yellow>]'
+          name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#1E90FF:#00BFFF>Diamond_ore&e]'
           lore:
             - '&7需要段位分: &e29400'
             - '&7升级奖励: &a76600 金币'
@@ -1974,7 +1974,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: DIAMOND_BLOCK
-      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#1E90FF:#00BFFF>Diamond_block</gradient><yellow>]'
+      name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#1E90FF:#00BFFF>Diamond_block&e]'
       lore:
         - '&7需要段位分: &e30246'
         - '&7升级奖励: &a78755 金币'
@@ -1986,7 +1986,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#1E90FF:#00BFFF>Diamond_block</gradient><yellow>]'
+          name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#1E90FF:#00BFFF>Diamond_block&e]'
           lore:
             - '&7需要段位分: &e30246'
             - '&7升级奖励: &a78755 金币'
@@ -1996,7 +1996,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: ENCHANTING_TABLE
-      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#8A2BE2:#BA55D3>Enchanter</gradient><yellow>]'
+      name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#8A2BE2:#BA55D3>Enchanter&e]'
       lore:
         - '&7需要段位分: &e31104'
         - '&7升级奖励: &a80940 金币'
@@ -2008,7 +2008,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#8A2BE2:#BA55D3>Enchanter</gradient><yellow>]'
+          name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#8A2BE2:#BA55D3>Enchanter&e]'
           lore:
             - '&7需要段位分: &e31104'
             - '&7升级奖励: &a80940 金币'
@@ -2018,7 +2018,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: EMERALD
-      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#228B22:#7CFC00>Emerald</gradient><yellow>]'
+      name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#228B22:#7CFC00>Emerald&e]'
       lore:
         - '&7需要段位分: &e31974'
         - '&7升级奖励: &a83155 金币'
@@ -2030,7 +2030,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#228B22:#7CFC00>Emerald</gradient><yellow>]'
+          name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#228B22:#7CFC00>Emerald&e]'
           lore:
             - '&7需要段位分: &e31974'
             - '&7升级奖励: &a83155 金币'
@@ -2040,7 +2040,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: EMERALD_ORE
-      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#228B22:#7CFC00>Emerald_ore</gradient><yellow>]'
+      name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#228B22:#7CFC00>Emerald_ore&e]'
       lore:
         - '&7需要段位分: &e32856'
         - '&7升级奖励: &a85400 金币'
@@ -2052,7 +2052,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#228B22:#7CFC00>Emerald_ore</gradient><yellow>]'
+          name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#228B22:#7CFC00>Emerald_ore&e]'
           lore:
             - '&7需要段位分: &e32856'
             - '&7升级奖励: &a85400 金币'
@@ -2062,7 +2062,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: EMERALD_BLOCK
-      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#228B22:#7CFC00>Emerald_block</gradient><yellow>]'
+      name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#228B22:#7CFC00>Emerald_block&e]'
       lore:
         - '&7需要段位分: &e33750'
         - '&7升级奖励: &a87675 金币'
@@ -2074,7 +2074,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#228B22:#7CFC00>Emerald_block</gradient><yellow>]'
+          name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#228B22:#7CFC00>Emerald_block&e]'
           lore:
             - '&7需要段位分: &e33750'
             - '&7升级奖励: &a87675 金币'
@@ -2084,7 +2084,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: OBSIDIAN
-      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#8B008B:#696969>Obsidian</gradient><yellow>]'
+      name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#8B008B:#696969>Obsidian&e]'
       lore:
         - '&7需要段位分: &e34656'
         - '&7升级奖励: &a89980 金币'
@@ -2096,7 +2096,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#8B008B:#696969>Obsidian</gradient><yellow>]'
+          name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#8B008B:#696969>Obsidian&e]'
           lore:
             - '&7需要段位分: &e34656'
             - '&7升级奖励: &a89980 金币'
@@ -2106,7 +2106,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: NETHER_BRICK
-      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#DC143C:#FA8072>Nether</gradient><yellow>]'
+      name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#DC143C:#FA8072>Nether&e]'
       lore:
         - '&7需要段位分: &e35574'
         - '&7升级奖励: &a92315 金币'
@@ -2118,7 +2118,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#DC143C:#FA8072>Nether</gradient><yellow>]'
+          name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#DC143C:#FA8072>Nether&e]'
           lore:
             - '&7需要段位分: &e35574'
             - '&7升级奖励: &a92315 金币'
@@ -2128,7 +2128,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: NETHER_QUARTZ_ORE
-      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#DC143C:#FA8072:#FFFFFF>Nether_Quartz</gradient><yellow>]'
+      name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#DC143C:#FA8072>Nether<gradient:#FA8072:#FFFFFF>_Quartz&e]'
       lore:
         - '&7需要段位分: &e36504'
         - '&7升级奖励: &a94680 金币'
@@ -2140,7 +2140,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#DC143C:#FA8072:#FFFFFF>Nether_Quartz</gradient><yellow>]'
+          name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#DC143C:#FA8072>Nether<gradient:#FA8072:#FFFFFF>_Quartz&e]'
           lore:
             - '&7需要段位分: &e36504'
             - '&7升级奖励: &a94680 金币'
@@ -2150,7 +2150,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: NETHER_GOLD_ORE
-      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#DC143C:#FA8072:#FFD700>Nether_Gold_Ore</gradient><yellow>]'
+      name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#DC143C:#FA8072>Nether<gradient:#FA8072:#FFD700>_Gold_Ore&e]'
       lore:
         - '&7需要段位分: &e37446'
         - '&7升级奖励: &a97075 金币'
@@ -2162,7 +2162,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#DC143C:#FA8072:#FFD700>Nether_Gold_Ore</gradient><yellow>]'
+          name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#DC143C:#FA8072>Nether<gradient:#FA8072:#FFD700>_Gold_Ore&e]'
           lore:
             - '&7需要段位分: &e37446'
             - '&7升级奖励: &a97075 金币'
@@ -2172,7 +2172,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: NETHER_BRICK
-      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#DC143C:#FA8072:#800000>Nether_Fortress</gradient><yellow>]'
+      name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#DC143C:#FA8072>Nether<gradient:#FA8072:#800000>_Fortress&e]'
       lore:
         - '&7需要段位分: &e38400'
         - '&7升级奖励: &a99500 金币'
@@ -2184,7 +2184,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#DC143C:#FA8072:#800000>Nether_Fortress</gradient><yellow>]'
+          name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#DC143C:#FA8072>Nether<gradient:#FA8072:#800000>_Fortress&e]'
           lore:
             - '&7需要段位分: &e38400'
             - '&7升级奖励: &a99500 金币'
@@ -2194,7 +2194,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: NETHERITE_INGOT
-      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#696969:#483D8B>Netherite</gradient><yellow>]'
+      name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#696969:#483D8B>Netherite&e]'
       lore:
         - '&7需要段位分: &e39366'
         - '&7升级奖励: &a101955 金币'
@@ -2207,7 +2207,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#696969:#483D8B>Netherite</gradient><yellow>]'
+          name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#696969:#483D8B>Netherite&e]'
           lore:
             - '&7需要段位分: &e39366'
             - '&7升级奖励: &a101955 金币'
@@ -2218,7 +2218,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: WITHER_SKELETON_SKULL
-      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#8B4513:#808080>Wither</gradient><yellow>]'
+      name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#8B4513:#808080>Wither&e]'
       lore:
         - '&7需要段位分: &e40344'
         - '&7升级奖励: &a104440 金币'
@@ -2230,7 +2230,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#8B4513:#808080>Wither</gradient><yellow>]'
+          name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#8B4513:#808080>Wither&e]'
           lore:
             - '&7需要段位分: &e40344'
             - '&7升级奖励: &a104440 金币'
@@ -2240,7 +2240,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: NETHER_STAR
-      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#DC143C:#FFD700:#FFFFFF>Nether_Star</gradient><yellow>]'
+      name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#DC143C:#FFD700>Nether<gradient:#FFD700:#FFFFFF>_Star&e]'
       lore:
         - '&7需要段位分: &e41334'
         - '&7升级奖励: &a106955 金币'
@@ -2252,7 +2252,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#DC143C:#FFD700:#FFFFFF>Nether_Star</gradient><yellow>]'
+          name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#DC143C:#FFD700>Nether<gradient:#FFD700:#FFFFFF>_Star&e]'
           lore:
             - '&7需要段位分: &e41334'
             - '&7升级奖励: &a106955 金币'
@@ -2262,7 +2262,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: BEACON
-      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#00BFFF:#FF4500>Beacon</gradient><yellow>]'
+      name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#00BFFF:#FF4500>Beacon&e]'
       lore:
         - '&7需要段位分: &e42336'
         - '&7升级奖励: &a109500 金币'
@@ -2274,7 +2274,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#00BFFF:#FF4500>Beacon</gradient><yellow>]'
+          name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#00BFFF:#FF4500>Beacon&e]'
           lore:
             - '&7需要段位分: &e42336'
             - '&7升级奖励: &a109500 金币'
@@ -2284,7 +2284,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: ENDER_PEARL
-      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#9932CC:#FFFF00>Ender</gradient><yellow>]'
+      name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#9932CC:#FFFF00>Ender&e]'
       lore:
         - '&7需要段位分: &e43350'
         - '&7升级奖励: &a112075 金币'
@@ -2296,7 +2296,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#9932CC:#FFFF00>Ender</gradient><yellow>]'
+          name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#9932CC:#FFFF00>Ender&e]'
           lore:
             - '&7需要段位分: &e43350'
             - '&7升级奖励: &a112075 金币'
@@ -2306,7 +2306,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: DRAGON_HEAD
-      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#9932CC:#FFFF00:#9932CC>Ender_Dragon</gradient><yellow>]'
+      name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#9932CC:#FFFF00>Ender_<gradient:#FFFF00:#9932CC>Dragon&e]'
       lore:
         - '&7需要段位分: &e44376'
         - '&7升级奖励: &a114680 金币'
@@ -2318,7 +2318,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#9932CC:#FFFF00:#9932CC>Ender_Dragon</gradient><yellow>]'
+          name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#9932CC:#FFFF00>Ender_<gradient:#FFFF00:#9932CC>Dragon&e]'
           lore:
             - '&7需要段位分: &e44376'
             - '&7升级奖励: &a114680 金币'
@@ -2328,7 +2328,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: END_STONE
-      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#8A2BE2:#4169E1>End_City</gradient><yellow>]'
+      name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#8A2BE2:#4169E1>End_City&e]'
       lore:
         - '&7需要段位分: &e45414'
         - '&7升级奖励: &a117315 金币'
@@ -2340,7 +2340,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#8A2BE2:#4169E1>End_City</gradient><yellow>]'
+          name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#8A2BE2:#4169E1>End_City&e]'
           lore:
             - '&7需要段位分: &e45414'
             - '&7升级奖励: &a117315 金币'
@@ -2350,7 +2350,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: ELYTRA
-      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#8B008B:#483D8B>Elytra</gradient><yellow>]'
+      name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#8B008B:#483D8B>Elytra&e]'
       lore:
         - '&7需要段位分: &e46464'
         - '&7升级奖励: &a119980 金币'
@@ -2362,7 +2362,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#8B008B:#483D8B>Elytra</gradient><yellow>]'
+          name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#8B008B:#483D8B>Elytra&e]'
           lore:
             - '&7需要段位分: &e46464'
             - '&7升级奖励: &a119980 金币'
@@ -2372,7 +2372,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: END_CRYSTAL
-      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#8A2BE2:#FFD700:#FF4500>End_Again</gradient><yellow>]'
+      name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#8A2BE2:#FFD700>End_<gradient:#FFD700:#FF4500>Again&e]'
       lore:
         - '&7需要段位分: &e47526'
         - '&7升级奖励: &a102634 金币'
@@ -2384,7 +2384,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#8A2BE2:#FFD700:#FF4500>End_Again</gradient><yellow>]'
+          name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#8A2BE2:#FFD700>End_<gradient:#FFD700:#FF4500>Again&e]'
           lore:
             - '&7需要段位分: &e47526'
             - '&7升级奖励: &a102634 金币'
@@ -2394,7 +2394,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: BEDROCK
-      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#000000:#696969>Bedrock</gradient><yellow>]'
+      name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#000000:#696969>Bedrock&e]'
       lore:
         - '&7需要段位分: &e48600'
         - '&7升级奖励: &a104009 金币'
@@ -2406,7 +2406,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#000000:#696969>Bedrock</gradient><yellow>]'
+          name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#000000:#696969>Bedrock&e]'
           lore:
             - '&7需要段位分: &e48600'
             - '&7升级奖励: &a104009 金币'
@@ -2416,7 +2416,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: BARRIER
-      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#ff0000:#F08080>Barrier</gradient><yellow>]'
+      name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#ff0000:#F08080>Barrier&e]'
       lore:
         - '&7需要段位分: &e49686'
         - '&7升级奖励: &a105384 金币'
@@ -2428,7 +2428,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#ff0000:#F08080>Barrier</gradient><yellow>]'
+          name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#ff0000:#F08080>Barrier&e]'
           lore:
             - '&7需要段位分: &e49686'
             - '&7升级奖励: &a105384 金币'
@@ -2438,7 +2438,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: COMMAND_BLOCK
-      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#FFA500:#FFFFFF:#DAA520>Command_Block</gradient><yellow>]'
+      name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#FFA500:#FFFFFF>Command<gradient:#FFFFFF:#DAA520>_Block&e]'
       lore:
         - '&7需要段位分: &e50784'
         - '&7升级奖励: &a106759 金币'
@@ -2450,7 +2450,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#FFA500:#FFFFFF:#DAA520>Command_Block</gradient><yellow>]'
+          name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#FFA500:#FFFFFF>Command<gradient:#FFFFFF:#DAA520>_Block&e]'
           lore:
             - '&7需要段位分: &e50784'
             - '&7升级奖励: &a106759 金币'
@@ -2460,7 +2460,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: CHAIN_COMMAND_BLOCK
-      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#20B2AA:#FFA500:#FFFFFF>Chain_Command_Block</gradient><yellow>]'
+      name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#20B2AA:#FFA500>Chain_Comm<gradient:#FFA500:#FFFFFF>and_Block&e]'
       lore:
         - '&7需要段位分: &e51894'
         - '&7升级奖励: &a108134 金币'
@@ -2472,7 +2472,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#20B2AA:#FFA500:#FFFFFF>Chain_Command_Block</gradient><yellow>]'
+          name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#20B2AA:#FFA500>Chain_Comm<gradient:#FFA500:#FFFFFF>and_Block&e]'
           lore:
             - '&7需要段位分: &e51894'
             - '&7升级奖励: &a108134 金币'
@@ -2482,7 +2482,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: REPEATING_COMMAND_BLOCK
-      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#9400D3:#FFA500:#FDF5E6>Repeating_Command_Block</gradient><yellow>]'
+      name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#9400D3:#FFA500>Repeating_Co<gradient:#FFA500:#FDF5E6>mmand_Block&e]'
       lore:
         - '&7需要段位分: &e53016'
         - '&7升级奖励: &a109509 金币'
@@ -2494,7 +2494,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#9400D3:#FFA500:#FDF5E6>Repeating_Command_Block</gradient><yellow>]'
+          name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#9400D3:#FFA500>Repeating_Co<gradient:#FFA500:#FDF5E6>mmand_Block&e]'
           lore:
             - '&7需要段位分: &e53016'
             - '&7升级奖励: &a109509 金币'
@@ -2504,7 +2504,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: DEBUG_STICK
-      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset>Debug_<gradient:#FFD700:#8A2BE2>Stick</gradient><yellow>]'
+      name: '&e[<gradient:#FFD700:#FF4500>Extra_&rDebug_<gradient:#FFD700:#8A2BE2>Stick&e]'
       lore:
         - '&7需要段位分: &e54150'
         - '&7升级奖励: &a110884 金币'
@@ -2516,7 +2516,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset>Debug_<gradient:#FFD700:#8A2BE2>Stick</gradient><yellow>]'
+          name: '&e[<gradient:#FFD700:#FF4500>Extra_&rDebug_<gradient:#FFD700:#8A2BE2>Stick&e]'
           lore:
             - '&7需要段位分: &e54150'
             - '&7升级奖励: &a110884 金币'
@@ -2526,7 +2526,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: STRUCTURE_BLOCK
-      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#8A2BE2:#DDA0DD>Structure_Block</gradient><yellow>]'
+      name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#8A2BE2:#DDA0DD>Structure_Block&e]'
       lore:
         - '&7需要段位分: &e55296'
         - '&7升级奖励: &a112259 金币'
@@ -2538,7 +2538,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#8A2BE2:#DDA0DD>Structure_Block</gradient><yellow>]'
+          name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#8A2BE2:#DDA0DD>Structure_Block&e]'
           lore:
             - '&7需要段位分: &e55296'
             - '&7升级奖励: &a112259 金币'
@@ -2548,7 +2548,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: STRUCTURE_BLOCK
-      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#8A2BE2:#20B2AA>Structure_Void</gradient><yellow>]'
+      name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#8A2BE2:#20B2AA>Structure_Void&e]'
       lore:
         - '&7需要段位分: &e56454'
         - '&7升级奖励: &a113634 金币'
@@ -2560,7 +2560,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#8A2BE2:#20B2AA>Structure_Void</gradient><yellow>]'
+          name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#8A2BE2:#20B2AA>Structure_Void&e]'
           lore:
             - '&7需要段位分: &e56454'
             - '&7升级奖励: &a113634 金币'
@@ -2570,7 +2570,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: GRASS_BLOCK
-      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#FF0000:#FFA500:#FFFF00:#00FF00:#00FFFF:#0000FF>Minecraft</gradient><yellow>]'
+      name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#FF0000:#FFA500>Mi<gradient:#FFA500:#FFFF00>ne<gradient:#FFFF00:#00FF00>cr<gradient:#00FF00:#00FFFF>af<gradient:#00FFFF:#0000FF>t&e]'
       lore:
         - '&7需要段位分: &e57624'
         - '&7升级奖励: &a115009 金币'
@@ -2583,7 +2583,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#FF0000:#FFA500:#FFFF00:#00FF00:#00FFFF:#0000FF>Minecraft</gradient><yellow>]'
+          name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#FF0000:#FFA500>Mi<gradient:#FFA500:#FFFF00>ne<gradient:#FFFF00:#00FF00>cr<gradient:#00FF00:#00FFFF>af<gradient:#00FFFF:#0000FF>t&e]'
           lore:
             - '&7需要段位分: &e57624'
             - '&7升级奖励: &a115009 金币'
@@ -2594,7 +2594,7 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: GRASS_BLOCK
-      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#FF0000:#FFA500:#FFFF00:#00FF00:#00FFFF:#0000FF:#FF00FF>Minecraft+</gradient><yellow>]'
+      name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#FF0000:#FFA500>Mi<gradient:#FFA500:#FFFF00>ne<gradient:#FFFF00:#00FF00>cr<gradient:#00FF00:#00FFFF>af<gradient:#00FFFF:#0000FF>t<gradient:#0000FF:#FF00FF>+&e]'
       lore:
         - '&7需要段位分: &e58806'
         - '&7升级奖励: &a116384 金币'
@@ -2606,7 +2606,7 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#FF0000:#FFA500:#FFFF00:#00FF00:#00FFFF:#0000FF:#FF00FF>Minecraft+</gradient><yellow>]'
+          name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#FF0000:#FFA500>Mi<gradient:#FFA500:#FFFF00>ne<gradient:#FFFF00:#00FF00>cr<gradient:#00FF00:#00FFFF>af<gradient:#00FFFF:#0000FF>t<gradient:#0000FF:#FF00FF>+&e]'
           lore:
             - '&7需要段位分: &e58806'
             - '&7升级奖励: &a116384 金币'
@@ -2616,12 +2616,12 @@ Icons:
     update: [ -1, 20, 30, -1 ]
     display:
       material: GRASS_BLOCK
-      name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#FF0000:#FFA500:#FFFF00:#00FF00:#00FFFF:#0000FF>Minecraft</gradient>-<white><gradient:#FFD700:#F5F5F5><bold>M<bold>a<bold>x</gradient><yellow>]'
+      name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#FF0000:#FFA500>Mi<gradient:#FFA500:#FFFF00>ne<gradient:#FFFF00:#00FF00>cr<gradient:#00FF00:#00FFFF>af<gradient:#00FFFF:#0000FF>t-&f<gradient:#FFD700:#F5F5F5>&lM&la&lx&e]'
       lore:
         - '&7需要段位分: &e60000'
         - '&7升级奖励: &a117759 金币'
         - '&7属性奖励: &b血量上限 +5 &7/ &b防御 +3 &7/ &b攻击 +3 &7/ &b护盾 +5'
-        - '<gray>专属内容: <light_purple><gold><bold>恭喜达到最高段位！'
+        - '&7专属内容: &d&6&l恭喜达到最高段位！'
         - ''
     actions:
       all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
@@ -2630,12 +2630,12 @@ Icons:
         priority: 10
         display:
           shiny: true
-          name: '<yellow>[<gradient:#FFD700:#FF4500>Extra_</gradient><reset><gradient:#FF0000:#FFA500:#FFFF00:#00FF00:#00FFFF:#0000FF>Minecraft</gradient>-<white><gradient:#FFD700:#F5F5F5><bold>M<bold>a<bold>x</gradient><yellow>]'
+          name: '&e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#FF0000:#FFA500>Mi<gradient:#FFA500:#FFFF00>ne<gradient:#FFFF00:#00FF00>cr<gradient:#00FF00:#00FFFF>af<gradient:#00FFFF:#0000FF>t-&f<gradient:#FFD700:#F5F5F5>&lM&la&lx&e]'
           lore:
             - '&7需要段位分: &e60000'
             - '&7升级奖励: &a117759 金币'
             - '&7属性奖励: &b血量上限 +5 &7/ &b防御 +3 &7/ &b攻击 +3 &7/ &b护盾 +5'
-            - '<gray>专属内容: <light_purple><gold><bold>恭喜达到最高段位！'
+            - '&7专属内容: &d&6&l恭喜达到最高段位！'
             - '&a✔ 已达到'
 
   # ---------- 算法总览 ----------
@@ -2691,7 +2691,7 @@ Icons:
   base_block_break:
     display:
       material: IRON_PICKAXE
-      name: '&eblock_break'
+      name: '&e方块破坏'
       lore:
         - '&7权重: &a+0.01 分'
         - '&7统计项: &8block_break'
@@ -2703,7 +2703,7 @@ Icons:
   base_block_place:
     display:
       material: BRICKS
-      name: '&eblock_place'
+      name: '&e方块放置'
       lore:
         - '&7权重: &a+0.03 分'
         - '&7统计项: &8block_place'
@@ -2715,7 +2715,7 @@ Icons:
   base_mob_kill:
     display:
       material: IRON_SWORD
-      name: '&emob_kill'
+      name: '&e击杀生物'
       lore:
         - '&7权重: &a+0.07 分'
         - '&7统计项: &8mob_kill'
@@ -2727,7 +2727,7 @@ Icons:
   base_player_kill:
     display:
       material: DIAMOND_SWORD
-      name: '&eplayer_kill'
+      name: '&e击杀玩家'
       lore:
         - '&7权重: &a+3 分'
         - '&7统计项: &8player_kill'
@@ -2751,7 +2751,7 @@ Icons:
   base_trade:
     display:
       material: EMERALD
-      name: '&etrade'
+      name: '&e村民交易'
       lore:
         - '&7权重: &a+2 分'
         - '&7统计项: &8trade'
@@ -2763,7 +2763,7 @@ Icons:
   base_enchant:
     display:
       material: ENCHANTING_TABLE
-      name: '&eenchant'
+      name: '&e附魔'
       lore:
         - '&7权重: &a+3 分'
         - '&7统计项: &8enchant'
@@ -2775,7 +2775,7 @@ Icons:
   base_jump:
     display:
       material: SLIME_BALL
-      name: '&ejump'
+      name: '&e跳跃'
       lore:
         - '&7权重: &a+0.001 分'
         - '&7统计项: &8jump'
@@ -2787,7 +2787,7 @@ Icons:
   base_move_cm:
     display:
       material: LEATHER_BOOTS
-      name: '&emove_cm'
+      name: '&e移动距离'
       lore:
         - '&7权重: &a+0 分'
         - '&7统计项: &8move_cm'
@@ -2799,7 +2799,7 @@ Icons:
   base_craft_item:
     display:
       material: CRAFTING_TABLE
-      name: '&ecraft_item'
+      name: '&e物品合成'
       lore:
         - '&7权重: &a+0.005 分'
         - '&7统计项: &8craft_item'
@@ -2823,7 +2823,7 @@ Icons:
   base_fishing:
     display:
       material: FISHING_ROD
-      name: '&efishing'
+      name: '&e钓鱼'
       lore:
         - '&7权重: &a+1 分'
         - '&7统计项: &8fishing'
@@ -2835,7 +2835,7 @@ Icons:
   base_raid_win:
     display:
       material: BELL
-      name: '&eraid_win'
+      name: '&e袭击胜利'
       lore:
         - '&7权重: &a+12 分'
         - '&7统计项: &8raid_win'
@@ -2848,7 +2848,7 @@ Icons:
   blk_log:
     display:
       material: OAK_LOG
-      name: '&elog'
+      name: '&e原木/菌柄（所有种类）'
       lore:
         - '&7额外分: &a+0.01 /个'
         - '&7配置键: &8log'
@@ -2861,7 +2861,7 @@ Icons:
   blk_wood:
     display:
       material: OAK_WOOD
-      name: '&ewood'
+      name: '&e六面树皮方块（所有 *_wood / *_hyphae）'
       lore:
         - '&7额外分: &a+0.01 /个'
         - '&7配置键: &8wood'
@@ -2874,7 +2874,7 @@ Icons:
   blk_coal_ore:
     display:
       material: COAL_ORE
-      name: '&ecoal_ore'
+      name: '&e煤矿石'
       lore:
         - '&7额外分: &a+0.018 /个'
         - '&7配置键: &8coal_ore'
@@ -2886,7 +2886,7 @@ Icons:
   blk_copper_ore:
     display:
       material: COPPER_ORE
-      name: '&ecopper_ore'
+      name: '&e铜矿石'
       lore:
         - '&7额外分: &a+0.022 /个'
         - '&7配置键: &8copper_ore'
@@ -2898,7 +2898,7 @@ Icons:
   blk_iron_ore:
     display:
       material: IRON_ORE
-      name: '&eiron_ore'
+      name: '&e铁矿石'
       lore:
         - '&7额外分: &a+0.035 /个'
         - '&7配置键: &8iron_ore'
@@ -2910,7 +2910,7 @@ Icons:
   blk_gold_ore:
     display:
       material: GOLD_ORE
-      name: '&egold_ore'
+      name: '&e金矿石'
       lore:
         - '&7额外分: &a+0.055 /个'
         - '&7配置键: &8gold_ore'
@@ -2922,7 +2922,7 @@ Icons:
   blk_diamond_ore:
     display:
       material: DIAMOND_ORE
-      name: '&ediamond_ore'
+      name: '&e钻石矿石'
       lore:
         - '&7额外分: &a+0.1 /个'
         - '&7配置键: &8diamond_ore'
@@ -2934,7 +2934,7 @@ Icons:
   blk_emerald_ore:
     display:
       material: EMERALD_ORE
-      name: '&eemerald_ore'
+      name: '&e绿宝石矿石'
       lore:
         - '&7额外分: &a+0.17 /个'
         - '&7配置键: &8emerald_ore'
@@ -2946,7 +2946,7 @@ Icons:
   blk_lapis_ore:
     display:
       material: LAPIS_ORE
-      name: '&elapis_ore'
+      name: '&e青金石矿石'
       lore:
         - '&7额外分: &a+0.05 /个'
         - '&7配置键: &8lapis_ore'
@@ -2958,7 +2958,7 @@ Icons:
   blk_redstone_ore:
     display:
       material: REDSTONE_ORE
-      name: '&eredstone_ore'
+      name: '&e红石矿石'
       lore:
         - '&7额外分: &a+0.05 /个'
         - '&7配置键: &8redstone_ore'
@@ -2970,7 +2970,7 @@ Icons:
   blk_nether_quartz_ore:
     display:
       material: NETHER_QUARTZ_ORE
-      name: '&enether_quartz_ore'
+      name: '&e下界石英矿石'
       lore:
         - '&7额外分: &a+0.055 /个'
         - '&7配置键: &8nether_quartz_ore'
@@ -2982,7 +2982,7 @@ Icons:
   blk_ancient_debris:
     display:
       material: ANCIENT_DEBRIS
-      name: '&eancient_debris'
+      name: '&e远古残骸'
       lore:
         - '&7额外分: &a+0.4 /个'
         - '&7配置键: &8ancient_debris'
@@ -2994,7 +2994,7 @@ Icons:
   blk_nether_gold_ore:
     display:
       material: NETHER_GOLD_ORE
-      name: '&enether_gold_ore'
+      name: '&e下界金矿石'
       lore:
         - '&7额外分: &a+0.04 /个'
         - '&7配置键: &8nether_gold_ore'
@@ -3006,7 +3006,7 @@ Icons:
   blk_obsidian:
     display:
       material: OBSIDIAN
-      name: '&eobsidian'
+      name: '&e黑曜石'
       lore:
         - '&7额外分: &a+0.018 /个'
         - '&7配置键: &8obsidian'
@@ -3597,8 +3597,9 @@ Icons:
   adv_story_root:
     display:
       material: BOOK
-      name: '&e故事/根源'
+      name: '&e&lMinecraft'
       lore:
+        - '&7游戏的核心与故事'
         - '&7分类: &f主世界 · 故事'
         - '&7完成奖励: &a+0.3 分'
         - '&7进度 ID: &8minecraft:story/root'
@@ -3610,8 +3611,9 @@ Icons:
   adv_story_mine_stone:
     display:
       material: STONE
-      name: '&e采掘石头'
+      name: '&e&l石器时代'
       lore:
+        - '&7用你的新镐挖掘石头'
         - '&7分类: &f主世界 · 故事'
         - '&7完成奖励: &a+0.5 分'
         - '&7进度 ID: &8minecraft:story/mine_stone'
@@ -3623,8 +3625,9 @@ Icons:
   adv_story_upgrade_tools:
     display:
       material: BOOK
-      name: '&e升级工具'
+      name: '&e&l获得升级'
       lore:
+        - '&7制作一把更好的镐'
         - '&7分类: &f主世界 · 故事'
         - '&7完成奖励: &a+0.8 分'
         - '&7进度 ID: &8minecraft:story/upgrade_tools'
@@ -3636,8 +3639,9 @@ Icons:
   adv_story_smelt_iron:
     display:
       material: IRON_INGOT
-      name: '&e冶炼铁锭'
+      name: '&e&l来硬的'
       lore:
+        - '&7冶炼出一块铁锭'
         - '&7分类: &f主世界 · 故事'
         - '&7完成奖励: &a+1 分'
         - '&7进度 ID: &8minecraft:story/smelt_iron'
@@ -3649,8 +3653,9 @@ Icons:
   adv_story_obtain_armor:
     display:
       material: BOOK
-      name: '&e获得盔甲'
+      name: '&e&l整装上阵'
       lore:
+        - '&7用铁盔甲来保护你自己'
         - '&7分类: &f主世界 · 故事'
         - '&7完成奖励: &a+2 分'
         - '&7进度 ID: &8minecraft:story/obtain_armor'
@@ -3662,8 +3667,9 @@ Icons:
   adv_story_lava_bucket:
     display:
       material: LAVA_BUCKET
-      name: '&e岩浆桶'
+      name: '&e&l热腾腾的'
       lore:
+        - '&7用铁桶装点熔岩'
         - '&7分类: &f主世界 · 故事'
         - '&7完成奖励: &a+1 分'
         - '&7进度 ID: &8minecraft:story/lava_bucket'
@@ -3675,8 +3681,9 @@ Icons:
   adv_story_deflect_arrow:
     display:
       material: ARROW
-      name: '&e弹射物反弹'
+      name: '&e&l不吃这套，谢谢'
       lore:
+        - '&7用盾牌反弹一个弹射物'
         - '&7分类: &f主世界 · 故事'
         - '&7完成奖励: &a+0.5 分'
         - '&7进度 ID: &8minecraft:story/deflect_arrow'
@@ -3688,8 +3695,9 @@ Icons:
   adv_story_form_obsidian:
     display:
       material: OBSIDIAN
-      name: '&e制作黑曜石'
+      name: '&e&l冰桶挑战'
       lore:
+        - '&7获得一块黑曜石'
         - '&7分类: &f主世界 · 故事'
         - '&7完成奖励: &a+1 分'
         - '&7进度 ID: &8minecraft:story/form_obsidian'
@@ -3701,8 +3709,9 @@ Icons:
   adv_story_iron_tools:
     display:
       material: IRON_INGOT
-      name: '&e铁制工具'
+      name: '&e&l这不是铁镐么'
       lore:
+        - '&7升级你的镐'
         - '&7分类: &f主世界 · 故事'
         - '&7完成奖励: &a+1 分'
         - '&7进度 ID: &8minecraft:story/iron_tools'
@@ -3714,8 +3723,9 @@ Icons:
   adv_story_mine_diamond:
     display:
       material: DIAMOND
-      name: '&e挖掘钻石'
+      name: '&e&l钻石！'
       lore:
+        - '&7获得钻石'
         - '&7分类: &f主世界 · 故事'
         - '&7完成奖励: &a+3 分'
         - '&7进度 ID: &8minecraft:story/mine_diamond'
@@ -3727,8 +3737,9 @@ Icons:
   adv_story_shiny_gear:
     display:
       material: BOOK
-      name: '&e闪亮装备'
+      name: '&e&l钻石护体'
       lore:
+        - '&7钻石盔甲能救人'
         - '&7分类: &f主世界 · 故事'
         - '&7完成奖励: &a+8 分'
         - '&7进度 ID: &8minecraft:story/shiny_gear'
@@ -3740,8 +3751,9 @@ Icons:
   adv_story_enchant_item:
     display:
       material: ENCHANTED_BOOK
-      name: '&e附魔物品'
+      name: '&e&l附魔师'
       lore:
+        - '&7在附魔台里附魔一样物品'
         - '&7分类: &f主世界 · 故事'
         - '&7完成奖励: &a+5 分'
         - '&7进度 ID: &8minecraft:story/enchant_item'
@@ -3753,8 +3765,9 @@ Icons:
   adv_story_cure_zombie_villager:
     display:
       material: ROTTEN_FLESH
-      name: '&e治愈僵尸村民'
+      name: '&e&l僵尸科医生'
       lore:
+        - '&7弱化并治疗一名僵尸村民'
         - '&7分类: &f主世界 · 故事'
         - '&7完成奖励: &a+4 分'
         - '&7进度 ID: &8minecraft:story/cure_zombie_villager'
@@ -3766,8 +3779,9 @@ Icons:
   adv_story_follow_ender_eye:
     display:
       material: END_STONE
-      name: '&e跟随末影之眼'
+      name: '&e&l隔墙有眼'
       lore:
+        - '&7跟随末影之眼'
         - '&7分类: &f主世界 · 故事'
         - '&7完成奖励: &a+3 分'
         - '&7进度 ID: &8minecraft:story/follow_ender_eye'
@@ -3779,8 +3793,9 @@ Icons:
   adv_story_enter_the_nether:
     display:
       material: NETHERRACK
-      name: '&e进入下界'
+      name: '&e&l勇往直下'
       lore:
+        - '&7建造、激活并进入一座下界传送门'
         - '&7分类: &f主世界 · 故事'
         - '&7完成奖励: &a+5 分'
         - '&7进度 ID: &8minecraft:story/enter_the_nether'
@@ -3792,8 +3807,9 @@ Icons:
   adv_story_enter_the_end:
     display:
       material: END_STONE
-      name: '&e进入末地'
+      name: '&e&l结束了？'
       lore:
+        - '&7进入末地传送门'
         - '&7分类: &f主世界 · 故事'
         - '&7完成奖励: &a+8 分'
         - '&7进度 ID: &8minecraft:story/enter_the_end'
@@ -3805,8 +3821,9 @@ Icons:
   adv_adventure_root:
     display:
       material: BOOK
-      name: '&e冒险/根源'
+      name: '&e&l冒险'
       lore:
+        - '&7冒险、探索与战斗'
         - '&7分类: &f主世界 · 冒险'
         - '&7完成奖励: &a+0.3 分'
         - '&7进度 ID: &8minecraft:adventure/root'
@@ -3818,8 +3835,9 @@ Icons:
   adv_adventure_sleep_in_bed:
     display:
       material: RED_BED
-      name: '&e在床上睡觉'
+      name: '&e&l甜蜜的梦'
       lore:
+        - '&7在床上睡觉以改变你的重生点'
         - '&7分类: &f主世界 · 冒险'
         - '&7完成奖励: &a+0.5 分'
         - '&7进度 ID: &8minecraft:adventure/sleep_in_bed'
@@ -3831,8 +3849,9 @@ Icons:
   adv_adventure_adventuring_time:
     display:
       material: COMPASS
-      name: '&e探索时光'
+      name: '&e&l探索的时光'
       lore:
+        - '&7发现所有的生物群系'
         - '&7分类: &f主世界 · 冒险'
         - '&7完成奖励: &a+550 分'
         - '&7进度 ID: &8minecraft:adventure/adventuring_time'
@@ -3844,8 +3863,9 @@ Icons:
   adv_adventure_kill_a_mob:
     display:
       material: COMPASS
-      name: '&e击杀怪物'
+      name: '&e&l怪物猎人'
       lore:
+        - '&7杀死任意敌对性怪物'
         - '&7分类: &f主世界 · 冒险'
         - '&7完成奖励: &a+0.5 分'
         - '&7进度 ID: &8minecraft:adventure/kill_a_mob'
@@ -3857,8 +3877,9 @@ Icons:
   adv_adventure_kill_all_mobs:
     display:
       material: COMPASS
-      name: '&e怪物猎人'
+      name: '&e&l资深怪物猎人'
       lore:
+        - '&7杀死每一种敌对性怪物'
         - '&7分类: &f主世界 · 冒险'
         - '&7完成奖励: &a+480 分'
         - '&7进度 ID: &8minecraft:adventure/kill_all_mobs'
@@ -3870,8 +3891,9 @@ Icons:
   adv_adventure_shoot_arrow:
     display:
       material: ARROW
-      name: '&e射箭'
+      name: '&e&l瞄准目标'
       lore:
+        - '&7用弓箭射点什么'
         - '&7分类: &f主世界 · 冒险'
         - '&7完成奖励: &a+0.5 分'
         - '&7进度 ID: &8minecraft:adventure/shoot_arrow'
@@ -3883,8 +3905,9 @@ Icons:
   adv_adventure_throw_trident:
     display:
       material: TRIDENT
-      name: '&e投掷三叉戟'
+      name: '&e&l抖包袱'
       lore:
+        - '&7往什么东西扔出三叉戟。\n注：别把你唯一的武器也抖掉了。'
         - '&7分类: &f主世界 · 冒险'
         - '&7完成奖励: &a+3 分'
         - '&7进度 ID: &8minecraft:adventure/throw_trident'
@@ -3896,8 +3919,9 @@ Icons:
   adv_adventure_trade:
     display:
       material: EMERALD
-      name: '&e交易'
+      name: '&e&l成交！'
       lore:
+        - '&7成功与一名村民进行交易'
         - '&7分类: &f主世界 · 冒险'
         - '&7完成奖励: &a+3 分'
         - '&7进度 ID: &8minecraft:adventure/trade'
@@ -3909,8 +3933,9 @@ Icons:
   adv_adventure_totem_of_undying:
     display:
       material: TOTEM_OF_UNDYING
-      name: '&e不死图腾'
+      name: '&e&l超越生死'
       lore:
+        - '&7利用不死图腾逃离死神'
         - '&7分类: &f主世界 · 冒险'
         - '&7完成奖励: &a+10 分'
         - '&7进度 ID: &8minecraft:adventure/totem_of_undying'
@@ -3922,8 +3947,9 @@ Icons:
   adv_adventure_summon_iron_golem:
     display:
       material: IRON_INGOT
-      name: '&e召唤铁傀儡'
+      name: '&e&l招募援兵'
       lore:
+        - '&7召唤一只铁傀儡来帮忙守卫村庄'
         - '&7分类: &f主世界 · 冒险'
         - '&7完成奖励: &a+3 分'
         - '&7进度 ID: &8minecraft:adventure/summon_iron_golem'
@@ -3935,8 +3961,9 @@ Icons:
   adv_adventure_voluntary_exile:
     display:
       material: COMPASS
-      name: '&e自愿流放'
+      name: '&e&l自我放逐'
       lore:
+        - '&7杀死一名袭击队长。\n或许该考虑暂时远离村庄……'
         - '&7分类: &f主世界 · 冒险'
         - '&7完成奖励: &a+5 分'
         - '&7进度 ID: &8minecraft:adventure/voluntary_exile'
@@ -3948,8 +3975,9 @@ Icons:
   adv_adventure_hero_of_the_village:
     display:
       material: COMPASS
-      name: '&e村庄英雄'
+      name: '&e&l村庄英雄'
       lore:
+        - '&7成功在袭击中保卫村庄'
         - '&7分类: &f主世界 · 冒险'
         - '&7完成奖励: &a+30 分'
         - '&7进度 ID: &8minecraft:adventure/hero_of_the_village'
@@ -3961,8 +3989,9 @@ Icons:
   adv_adventure_very_very_frightening:
     display:
       material: COMPASS
-      name: '&e非常非常吓人'
+      name: '&e&l魔女审判'
       lore:
+        - '&7雷击一名村民'
         - '&7分类: &f主世界 · 冒险'
         - '&7完成奖励: &a+18 分'
         - '&7进度 ID: &8minecraft:adventure/very_very_frightening'
@@ -3974,8 +4003,9 @@ Icons:
   adv_adventure_sniper_duel:
     display:
       material: COMPASS
-      name: '&e狙击决斗'
+      name: '&e&l狙击手的对决'
       lore:
+        - '&7从至少50米外射杀一只骷髅'
         - '&7分类: &f主世界 · 冒险'
         - '&7完成奖励: &a+15 分'
         - '&7进度 ID: &8minecraft:adventure/sniper_duel'
@@ -3987,8 +4017,9 @@ Icons:
   adv_adventure_ol_betsy:
     display:
       material: COMPASS
-      name: '&e老贝蒂'
+      name: '&e&l扣下悬刀'
       lore:
+        - '&7用弩进行一次射击'
         - '&7分类: &f主世界 · 冒险'
         - '&7完成奖励: &a+1 分'
         - '&7进度 ID: &8minecraft:adventure/ol_betsy'
@@ -4000,8 +4031,9 @@ Icons:
   adv_adventure_arbalistic:
     display:
       material: COMPASS
-      name: '&e弩箭手'
+      name: '&e&l劲弩手'
       lore:
+        - '&7用弩一发击杀五只不同的生物'
         - '&7分类: &f主世界 · 冒险'
         - '&7完成奖励: &a+22 分'
         - '&7进度 ID: &8minecraft:adventure/arbalistic'
@@ -4013,8 +4045,9 @@ Icons:
   adv_adventure_who_needs_rockets:
     display:
       material: COMPASS
-      name: '&e谁需要火箭'
+      name: '&e&l还要啥火箭啊？'
       lore:
+        - '&7使用风弹将自己向上弹射8格'
         - '&7分类: &f主世界 · 冒险'
         - '&7完成奖励: &a+4 分'
         - '&7进度 ID: &8minecraft:adventure/who_needs_rockets'
@@ -4026,8 +4059,9 @@ Icons:
   adv_adventure_two_birds_one_arrow:
     display:
       material: ARROW
-      name: '&e一箭双雕'
+      name: '&e&l一箭双雕'
       lore:
+        - '&7用一支穿透箭射杀两只幻翼'
         - '&7分类: &f主世界 · 冒险'
         - '&7完成奖励: &a+18 分'
         - '&7进度 ID: &8minecraft:adventure/two_birds_one_arrow'
@@ -4039,8 +4073,9 @@ Icons:
   adv_adventure_whos_the_pillager_now:
     display:
       material: COMPASS
-      name: '&e现在谁是掠夺者'
+      name: '&e&l现在谁才是掠夺者？'
       lore:
+        - '&7让掠夺者也尝尝弩的滋味'
         - '&7分类: &f主世界 · 冒险'
         - '&7完成奖励: &a+15 分'
         - '&7进度 ID: &8minecraft:adventure/whos_the_pillager_now'
@@ -4052,8 +4087,9 @@ Icons:
   adv_adventure_lighten_up:
     display:
       material: COMPASS
-      name: '&e点亮它'
+      name: '&e&l铜光焕发'
       lore:
+        - '&7用斧刮削铜灯来让它变得更亮'
         - '&7分类: &f主世界 · 冒险'
         - '&7完成奖励: &a+12 分'
         - '&7进度 ID: &8minecraft:adventure/lighten_up'
@@ -4065,8 +4101,9 @@ Icons:
   adv_adventure_honey_block_slide:
     display:
       material: HONEYCOMB
-      name: '&e蜂蜜块滑行'
+      name: '&e&l胶着状态'
       lore:
+        - '&7跳入蜂蜜块以缓冲摔落'
         - '&7分类: &f主世界 · 冒险'
         - '&7完成奖励: &a+3 分'
         - '&7进度 ID: &8minecraft:adventure/honey_block_slide'
@@ -4078,8 +4115,9 @@ Icons:
   adv_adventure_fall_from_world_height:
     display:
       material: COMPASS
-      name: '&e从世界高度坠落'
+      name: '&e&l上天入地'
       lore:
+        - '&7从世界顶部（建筑高度限制处）自由落体，坠至世界底部并存活下来'
         - '&7分类: &f主世界 · 冒险'
         - '&7完成奖励: &a+8 分'
         - '&7进度 ID: &8minecraft:adventure/fall_from_world_height'
@@ -4091,8 +4129,9 @@ Icons:
   adv_adventure_spyglass_at_parrot:
     display:
       material: COMPASS
-      name: '&e用望远镜看鹦鹉'
+      name: '&e&l那是鸟吗？'
       lore:
+        - '&7透过望远镜观察鹦鹉'
         - '&7分类: &f主世界 · 冒险'
         - '&7完成奖励: &a+1 分'
         - '&7进度 ID: &8minecraft:adventure/spyglass_at_parrot'
@@ -4104,8 +4143,9 @@ Icons:
   adv_adventure_spyglass_at_ghast:
     display:
       material: GHAST_TEAR
-      name: '&e用望远镜看恶魂'
+      name: '&e&l那是气球吗？'
       lore:
+        - '&7透过望远镜观察恶魂'
         - '&7分类: &f主世界 · 冒险'
         - '&7完成奖励: &a+2 分'
         - '&7进度 ID: &8minecraft:adventure/spyglass_at_ghast'
@@ -4117,8 +4157,9 @@ Icons:
   adv_adventure_spyglass_at_dragon:
     display:
       material: DRAGON_HEAD
-      name: '&e用望远镜看末影龙'
+      name: '&e&l那是飞机吗？'
       lore:
+        - '&7透过望远镜观察末影龙'
         - '&7分类: &f主世界 · 冒险'
         - '&7完成奖励: &a+3 分'
         - '&7进度 ID: &8minecraft:adventure/spyglass_at_dragon'
@@ -4130,8 +4171,9 @@ Icons:
   adv_adventure_walk_on_powder_snow_with_leather_boots:
     display:
       material: COMPASS
-      name: '&e穿皮革靴在细雪上行走'
+      name: '&e&l轻功雪上飘'
       lore:
+        - '&7在细雪上行走……并且不陷进去'
         - '&7分类: &f主世界 · 冒险'
         - '&7完成奖励: &a+5 分'
         - '&7进度 ID: &8minecraft:adventure/walk_on_powder_snow_with_leather_boots'
@@ -4143,8 +4185,9 @@ Icons:
   adv_adventure_avoid_vibration:
     display:
       material: COMPASS
-      name: '&e避开振动'
+      name: '&e&l潜行100级'
       lore:
+        - '&7在幽匿感测体或监守者周围潜行以防被它们探测到'
         - '&7分类: &f主世界 · 冒险'
         - '&7完成奖励: &a+7 分'
         - '&7进度 ID: &8minecraft:adventure/avoid_vibration'
@@ -4156,8 +4199,9 @@ Icons:
   adv_adventure_play_jukebox_in_meadows:
     display:
       material: COMPASS
-      name: '&e在草地上播放唱片'
+      name: '&e&l音乐之声'
       lore:
+        - '&7用唱片机的音乐声为草甸增添生机'
         - '&7分类: &f主世界 · 冒险'
         - '&7完成奖励: &a+7 分'
         - '&7进度 ID: &8minecraft:adventure/play_jukebox_in_meadows'
@@ -4169,8 +4213,9 @@ Icons:
   adv_adventure_bullseye:
     display:
       material: COMPASS
-      name: '&e正中靶心'
+      name: '&e&l正中靶心'
       lore:
+        - '&7从至少30米外射中标靶的靶心'
         - '&7分类: &f主世界 · 冒险'
         - '&7完成奖励: &a+10 分'
         - '&7进度 ID: &8minecraft:adventure/bullseye'
@@ -4182,8 +4227,9 @@ Icons:
   adv_adventure_craft_decorated_pot_using_only_sherds:
     display:
       material: COMPASS
-      name: '&e只用陶片合成饰纹陶罐'
+      name: '&e&l精修细补'
       lore:
+        - '&7用4个陶片制作饰纹陶罐'
         - '&7分类: &f主世界 · 冒险'
         - '&7完成奖励: &a+8 分'
         - '&7进度 ID: &8minecraft:adventure/craft_decorated_pot_using_only_sherds'
@@ -4195,8 +4241,9 @@ Icons:
   adv_adventure_kill_mob_near_sculk_catalyst:
     display:
       material: COMPASS
-      name: '&e在幽匿催发体旁击杀生物'
+      name: '&e&l它蔓延了'
       lore:
+        - '&7在幽匿催发体附近杀死生物'
         - '&7分类: &f主世界 · 冒险'
         - '&7完成奖励: &a+6 分'
         - '&7进度 ID: &8minecraft:adventure/kill_mob_near_sculk_catalyst'
@@ -4208,8 +4255,9 @@ Icons:
   adv_adventure_lightning_rod_with_villager_no_fire:
     display:
       material: EMERALD
-      name: '&e用避雷针保护村民'
+      name: '&e&l电涌保护器'
       lore:
+        - '&7在不引发火灾的前提下保护村民免受雷击'
         - '&7分类: &f主世界 · 冒险'
         - '&7完成奖励: &a+8 分'
         - '&7进度 ID: &8minecraft:adventure/lightning_rod_with_villager_no_fire'
@@ -4221,8 +4269,9 @@ Icons:
   adv_adventure_read_power_of_chiseled_bookshelf:
     display:
       material: CHISELED_BOOKSHELF
-      name: '&e读取雕纹书架'
+      name: '&e&l知识就是力量'
       lore:
+        - '&7使用红石比较器获取雕纹书架的信号强度'
         - '&7分类: &f主世界 · 冒险'
         - '&7完成奖励: &a+3 分'
         - '&7进度 ID: &8minecraft:adventure/read_power_of_chiseled_bookshelf'
@@ -4234,8 +4283,9 @@ Icons:
   adv_adventure_salvage_sherd:
     display:
       material: COMPASS
-      name: '&e打捞陶片'
+      name: '&e&l探古寻源'
       lore:
+        - '&7刷扫可疑的方块来获得陶片'
         - '&7分类: &f主世界 · 冒险'
         - '&7完成奖励: &a+3 分'
         - '&7进度 ID: &8minecraft:adventure/salvage_sherd'
@@ -4247,8 +4297,9 @@ Icons:
   adv_adventure_trade_at_world_height:
     display:
       material: EMERALD
-      name: '&e在世界最高处交易'
+      name: '&e&l星际商人'
       lore:
+        - '&7在建筑高度限制处与村民交易'
         - '&7分类: &f主世界 · 冒险'
         - '&7完成奖励: &a+6 分'
         - '&7进度 ID: &8minecraft:adventure/trade_at_world_height'
@@ -4260,8 +4311,9 @@ Icons:
   adv_adventure_trim_with_any_armor_pattern:
     display:
       material: COMPASS
-      name: '&e任意盔甲纹饰'
+      name: '&e&l旧貌锻新颜'
       lore:
+        - '&7在锻造台中合成带有纹饰的盔甲'
         - '&7分类: &f主世界 · 冒险'
         - '&7完成奖励: &a+10 分'
         - '&7进度 ID: &8minecraft:adventure/trim_with_any_armor_pattern'
@@ -4273,8 +4325,9 @@ Icons:
   adv_adventure_trim_with_all_exclusive_armor_patterns:
     display:
       material: COMPASS
-      name: '&e集齐所有盔甲纹饰'
+      name: '&e&l匠心独具'
       lore:
+        - '&7将下列锻造模板都至少使用一次：尖塔、猪鼻、肋骨、监守、幽静、恼鬼、潮汐、向导'
         - '&7分类: &f主世界 · 冒险'
         - '&7完成奖励: &a+60 分'
         - '&7进度 ID: &8minecraft:adventure/trim_with_all_exclusive_armor_patterns'
@@ -4286,8 +4339,9 @@ Icons:
   adv_adventure_minecraft_trials_edition:
     display:
       material: COMPASS
-      name: '&e试炼之室'
+      name: '&e&lMinecraft：试炼版'
       lore:
+        - '&7踏入试炼密室'
         - '&7分类: &f主世界 · 冒险'
         - '&7完成奖励: &a+10 分'
         - '&7进度 ID: &8minecraft:adventure/minecraft_trials_edition'
@@ -4299,8 +4353,9 @@ Icons:
   adv_adventure_under_lock_and_key:
     display:
       material: COMPASS
-      name: '&e上锁与钥匙'
+      name: '&e&l珍藏密敛'
       lore:
+        - '&7用试炼钥匙解锁宝库'
         - '&7分类: &f主世界 · 冒险'
         - '&7完成奖励: &a+6 分'
         - '&7进度 ID: &8minecraft:adventure/under_lock_and_key'
@@ -4312,8 +4367,9 @@ Icons:
   adv_adventure_revaulting:
     display:
       material: COMPASS
-      name: '&e再开宝库'
+      name: '&e&l宝经磨炼'
       lore:
+        - '&7用不祥试炼钥匙解锁不祥宝库'
         - '&7分类: &f主世界 · 冒险'
         - '&7完成奖励: &a+20 分'
         - '&7进度 ID: &8minecraft:adventure/revaulting'
@@ -4325,8 +4381,9 @@ Icons:
   adv_adventure_blowback:
     display:
       material: COMPASS
-      name: '&e以其人之道'
+      name: '&e&l逆风翻盘'
       lore:
+        - '&7反弹旋风人的风弹来击杀旋风人'
         - '&7分类: &f主世界 · 冒险'
         - '&7完成奖励: &a+40 分'
         - '&7进度 ID: &8minecraft:adventure/blowback'
@@ -4338,8 +4395,9 @@ Icons:
   adv_adventure_overoverkill:
     display:
       material: COMPASS
-      name: '&e过量击杀'
+      name: '&e&l天赐良击'
       lore:
+        - '&7使用重锤一击造成50颗心的伤害'
         - '&7分类: &f主世界 · 冒险'
         - '&7完成奖励: &a+35 分'
         - '&7进度 ID: &8minecraft:adventure/overoverkill'
@@ -4351,8 +4409,9 @@ Icons:
   adv_adventure_crafters_crafting_crafters:
     display:
       material: COMPASS
-      name: '&e合成器合成合成器'
+      name: '&e&l合成器合成合成器'
       lore:
+        - '&7靠近一个正在合成合成器的合成器'
         - '&7分类: &f主世界 · 冒险'
         - '&7完成奖励: &a+12 分'
         - '&7进度 ID: &8minecraft:adventure/crafters_crafting_crafters'
@@ -4364,8 +4423,9 @@ Icons:
   adv_adventure_brush_armadillo:
     display:
       material: COMPASS
-      name: '&e刷犰狳'
+      name: '&e&l这不是鳞甲么？'
       lore:
+        - '&7用刷子从犰狳身上获得犰狳鳞甲'
         - '&7分类: &f主世界 · 冒险'
         - '&7完成奖励: &a+3 分'
         - '&7进度 ID: &8minecraft:adventure/brush_armadillo'
@@ -4377,8 +4437,9 @@ Icons:
   adv_adventure_use_lodestone:
     display:
       material: STONE
-      name: '&e磁石指路'
+      name: '&e&l天涯共此石'
       lore:
+        - '&7对着磁石使用指南针'
         - '&7分类: &f主世界 · 冒险'
         - '&7完成奖励: &a+3 分'
         - '&7进度 ID: &8minecraft:adventure/use_lodestone'
@@ -4390,8 +4451,9 @@ Icons:
   adv_adventure_heart_transplanter:
     display:
       material: COMPASS
-      name: '&e心脏移植'
+      name: '&e&l移心接木'
       lore:
+        - '&7将嘎枝之心以正确朝向放在两个苍白橡木原木方块中间'
         - '&7分类: &f主世界 · 冒险'
         - '&7完成奖励: &a+15 分'
         - '&7进度 ID: &8minecraft:adventure/heart_transplanter'
@@ -4403,8 +4465,9 @@ Icons:
   adv_adventure_spear_many_mobs:
     display:
       material: COMPASS
-      name: '&e长矛串烧'
+      name: '&e&l生物串串香'
       lore:
+        - '&7用矛在一次冲锋攻击内命中五只生物'
         - '&7分类: &f主世界 · 冒险'
         - '&7完成奖励: &a+25 分'
         - '&7进度 ID: &8minecraft:adventure/spear_many_mobs'
@@ -4416,8 +4479,9 @@ Icons:
   adv_husbandry_root:
     display:
       material: BOOK
-      name: '&e农牧业/根源'
+      name: '&e&l农牧业'
       lore:
+        - '&7世界无处没有朋友与美食'
         - '&7分类: &f主世界 · 农牧'
         - '&7完成奖励: &a+0.3 分'
         - '&7进度 ID: &8minecraft:husbandry/root'
@@ -4429,8 +4493,9 @@ Icons:
   adv_husbandry_plant_seed:
     display:
       material: WHEAT
-      name: '&e种植种子'
+      name: '&e&l开荒垦地'
       lore:
+        - '&7种下种子，见证它的成长'
         - '&7分类: &f主世界 · 农牧'
         - '&7完成奖励: &a+1 分'
         - '&7进度 ID: &8minecraft:husbandry/plant_seed'
@@ -4442,8 +4507,9 @@ Icons:
   adv_husbandry_breed_an_animal:
     display:
       material: WHEAT
-      name: '&e繁殖动物'
+      name: '&e&l我从哪儿来？'
       lore:
+        - '&7繁殖一对动物'
         - '&7分类: &f主世界 · 农牧'
         - '&7完成奖励: &a+1.5 分'
         - '&7进度 ID: &8minecraft:husbandry/breed_an_animal'
@@ -4455,8 +4521,9 @@ Icons:
   adv_husbandry_tame_an_animal:
     display:
       material: WHEAT
-      name: '&e驯服动物'
+      name: '&e&l永恒的伙伴'
       lore:
+        - '&7驯服一只动物'
         - '&7分类: &f主世界 · 农牧'
         - '&7完成奖励: &a+3 分'
         - '&7进度 ID: &8minecraft:husbandry/tame_an_animal'
@@ -4468,8 +4535,9 @@ Icons:
   adv_husbandry_fishy_business:
     display:
       material: COD
-      name: '&e钓鱼生意'
+      name: '&e&l腥味十足的生意'
       lore:
+        - '&7钓到一条鱼'
         - '&7分类: &f主世界 · 农牧'
         - '&7完成奖励: &a+2 分'
         - '&7进度 ID: &8minecraft:husbandry/fishy_business'
@@ -4481,8 +4549,9 @@ Icons:
   adv_husbandry_tactical_fishing:
     display:
       material: FISHING_ROD
-      name: '&e战术钓鱼'
+      name: '&e&l战术性钓鱼'
       lore:
+        - '&7不用钓鱼竿抓住一条鱼！'
         - '&7分类: &f主世界 · 农牧'
         - '&7完成奖励: &a+5 分'
         - '&7进度 ID: &8minecraft:husbandry/tactical_fishing'
@@ -4494,8 +4563,9 @@ Icons:
   adv_husbandry_balanced_diet:
     display:
       material: WHEAT
-      name: '&e均衡饮食'
+      name: '&e&l均衡饮食'
       lore:
+        - '&7尝遍天下食材，即便是对身体不好的'
         - '&7分类: &f主世界 · 农牧'
         - '&7完成奖励: &a+450 分'
         - '&7进度 ID: &8minecraft:husbandry/balanced_diet'
@@ -4507,8 +4577,9 @@ Icons:
   adv_husbandry_bred_all_animals:
     display:
       material: WHEAT
-      name: '&e繁育所有动物'
+      name: '&e&l成双成对'
       lore:
+        - '&7繁殖每种动物！'
         - '&7分类: &f主世界 · 农牧'
         - '&7完成奖励: &a+350 分'
         - '&7进度 ID: &8minecraft:husbandry/bred_all_animals'
@@ -4520,8 +4591,9 @@ Icons:
   adv_husbandry_complete_catalogue:
     display:
       material: WHEAT
-      name: '&e全部猫种'
+      name: '&e&l百猫全书'
       lore:
+        - '&7驯服所有种类的猫！'
         - '&7分类: &f主世界 · 农牧'
         - '&7完成奖励: &a+320 分'
         - '&7进度 ID: &8minecraft:husbandry/complete_catalogue'
@@ -4533,8 +4605,9 @@ Icons:
   adv_husbandry_wax_on:
     display:
       material: WHEAT
-      name: '&e涂蜡'
+      name: '&e&l涂蜡'
       lore:
+        - '&7将蜜脾涂到铜块上！'
         - '&7分类: &f主世界 · 农牧'
         - '&7完成奖励: &a+2 分'
         - '&7进度 ID: &8minecraft:husbandry/wax_on'
@@ -4546,8 +4619,9 @@ Icons:
   adv_husbandry_wax_off:
     display:
       material: WHEAT
-      name: '&e除蜡'
+      name: '&e&l脱蜡'
       lore:
+        - '&7给铜块脱蜡！'
         - '&7分类: &f主世界 · 农牧'
         - '&7完成奖励: &a+2 分'
         - '&7进度 ID: &8minecraft:husbandry/wax_off'
@@ -4559,8 +4633,9 @@ Icons:
   adv_husbandry_silk_touch_nest:
     display:
       material: WHEAT
-      name: '&e精准采集蜂巢'
+      name: '&e&l举巢搬迁'
       lore:
+        - '&7用精准采集移动住着3只蜜蜂的蜂巢'
         - '&7分类: &f主世界 · 农牧'
         - '&7完成奖励: &a+8 分'
         - '&7进度 ID: &8minecraft:husbandry/silk_touch_nest'
@@ -4572,8 +4647,9 @@ Icons:
   adv_husbandry_leash_all_frog_variants:
     display:
       material: FROGSPAWN
-      name: '&e拴住所有青蛙变种'
+      name: '&e&l呱呱队出动'
       lore:
+        - '&7用拴绳拴住所有种类的青蛙'
         - '&7分类: &f主世界 · 农牧'
         - '&7完成奖励: &a+15 分'
         - '&7进度 ID: &8minecraft:husbandry/leash_all_frog_variants'
@@ -4585,8 +4661,9 @@ Icons:
   adv_husbandry_froglights:
     display:
       material: FROGSPAWN
-      name: '&e蛙灯'
+      name: '&e&l相映生辉！'
       lore:
+        - '&7在你的物品栏中集齐所有种类的蛙明灯'
         - '&7分类: &f主世界 · 农牧'
         - '&7完成奖励: &a+8 分'
         - '&7进度 ID: &8minecraft:husbandry/froglights'
@@ -4598,8 +4675,9 @@ Icons:
   adv_husbandry_allay_deliver_cake_to_note_block:
     display:
       material: CAKE
-      name: '&e悦灵送蛋糕到音符盒'
+      name: '&e&l生日快乐歌'
       lore:
+        - '&7让悦灵向音符盒投掷一块蛋糕'
         - '&7分类: &f主世界 · 农牧'
         - '&7完成奖励: &a+8 分'
         - '&7进度 ID: &8minecraft:husbandry/allay_deliver_cake_to_note_block'
@@ -4611,8 +4689,9 @@ Icons:
   adv_husbandry_make_a_sign_glow:
     display:
       material: WHEAT
-      name: '&e让告示牌发光'
+      name: '&e&l眼前一亮！'
       lore:
+        - '&7让任意种类告示牌上的文本发光'
         - '&7分类: &f主世界 · 农牧'
         - '&7完成奖励: &a+3 分'
         - '&7进度 ID: &8minecraft:husbandry/make_a_sign_glow'
@@ -4624,8 +4703,9 @@ Icons:
   adv_husbandry_safely_harvest_honey:
     display:
       material: HONEYCOMB
-      name: '&e安全收获蜂蜜'
+      name: '&e&l与蜂共舞'
       lore:
+        - '&7利用营火在不惊动蜜蜂的情况下从蜂巢收集蜂蜜'
         - '&7分类: &f主世界 · 农牧'
         - '&7完成奖励: &a+3 分'
         - '&7进度 ID: &8minecraft:husbandry/safely_harvest_honey'
@@ -4637,8 +4717,9 @@ Icons:
   adv_husbandry_axolotl_in_a_bucket:
     display:
       material: BUCKET
-      name: '&e把美西螈装进桶'
+      name: '&e&l最萌捕食者'
       lore:
+        - '&7用铁桶捕获一只美西螈'
         - '&7分类: &f主世界 · 农牧'
         - '&7完成奖励: &a+5 分'
         - '&7进度 ID: &8minecraft:husbandry/axolotl_in_a_bucket'
@@ -4650,8 +4731,9 @@ Icons:
   adv_husbandry_kill_axolotl_target:
     display:
       material: AXOLOTL_BUCKET
-      name: '&e和美西螈并肩作战'
+      name: '&e&l友谊的治愈力！'
       lore:
+        - '&7与美西螈并肩作战并赢得胜利'
         - '&7分类: &f主世界 · 农牧'
         - '&7完成奖励: &a+8 分'
         - '&7进度 ID: &8minecraft:husbandry/kill_axolotl_target'
@@ -4663,8 +4745,9 @@ Icons:
   adv_husbandry_tadpole_in_a_bucket:
     display:
       material: BUCKET
-      name: '&e桶装蝌蚪'
+      name: '&e&l蚪到桶里来'
       lore:
+        - '&7用铁桶捕获一只蝌蚪'
         - '&7分类: &f主世界 · 农牧'
         - '&7完成奖励: &a+3 分'
         - '&7进度 ID: &8minecraft:husbandry/tadpole_in_a_bucket'
@@ -4676,8 +4759,9 @@ Icons:
   adv_husbandry_allay_deliver_item_to_player:
     display:
       material: WHEAT
-      name: '&e悦灵交付物品'
+      name: '&e&l找到一个好朋友'
       lore:
+        - '&7让悦灵向你投掷物品'
         - '&7分类: &f主世界 · 农牧'
         - '&7完成奖励: &a+5 分'
         - '&7进度 ID: &8minecraft:husbandry/allay_deliver_item_to_player'
@@ -4689,8 +4773,9 @@ Icons:
   adv_husbandry_feed_snifflet:
     display:
       material: WHEAT
-      name: '&e喂食小嗅探兽'
+      name: '&e&l小小嗅探兽'
       lore:
+        - '&7喂食一只幼年嗅探兽'
         - '&7分类: &f主世界 · 农牧'
         - '&7完成奖励: &a+5 分'
         - '&7进度 ID: &8minecraft:husbandry/feed_snifflet'
@@ -4702,8 +4787,9 @@ Icons:
   adv_husbandry_obtain_sniffer_egg:
     display:
       material: EGG
-      name: '&e获得嗅探兽蛋'
+      name: '&e&l怪味蛋'
       lore:
+        - '&7获得嗅探兽蛋'
         - '&7分类: &f主世界 · 农牧'
         - '&7完成奖励: &a+15 分'
         - '&7进度 ID: &8minecraft:husbandry/obtain_sniffer_egg'
@@ -4715,8 +4801,9 @@ Icons:
   adv_husbandry_plant_any_sniffer_seed:
     display:
       material: WHEAT
-      name: '&e种植远古种子'
+      name: '&e&l播种往事'
       lore:
+        - '&7种植任意嗅探兽种子'
         - '&7分类: &f主世界 · 农牧'
         - '&7完成奖励: &a+10 分'
         - '&7进度 ID: &8minecraft:husbandry/plant_any_sniffer_seed'
@@ -4728,8 +4815,9 @@ Icons:
   adv_husbandry_obtain_netherite_hoe:
     display:
       material: NETHERITE_INGOT
-      name: '&e下界合金锄'
+      name: '&e&l终极奉献'
       lore:
+        - '&7用下界合金锭升级一把锄，然后重新考虑你的人生抉择'
         - '&7分类: &f主世界 · 农牧'
         - '&7完成奖励: &a+20 分'
         - '&7进度 ID: &8minecraft:husbandry/obtain_netherite_hoe'
@@ -4741,8 +4829,9 @@ Icons:
   adv_husbandry_ride_a_boat_with_a_goat:
     display:
       material: GOAT_HORN
-      name: '&e带山羊坐船'
+      name: '&e&l羊帆起航！'
       lore:
+        - '&7与山羊同船共渡'
         - '&7分类: &f主世界 · 农牧'
         - '&7完成奖励: &a+5 分'
         - '&7进度 ID: &8minecraft:husbandry/ride_a_boat_with_a_goat'
@@ -4754,8 +4843,9 @@ Icons:
   adv_husbandry_place_dried_ghast_in_water:
     display:
       material: WATER_BUCKET
-      name: '&e把干燥恶魂放进水里'
+      name: '&e&l补水保湿！'
       lore:
+        - '&7将失水恶魂方块放在水中'
         - '&7分类: &f主世界 · 农牧'
         - '&7完成奖励: &a+5 分'
         - '&7进度 ID: &8minecraft:husbandry/place_dried_ghast_in_water'
@@ -4767,8 +4857,9 @@ Icons:
   adv_husbandry_remove_wolf_armor:
     display:
       material: WHEAT
-      name: '&e给狼卸下盔甲'
+      name: '&e&l华丽一剪'
       lore:
+        - '&7用剪刀移除狼身上的狼铠'
         - '&7分类: &f主世界 · 农牧'
         - '&7完成奖励: &a+2 分'
         - '&7进度 ID: &8minecraft:husbandry/remove_wolf_armor'
@@ -4780,8 +4871,9 @@ Icons:
   adv_husbandry_repair_wolf_armor:
     display:
       material: WHEAT
-      name: '&e修复狼盔甲'
+      name: '&e&l完好如初'
       lore:
+        - '&7用犰狳鳞甲修复损坏的狼铠'
         - '&7分类: &f主世界 · 农牧'
         - '&7完成奖励: &a+3 分'
         - '&7进度 ID: &8minecraft:husbandry/repair_wolf_armor'
@@ -4793,8 +4885,9 @@ Icons:
   adv_husbandry_whole_pack:
     display:
       material: WHEAT
-      name: '&e完整狼群'
+      name: '&e&l群狼聚首'
       lore:
+        - '&7驯服所有种类的狼'
         - '&7分类: &f主世界 · 农牧'
         - '&7完成奖励: &a+200 分'
         - '&7进度 ID: &8minecraft:husbandry/whole_pack'
@@ -4806,8 +4899,9 @@ Icons:
   adv_nether_root:
     display:
       material: BOOK
-      name: '&e下界/根源'
+      name: '&e&l下界'
       lore:
+        - '&7记得带夏装'
         - '&7分类: &f下界'
         - '&7完成奖励: &a+0.3 分'
         - '&7进度 ID: &8minecraft:nether/root'
@@ -4819,8 +4913,9 @@ Icons:
   adv_nether_find_fortress:
     display:
       material: NETHERRACK
-      name: '&e发现堡垒'
+      name: '&e&l阴森的要塞'
       lore:
+        - '&7用你的方式进入下界要塞'
         - '&7分类: &f下界'
         - '&7完成奖励: &a+5 分'
         - '&7进度 ID: &8minecraft:nether/find_fortress'
@@ -4832,8 +4927,9 @@ Icons:
   adv_nether_return_to_sender:
     display:
       material: END_STONE
-      name: '&e归还火焰'
+      name: '&e&l见鬼去吧'
       lore:
+        - '&7用一团火球干掉一只恶魂'
         - '&7分类: &f下界'
         - '&7完成奖励: &a+10 分'
         - '&7进度 ID: &8minecraft:nether/return_to_sender'
@@ -4845,8 +4941,9 @@ Icons:
   adv_nether_obtain_blaze_rod:
     display:
       material: BLAZE_ROD
-      name: '&e获得烈焰棒'
+      name: '&e&l与火共舞'
       lore:
+        - '&7让烈焰人从烈焰棒中解放吧'
         - '&7分类: &f下界'
         - '&7完成奖励: &a+5 分'
         - '&7进度 ID: &8minecraft:nether/obtain_blaze_rod'
@@ -4858,8 +4955,9 @@ Icons:
   adv_nether_get_wither_skull:
     display:
       material: WITHER_SKELETON_SKULL
-      name: '&e获得凋零骷髅头'
+      name: '&e&l惊悚恐怖骷髅头'
       lore:
+        - '&7获得凋灵骷髅的头颅'
         - '&7分类: &f下界'
         - '&7完成奖励: &a+12 分'
         - '&7进度 ID: &8minecraft:nether/get_wither_skull'
@@ -4871,8 +4969,9 @@ Icons:
   adv_nether_summon_wither:
     display:
       material: WITHER_SKELETON_SKULL
-      name: '&e召唤凋灵'
+      name: '&e&l凋零山庄'
       lore:
+        - '&7召唤凋灵'
         - '&7分类: &f下界'
         - '&7完成奖励: &a+30 分'
         - '&7进度 ID: &8minecraft:nether/summon_wither'
@@ -4884,8 +4983,9 @@ Icons:
   adv_nether_create_beacon:
     display:
       material: BEACON
-      name: '&e制造信标'
+      name: '&e&l带信标回家'
       lore:
+        - '&7建造并放置一个信标'
         - '&7分类: &f下界'
         - '&7完成奖励: &a+12 分'
         - '&7进度 ID: &8minecraft:nether/create_beacon'
@@ -4897,8 +4997,9 @@ Icons:
   adv_nether_create_full_beacon:
     display:
       material: BEACON
-      name: '&e完整信标'
+      name: '&e&l信标工程师'
       lore:
+        - '&7让一座信标发挥最大功效'
         - '&7分类: &f下界'
         - '&7完成奖励: &a+40 分'
         - '&7进度 ID: &8minecraft:nether/create_full_beacon'
@@ -4910,8 +5011,9 @@ Icons:
   adv_nether_brew_potion:
     display:
       material: POTION
-      name: '&e酿造药水'
+      name: '&e&l本地酿造厂'
       lore:
+        - '&7酿造一瓶药水'
         - '&7分类: &f下界'
         - '&7完成奖励: &a+3 分'
         - '&7进度 ID: &8minecraft:nether/brew_potion'
@@ -4923,8 +5025,9 @@ Icons:
   adv_nether_all_potions:
     display:
       material: POTION
-      name: '&e所有药水效果'
+      name: '&e&l狂乱的鸡尾酒'
       lore:
+        - '&7同时拥有所有药水效果'
         - '&7分类: &f下界'
         - '&7完成奖励: &a+250 分'
         - '&7进度 ID: &8minecraft:nether/all_potions'
@@ -4936,8 +5039,9 @@ Icons:
   adv_nether_all_effects:
     display:
       material: NETHERRACK
-      name: '&e所有状态效果'
+      name: '&e&l为什么会变成这样呢？'
       lore:
+        - '&7同时拥有所有状态效果'
         - '&7分类: &f下界'
         - '&7完成奖励: &a+800 分'
         - '&7进度 ID: &8minecraft:nether/all_effects'
@@ -4949,8 +5053,9 @@ Icons:
   adv_nether_uneasy_alliance:
     display:
       material: NETHERRACK
-      name: '&e不安的同盟'
+      name: '&e&l脆弱的同盟'
       lore:
+        - '&7从下界救出一只恶魂，将其安全地带到主世界……然后干掉它'
         - '&7分类: &f下界'
         - '&7完成奖励: &a+80 分'
         - '&7进度 ID: &8minecraft:nether/uneasy_alliance'
@@ -4962,8 +5067,9 @@ Icons:
   adv_nether_fast_travel:
     display:
       material: NETHERRACK
-      name: '&e快速旅行'
+      name: '&e&l曲速泡'
       lore:
+        - '&7利用下界移动对应主世界7千米的距离'
         - '&7分类: &f下界'
         - '&7完成奖励: &a+10 分'
         - '&7进度 ID: &8minecraft:nether/fast_travel'
@@ -4975,8 +5081,9 @@ Icons:
   adv_nether_explore_nether:
     display:
       material: NETHERRACK
-      name: '&e探索下界'
+      name: '&e&l热门景点'
       lore:
+        - '&7探索所有下界生物群系'
         - '&7分类: &f下界'
         - '&7完成奖励: &a+15 分'
         - '&7进度 ID: &8minecraft:nether/explore_nether'
@@ -4988,8 +5095,9 @@ Icons:
   adv_nether_ride_strider:
     display:
       material: WARPED_FUNGUS_ON_A_STICK
-      name: '&e骑炽足兽'
+      name: '&e&l画船添足'
       lore:
+        - '&7手持诡异菌钓竿骑乘炽足兽'
         - '&7分类: &f下界'
         - '&7完成奖励: &a+5 分'
         - '&7进度 ID: &8minecraft:nether/ride_strider'
@@ -5001,8 +5109,9 @@ Icons:
   adv_nether_obtain_ancient_debris:
     display:
       material: ANCIENT_DEBRIS
-      name: '&e远古残骸'
+      name: '&e&l深藏不露'
       lore:
+        - '&7获得远古残骸'
         - '&7分类: &f下界'
         - '&7完成奖励: &a+15 分'
         - '&7进度 ID: &8minecraft:nether/obtain_ancient_debris'
@@ -5014,8 +5123,9 @@ Icons:
   adv_nether_netherite_armor:
     display:
       material: NETHERITE_INGOT
-      name: '&e下界合金盔甲'
+      name: '&e&l残骸裹身'
       lore:
+        - '&7获得一整套下界合金盔甲'
         - '&7分类: &f下界'
         - '&7完成奖励: &a+20 分'
         - '&7进度 ID: &8minecraft:nether/netherite_armor'
@@ -5027,8 +5137,9 @@ Icons:
   adv_nether_charge_respawn_anchor:
     display:
       material: NETHERRACK
-      name: '&e为重生锚充能'
+      name: '&e&l锚没有九条命'
       lore:
+        - '&7为重生锚充满能量'
         - '&7分类: &f下界'
         - '&7完成奖励: &a+8 分'
         - '&7进度 ID: &8minecraft:nether/charge_respawn_anchor'
@@ -5040,8 +5151,9 @@ Icons:
   adv_nether_distract_piglin:
     display:
       material: GOLD_INGOT
-      name: '&e分散猪灵注意'
+      name: '&e&l金光闪闪'
       lore:
+        - '&7用金质物品让猪灵分神'
         - '&7分类: &f下界'
         - '&7完成奖励: &a+5 分'
         - '&7进度 ID: &8minecraft:nether/distract_piglin'
@@ -5053,8 +5165,9 @@ Icons:
   adv_nether_find_bastion:
     display:
       material: NETHERRACK
-      name: '&e发现堡垒遗迹'
+      name: '&e&l光辉岁月'
       lore:
+        - '&7进入堡垒遗迹'
         - '&7分类: &f下界'
         - '&7完成奖励: &a+8 分'
         - '&7进度 ID: &8minecraft:nether/find_bastion'
@@ -5066,8 +5179,9 @@ Icons:
   adv_nether_loot_bastion:
     display:
       material: NETHERRACK
-      name: '&e搜刮堡垒遗迹'
+      name: '&e&l战猪'
       lore:
+        - '&7掠夺堡垒遗迹里的箱子'
         - '&7分类: &f下界'
         - '&7完成奖励: &a+10 分'
         - '&7进度 ID: &8minecraft:nether/loot_bastion'
@@ -5079,8 +5193,9 @@ Icons:
   adv_nether_obtain_crying_obsidian:
     display:
       material: OBSIDIAN
-      name: '&e获得哭泣的黑曜石'
+      name: '&e&l谁在切洋葱？'
       lore:
+        - '&7获得哭泣的黑曜石'
         - '&7分类: &f下界'
         - '&7完成奖励: &a+5 分'
         - '&7进度 ID: &8minecraft:nether/obtain_crying_obsidian'
@@ -5092,8 +5207,9 @@ Icons:
   adv_nether_ride_strider_in_overworld_lava:
     display:
       material: LAVA_BUCKET
-      name: '&e在主世界的岩浆上骑炽足兽'
+      name: '&e&l温暖如家'
       lore:
+        - '&7带炽足兽在主世界的熔岩湖上来一场长——途旅行'
         - '&7分类: &f下界'
         - '&7完成奖励: &a+5 分'
         - '&7进度 ID: &8minecraft:nether/ride_strider_in_overworld_lava'
@@ -5105,8 +5221,9 @@ Icons:
   adv_end_root:
     display:
       material: BOOK
-      name: '&e末地/根源'
+      name: '&e&l末地'
       lore:
+        - '&7抑或是起点？'
         - '&7分类: &f末地'
         - '&7完成奖励: &a+0.3 分'
         - '&7进度 ID: &8minecraft:end/root'
@@ -5118,8 +5235,9 @@ Icons:
   adv_end_kill_dragon:
     display:
       material: DRAGON_HEAD
-      name: '&e击杀末影龙'
+      name: '&e&l解放末地'
       lore:
+        - '&7祝君好运'
         - '&7分类: &f末地'
         - '&7完成奖励: &a+60 分'
         - '&7进度 ID: &8minecraft:end/kill_dragon'
@@ -5131,8 +5249,9 @@ Icons:
   adv_end_dragon_egg:
     display:
       material: DRAGON_HEAD
-      name: '&e龙蛋'
+      name: '&e&l下一世代'
       lore:
+        - '&7获得龙蛋'
         - '&7分类: &f末地'
         - '&7完成奖励: &a+300 分'
         - '&7进度 ID: &8minecraft:end/dragon_egg'
@@ -5144,8 +5263,9 @@ Icons:
   adv_end_enter_end_gateway:
     display:
       material: END_STONE
-      name: '&e进入末地折跃门'
+      name: '&e&l远程折跃'
       lore:
+        - '&7逃离这座岛屿'
         - '&7分类: &f末地'
         - '&7完成奖励: &a+12 分'
         - '&7进度 ID: &8minecraft:end/enter_end_gateway'
@@ -5157,8 +5277,9 @@ Icons:
   adv_end_find_end_city:
     display:
       material: END_STONE
-      name: '&e寻找末地城'
+      name: '&e&l在游戏尽头的城市'
       lore:
+        - '&7进去吧，又能发生什么呢？'
         - '&7分类: &f末地'
         - '&7完成奖励: &a+15 分'
         - '&7进度 ID: &8minecraft:end/find_end_city'
@@ -5170,8 +5291,9 @@ Icons:
   adv_end_elytra:
     display:
       material: ELYTRA
-      name: '&e鞘翅'
+      name: '&e&l天空即为极限'
       lore:
+        - '&7找到鞘翅'
         - '&7分类: &f末地'
         - '&7完成奖励: &a+40 分'
         - '&7进度 ID: &8minecraft:end/elytra'
@@ -5183,8 +5305,9 @@ Icons:
   adv_end_levitate:
     display:
       material: END_STONE
-      name: '&e悬浮'
+      name: '&e&l这上面的风景不错'
       lore:
+        - '&7利用潜影贝的攻击向上漂浮50个方块'
         - '&7分类: &f末地'
         - '&7完成奖励: &a+10 分'
         - '&7进度 ID: &8minecraft:end/levitate'
@@ -5196,8 +5319,9 @@ Icons:
   adv_end_respawn_dragon:
     display:
       material: DRAGON_HEAD
-      name: '&e复活末影龙'
+      name: '&e&l结束了…再一次…'
       lore:
+        - '&7复活末影龙'
         - '&7分类: &f末地'
         - '&7完成奖励: &a+15 分'
         - '&7进度 ID: &8minecraft:end/respawn_dragon'
@@ -5209,8 +5333,9 @@ Icons:
   adv_end_dragon_breath:
     display:
       material: DRAGON_BREATH
-      name: '&e龙息'
+      name: '&e&l你需要来点薄荷糖'
       lore:
+        - '&7用玻璃瓶收集一些龙息'
         - '&7分类: &f末地'
         - '&7完成奖励: &a+10 分'
         - '&7进度 ID: &8minecraft:end/dragon_breath'

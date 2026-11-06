@@ -29,20 +29,19 @@ foreach ($f in @($ranksFile, $wikiFile, $oldMenu)) {
 # ------------------------------------------------------------
 # 工具函数
 # ------------------------------------------------------------
-$script:miniCodes = @{
-    '0' = '<black>'; '1' = '<dark_blue>'; '2' = '<dark_green>'; '3' = '<dark_aqua>'
-    '4' = '<dark_red>'; '5' = '<dark_purple>'; '6' = '<gold>'; '7' = '<gray>'; '8' = '<dark_gray>'
-    '9' = '<blue>'; 'a' = '<green>'; 'b' = '<aqua>'; 'c' = '<red>'; 'd' = '<light_purple>'
-    'e' = '<yellow>'; 'f' = '<white>'; 'k' = '<obfuscated>'; 'l' = '<bold>'
-    'm' = '<strikethrough>'; 'n' = '<underline>'; 'o' = '<italic>'; 'r' = '<reset>'
-}
 
-# {#RRGGBB>} / {#RRGGBB<>} / {#RRGGBB<} / &a  ->  MiniMessage
-function ConvertTo-Mini([string]$text) {
+# {#RRGGBB>} / {#RRGGBB<>} / {#RRGGBB<} / &a  ->  TrMenu 渐变写法
+# 规则（客户端实测）：
+#   - 颜色码用传统 & 写法，<yellow> 这类命名标签不生效
+#   - <gradient:#A:#B> 后面不要 </gradient>，渐变会一直作用到下一个颜色标记
+#   - 没有 <reset>，需要复位颜色就用 &r
+# 例：&e[{#FFD700>}Extra_{#FF4500<}&r{#A0522D>}Dirt{#F5DEB3<}&e]
+#  ->  &e[<gradient:#FFD700:#FF4500>Extra_&r<gradient:#A0522D:#F5DEB3>Dirt&e]
+function ConvertTo-TrMenu([string]$text) {
     if ([string]::IsNullOrEmpty($text)) { return $text }
     $sb = New-Object System.Text.StringBuilder
-    $stops = New-Object System.Collections.Generic.List[string]
-    $gradient = New-Object System.Text.StringBuilder
+    $buffer = New-Object System.Text.StringBuilder
+    $prev = $null
     $inGradient = $false
     $i = 0
     $n = $text.Length
@@ -56,47 +55,42 @@ function ConvertTo-Mini([string]$text) {
                     $color = '#' + $Matches[1]
                     $kind = [string]$Matches[2]
                     if ($kind -eq '>') {
-                        $stops.Clear(); [void]$stops.Add($color)
-                        [void]$gradient.Clear(); $inGradient = $true
+                        $prev = $color
+                        $inGradient = $true
+                        [void]$buffer.Clear()
                     }
                     elseif ($kind -eq '<>') {
-                        if ($inGradient) { [void]$stops.Add($color) }
+                        if ($inGradient) {
+                            [void]$sb.Append('<gradient:' + $prev + ':' + $color + '>')
+                            [void]$sb.Append($buffer.ToString())
+                            [void]$buffer.Clear()
+                            $prev = $color
+                        }
                     }
                     elseif ($kind -eq '<') {
                         if ($inGradient) {
-                            [void]$stops.Add($color)
-                            [void]$sb.Append('<gradient:' + ($stops -join ':') + '>')
-                            [void]$sb.Append($gradient.ToString())
-                            [void]$sb.Append('</gradient>')
+                            [void]$sb.Append('<gradient:' + $prev + ':' + $color + '>')
+                            [void]$sb.Append($buffer.ToString())
+                            [void]$buffer.Clear()
                             $inGradient = $false
+                            $prev = $null
                         }
                     }
                     else {
-                        [void]$sb.Append('<color:' + $color + '>')
+                        # 单色：退化成首尾同色的渐变
+                        [void]$sb.Append('<gradient:' + $color + ':' + $color + '>')
                     }
                     $i = $close + 1
                     continue
                 }
             }
         }
-
-        if ($text[$i] -eq '&' -and ($i + 1) -lt $n) {
-            $code = ([string]$text[$i + 1]).ToLower()
-            if ($script:miniCodes.ContainsKey($code)) {
-                $tag = $script:miniCodes[$code]
-                if ($inGradient) { [void]$gradient.Append($tag) } else { [void]$sb.Append($tag) }
-                $i += 2
-                continue
-            }
-        }
-
-        if ($inGradient) { [void]$gradient.Append($text[$i]) } else { [void]$sb.Append($text[$i]) }
+        if ($inGradient) { [void]$buffer.Append($text[$i]) } else { [void]$sb.Append($text[$i]) }
         $i++
     }
-    if ($inGradient) {
-        [void]$sb.Append('<gradient:' + ($stops -join ':') + '>')
-        [void]$sb.Append($gradient.ToString())
-        [void]$sb.Append('</gradient>')
+    if ($inGradient -and $buffer.Length -gt 0) {
+        [void]$sb.Append('<gradient:' + $prev + ':' + $prev + '>')
+        [void]$sb.Append($buffer.ToString())
     }
     return $sb.ToString()
 }
@@ -138,19 +132,67 @@ function AddPage([string]$comment, [object[]]$content, [string[]]$nav) {
 # 1. 中文名（wiki）
 # ------------------------------------------------------------
 $advName = @{}; $blkName = @{}; $mobName = @{}; $baseName = @{}
+# 注意：PowerShell 的 -match 默认不区分大小写，这里必须用 -cmatch，
+# 否则 [A-Z_]+ 会把小写的方块/基础项也吞进去
 foreach ($line in Get-Content $wikiFile -Encoding UTF8) {
-    if ($line -match '^\| <code>minecraft:([a-z_]+)/([a-z_0-9]+)</code> \|\| (.+?) \|\| ([0-9.]+)') {
+    if ($line -cmatch '^\| <code>minecraft:([a-z_]+)/([a-z_0-9]+)</code> \|\| (.+?) \|\| ([0-9.]+)\s*$') {
         $advName["$($Matches[1])/$($Matches[2])"] = $Matches[3].Trim()
     }
-    elseif ($line -match '^\| <code>([A-Z_]+)</code> \|\| (.+?) \|\| ([0-9.]+)') {
+    elseif ($line -cmatch '^\| <code>([A-Z_]+)</code> \|\| (.+?) \|\| ([0-9.]+)\s*$') {
         $mobName[$Matches[1]] = $Matches[2].Trim()
     }
-    elseif ($line -match '^\| <code>([a-z_]+)</code> \|\| (.+?) \|\| ([0-9.]+)') {
+    elseif ($line -cmatch '^\| <code>([a-z_]+)</code> \|\| (.+?) \|\| ([0-9.]+)\s*$') {
         $blkName[$Matches[1]] = $Matches[2].Trim()
     }
-    elseif ($line -match '^\| <code>([a-z_]+)</code> \|\| (.+?) \|\| (.+)$') {
+    elseif ($line -cmatch '^\| <code>([a-z_]+)</code> \|\| (.+?) \|\| (.+)$') {
         $baseName[$Matches[1]] = $Matches[2].Trim()
     }
+}
+
+# wiki 表格里的名称偶尔带 <code> 标记，统一清掉
+foreach ($map in @($advName, $blkName, $mobName, $baseName)) {
+    foreach ($k in @($map.Keys)) {
+        $map[$k] = ($map[$k] -replace '</?code>', '').Trim()
+    }
+}
+$advI18n = @{}
+$advFile = Join-Path $Root 'Trmenu\advancements.txt'
+if (Test-Path $advFile) {
+    foreach ($line in Get-Content $advFile -Encoding UTF8) {
+        if ($line -match '"advancements\.([a-z_]+)\.([a-z_0-9]+)\.(title|description)":\s*"(.*)"\s*,?\s*$') {
+            $key = "$($Matches[1])/$($Matches[2])"
+            if (-not $advI18n.ContainsKey($key)) {
+                $advI18n[$key] = @{ Title = ''; Description = '' }
+            }
+            if ($Matches[3] -eq 'title') { $advI18n[$key].Title = $Matches[4] }
+            else { $advI18n[$key].Description = $Matches[4] }
+        }
+    }
+} else {
+    Write-Output '警告: 未找到 Trmenu\advancements.txt，成就名将回退到 wiki 译名'
+}
+
+# Trmenu\advancements.txt 里缺的条目，译名取自 1.21.11 官方 zh_cn 语言文件
+$advOverride = @{
+    'adventure/who_needs_rockets'                  = @('还要啥火箭啊？', '使用风弹将自己向上弹射8格')
+    'adventure/lighten_up'                         = @('铜光焕发', '用斧刮削铜灯来让它变得更亮')
+    'adventure/read_power_of_chiseled_bookshelf'   = @('知识就是力量', '使用红石比较器获取雕纹书架的信号强度')
+    'adventure/minecraft_trials_edition'           = @('Minecraft：试炼版', '踏入试炼密室')
+    'adventure/under_lock_and_key'                 = @('珍藏密敛', '用试炼钥匙解锁宝库')
+    'adventure/revaulting'                         = @('宝经磨炼', '用不祥试炼钥匙解锁不祥宝库')
+    'adventure/blowback'                           = @('逆风翻盘', '反弹旋风人的风弹来击杀旋风人')
+    'adventure/overoverkill'                       = @('天赐良击', '使用重锤一击造成50颗心的伤害')
+    'adventure/crafters_crafting_crafters'         = @('合成器合成合成器', '靠近一个正在合成合成器的合成器')
+    'adventure/brush_armadillo'                    = @('这不是鳞甲么？', '用刷子从犰狳身上获得犰狳鳞甲')
+    'adventure/use_lodestone'                      = @('天涯共此石', '对着磁石使用指南针')
+    'adventure/heart_transplanter'                 = @('移心接木', '将嘎枝之心以正确朝向放在两个苍白橡木原木方块中间')
+    'adventure/spear_many_mobs'                    = @('生物串串香', '用矛在一次冲锋攻击内命中五只生物')
+    'husbandry/bred_all_animals'                   = @('成双成对', '繁殖每种动物！')
+    'husbandry/obtain_netherite_hoe'               = @('终极奉献', '用下界合金锭升级一把锄，然后重新考虑你的人生抉择')
+    'husbandry/place_dried_ghast_in_water'         = @('补水保湿！', '将失水恶魂方块放在水中')
+    'husbandry/remove_wolf_armor'                  = @('华丽一剪', '用剪刀移除狼身上的狼铠')
+    'husbandry/repair_wolf_armor'                  = @('完好如初', '用犰狳鳞甲修复损坏的狼铠')
+    'husbandry/whole_pack'                         = @('群狼聚首', '驯服所有种类的狼')
 }
 
 # ------------------------------------------------------------
@@ -762,7 +804,7 @@ foreach ($rank in $ranks) {
     if ($rank.Id -eq 'Newbie') { continue }
     $material = 'STONE'
     if ($rankMaterial.ContainsKey($rank.Id)) { $material = $rankMaterial[$rank.Id] }
-    $mini = ConvertTo-Mini $rank.Display
+    $mini = ConvertTo-TrMenu $rank.Display
 
     $lore = New-Object System.Collections.Generic.List[string]
     $lore.Add('&7需要段位分: &e' + (Fmt $rank.Score))
@@ -777,7 +819,7 @@ foreach ($rank in $ranks) {
         }
         $lore.Add('&7属性奖励: &b' + ($parts -join ' &7/ &b'))
     }
-    if ($rank.Extra.Count -gt 0) { $lore.Add((ConvertTo-Mini ('&7专属内容: &d' + $rank.Extra[0]))) }
+    if ($rank.Extra.Count -gt 0) { $lore.Add((ConvertTo-TrMenu ('&7专属内容: &d' + $rank.Extra[0]))) }
     $lore.Add('')
 
     Add ('  ' + $rank.Id + ':')
@@ -943,13 +985,26 @@ foreach ($prefix in $advOrder) {
     $meta = $advMeta[$prefix]
     foreach ($path in $advData[$prefix].Keys) {
         $score = $advData[$prefix][$path]
-        $name = $advName[$path]; if (-not $name) { $name = ($path -split '/')[-1] }
+        # 名称/简介优先用官方简中语言文件（advancements.txt），缺失时回退到 wiki 译名
+        $name = ''
+        $desc = ''
+        if ($advI18n.ContainsKey($path)) {
+            $name = $advI18n[$path].Title
+            $desc = $advI18n[$path].Description
+        }
+        if (-not $name -and $advOverride.ContainsKey($path)) {
+            $name = $advOverride[$path][0]
+            $desc = $advOverride[$path][1]
+        }
+        if (-not $name) { $name = $advName[$path] }
+        if (-not $name) { $name = ($path -split '/')[-1] }
         $mat = Get-AdvMaterial ($path -split '/')[-1] $prefix
         Add ('  adv_' + ($path -replace '/', '_') + ':')
         Add '    display:'
         Add ('      material: ' + $mat)
-        Add ('      name: ' + (Y ('&e' + $name)))
+        Add ('      name: ' + (Y ('&e&l' + $name)))
         Add '      lore:'
+        if ($desc) { Add ('        - ' + (Y ('&7' + $desc))) }
         Add ('        - ' + (Y ('&7分类: &f' + $meta.name)))
         Add ('        - ' + (Y ('&7完成奖励: &a+' + (Fmt $score) + ' 分')))
         Add ('        - ' + (Y ('&7进度 ID: &8minecraft:' + $path)))
