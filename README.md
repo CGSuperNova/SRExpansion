@@ -49,11 +49,11 @@ jar --create --file dist\SRExpansion.jar -C out .
   「下一段位」，全程跟随玩家视角（`move-interval-ticks` 控制刷新间隔，默认每 tick 跟随），且只对本人可见。
   段位还可以用 `extra:` 追加第 4 幕内容（例如最高段位的「恭喜达到最高段位！」），玩家可用
   `/srank display` 自行关闭这段演出。
-- **段位属性奖励**：装了一同附带的 [AdvancedPlayerAttribute](../AdvancedPlayerAttribute) 插件后，
-  可以在 `ranks.yml` 里给段位配 `attributes:`
-  （`max_health` / `attack` / `defense` / `shield` / `dodge` / `armor_pierce` / `absolute`）。
-  加成按「该段位及之前所有段位」累加，登录、升级、`rankset`、重载时都会重算一次；
-  两个插件通过反射连接，没有编译依赖，没装属性插件时这项功能自动跳过。
+- **段位属性点**：装了一同附带的 [AdvancedPlayerAttribute](../AdvancedPlayerAttribute) 插件后，
+  可以在 `ranks.yml` 里给段位配 `points: N`。点数按「该段位及之前所有段位」累加，
+  登录、升级、`rankset`、重载时都会重算一次；玩家用 `/apa upgrade|refund` 或游戏内属性界面
+  自行分配到攻击 / 防御 / 血量上限 / 闪避率 / 护盾等属性上（每级消耗递增，有上限，撤回花金币）。
+  旧的 `attributes:` 固定加成仍然兼容。两个插件通过反射连接，没有编译依赖，没装属性插件时自动跳过。
 - 段位名支持 `&a` 传统颜色码、`{#RRGGBB}` 单色、`{#RRGGBB>}文字{#RRGGBB<}` 渐变，
   以及多色标 `{#RRGGBB<>}`（解析器见 `TextFormatter`）。
 

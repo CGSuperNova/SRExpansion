@@ -17,22 +17,28 @@ public final class Rank {
     private final boolean auto;     // 是否允许自动升级
     private final Map<String, Double> attributes;   // 段位提供的属性加成（AdvancedPlayerAttribute 的属性 id）
     private final java.util.List<String> extraDisplay;  // 基础三幕之后再额外显示的悬浮字内容
+    private final double points;    // 段位提供的属性点
 
     private Component displayComponent;
     private String displayLegacy;
     private String displayPlain;
 
     public Rank(int index, String id, String display, double score, double money, boolean auto) {
-        this(index, id, display, score, money, auto, Map.of(), java.util.List.of());
+        this(index, id, display, score, money, auto, Map.of(), java.util.List.of(), 0);
     }
 
     public Rank(int index, String id, String display, double score, double money, boolean auto,
                 Map<String, Double> attributes) {
-        this(index, id, display, score, money, auto, attributes, java.util.List.of());
+        this(index, id, display, score, money, auto, attributes, java.util.List.of(), 0);
     }
 
     public Rank(int index, String id, String display, double score, double money, boolean auto,
                 Map<String, Double> attributes, java.util.List<String> extraDisplay) {
+        this(index, id, display, score, money, auto, attributes, extraDisplay, 0);
+    }
+
+    public Rank(int index, String id, String display, double score, double money, boolean auto,
+                Map<String, Double> attributes, java.util.List<String> extraDisplay, double points) {
         this.index = index;
         this.id = id;
         this.display = display;
@@ -41,6 +47,7 @@ public final class Rank {
         this.auto = auto;
         this.attributes = attributes == null ? Map.of() : new LinkedHashMap<>(attributes);
         this.extraDisplay = extraDisplay == null ? java.util.List.of() : java.util.List.copyOf(extraDisplay);
+        this.points = points;
     }
 
     public int getIndex() { return index; }
@@ -55,6 +62,9 @@ public final class Rank {
 
     /** 基础三幕显示完之后，再额外显示的内容（每个元素一行）；空列表表示没有额外内容。 */
     public java.util.List<String> getExtraDisplay() { return extraDisplay; }
+
+    /** 这个段位本身提供的属性点（未累加低段位）。 */
+    public double getPoints() { return points; }
 
     /** 带颜色的显示名（Adventure 组件）。 */
     public Component getDisplayComponent() {

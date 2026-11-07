@@ -1,5 +1,5 @@
 name: SRExpansion
-version: 1.11.0
+version: 1.12.0
 main: org.example.com.sRExpansion.SRExpansion
 api-version: '1.21'
 author: buzizi

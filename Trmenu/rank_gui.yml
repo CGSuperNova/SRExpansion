@@ -16,9 +16,9 @@ Layout:
   # 0 主页面
   - - '#########'
     - '#I     R#'
-    - '#   T   #'
-    - '#F     C#'
+    - '#F  T  C#'
     - '#S     A#'
+    - '#   P   #'
     - '#########'
   # 1 个人设置 / 操作
   - - '#########'
@@ -125,6 +125,13 @@ Layout:
     - '         '
     - '         '
     - '`back_adv`########'
+  # 16 属性点配置
+  - - '#########'
+    - '#   `attr_info`   #'
+    - '# `up_attack` `up_defense` `up_max_health` #'
+    - '# `up_shield` `up_dodge` `up_armor_pierce` #'
+    - '#   `up_absolute`   #'
+    - '`back_attr`########'
 
 PlayerInventory:
   - '         '
@@ -225,6 +232,7 @@ Icons:
         - '&f· 攻击 &7%apa_attack% &f· 防御 &7%apa_defense%'
         - '&f· 血量上限 &7%apa_max_health% &8(总计 %apa_max_health_total%)'
         - '&f· 闪避率 &7%apa_dodge%% &f· 护盾 &7%apa_shield%/%apa_shield_max%'
+        - '&f· 可用属性点: &a%apa_points%'
         - '&8&m------------------------'
         - '&7自动升级: &f%srank_autorankup% &7| 悬浮字: &f%srank_display%'
         - '&e点击刷新'
@@ -333,6 +341,230 @@ Icons:
     actions:
       all: 'page: 5 &&& sound: BLOCK_NOTE_BLOCK_BIT-1-1'
 
+  P:
+    update: 20
+    display:
+      material: AMETHYST_SHARD
+      name: '&d&l属性点 &7: &f%apa_points%'
+      lore:
+        - '&7升级段位会获得属性点'
+        - '&7可以自由分配到攻击、防御、血量等属性'
+        - '&8&m------------------------'
+        - '&f可用属性点: &a%apa_points% &7/ 共 &f%apa_points_total%'
+        - '&7点击进入属性配置'
+    actions:
+      all: 'page: 16 &&& sound: BLOCK_NOTE_BLOCK_BIT-1-1'
+
+  # ---------- 属性点配置 ----------
+  back_attr:
+    update: 20
+    display:
+      material: Light Blue Stained Glass Pane
+      name: '&b返回主页面'
+      lore:
+        - '&7点击返回'
+    actions:
+      all: 'page: 0 &&& sound: BLOCK_NOTE_BLOCK_PLING-1-2'
+
+  attr_info:
+    update: 20
+    display:
+      material: EXPERIENCE_BOTTLE
+      name: '&a&l属性点 &7: &f%apa_points%'
+      lore:
+        - '&7已获得: &f%apa_points_total% &7已花费: &f%apa_points_spent%'
+        - '&7可用: &a%apa_points%'
+        - '&8&m------------------------'
+        - '&7左键升级一级，右键撤回一级'
+        - '&7升级消耗递增：第 n 级消耗 n × 基础消耗'
+        - '&7撤回会返还属性点，但需要花费金币'
+        - '&8&m------------------------'
+        - '&7等级与属性值看下面的按钮'
+    actions:
+      all: 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'
+
+  up_attack:
+    update: 20
+    display:
+      material: IRON_SWORD
+      name: '&e&l攻击 &7Lv.&f%apa_level_attack%'
+      lore:
+        - '&7命中时额外造成的伤害'
+        - '&8&m------------------------'
+        - '&f当前: &a%apa_attack%'
+        - '&f下一级消耗: &b%apa_cost_attack% &7点'
+        - '&f等级上限: &7Lv.%apa_maxlevel_attack%'
+        - '&8&m------------------------'
+        - '&e左键 &7- 升级一级（消耗属性点）'
+        - '&c右键 &7- 撤回一级（返还属性点，消耗金币）'
+    actions:
+      left:
+        - 'command: apa upgrade attack'
+        - 'delay: 2'
+        - 'update: up_attack;attr_info'
+        - 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+      right:
+        - 'command: apa refund attack'
+        - 'delay: 2'
+        - 'update: up_attack;attr_info'
+        - 'sound: BLOCK_NOTE_BLOCK_BASS-1-1'
+
+  up_defense:
+    update: 20
+    display:
+      material: IRON_CHESTPLATE
+      name: '&e&l防御 &7Lv.&f%apa_level_defense%'
+      lore:
+        - '&7受到的伤害固定减少'
+        - '&8&m------------------------'
+        - '&f当前: &a%apa_defense%'
+        - '&f下一级消耗: &b%apa_cost_defense% &7点'
+        - '&f等级上限: &7Lv.%apa_maxlevel_defense%'
+        - '&8&m------------------------'
+        - '&e左键 &7- 升级一级（消耗属性点）'
+        - '&c右键 &7- 撤回一级（返还属性点，消耗金币）'
+    actions:
+      left:
+        - 'command: apa upgrade defense'
+        - 'delay: 2'
+        - 'update: up_defense;attr_info'
+        - 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+      right:
+        - 'command: apa refund defense'
+        - 'delay: 2'
+        - 'update: up_defense;attr_info'
+        - 'sound: BLOCK_NOTE_BLOCK_BASS-1-1'
+
+  up_max_health:
+    update: 20
+    display:
+      material: GOLDEN_APPLE
+      name: '&e&l血量上限 &7Lv.&f%apa_level_max_health%'
+      lore:
+        - '&7最大生命值提升'
+        - '&8&m------------------------'
+        - '&f当前: &a%apa_max_health%'
+        - '&f下一级消耗: &b%apa_cost_max_health% &7点'
+        - '&f等级上限: &7Lv.%apa_maxlevel_max_health%'
+        - '&8&m------------------------'
+        - '&e左键 &7- 升级一级（消耗属性点）'
+        - '&c右键 &7- 撤回一级（返还属性点，消耗金币）'
+    actions:
+      left:
+        - 'command: apa upgrade max_health'
+        - 'delay: 2'
+        - 'update: up_max_health;attr_info'
+        - 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+      right:
+        - 'command: apa refund max_health'
+        - 'delay: 2'
+        - 'update: up_max_health;attr_info'
+        - 'sound: BLOCK_NOTE_BLOCK_BASS-1-1'
+
+  up_shield:
+    update: 20
+    display:
+      material: SHIELD
+      name: '&e&l护盾 &7Lv.&f%apa_level_shield%'
+      lore:
+        - '&7黄心，优先于生命值被消耗'
+        - '&8&m------------------------'
+        - '&f当前: &a%apa_shield%'
+        - '&f下一级消耗: &b%apa_cost_shield% &7点'
+        - '&f等级上限: &7Lv.%apa_maxlevel_shield%'
+        - '&8&m------------------------'
+        - '&e左键 &7- 升级一级（消耗属性点）'
+        - '&c右键 &7- 撤回一级（返还属性点，消耗金币）'
+    actions:
+      left:
+        - 'command: apa upgrade shield'
+        - 'delay: 2'
+        - 'update: up_shield;attr_info'
+        - 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+      right:
+        - 'command: apa refund shield'
+        - 'delay: 2'
+        - 'update: up_shield;attr_info'
+        - 'sound: BLOCK_NOTE_BLOCK_BASS-1-1'
+
+  up_dodge:
+    update: 20
+    display:
+      material: FEATHER
+      name: '&e&l闪避率 &7Lv.&f%apa_level_dodge%'
+      lore:
+        - '&7按百分比躲开一次攻击'
+        - '&8&m------------------------'
+        - '&f当前: &a%apa_dodge%%'
+        - '&f下一级消耗: &b%apa_cost_dodge% &7点'
+        - '&f等级上限: &7Lv.%apa_maxlevel_dodge%'
+        - '&8&m------------------------'
+        - '&e左键 &7- 升级一级（消耗属性点）'
+        - '&c右键 &7- 撤回一级（返还属性点，消耗金币）'
+    actions:
+      left:
+        - 'command: apa upgrade dodge'
+        - 'delay: 2'
+        - 'update: up_dodge;attr_info'
+        - 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+      right:
+        - 'command: apa refund dodge'
+        - 'delay: 2'
+        - 'update: up_dodge;attr_info'
+        - 'sound: BLOCK_NOTE_BLOCK_BASS-1-1'
+
+  up_armor_pierce:
+    update: 20
+    display:
+      material: ARROW
+      name: '&e&l破甲攻击 &7Lv.&f%apa_level_armor_pierce%'
+      lore:
+        - '&7无视护甲的额外伤害'
+        - '&8&m------------------------'
+        - '&f当前: &a%apa_armor_pierce%'
+        - '&f下一级消耗: &b%apa_cost_armor_pierce% &7点'
+        - '&f等级上限: &7Lv.%apa_maxlevel_armor_pierce%'
+        - '&8&m------------------------'
+        - '&e左键 &7- 升级一级（消耗属性点）'
+        - '&c右键 &7- 撤回一级（返还属性点，消耗金币）'
+    actions:
+      left:
+        - 'command: apa upgrade armor_pierce'
+        - 'delay: 2'
+        - 'update: up_armor_pierce;attr_info'
+        - 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+      right:
+        - 'command: apa refund armor_pierce'
+        - 'delay: 2'
+        - 'update: up_armor_pierce;attr_info'
+        - 'sound: BLOCK_NOTE_BLOCK_BASS-1-1'
+
+  up_absolute:
+    update: 20
+    display:
+      material: NETHER_STAR
+      name: '&e&l绝对攻击 &7Lv.&f%apa_level_absolute%'
+      lore:
+        - '&7无视一切防御与 Buff 的伤害'
+        - '&8&m------------------------'
+        - '&f当前: &a%apa_absolute%'
+        - '&f下一级消耗: &b%apa_cost_absolute% &7点'
+        - '&f等级上限: &7Lv.%apa_maxlevel_absolute%'
+        - '&8&m------------------------'
+        - '&e左键 &7- 升级一级（消耗属性点）'
+        - '&c右键 &7- 撤回一级（返还属性点，消耗金币）'
+    actions:
+      left:
+        - 'command: apa upgrade absolute'
+        - 'delay: 2'
+        - 'update: up_absolute;attr_info'
+        - 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+      right:
+        - 'command: apa refund absolute'
+        - 'delay: 2'
+        - 'update: up_absolute;attr_info'
+        - 'sound: BLOCK_NOTE_BLOCK_BASS-1-1'
+
   # ---------- 设置 / 操作 ----------
   X:
     update: 20
@@ -412,7 +644,6 @@ Icons:
       lore:
         - '&7需要段位分: &e5'
         - '&7升级奖励: &a355 金币'
-        - '&7属性奖励: &b血量上限 +1'
         - ''
     actions:
       all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
@@ -425,7 +656,6 @@ Icons:
           lore:
             - '&7需要段位分: &e5'
             - '&7升级奖励: &a355 金币'
-            - '&7属性奖励: &b血量上限 +1'
             - '&a✔ 已达到'
 
   Log:
@@ -480,7 +710,6 @@ Icons:
       lore:
         - '&7需要段位分: &e80'
         - '&7升级奖励: &a700 金币'
-        - '&7属性奖励: &b血量上限 +1'
         - ''
     actions:
       all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
@@ -493,7 +722,6 @@ Icons:
           lore:
             - '&7需要段位分: &e80'
             - '&7升级奖励: &a700 金币'
-            - '&7属性奖励: &b血量上限 +1'
             - '&a✔ 已达到'
 
   Coal_ore:
@@ -548,7 +776,6 @@ Icons:
       lore:
         - '&7需要段位分: &e245'
         - '&7升级奖励: &a1315 金币'
-        - '&7属性奖励: &b血量上限 +2 &7/ &b防御 +1'
         - ''
     actions:
       all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
@@ -561,7 +788,6 @@ Icons:
           lore:
             - '&7需要段位分: &e245'
             - '&7升级奖励: &a1315 金币'
-            - '&7属性奖励: &b血量上限 +2 &7/ &b防御 +1'
             - '&a✔ 已达到'
 
   Iron_ore:
@@ -616,7 +842,6 @@ Icons:
       lore:
         - '&7需要段位分: &e500'
         - '&7升级奖励: &a2200 金币'
-        - '&7属性奖励: &b血量上限 +1 &7/ &b攻击 +1'
         - ''
     actions:
       all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
@@ -629,7 +854,6 @@ Icons:
           lore:
             - '&7需要段位分: &e500'
             - '&7升级奖励: &a2200 金币'
-            - '&7属性奖励: &b血量上限 +1 &7/ &b攻击 +1'
             - '&a✔ 已达到'
 
   Gold_ore:
@@ -816,7 +1040,6 @@ Icons:
       lore:
         - '&7需要段位分: &e1805'
         - '&7升级奖励: &a6475 金币'
-        - '&7属性奖励: &b血量上限 +2 &7/ &b防御 +1 &7/ &b攻击 +1'
         - ''
     actions:
       all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
@@ -829,7 +1052,6 @@ Icons:
           lore:
             - '&7需要段位分: &e1805'
             - '&7升级奖励: &a6475 金币'
-            - '&7属性奖励: &b血量上限 +2 &7/ &b防御 +1 &7/ &b攻击 +1'
             - '&a✔ 已达到'
 
   Diamond_ore:
@@ -1082,7 +1304,6 @@ Icons:
       lore:
         - '&7需要段位分: &e4805'
         - '&7升级奖励: &a15955 金币'
-        - '&7属性奖励: &b血量上限 +2 &7/ &b防御 +1 &7/ &b攻击 +1 &7/ &b护盾 +2'
         - ''
     actions:
       all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
@@ -1095,7 +1316,6 @@ Icons:
           lore:
             - '&7需要段位分: &e4805'
             - '&7升级奖励: &a15955 金币'
-            - '&7属性奖励: &b血量上限 +2 &7/ &b防御 +1 &7/ &b攻击 +1 &7/ &b护盾 +2'
             - '&a✔ 已达到'
 
   Wither:
@@ -1106,7 +1326,6 @@ Icons:
       lore:
         - '&7需要段位分: &e5120'
         - '&7升级奖励: &a16940 金币'
-        - '&7属性奖励: &b攻击 +2'
         - ''
     actions:
       all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
@@ -1119,7 +1338,6 @@ Icons:
           lore:
             - '&7需要段位分: &e5120'
             - '&7升级奖励: &a16940 金币'
-            - '&7属性奖励: &b攻击 +2'
             - '&a✔ 已达到'
 
   Nether_Star:
@@ -1152,7 +1370,6 @@ Icons:
       lore:
         - '&7需要段位分: &e5780'
         - '&7升级奖励: &a19000 金币'
-        - '&7属性奖励: &b血量上限 +2 &7/ &b防御 +1'
         - ''
     actions:
       all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
@@ -1165,7 +1382,6 @@ Icons:
           lore:
             - '&7需要段位分: &e5780'
             - '&7升级奖励: &a19000 金币'
-            - '&7属性奖励: &b血量上限 +2 &7/ &b防御 +1'
             - '&a✔ 已达到'
 
   Ender:
@@ -1198,7 +1414,6 @@ Icons:
       lore:
         - '&7需要段位分: &e6480'
         - '&7升级奖励: &a21180 金币'
-        - '&7属性奖励: &b攻击 +2 &7/ &b护盾 +2'
         - ''
     actions:
       all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
@@ -1211,7 +1426,6 @@ Icons:
           lore:
             - '&7需要段位分: &e6480'
             - '&7升级奖励: &a21180 金币'
-            - '&7属性奖励: &b攻击 +2 &7/ &b护盾 +2'
             - '&a✔ 已达到'
 
   End_City:
@@ -1464,7 +1678,6 @@ Icons:
       lore:
         - '&7需要段位分: &e11520'
         - '&7升级奖励: &a36780 金币'
-        - '&7属性奖励: &b血量上限 +3 &7/ &b防御 +2 &7/ &b闪避率 +2%'
         - ''
     actions:
       all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
@@ -1477,7 +1690,6 @@ Icons:
           lore:
             - '&7需要段位分: &e11520'
             - '&7升级奖励: &a36780 金币'
-            - '&7属性奖励: &b血量上限 +3 &7/ &b防御 +2 &7/ &b闪避率 +2%'
             - '&a✔ 已达到'
 
   Minecraft+:
@@ -1510,7 +1722,6 @@ Icons:
       lore:
         - '&7需要段位分: &e12500'
         - '&7升级奖励: &a39800 金币'
-        - '&7属性奖励: &b血量上限 +3 &7/ &b攻击 +3 &7/ &b护盾 +3'
         - ''
     actions:
       all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
@@ -1523,7 +1734,6 @@ Icons:
           lore:
             - '&7需要段位分: &e12500'
             - '&7升级奖励: &a39800 金币'
-            - '&7属性奖励: &b血量上限 +3 &7/ &b攻击 +3 &7/ &b护盾 +3'
             - '&a✔ 已达到'
 
   Extra_Dirt:
@@ -1666,7 +1876,6 @@ Icons:
       lore:
         - '&7需要段位分: &e19494'
         - '&7升级奖励: &a51315 金币'
-        - '&7属性奖励: &b血量上限 +2 &7/ &b防御 +2'
         - ''
     actions:
       all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
@@ -1679,7 +1888,6 @@ Icons:
           lore:
             - '&7需要段位分: &e19494'
             - '&7升级奖励: &a51315 金币'
-            - '&7属性奖励: &b血量上限 +2 &7/ &b防御 +2'
             - '&a✔ 已达到'
 
   Extra_Iron_ore:
@@ -1932,7 +2140,6 @@ Icons:
       lore:
         - '&7需要段位分: &e28566'
         - '&7升级奖励: &a74475 金币'
-        - '&7属性奖励: &b血量上限 +2 &7/ &b攻击 +2 &7/ &b闪避率 +2%'
         - ''
     actions:
       all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
@@ -1945,7 +2152,6 @@ Icons:
           lore:
             - '&7需要段位分: &e28566'
             - '&7升级奖励: &a74475 金币'
-            - '&7属性奖励: &b血量上限 +2 &7/ &b攻击 +2 &7/ &b闪避率 +2%'
             - '&a✔ 已达到'
 
   Extra_Diamond_ore:
@@ -2198,7 +2404,6 @@ Icons:
       lore:
         - '&7需要段位分: &e39366'
         - '&7升级奖励: &a101955 金币'
-        - '&7属性奖励: &b血量上限 +3 &7/ &b防御 +2 &7/ &b护盾 +3'
         - ''
     actions:
       all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
@@ -2211,7 +2416,6 @@ Icons:
           lore:
             - '&7需要段位分: &e39366'
             - '&7升级奖励: &a101955 金币'
-            - '&7属性奖励: &b血量上限 +3 &7/ &b防御 +2 &7/ &b护盾 +3'
             - '&a✔ 已达到'
 
   Extra_Wither:
@@ -2574,7 +2778,6 @@ Icons:
       lore:
         - '&7需要段位分: &e57624'
         - '&7升级奖励: &a115009 金币'
-        - '&7属性奖励: &b血量上限 +3 &7/ &b攻击 +3 &7/ &b闪避率 +3%'
         - ''
     actions:
       all: 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'
@@ -2587,7 +2790,6 @@ Icons:
           lore:
             - '&7需要段位分: &e57624'
             - '&7升级奖励: &a115009 金币'
-            - '&7属性奖励: &b血量上限 +3 &7/ &b攻击 +3 &7/ &b闪避率 +3%'
             - '&a✔ 已达到'
 
   Extra_Minecraft_plus:
@@ -2620,7 +2822,6 @@ Icons:
       lore:
         - '&7需要段位分: &e60000'
         - '&7升级奖励: &a117759 金币'
-        - '&7属性奖励: &b血量上限 +5 &7/ &b防御 +3 &7/ &b攻击 +3 &7/ &b护盾 +5'
         - '&7专属内容: &d&6&l恭喜达到最高段位！'
         - ''
     actions:
@@ -2634,7 +2835,6 @@ Icons:
           lore:
             - '&7需要段位分: &e60000'
             - '&7升级奖励: &a117759 金币'
-            - '&7属性奖励: &b血量上限 +5 &7/ &b防御 +3 &7/ &b攻击 +3 &7/ &b护盾 +5'
             - '&7专属内容: &d&6&l恭喜达到最高段位！'
             - '&a✔ 已达到'
 

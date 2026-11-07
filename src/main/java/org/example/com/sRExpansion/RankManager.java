@@ -73,7 +73,7 @@ public class RankManager {
     public void load() {
         File file = ConfigFiles.ensure(plugin, "ranks.yml", "ranks");
         YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
-        migrateAttributes(config, file);
+        migratePoints(config, file);
 
         autoDefault = config.getBoolean("settings.auto-rankup-default", true);
         checkInterval = Math.max(5, config.getInt("settings.check-interval-seconds", 60));
@@ -129,7 +129,7 @@ public class RankManager {
                     }
                 }
                 loaded.add(new Rank(0, id, display, score, money, auto, attributes,
-                        rank.getStringList("extra")));
+                        rank.getStringList("extra"), rank.getDouble("points", 0)));
             }
         }
         loaded.sort(Comparator.comparingDouble(Rank::getScore));
@@ -141,7 +141,7 @@ public class RankManager {
         for (Rank rank : loaded) {
             index++;
             Rank numbered = new Rank(index, rank.getId(), rank.getDisplay(), rank.getScore(), rank.getMoney(),
-                    rank.isAuto(), rank.getAttributes(), rank.getExtraDisplay());
+                    rank.isAuto(), rank.getAttributes(), rank.getExtraDisplay(), rank.getPoints());
             ranks.add(numbered);
             byId.put(numbered.getId().toLowerCase(Locale.ROOT), numbered);
             attributeIds.addAll(numbered.getAttributes().keySet());
@@ -150,14 +150,14 @@ public class RankManager {
     }
 
     /**
-     * 一次性迁移：把 jar 内置的 attributes 补进服务器上已存在的段位条目。
+     * 一次性迁移：把段位奖励从「固定属性加成」换成「属性点」。
      *
      * <p>配置合并对 {@code ranks} 是「只补整条新增、不改已有条目」，所以老服务器的
-     * ranks.yml 不会自动获得 v1.10.0 新增的 attributes。这里用一个开关做一次性迁移：
-     * 只给「还没有 attributes 字段」的段位补上默认值，之后管理员删改都不会被还原。</p>
+     * ranks.yml 不会自动获得新增的 {@code points}。这里用开关做一次性迁移：
+     * 旧条目里的 {@code attributes} 会被移除，换成内置默认的属性点。</p>
      */
-    private void migrateAttributes(YamlConfiguration config, File file) {
-        if (config.getBoolean("settings.attributes-migrated", false)) return;
+    private void migratePoints(YamlConfiguration config, File file) {
+        if (config.getBoolean("settings.points-migrated", false)) return;
         java.io.InputStream in = plugin.getResource("ranks.yml");
         if (in == null) return;
         YamlConfiguration defaults;
@@ -169,27 +169,31 @@ public class RankManager {
 
         ConfigurationSection ranks = config.getConfigurationSection("ranks");
         ConfigurationSection defaultRanks = defaults.getConfigurationSection("ranks");
-        int migrated = 0;
+        int converted = 0;
+        int added = 0;
         if (ranks != null && defaultRanks != null) {
             for (String id : ranks.getKeys(false)) {
                 ConfigurationSection entry = ranks.getConfigurationSection(id);
                 ConfigurationSection defaultEntry = defaultRanks.getConfigurationSection(id);
                 if (entry == null || defaultEntry == null) continue;
-                if (entry.contains("attributes")) continue;
-                ConfigurationSection defaultAttributes = defaultEntry.getConfigurationSection("attributes");
-                if (defaultAttributes == null) continue;
-                ConfigurationSection created = entry.createSection("attributes");
-                for (String key : defaultAttributes.getKeys(false)) {
-                    created.set(key, defaultAttributes.get(key));
+                if (entry.contains("points")) continue;
+                double defaultPoints = defaultEntry.getDouble("points", 0);
+                if (entry.contains("attributes")) {
+                    // 旧机制：删掉固定加成，换成属性点
+                    entry.set("attributes", null);
+                    if (defaultPoints > 0) entry.set("points", defaultPoints);
+                    converted++;
+                } else if (defaultPoints > 0) {
+                    entry.set("points", defaultPoints);
+                    added++;
                 }
-                migrated++;
             }
         }
-        config.set("settings.attributes-migrated", true);
+        config.set("settings.points-migrated", true);
         try {
             config.save(file);
-            if (migrated > 0) {
-                plugin.getLogger().info("已为 " + migrated + " 个段位补上默认的属性奖励（attributes）");
+            if (converted > 0 || added > 0) {
+                plugin.getLogger().info("段位奖励已迁移为属性点：转换 " + converted + " 个、新增 " + added + " 个");
             }
         } catch (java.io.IOException e) {
             plugin.getLogger().warning("写回 ranks.yml 失败: " + e.getMessage());
@@ -203,7 +207,7 @@ public class RankManager {
     public void syncAttributes(Player player) {
         if (player == null) return;
         AttributeBridge bridge = plugin.getAttributeBridge();
-        if (bridge == null || !bridge.isAvailable() || attributeIds.isEmpty()) return;
+        if (bridge == null || !bridge.isAvailable()) return;
         ScoreDataManager dataManager = plugin.getDataManager();
         if (dataManager == null) return;
         ScoreDataManager.PlayerData data = dataManager.getPlayerData(player.getUniqueId());
@@ -213,17 +217,31 @@ public class RankManager {
         if (current == null) current = getByScore(data.getScore());
         if (current == null) return;
 
-        Map<String, Double> totals = new LinkedHashMap<>();
-        for (Rank rank : ranks) {
-            if (rank.getIndex() > current.getIndex()) break;
-            rank.getAttributes().forEach((key, value) -> totals.merge(key, value, Double::sum));
+        // 1) 段位自带的固定属性加成
+        if (!attributeIds.isEmpty()) {
+            Map<String, Double> totals = new LinkedHashMap<>();
+            for (Rank rank : ranks) {
+                if (rank.getIndex() > current.getIndex()) break;
+                rank.getAttributes().forEach((key, value) -> totals.merge(key, value, Double::sum));
+            }
+            for (String attributeId : attributeIds) {
+                bridge.set(player, attributeId, totals.getOrDefault(attributeId, 0.0));
+            }
         }
-        for (String attributeId : attributeIds) {
-            bridge.set(player, attributeId, totals.getOrDefault(attributeId, 0.0));
+
+        // 2) 段位发放的属性点（累加到当前段位为止）
+        if (bridge.supportsPoints()) {
+            double points = 0;
+            for (Rank rank : ranks) {
+                if (rank.getIndex() > current.getIndex()) break;
+                points += rank.getPoints();
+            }
+            bridge.setPoints(player, points);
         }
     }
 
-    public int getCheckInterval() { return checkInterval; }    public boolean isAutoDefault() { return autoDefault; }
+    public int getCheckInterval() { return checkInterval; }
+    public boolean isAutoDefault() { return autoDefault; }
     public List<Rank> getRanks() { return ranks; }
     public int size() { return ranks.size(); }
 

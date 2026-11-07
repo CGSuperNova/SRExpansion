@@ -384,9 +384,9 @@ Add 'Layout:'
 AddPage '0 主页面' @(
     @('#', '#', '#', '#', '#', '#', '#', '#', '#'),
     @('#', 'I', ' ', ' ', ' ', ' ', ' ', 'R', '#'),
-    @('#', ' ', ' ', ' ', 'T', ' ', ' ', ' ', '#'),
-    @('#', 'F', ' ', ' ', ' ', ' ', ' ', 'C', '#'),
+    @('#', 'F', ' ', ' ', 'T', ' ', ' ', 'C', '#'),
     @('#', 'S', ' ', ' ', ' ', ' ', ' ', 'A', '#'),
+    @('#', ' ', ' ', ' ', 'P', ' ', ' ', ' ', '#'),
     @('#', '#', '#', '#', '#', '#', '#', '#', '#')
 ) $null
 
@@ -517,6 +517,16 @@ foreach ($chunk in $advChunks) {
     $pageNo++
 }
 
+# 属性点配置页（追加在最后，页码 = $pageNo）
+$attrPage = $pageNo
+AddPage ($attrPage.ToString() + ' 属性点配置') @(
+    @('#', '#', '#', '#', '#', '#', '#', '#', '#'),
+    @('#', ' ', ' ', ' ', '`attr_info`', ' ', ' ', ' ', '#'),
+    @('#', ' ', '`up_attack`', ' ', '`up_defense`', ' ', '`up_max_health`', ' ', '#'),
+    @('#', ' ', '`up_shield`', ' ', '`up_dodge`', ' ', '`up_armor_pierce`', ' ', '#'),
+    @('#', ' ', ' ', ' ', '`up_absolute`', ' ', ' ', ' ', '#')
+) @('`back_attr`', '#', '#', '#', '#', '#', '#', '#', '#')
+
 # ---------------- 选项 / 绑定 / 事件 ----------------
 Add ''
 Add 'PlayerInventory:'
@@ -622,6 +632,7 @@ Add ('        - ' + (Y '&6&l属性加成'))
 Add ('        - ' + (Y '&f· 攻击 &7%apa_attack% &f· 防御 &7%apa_defense%'))
 Add ('        - ' + (Y '&f· 血量上限 &7%apa_max_health% &8(总计 %apa_max_health_total%)'))
 Add ('        - ' + (Y '&f· 闪避率 &7%apa_dodge%% &f· 护盾 &7%apa_shield%/%apa_shield_max%'))
+Add ('        - ' + (Y '&f· 可用属性点: &a%apa_points%'))
 Add ('        - ' + (Y '&8&m------------------------'))
 Add ('        - ' + (Y '&7自动升级: &f%srank_autorankup% &7| 悬浮字: &f%srank_display%'))
 Add ('        - ' + (Y '&e点击刷新'))
@@ -723,6 +734,89 @@ Add ('        - ' + (Y '&7点击查看'))
 Add '    actions:'
 Add ('      all: ' + (Y 'page: 5 &&& sound: BLOCK_NOTE_BLOCK_BIT-1-1'))
 Add ''
+Add '  P:'
+Add '    update: 20'
+Add '    display:'
+Add '      material: AMETHYST_SHARD'
+Add ('      name: ' + (Y '&d&l属性点 &7: &f%apa_points%'))
+Add '      lore:'
+Add ('        - ' + (Y '&7升级段位会获得属性点'))
+Add ('        - ' + (Y '&7可以自由分配到攻击、防御、血量等属性'))
+Add ('        - ' + (Y '&8&m------------------------'))
+Add ('        - ' + (Y '&f可用属性点: &a%apa_points% &7/ 共 &f%apa_points_total%'))
+Add ('        - ' + (Y '&7点击进入属性配置'))
+Add '    actions:'
+Add ('      all: ' + (Y ('page: ' + $attrPage + ' &&& sound: BLOCK_NOTE_BLOCK_BIT-1-1')))
+Add ''
+
+# 属性点配置页
+Add '  # ---------- 属性点配置 ----------'
+Add '  back_attr:'
+Add '    update: 20'
+Add '    display:'
+Add '      material: Light Blue Stained Glass Pane'
+Add ('      name: ' + (Y '&b返回主页面'))
+Add '      lore:'
+Add ('        - ' + (Y '&7点击返回'))
+Add '    actions:'
+Add ('      all: ' + (Y 'page: 0 &&& sound: BLOCK_NOTE_BLOCK_PLING-1-2'))
+Add ''
+Add '  attr_info:'
+Add '    update: 20'
+Add '    display:'
+Add '      material: EXPERIENCE_BOTTLE'
+Add ('      name: ' + (Y '&a&l属性点 &7: &f%apa_points%'))
+Add '      lore:'
+Add ('        - ' + (Y '&7已获得: &f%apa_points_total% &7已花费: &f%apa_points_spent%'))
+Add ('        - ' + (Y '&7可用: &a%apa_points%'))
+Add ('        - ' + (Y '&8&m------------------------'))
+Add ('        - ' + (Y '&7左键升级一级，右键撤回一级'))
+Add ('        - ' + (Y '&7升级消耗递增：第 n 级消耗 n × 基础消耗'))
+Add ('        - ' + (Y '&7撤回会返还属性点，但需要花费金币'))
+Add ('        - ' + (Y '&8&m------------------------'))
+Add ('        - ' + (Y '&7等级与属性值看下面的按钮'))
+Add '    actions:'
+Add ('      all: ' + (Y 'sound: BLOCK_NOTE_BLOCK_BIT-1-0'))
+Add ''
+
+$attrIcons = @(
+    @{ id = 'attack';       mat = 'IRON_SWORD';        name = '攻击';     desc = '命中时额外造成的伤害' },
+    @{ id = 'defense';      mat = 'IRON_CHESTPLATE';   name = '防御';     desc = '受到的伤害固定减少' },
+    @{ id = 'max_health';   mat = 'GOLDEN_APPLE';      name = '血量上限'; desc = '最大生命值提升' },
+    @{ id = 'shield';       mat = 'SHIELD';            name = '护盾';     desc = '黄心，优先于生命值被消耗' },
+    @{ id = 'dodge';        mat = 'FEATHER';           name = '闪避率';   desc = '按百分比躲开一次攻击' },
+    @{ id = 'armor_pierce'; mat = 'ARROW';             name = '破甲攻击'; desc = '无视护甲的额外伤害' },
+    @{ id = 'absolute';     mat = 'NETHER_STAR';       name = '绝对攻击'; desc = '无视一切防御与 Buff 的伤害' }
+)
+foreach ($attr in $attrIcons) {
+    $id = $attr.id
+    Add ('  up_' + $id + ':')
+    Add '    update: 20'
+    Add '    display:'
+    Add ('      material: ' + $attr.mat)
+    Add ('      name: ' + (Y ('&e&l' + $attr.name + ' &7Lv.&f%apa_level_' + $id + '%')))
+    Add '      lore:'
+    Add ('        - ' + (Y ('&7' + $attr.desc)))
+    Add ('        - ' + (Y '&8&m------------------------'))
+    Add ('        - ' + (Y ('&f当前: &a%apa_' + $id + '%' + $(if ($id -eq 'dodge') { '%' } else { '' }))))
+    Add ('        - ' + (Y ('&f下一级消耗: &b%apa_cost_' + $id + '% &7点')))
+    Add ('        - ' + (Y ('&f等级上限: &7Lv.%apa_maxlevel_' + $id + '%')))
+    Add ('        - ' + (Y '&8&m------------------------'))
+    Add ('        - ' + (Y '&e左键 &7- 升级一级（消耗属性点）'))
+    Add ('        - ' + (Y '&c右键 &7- 撤回一级（返还属性点，消耗金币）'))
+    Add '    actions:'
+    Add '      left:'
+    Add ('        - ' + (Y ('command: apa upgrade ' + $id)))
+    Add ('        - ' + (Y 'delay: 2'))
+    Add ('        - ' + (Y ('update: up_' + $id + ';attr_info')))
+    Add ('        - ' + (Y 'sound: BLOCK_NOTE_BLOCK_PLING-1-1'))
+    Add '      right:'
+    Add ('        - ' + (Y ('command: apa refund ' + $id)))
+    Add ('        - ' + (Y 'delay: 2'))
+    Add ('        - ' + (Y ('update: up_' + $id + ';attr_info')))
+    Add ('        - ' + (Y 'sound: BLOCK_NOTE_BLOCK_BASS-1-1'))
+    Add ''
+}
 
 # 设置页
 Add '  # ---------- 设置 / 操作 ----------'
