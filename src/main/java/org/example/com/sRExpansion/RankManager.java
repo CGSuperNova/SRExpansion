@@ -217,7 +217,9 @@ public class RankManager {
         if (current == null) current = getByScore(data.getScore());
         if (current == null) return;
 
-        // 1) 段位自带的固定属性加成
+        // 1) 段位自带的固定属性加成（旧机制）
+        //    先清空来源，避免切换到属性点机制后，data.yml 里残留的旧加成继续生效
+        bridge.clear(player);
         if (!attributeIds.isEmpty()) {
             Map<String, Double> totals = new LinkedHashMap<>();
             for (Rank rank : ranks) {
