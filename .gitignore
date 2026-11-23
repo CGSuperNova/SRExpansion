@@ -36,6 +36,7 @@ dirt.txt
 docs/
 SRExpansion_config/
 AdvancedPlayerAttribute_config/
+段位名称列表-*.txt
 
 # ---- 独立插件（自己是一个仓库）----
 AdvancedPlayerAttribute/

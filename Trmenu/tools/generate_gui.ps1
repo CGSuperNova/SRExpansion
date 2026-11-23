@@ -22,7 +22,7 @@ $wikiFile  = Join-Path $Root 'wiki.txt'
 $oldMenu   = Join-Path $Root 'Trmenu\ai_rank.yml'
 $outFile   = Join-Path $Root 'Trmenu\rank_gui.yml'
 
-foreach ($f in @($ranksFile, $wikiFile, $oldMenu)) {
+foreach ($f in @($ranksFile, $wikiFile)) {
     if (-not (Test-Path $f)) { throw "缺少输入文件: $f" }
 }
 
@@ -219,16 +219,21 @@ foreach ($line in Get-Content $ranksFile -Encoding UTF8) {
 }
 
 # ------------------------------------------------------------
-# 3. 旧菜单的段位材质
+# 3. 段位材质（优先沿用旧菜单，其次沿用上一次生成的菜单）
 # ------------------------------------------------------------
 $rankMaterial = @{}
-$oldLines = Get-Content $oldMenu -Encoding UTF8
-for ($i = 0; $i -lt $oldLines.Count; $i++) {
-    if ($oldLines[$i] -match '^  ([A-Za-z_0-9+]+):\s*$') {
-        $id = $Matches[1]
-        for ($j = $i + 1; $j -lt [math]::Min($i + 8, $oldLines.Count); $j++) {
-            if ($oldLines[$j] -match '^\s+material:\s*(\S+)') { $rankMaterial[$id] = $Matches[1]; break }
-            if ($oldLines[$j] -match '^  \S+:\s*$') { break }
+$materialSource = $null
+if (Test-Path $oldMenu) { $materialSource = $oldMenu }
+elseif (Test-Path $outFile) { $materialSource = $outFile; Write-Output "未找到 ai_rank.yml，材质沿用上一次生成的 rank_gui.yml" }
+if ($materialSource) {
+    $oldLines = Get-Content $materialSource -Encoding UTF8
+    for ($i = 0; $i -lt $oldLines.Count; $i++) {
+        if ($oldLines[$i] -match '^  ([A-Za-z_0-9+]+):\s*$') {
+            $id = $Matches[1]
+            for ($j = $i + 1; $j -lt [math]::Min($i + 8, $oldLines.Count); $j++) {
+                if ($oldLines[$j] -match '^\s+material:\s*(\S+)') { $rankMaterial[$id] = $Matches[1]; break }
+                if ($oldLines[$j] -match '^  \S+:\s*$') { break }
+            }
         }
     }
 }
@@ -394,7 +399,7 @@ AddPage '0 主页面' @(
 AddPage '1 个人设置 / 操作' @(
     @('#', '#', '#', '#', '#', '#', '#', '#', '#'),
     @('#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#'),
-    @('#', ' ', 'X', ' ', ' ', ' ', 'Y', ' ', '#'),
+    @('#', ' ', 'X', ' ', 'W', ' ', 'Y', ' ', '#'),
     @('#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#'),
     @('#', ' ', ' ', ' ', 'Z', ' ', ' ', ' ', '#')
 ) @('K', '#', '#', '#', '#', '#', '#', '#', '#')
@@ -846,6 +851,20 @@ Add ('        - ' + (Y '&f当前状态: &a%srank_display%'))
 Add ('        - ' + (Y '&7点击切换'))
 Add '    actions:'
 Add ('      all: ' + (Y 'command: srank display &&& delay: 2 &&& update: Y &&& sound: BLOCK_NOTE_BLOCK_PLING-1-1'))
+Add ''
+Add '  W:'
+Add '    update: 20'
+Add '    display:'
+Add '      material: BELL'
+Add ('      name: ' + (Y '&e&l属性点提醒 &7: &f%apa_notify%'))
+Add '      lore:'
+Add ('        - ' + (Y '&7还有属性点没使用时，会用 toast 提醒你'))
+Add ('        - ' + (Y '&7上线提示一次，之后每 5 分钟一次'))
+Add ('        - ' + (Y '&8&m------------------------'))
+Add ('        - ' + (Y '&f当前状态: &a%apa_notify%'))
+Add ('        - ' + (Y '&7点击切换'))
+Add '    actions:'
+Add ('      all: ' + (Y 'command: apa notify &&& delay: 2 &&& update: W &&& sound: BLOCK_NOTE_BLOCK_BELL-1-2'))
 Add ''
 Add '  Z:'
 Add '    update: 20'

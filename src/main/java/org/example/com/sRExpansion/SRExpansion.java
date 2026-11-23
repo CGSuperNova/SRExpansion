@@ -13,6 +13,7 @@ public final class SRExpansion extends JavaPlugin {
     private RankManager rankManager;
     private RankupDisplay rankupDisplay;
     private AttributeBridge attributeBridge;
+    private ScoreNotifier scoreNotifier;
 
     @Override
     public void onEnable() {
@@ -35,6 +36,7 @@ public final class SRExpansion extends JavaPlugin {
         dataManager.loadConfig();
 
         rankupDisplay = new RankupDisplay(this);
+        scoreNotifier = new ScoreNotifier(this);
 
         Bukkit.getPluginManager().registerEvents(new StatisticsListener(this), this);
         Bukkit.getPluginManager().registerEvents(new BlockEventListener(this), this);
@@ -74,4 +76,5 @@ public final class SRExpansion extends JavaPlugin {
     public RankManager getRankManager() { return rankManager; }
     public RankupDisplay getRankupDisplay() { return rankupDisplay; }
     public AttributeBridge getAttributeBridge() { return attributeBridge; }
+    public ScoreNotifier getScoreNotifier() { return scoreNotifier; }
 }

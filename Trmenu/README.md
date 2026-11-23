@@ -55,6 +55,7 @@
 | 图标 | 行为 |
 |---|---|
 | `X` 自动升级 | 显示 `%srank_autorankup%`，点击执行 `srank autorankup` 并刷新 |
+| `W` 属性点提醒 | 显示 `%apa_notify%`，点击执行 `apa notify` 并刷新 |
 | `Y` 悬浮字 | 显示 `%srank_display%`，点击执行 `srank display` 并刷新 |
 | `Z` 手动升级 | 显示下一段位与还差多少分，点击执行 `srank rankup` |
 | `K` | 返回主页面 |

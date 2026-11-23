@@ -866,9 +866,21 @@ public class ScoreDataManager {
         }
 
         if (added != 0) {
-            data.setScore(data.getScore() + added);
+            changeScore(uuid, data, added);
         }
         markDirty(uuid);
+    }
+
+    /**
+     * 统一的分数变更入口：改分并驱动 actionbar 提示。
+     * 所有“玩家分数真的变了”的地方都应该走这里，而不是直接 data.setScore。
+     */
+    private void changeScore(UUID uuid, PlayerData data, double delta) {
+        if (data == null || delta == 0) return;
+        data.setScore(data.getScore() + delta);
+        if (plugin.getScoreNotifier() != null) {
+            plugin.getScoreNotifier().notify(uuid, delta);
+        }
     }
 
     private double getRawScoreForStat(PlayerStatsSnapshot snap, String key) {
@@ -924,7 +936,7 @@ public class ScoreDataManager {
         double added = pointValue;
         double oldScore = data.getStats().discountedAdvancements;
         data.getStats().discountedAdvancements = oldScore + added;
-        data.setScore(data.getScore() + added);
+        changeScore(uuid, data, added);
         markDirty(uuid);
         checkThresholds(player);
     }
@@ -954,7 +966,7 @@ public class ScoreDataManager {
         double added = discNew - discOld;
         data.getStats().playerKills++;
         data.getStats().discountedPlayerKill = discNew;
-        data.setScore(data.getScore() + added);
+        changeScore(killerId, data, added);
         markDirty(killerId);
         checkThresholds(killer);
         killer.sendMessage(ChatColor.GREEN + "你击杀了 " + victim.getName() + "，获得 " + String.format("%.2f", added) + " 生存段位分！");
@@ -982,7 +994,7 @@ public class ScoreDataManager {
         if (penalty > deathPenaltyMax) penalty = deathPenaltyMax;
         if (penalty <= 0) return;
         double newScore = currentScore - penalty;
-        data.setScore(newScore);
+        changeScore(uuid, data, -penalty);
         data.setTotalPenalty(data.getTotalPenalty() + penalty);
         markDirty(uuid);
         player.sendMessage(ChatColor.RED + "你因死亡被扣除 " + String.format("%.2f", penalty) +
@@ -1263,7 +1275,7 @@ public class ScoreDataManager {
         int id = data.getNextGiveId();
         data.setNextGiveId(id + 1);
         data.getGiveRecords().add(new GiveRecord(id, amount, reason, operator, System.currentTimeMillis()));
-        data.setScore(data.getScore() + amount);
+        changeScore(uuid, data, amount);
         markDirty(uuid);
         checkThresholds(Bukkit.getPlayer(uuid));
         return id;
@@ -1275,7 +1287,7 @@ public class ScoreDataManager {
         GiveRecord target = findGiveRecord(data, id);
         if (target == null) return false;
         data.getGiveRecords().remove(target);
-        data.setScore(data.getScore() - target.amount);
+        changeScore(uuid, data, -target.amount);
         markDirty(uuid);
         return true;
     }
@@ -1285,7 +1297,7 @@ public class ScoreDataManager {
         if (data == null) return false;
         GiveRecord target = findGiveRecord(data, id);
         if (target == null) return false;
-        data.setScore(data.getScore() - target.amount + newAmount);
+        changeScore(uuid, data, newAmount - target.amount);
         target.amount = newAmount;
         if (newReason != null && !newReason.isEmpty()) target.reason = newReason;
         markDirty(uuid);

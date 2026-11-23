@@ -23,7 +23,7 @@ Layout:
   # 1 个人设置 / 操作
   - - '#########'
     - '#       #'
-    - '# X   Y #'
+    - '# X W Y #'
     - '#       #'
     - '#   Z   #'
     - 'K########'
@@ -592,6 +592,20 @@ Icons:
         - '&7点击切换'
     actions:
       all: 'command: srank display &&& delay: 2 &&& update: Y &&& sound: BLOCK_NOTE_BLOCK_PLING-1-1'
+
+  W:
+    update: 20
+    display:
+      material: BELL
+      name: '&e&l属性点提醒 &7: &f%apa_notify%'
+      lore:
+        - '&7还有属性点没使用时，会用 toast 提醒你'
+        - '&7上线提示一次，之后每 5 分钟一次'
+        - '&8&m------------------------'
+        - '&f当前状态: &a%apa_notify%'
+        - '&7点击切换'
+    actions:
+      all: 'command: apa notify &&& delay: 2 &&& update: W &&& sound: BLOCK_NOTE_BLOCK_BELL-1-2'
 
   Z:
     update: 20
